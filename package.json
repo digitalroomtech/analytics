@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "npx nodemon index.ts",
     "nodemon:app": "npx nodemon app.ts",
-    "dev": "nodemon",
+    "dev": "nodemon src/index.ts",
     "build": "prisma generate && rimraf ./build && tsc && npm run copyFiles",
     "app": "npm run build && node build/app.js",
     "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build",
@@ -59,7 +59,6 @@
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
-    "@faker-js/faker": "^8.2.0",
     "@prisma/client": "^5.6.0",
     "apollo-server": "^3.12.1",
     "axios": "^1.5.0",
