@@ -13,4 +13,5 @@ model Analytic {
   uuid   String @unique
   url    String
   userId Int
+  tenant String
 }
