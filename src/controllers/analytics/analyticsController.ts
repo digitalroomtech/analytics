@@ -24,7 +24,7 @@ export async function authenticate(req: Request, res: Response) {
   return res.json({ message: 'Authenticate successfully.', uuid: uuid });
 }
 
-export async function createEvent(req: Request, res: Response) {
+export async function analyticsCreate(req: Request, res: Response) {
   const data = req.body;
 
   if (!data.name || !data.uuid || !data.tenant) {

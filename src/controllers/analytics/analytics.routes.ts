@@ -1,12 +1,12 @@
 import express from 'express';
-import { authenticate, createEvent } from './analyticsController';
+import { authenticate, analyticsCreate } from '../analytics/analyticsController';
 
 const router = express.Router();
 
 router.get('/authenticate', authenticate);
 
-router.post('/createEvent', async (req, res) => {
-  await createEvent(req, res);
+router.post('/create', async (req, res) => {
+  await analyticsCreate(req, res);
 });
 
 export default router;

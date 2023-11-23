@@ -1,6 +1,6 @@
 import express from 'express';
-import analyticsRoutes from './controllers/analytics/analytics.routes';
-import { PrismaClient } from '@prisma/client';
+import analyticsRoutes from './controllers/analytic/analytics.routes';
+import { PrismaClient } from './generated/client';
 import cors from 'cors';
 import http from 'http';
 
