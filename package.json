@@ -9,7 +9,7 @@
     "nodemon": "npx nodemon index.ts",
     "nodemon:app": "npx nodemon app.ts",
     "dev": "nodemon src/index.ts",
-    "build": "prisma generate && rimraf ./build && tsc && npm run copyFiles",
+    "build": "npx prisma generate && rimraf ./build && tsc && npm run copyFiles",
     "app": "npm run build && node build/app.js",
     "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build",
     "prepare": "husky install"
@@ -52,7 +52,6 @@
     "lint-staged": "^14.0.1",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.3",
-    "prisma": "^5.6.0",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"

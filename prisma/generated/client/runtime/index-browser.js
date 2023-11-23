@@ -335,14 +335,14 @@ d.inverseCosine = d.acos = function () {
         : new i(0)
       : new i(NaN)
     : n.isZero()
-    ? R(i, t + 4, s).times(0.5)
-    : ((i.precision = t + 6),
-      (i.rounding = 1),
-      (n = n.asin()),
-      (e = R(i, t + 4, s).times(0.5)),
-      (i.precision = t),
-      (i.rounding = s),
-      e.minus(n));
+      ? R(i, t + 4, s).times(0.5)
+      : ((i.precision = t + 6),
+        (i.rounding = 1),
+        (n = n.asin()),
+        (e = R(i, t + 4, s).times(0.5)),
+        (i.precision = t),
+        (i.rounding = s),
+        e.minus(n));
 };
 d.inverseHyperbolicCosine = d.acosh = function () {
   var e,
@@ -352,17 +352,17 @@ d.inverseHyperbolicCosine = d.acosh = function () {
   return i.lte(1)
     ? new r(i.eq(1) ? 0 : NaN)
     : i.isFinite()
-    ? ((e = r.precision),
-      (n = r.rounding),
-      (r.precision = e + Math.max(Math.abs(i.e), i.sd()) + 4),
-      (r.rounding = 1),
-      (w = !1),
-      (i = i.times(i).minus(1).sqrt().plus(i)),
-      (w = !0),
-      (r.precision = e),
-      (r.rounding = n),
-      i.ln())
-    : new r(i);
+      ? ((e = r.precision),
+        (n = r.rounding),
+        (r.precision = e + Math.max(Math.abs(i.e), i.sd()) + 4),
+        (r.rounding = 1),
+        (w = !1),
+        (i = i.times(i).minus(1).sqrt().plus(i)),
+        (w = !0),
+        (r.precision = e),
+        (r.rounding = n),
+        i.ln())
+      : new r(i);
 };
 d.inverseHyperbolicSine = d.asinh = function () {
   var e,
@@ -551,8 +551,8 @@ d.minus = d.sub = function (e) {
       !g.s || !e.s
         ? (e = new v(NaN))
         : g.d
-        ? (e.s = -e.s)
-        : (e = new v(e.d || g.s !== e.s ? g : NaN)),
+          ? (e.s = -e.s)
+          : (e = new v(e.d || g.s !== e.s ? g : NaN)),
       e
     );
   if (g.s != e.s) return (e.s = -e.s), g.plus(e);
@@ -605,14 +605,14 @@ d.modulo = d.mod = function (e) {
     !i.d || !e.s || (e.d && !e.d[0])
       ? new r(NaN)
       : !e.d || (i.d && !i.d[0])
-      ? p(new r(i), r.precision, r.rounding)
-      : ((w = !1),
-        r.modulo == 9
-          ? ((n = S(i, e.abs(), 0, 3, 1)), (n.s *= e.s))
-          : (n = S(i, e, 0, r.modulo, 1)),
-        (n = n.times(e)),
-        (w = !0),
-        i.minus(n))
+        ? p(new r(i), r.precision, r.rounding)
+        : ((w = !1),
+          r.modulo == 9
+            ? ((n = S(i, e.abs(), 0, 3, 1)), (n.s *= e.s))
+            : (n = S(i, e, 0, r.modulo, 1)),
+          (n = n.times(e)),
+          (w = !0),
+          i.minus(n))
   );
 };
 d.naturalExponential = d.exp = function () {
@@ -1036,11 +1036,15 @@ function Q(e, n, i, r) {
               ((e[t + 1] / s / 100) | 0) == M(10, n - 2) - 1) ||
             ((u == s / 2 || u == 0) && ((e[t + 1] / s / 100) | 0) == 0))
       : n < 4
-      ? (n == 0 ? (u = (u / 1e3) | 0) : n == 1 ? (u = (u / 100) | 0) : n == 2 && (u = (u / 10) | 0),
-        (o = ((r || i < 4) && u == 9999) || (!r && i > 3 && u == 4999)))
-      : (o =
-          (((r || i < 4) && u + 1 == s) || (!r && i > 3 && u + 1 == s / 2)) &&
-          ((e[t + 1] / s / 1e3) | 0) == M(10, n - 3) - 1),
+        ? (n == 0
+            ? (u = (u / 1e3) | 0)
+            : n == 1
+              ? (u = (u / 100) | 0)
+              : n == 2 && (u = (u / 10) | 0),
+          (o = ((r || i < 4) && u == 9999) || (!r && i > 3 && u == 4999)))
+        : (o =
+            (((r || i < 4) && u + 1 == s) || (!r && i > 3 && u + 1 == s / 2)) &&
+            ((e[t + 1] / s / 1e3) | 0) == M(10, n - 3) - 1),
     o
   );
 }
@@ -1121,8 +1125,8 @@ var S = (function () {
         !r.s || !t.s || (b ? k && b[0] == k[0] : !k)
           ? NaN
           : (b && b[0] == 0) || !k
-          ? ae * 0
-          : ae / 0,
+            ? ae * 0
+            : ae / 0,
       );
     for (
       l ? ((g = 1), (c = r.e - t.e)) : ((l = F), (g = m), (c = A(r.e / g) - A(t.e / g))),
@@ -1139,8 +1143,8 @@ var S = (function () {
       s == null
         ? ((D = s = ee.precision), (o = ee.rounding))
         : u
-        ? (D = s + (r.e - t.e) + 1)
-        : (D = s),
+          ? (D = s + (r.e - t.e) + 1)
+          : (D = s),
       D < 0)
     )
       T.push(1), (v = !0);
@@ -1278,11 +1282,11 @@ function I(e, n, i) {
           : o > 1 && (s = s.charAt(0) + '.' + s.slice(1)),
         (s = s + (e.e < 0 ? 'e' : 'e+') + e.e))
       : t < 0
-      ? ((s = '0.' + U(-t - 1) + s), i && (r = i - o) > 0 && (s += U(r)))
-      : t >= o
-      ? ((s += U(t + 1 - o)), i && (r = i - t - 1) > 0 && (s = s + '.' + U(r)))
-      : ((r = t + 1) < o && (s = s.slice(0, r) + '.' + s.slice(r)),
-        i && (r = i - o) > 0 && (t + 1 === o && (s += '.'), (s += U(r)))),
+        ? ((s = '0.' + U(-t - 1) + s), i && (r = i - o) > 0 && (s += U(r)))
+        : t >= o
+          ? ((s += U(t + 1 - o)), i && (r = i - t - 1) > 0 && (s = s + '.' + U(r)))
+          : ((r = t + 1) < o && (s = s.slice(0, r) + '.' + s.slice(r)),
+            i && (r = i - o) > 0 && (t + 1 === o && (s += '.'), (s += U(r)))),
     s
   );
 }
@@ -1673,20 +1677,20 @@ function hn(e, n) {
     !e.s || !n.s
       ? (i = new this(NaN))
       : !e.d && !n.d
-      ? ((i = R(this, s, 1).times(n.s > 0 ? 0.25 : 0.75)), (i.s = e.s))
-      : !n.d || e.isZero()
-      ? ((i = n.s < 0 ? R(this, r, t) : new this(0)), (i.s = e.s))
-      : !e.d || n.isZero()
-      ? ((i = R(this, s, 1).times(0.5)), (i.s = e.s))
-      : n.s < 0
-      ? ((this.precision = s),
-        (this.rounding = 1),
-        (i = this.atan(S(e, n, s, 1))),
-        (n = R(this, s, 1)),
-        (this.precision = r),
-        (this.rounding = t),
-        (i = e.s < 0 ? i.minus(n) : i.plus(n)))
-      : (i = this.atan(S(e, n, s, 1))),
+        ? ((i = R(this, s, 1).times(n.s > 0 ? 0.25 : 0.75)), (i.s = e.s))
+        : !n.d || e.isZero()
+          ? ((i = n.s < 0 ? R(this, r, t) : new this(0)), (i.s = e.s))
+          : !e.d || n.isZero()
+            ? ((i = R(this, s, 1).times(0.5)), (i.s = e.s))
+            : n.s < 0
+              ? ((this.precision = s),
+                (this.rounding = 1),
+                (i = this.atan(S(e, n, s, 1))),
+                (n = R(this, s, 1)),
+                (this.precision = r),
+                (this.rounding = t),
+                (i = e.s < 0 ? i.minus(n) : i.plus(n)))
+              : (i = this.atan(S(e, n, s, 1))),
     i
   );
 }
@@ -1762,8 +1766,8 @@ function $e(e) {
           ? !s.d || s.e > t.maxE
             ? ((f.e = NaN), (f.d = null))
             : s.e < t.minE
-            ? ((f.e = 0), (f.d = [0]))
-            : ((f.e = s.e), (f.d = s.d.slice()))
+              ? ((f.e = 0), (f.d = [0]))
+              : ((f.e = s.e), (f.d = s.d.slice()))
           : ((f.e = s.e), (f.d = s.d ? s.d.slice() : s.d));
       return;
     }
@@ -1778,8 +1782,8 @@ function $e(e) {
           ? o > t.maxE
             ? ((f.e = NaN), (f.d = null))
             : o < t.minE
-            ? ((f.e = 0), (f.d = [0]))
-            : ((f.e = o), (f.d = [s]))
+              ? ((f.e = 0), (f.d = [0]))
+              : ((f.e = o), (f.d = [s]))
           : ((f.e = o), (f.d = [s]));
         return;
       } else if (s * 0 !== 0) {
@@ -1992,20 +1996,22 @@ function He() {
   return typeof Netlify == 'object'
     ? 'netlify'
     : typeof EdgeRuntime == 'string'
-    ? 'edge-light'
-    : ((e = globalThis.navigator) == null ? void 0 : e.userAgent) === Jn
-    ? 'workerd'
-    : globalThis.Deno
-    ? 'deno'
-    : globalThis.__lagon__
-    ? 'lagon'
-    : ((i = (n = globalThis.process) == null ? void 0 : n.release) == null ? void 0 : i.name) === Wn
-    ? 'node'
-    : globalThis.Bun
-    ? 'bun'
-    : globalThis.fastly
-    ? 'fastly'
-    : 'unknown';
+      ? 'edge-light'
+      : ((e = globalThis.navigator) == null ? void 0 : e.userAgent) === Jn
+        ? 'workerd'
+        : globalThis.Deno
+          ? 'deno'
+          : globalThis.__lagon__
+            ? 'lagon'
+            : ((i = (n = globalThis.process) == null ? void 0 : n.release) == null
+                  ? void 0
+                  : i.name) === Wn
+              ? 'node'
+              : globalThis.Bun
+                ? 'bun'
+                : globalThis.fastly
+                  ? 'fastly'
+                  : 'unknown';
 }
 0 && (module.exports = { Decimal, Public, detectRuntime, makeStrictEnum, objectEnumValues });
 /*! Bundled license information:

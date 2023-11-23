@@ -116,7 +116,7 @@ const config = {
     },
     output: {
       value:
-        'C:\\Users\\Kristopher\\Documents\\Proyectos\\DigitalRoom\\analytics\\src\\generated\\client',
+        'C:\\Users\\Kristopher\\Documents\\Proyectos\\DigitalRoom\\analytics\\prisma\\generated\\client',
       fromEnvVar: null,
     },
     config: {
@@ -136,7 +136,7 @@ const config = {
     rootEnvPath: '../../../.env',
     schemaEnvPath: '../../../.env',
   },
-  relativePath: '../../../prisma',
+  relativePath: '../..',
   clientVersion: '5.6.0',
   engineVersion: 'e95e739751f42d8ca026f6b910f5a2dc5adeaeee',
   datasourceNames: ['db'],
@@ -151,8 +151,8 @@ const config = {
     },
   },
   inlineSchema:
-    'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogICAgb3V0cHV0ICAgPSAiLi4vc3JjL2dlbmVyYXRlZC9jbGllbnQiDQoNCn0NCg0KZGF0YXNvdXJjZSBkYiB7DQogIHByb3ZpZGVyID0gIm15c3FsIg0KICB1cmwgICAgICA9IGVudigiREFUQUJBU0VfVVJMIikNCn0NCg0KbW9kZWwgQW5hbHl0aWNzIHsNCiAgaWQgICAgIEludCAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICBuYW1lICAgU3RyaW5nDQogIHV1aWQgICBTdHJpbmcgQHVuaXF1ZQ0KICB1cmwgICAgU3RyaW5nPw0KICB1c2VyX2lkIEludD8NCiAgdGVuYW50IFN0cmluZz8NCn0=',
-  inlineSchemaHash: '219f5066fda6f00fa3621f1e100326dac96c74f2d73aa072a906f92631b868f3',
+    'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogICAgb3V0cHV0ICAgPSAiLi9nZW5lcmF0ZWQvY2xpZW50Ig0KDQp9DQoNCmRhdGFzb3VyY2UgZGIgew0KICBwcm92aWRlciA9ICJteXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCm1vZGVsIEFuYWx5dGljcyB7DQogIGlkICAgICBJbnQgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgbmFtZSAgIFN0cmluZw0KICB1dWlkICAgU3RyaW5nIEB1bmlxdWUNCiAgdXJsICAgIFN0cmluZz8NCiAgdXNlcl9pZCBJbnQ/DQogIHRlbmFudCBTdHJpbmc/DQp9',
+  inlineSchemaHash: '7fa5ecb7e15e1408d41171552abcd15ac2d69e0e06ff724b600ed8586df706b5',
   noEngine: false,
 };
 config.dirname = '/';

@@ -968,23 +968,23 @@ export declare type DynamicModelExtensionArgs<
         [K: symbol]: {};
       }
     : K extends TypeMap['meta']['modelProps']
-    ? {
-        [P in keyof M_[K]]?: unknown;
-      } & {
-        [K: symbol]: {
-          ctx: DynamicModelExtensionThis<TypeMap, ModelKey<TypeMap, K>, ExtArgs> & {
-            $parent: DynamicClientExtensionThis<TypeMap, TypeMapCb, ExtArgs>;
-          } & {
-            $name: ModelKey<TypeMap, K>;
-          } & {
-            /**
-             * @deprecated Use `$name` instead.
-             */
-            name: ModelKey<TypeMap, K>;
+      ? {
+          [P in keyof M_[K]]?: unknown;
+        } & {
+          [K: symbol]: {
+            ctx: DynamicModelExtensionThis<TypeMap, ModelKey<TypeMap, K>, ExtArgs> & {
+              $parent: DynamicClientExtensionThis<TypeMap, TypeMapCb, ExtArgs>;
+            } & {
+              $name: ModelKey<TypeMap, K>;
+            } & {
+              /**
+               * @deprecated Use `$name` instead.
+               */
+              name: ModelKey<TypeMap, K>;
+            };
           };
-        };
-      }
-    : never;
+        }
+      : never;
 };
 
 export declare type DynamicModelExtensionFluentApi<
@@ -1089,40 +1089,40 @@ export declare type DynamicQueryExtensionArgs<Q_, TypeMap extends TypeMapDef> = 
         query: (args: any) => PrismaPromise<any>;
       }) => Promise<any>
     : K extends '$allModels'
-    ? {
-        [P in
-          | keyof Q_[K]
-          | keyof TypeMap['model'][keyof TypeMap['model']]['operations']
-          | '$allOperations']?: P extends '$allOperations'
-          ? DynamicQueryExtensionCb<
-              TypeMap,
-              'model',
-              keyof TypeMap['model'],
-              keyof TypeMap['model'][keyof TypeMap['model']]['operations']
-            >
-          : P extends keyof TypeMap['model'][keyof TypeMap['model']]['operations']
-          ? DynamicQueryExtensionCb<TypeMap, 'model', keyof TypeMap['model'], P>
+      ? {
+          [P in
+            | keyof Q_[K]
+            | keyof TypeMap['model'][keyof TypeMap['model']]['operations']
+            | '$allOperations']?: P extends '$allOperations'
+            ? DynamicQueryExtensionCb<
+                TypeMap,
+                'model',
+                keyof TypeMap['model'],
+                keyof TypeMap['model'][keyof TypeMap['model']]['operations']
+              >
+            : P extends keyof TypeMap['model'][keyof TypeMap['model']]['operations']
+              ? DynamicQueryExtensionCb<TypeMap, 'model', keyof TypeMap['model'], P>
+              : never;
+        }
+      : K extends TypeMap['meta']['modelProps']
+        ? {
+            [P in
+              | keyof Q_[K]
+              | keyof TypeMap['model'][ModelKey<TypeMap, K>]['operations']
+              | '$allOperations']?: P extends '$allOperations'
+              ? DynamicQueryExtensionCb<
+                  TypeMap,
+                  'model',
+                  ModelKey<TypeMap, K>,
+                  keyof TypeMap['model'][ModelKey<TypeMap, K>]['operations']
+                >
+              : P extends keyof TypeMap['model'][ModelKey<TypeMap, K>]['operations']
+                ? DynamicQueryExtensionCb<TypeMap, 'model', ModelKey<TypeMap, K>, P>
+                : never;
+          }
+        : K extends keyof TypeMap['other']['operations']
+          ? DynamicQueryExtensionCb<[TypeMap], 0, 'other', K>
           : never;
-      }
-    : K extends TypeMap['meta']['modelProps']
-    ? {
-        [P in
-          | keyof Q_[K]
-          | keyof TypeMap['model'][ModelKey<TypeMap, K>]['operations']
-          | '$allOperations']?: P extends '$allOperations'
-          ? DynamicQueryExtensionCb<
-              TypeMap,
-              'model',
-              ModelKey<TypeMap, K>,
-              keyof TypeMap['model'][ModelKey<TypeMap, K>]['operations']
-            >
-          : P extends keyof TypeMap['model'][ModelKey<TypeMap, K>]['operations']
-          ? DynamicQueryExtensionCb<TypeMap, 'model', ModelKey<TypeMap, K>, P>
-          : never;
-      }
-    : K extends keyof TypeMap['other']['operations']
-    ? DynamicQueryExtensionCb<[TypeMap], 0, 'other', K>
-    : never;
 };
 
 export declare type DynamicQueryExtensionCb<
@@ -1607,49 +1607,49 @@ declare function getExtensionContext<T>(that: T): Context_2<T>;
 export declare type GetFindResult<P extends OperationPayload, A> = Equals<A, any> extends 1
   ? DefaultSelection<P>
   : A extends
-      | ({
-          select: infer S extends object;
-        } & Record<string, unknown>)
-      | ({
-          include: infer I extends object;
-        } & Record<string, unknown>)
-  ? {
-      [K in keyof S | keyof I as (S & I)[K] extends false | undefined | null ? never : K]: (S &
-        I)[K] extends object
-        ? P extends SelectablePayloadFields<K, (infer O)[]>
-          ? O extends OperationPayload
-            ? GetFindResult<O, (S & I)[K]>[]
-            : never
-          : P extends SelectablePayloadFields<K, infer O | null>
-          ? O extends OperationPayload
-            ? GetFindResult<O, (S & I)[K]> | (SelectField<P, K> & null)
-            : never
-          : K extends '_count'
-          ? Count<GetFindResult<P, (S & I)[K]>>
-          : never
-        : P extends SelectablePayloadFields<K, (infer O)[]>
-        ? O extends OperationPayload
-          ? DefaultSelection<O>[]
-          : never
-        : P extends SelectablePayloadFields<K, infer O | null>
-        ? O extends OperationPayload
-          ? DefaultSelection<O> | (SelectField<P, K> & null)
-          : never
-        : P extends {
-            scalars: {
-              [k in K]: infer O;
-            };
-          }
-        ? O
-        : K extends '_count'
-        ? Count<P['objects']>
-        : never;
-    } & (A extends {
-      include: any;
-    } & Record<string, unknown>
-      ? DefaultSelection<P>
-      : unknown)
-  : DefaultSelection<P>;
+        | ({
+            select: infer S extends object;
+          } & Record<string, unknown>)
+        | ({
+            include: infer I extends object;
+          } & Record<string, unknown>)
+    ? {
+        [K in keyof S | keyof I as (S & I)[K] extends false | undefined | null ? never : K]: (S &
+          I)[K] extends object
+          ? P extends SelectablePayloadFields<K, (infer O)[]>
+            ? O extends OperationPayload
+              ? GetFindResult<O, (S & I)[K]>[]
+              : never
+            : P extends SelectablePayloadFields<K, infer O | null>
+              ? O extends OperationPayload
+                ? GetFindResult<O, (S & I)[K]> | (SelectField<P, K> & null)
+                : never
+              : K extends '_count'
+                ? Count<GetFindResult<P, (S & I)[K]>>
+                : never
+          : P extends SelectablePayloadFields<K, (infer O)[]>
+            ? O extends OperationPayload
+              ? DefaultSelection<O>[]
+              : never
+            : P extends SelectablePayloadFields<K, infer O | null>
+              ? O extends OperationPayload
+                ? DefaultSelection<O> | (SelectField<P, K> & null)
+                : never
+              : P extends {
+                    scalars: {
+                      [k in K]: infer O;
+                    };
+                  }
+                ? O
+                : K extends '_count'
+                  ? Count<P['objects']>
+                  : never;
+      } & (A extends {
+        include: any;
+      } & Record<string, unknown>
+        ? DefaultSelection<P>
+        : unknown)
+    : DefaultSelection<P>;
 
 export declare type GetGroupByResult<P extends OperationPayload, A> = A extends {
   by: string[];
@@ -1660,14 +1660,14 @@ export declare type GetGroupByResult<P extends OperationPayload, A> = A extends 
       }
     >
   : A extends {
-      by: string;
-    }
-  ? Array<
-      GetAggregateResult<P, A> & {
-        [K in A['by']]: P['scalars'][K];
+        by: string;
       }
-    >
-  : {}[];
+    ? Array<
+        GetAggregateResult<P, A> & {
+          [K in A['by']]: P['scalars'][K];
+        }
+      >
+    : {}[];
 
 export declare type GetPayloadResult<
   Base extends Record<any, any>,
@@ -2596,8 +2596,8 @@ export declare type PayloadToResult<
   [K in keyof O]?: O[K][K] extends any[]
     ? PayloadToResult<O[K][K][number]>[]
     : O[K][K] extends object
-    ? PayloadToResult<O[K][K]>
-    : O[K][K];
+      ? PayloadToResult<O[K][K]>
+      : O[K][K];
 };
 
 declare type Pick_2<T, K extends string | number | symbol> = {
@@ -3085,10 +3085,10 @@ export declare type SelectField<
 }
   ? P['objects'][K]
   : P extends {
-      composites: Record<K, any>;
-    }
-  ? P['composites'][K]
-  : never;
+        composites: Record<K, any>;
+      }
+    ? P['composites'][K]
+    : never;
 
 declare type Selection_2 = Record<string, boolean | JsArgs>;
 export { Selection_2 as Selection };
@@ -3486,11 +3486,11 @@ export declare type UnwrapPayload<P> = {} extends P
       }[]
         ? Array<S & UnwrapPayload<C>>
         : P[K] extends {
-            scalars: infer S;
-            composites: infer C;
-          } | null
-        ? (S & UnwrapPayload<C>) | Select<P[K], null>
-        : never;
+              scalars: infer S;
+              composites: infer C;
+            } | null
+          ? (S & UnwrapPayload<C>) | Select<P[K], null>
+          : never;
     };
 
 export declare type UnwrapPromise<P> = P extends Promise<infer R> ? R : P;

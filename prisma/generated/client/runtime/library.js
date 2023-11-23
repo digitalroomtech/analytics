@@ -96,24 +96,24 @@ var Go = K((Lf, Qo) => {
     return t >= ut
       ? Math.round(e / ut) + 'd'
       : t >= Ct
-      ? Math.round(e / Ct) + 'h'
-      : t >= Tt
-      ? Math.round(e / Tt) + 'm'
-      : t >= vt
-      ? Math.round(e / vt) + 's'
-      : e + 'ms';
+        ? Math.round(e / Ct) + 'h'
+        : t >= Tt
+          ? Math.round(e / Tt) + 'm'
+          : t >= vt
+            ? Math.round(e / vt) + 's'
+            : e + 'ms';
   }
   function Ru(e) {
     var t = Math.abs(e);
     return t >= ut
       ? Qr(e, t, ut, 'day')
       : t >= Ct
-      ? Qr(e, t, Ct, 'hour')
-      : t >= Tt
-      ? Qr(e, t, Tt, 'minute')
-      : t >= vt
-      ? Qr(e, t, vt, 'second')
-      : e + ' ms';
+        ? Qr(e, t, Ct, 'hour')
+        : t >= Tt
+          ? Qr(e, t, Tt, 'minute')
+          : t >= vt
+            ? Qr(e, t, vt, 'second')
+            : e + ' ms';
   }
   function Qr(e, t, r, n) {
     var i = t >= r * 1.5;
@@ -338,23 +338,23 @@ var Ho = K((ye, Gr) => {
       (window.process.type === 'renderer' || window.process.__nwjs)
       ? !0
       : typeof navigator < 'u' &&
-        navigator.userAgent &&
-        navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)
-      ? !1
-      : (typeof document < 'u' &&
-          document.documentElement &&
-          document.documentElement.style &&
-          document.documentElement.style.WebkitAppearance) ||
-        (typeof window < 'u' &&
-          window.console &&
-          (window.console.firebug || (window.console.exception && window.console.table))) ||
-        (typeof navigator < 'u' &&
           navigator.userAgent &&
-          navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) &&
-          parseInt(RegExp.$1, 10) >= 31) ||
-        (typeof navigator < 'u' &&
-          navigator.userAgent &&
-          navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+          navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)
+        ? !1
+        : (typeof document < 'u' &&
+            document.documentElement &&
+            document.documentElement.style &&
+            document.documentElement.style.WebkitAppearance) ||
+          (typeof window < 'u' &&
+            window.console &&
+            (window.console.firebug || (window.console.exception && window.console.table))) ||
+          (typeof navigator < 'u' &&
+            navigator.userAgent &&
+            navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) &&
+            parseInt(RegExp.$1, 10) >= 31) ||
+          (typeof navigator < 'u' &&
+            navigator.userAgent &&
+            navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
   }
   function ku(e) {
     if (
@@ -429,8 +429,8 @@ var mi = K((jf, Yo) => {
     (H.FORCE_COLOR === 'true'
       ? (Ge = 1)
       : H.FORCE_COLOR === 'false'
-      ? (Ge = 0)
-      : (Ge = H.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(H.FORCE_COLOR, 10), 3)));
+        ? (Ge = 0)
+        : (Ge = H.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(H.FORCE_COLOR, 10), 3)));
   function pi(e) {
     return e === 0 ? !1 : { level: e, hasBasic: !0, has256: e >= 2, has16m: e >= 3 };
   }
@@ -466,9 +466,9 @@ var mi = K((jf, Yo) => {
     return /-256(color)?$/i.test(H.TERM)
       ? 2
       : /^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(H.TERM) ||
-        'COLORTERM' in H
-      ? 1
-      : r;
+          'COLORTERM' in H
+        ? 1
+        : r;
   }
   function Lu(e) {
     let t = di(e, e && e.isTTY);
@@ -518,10 +518,10 @@ var Xo = K((ee, Hr) => {
         /^(yes|on|true|enabled)$/i.test(n)
           ? (n = !0)
           : /^(no|off|false|disabled)$/i.test(n)
-          ? (n = !1)
-          : n === 'null'
-          ? (n = null)
-          : (n = Number(n)),
+            ? (n = !1)
+            : n === 'null'
+              ? (n = null)
+              : (n = Number(n)),
         (e[r] = n),
         e
       );
@@ -727,10 +727,10 @@ var gs = K((Eg, er) => {
       Ti[r]
         ? Xu.link(e, t)
         : n.fallback === !1
-        ? e
-        : typeof n.fallback == 'function'
-        ? n.fallback(e, t)
-        : `${e} (\u200B${t}\u200B)`;
+          ? e
+          : typeof n.fallback == 'function'
+            ? n.fallback(e, t)
+            : `${e} (\u200B${t}\u200B)`;
   er.exports = (e, t, r = {}) => fs(e, t, r);
   er.exports.stderr = (e, t, r = {}) => fs(e, t, { target: 'stderr', ...r });
   er.exports.isSupported = Ti.stdout;
@@ -1265,12 +1265,12 @@ function xi(e, t) {
       ? 'query_engine.dll.node'
       : `query_engine-${e}.dll.node`
     : e.includes('darwin')
-    ? r
-      ? `${Yr}.dylib.node`
-      : `${Yr}-${e}.dylib.node`
-    : r
-    ? `${Yr}.so.node`
-    : `${Yr}-${e}.so.node`;
+      ? r
+        ? `${Yr}.dylib.node`
+        : `${Yr}-${e}.dylib.node`
+      : r
+        ? `${Yr}.so.node`
+        : `${Yr}-${e}.so.node`;
 }
 var bs = I(require('child_process')),
   Ci = I(require('fs/promises')),
@@ -1330,8 +1330,8 @@ var je = Symbol.for('@ts-pattern/matcher'),
           ? t
           : []
         : Array.isArray(e)
-        ? Zt(e, Ye)
-        : Zt(Object.values(e), Ye)
+          ? Zt(e, Ye)
+          : Zt(Object.values(e), Ye)
       : [];
   },
   Zt = (e, t) => e.reduce((r, n) => r.concat(t(n)), []);
@@ -1992,10 +1992,10 @@ function mt(e) {
     (e?.config.engineType === 'library'
       ? 'library'
       : e?.config.engineType === 'binary'
-      ? 'binary'
-      : e?.config.engineType === 'wasm'
-      ? 'wasm'
-      : ks)
+        ? 'binary'
+        : e?.config.engineType === 'wasm'
+          ? 'wasm'
+          : ks)
   );
 }
 function Cc() {
@@ -2884,14 +2884,14 @@ m.inverseCosine = m.acos = function () {
         : new r(0)
       : new r(NaN)
     : t.isZero()
-    ? Te(r, i + 4, o).times(0.5)
-    : ((r.precision = i + 6),
-      (r.rounding = 1),
-      (t = t.asin()),
-      (e = Te(r, i + 4, o).times(0.5)),
-      (r.precision = i),
-      (r.rounding = o),
-      e.minus(t));
+      ? Te(r, i + 4, o).times(0.5)
+      : ((r.precision = i + 6),
+        (r.rounding = 1),
+        (t = t.asin()),
+        (e = Te(r, i + 4, o).times(0.5)),
+        (r.precision = i),
+        (r.rounding = o),
+        e.minus(t));
 };
 m.inverseHyperbolicCosine = m.acosh = function () {
   var e,
@@ -2901,17 +2901,17 @@ m.inverseHyperbolicCosine = m.acosh = function () {
   return r.lte(1)
     ? new n(r.eq(1) ? 0 : NaN)
     : r.isFinite()
-    ? ((e = n.precision),
-      (t = n.rounding),
-      (n.precision = e + Math.max(Math.abs(r.e), r.sd()) + 4),
-      (n.rounding = 1),
-      (P = !1),
-      (r = r.times(r).minus(1).sqrt().plus(r)),
-      (P = !0),
-      (n.precision = e),
-      (n.rounding = t),
-      r.ln())
-    : new n(r);
+      ? ((e = n.precision),
+        (t = n.rounding),
+        (n.precision = e + Math.max(Math.abs(r.e), r.sd()) + 4),
+        (n.rounding = 1),
+        (P = !1),
+        (r = r.times(r).minus(1).sqrt().plus(r)),
+        (P = !0),
+        (n.precision = e),
+        (n.rounding = t),
+        r.ln())
+      : new n(r);
 };
 m.inverseHyperbolicSine = m.asinh = function () {
   var e,
@@ -3102,8 +3102,8 @@ m.minus = m.sub = function (e) {
       !f.s || !e.s
         ? (e = new y(NaN))
         : f.d
-        ? (e.s = -e.s)
-        : (e = new y(e.d || f.s !== e.s ? f : NaN)),
+          ? (e.s = -e.s)
+          : (e = new y(e.d || f.s !== e.s ? f : NaN)),
       e
     );
   if (f.s != e.s) return (e.s = -e.s), f.plus(e);
@@ -3156,14 +3156,14 @@ m.modulo = m.mod = function (e) {
     !r.d || !e.s || (e.d && !e.d[0])
       ? new n(NaN)
       : !e.d || (r.d && !r.d[0])
-      ? x(new n(r), n.precision, n.rounding)
-      : ((P = !1),
-        n.modulo == 9
-          ? ((t = N(r, e.abs(), 0, 3, 1)), (t.s *= e.s))
-          : (t = N(r, e, 0, n.modulo, 1)),
-        (t = t.times(e)),
-        (P = !0),
-        r.minus(t))
+        ? x(new n(r), n.precision, n.rounding)
+        : ((P = !1),
+          n.modulo == 9
+            ? ((t = N(r, e.abs(), 0, 3, 1)), (t.s *= e.s))
+            : (t = N(r, e, 0, n.modulo, 1)),
+          (t = t.times(e)),
+          (P = !0),
+          r.minus(t))
   );
 };
 m.naturalExponential = m.exp = function () {
@@ -3588,11 +3588,15 @@ function hr(e, t, r, n) {
               ((e[i + 1] / o / 100) | 0) == Q(10, t - 2) - 1) ||
             ((a == o / 2 || a == 0) && ((e[i + 1] / o / 100) | 0) == 0))
       : t < 4
-      ? (t == 0 ? (a = (a / 1e3) | 0) : t == 1 ? (a = (a / 100) | 0) : t == 2 && (a = (a / 10) | 0),
-        (s = ((n || r < 4) && a == 9999) || (!n && r > 3 && a == 4999)))
-      : (s =
-          (((n || r < 4) && a + 1 == o) || (!n && r > 3 && a + 1 == o / 2)) &&
-          ((e[i + 1] / o / 1e3) | 0) == Q(10, t - 3) - 1),
+        ? (t == 0
+            ? (a = (a / 1e3) | 0)
+            : t == 1
+              ? (a = (a / 100) | 0)
+              : t == 2 && (a = (a / 10) | 0),
+          (s = ((n || r < 4) && a == 9999) || (!n && r > 3 && a == 4999)))
+        : (s =
+            (((n || r < 4) && a + 1 == o) || (!n && r > 3 && a + 1 == o / 2)) &&
+            ((e[i + 1] / o / 1e3) | 0) == Q(10, t - 3) - 1),
     s
   );
 }
@@ -3673,8 +3677,8 @@ var N = (function () {
         !n.s || !i.s || (oe ? O && oe[0] == O[0] : !O)
           ? NaN
           : (oe && oe[0] == 0) || !O
-          ? ii * 0
-          : ii / 0,
+            ? ii * 0
+            : ii / 0,
       );
     for (
       l ? ((f = 1), (c = n.e - i.e)) : ((l = Ce), (f = w), (c = ae(n.e / f) - ae(i.e / f))),
@@ -3691,8 +3695,8 @@ var N = (function () {
       o == null
         ? ((X = o = Br.precision), (s = Br.rounding))
         : a
-        ? (X = o + (n.e - i.e) + 1)
-        : (X = o),
+          ? (X = o + (n.e - i.e) + 1)
+          : (X = o),
       X < 0)
     )
       _.push(1), (y = !0);
@@ -3832,11 +3836,11 @@ function De(e, t, r) {
           : s > 1 && (o = o.charAt(0) + '.' + o.slice(1)),
         (o = o + (e.e < 0 ? 'e' : 'e+') + e.e))
       : i < 0
-      ? ((o = '0.' + Xe(-i - 1) + o), r && (n = r - s) > 0 && (o += Xe(n)))
-      : i >= s
-      ? ((o += Xe(i + 1 - s)), r && (n = r - i - 1) > 0 && (o = o + '.' + Xe(n)))
-      : ((n = i + 1) < s && (o = o.slice(0, n) + '.' + o.slice(n)),
-        r && (n = r - s) > 0 && (i + 1 === s && (o += '.'), (o += Xe(n)))),
+        ? ((o = '0.' + Xe(-i - 1) + o), r && (n = r - s) > 0 && (o += Xe(n)))
+        : i >= s
+          ? ((o += Xe(i + 1 - s)), r && (n = r - i - 1) > 0 && (o = o + '.' + Xe(n)))
+          : ((n = i + 1) < s && (o = o.slice(0, n) + '.' + o.slice(n)),
+            r && (n = r - s) > 0 && (i + 1 === s && (o += '.'), (o += Xe(n)))),
     o
   );
 }
@@ -4227,20 +4231,20 @@ function op(e, t) {
     !e.s || !t.s
       ? (r = new this(NaN))
       : !e.d && !t.d
-      ? ((r = Te(this, o, 1).times(t.s > 0 ? 0.25 : 0.75)), (r.s = e.s))
-      : !t.d || e.isZero()
-      ? ((r = t.s < 0 ? Te(this, n, i) : new this(0)), (r.s = e.s))
-      : !e.d || t.isZero()
-      ? ((r = Te(this, o, 1).times(0.5)), (r.s = e.s))
-      : t.s < 0
-      ? ((this.precision = o),
-        (this.rounding = 1),
-        (r = this.atan(N(e, t, o, 1))),
-        (t = Te(this, o, 1)),
-        (this.precision = n),
-        (this.rounding = i),
-        (r = e.s < 0 ? r.minus(t) : r.plus(t)))
-      : (r = this.atan(N(e, t, o, 1))),
+        ? ((r = Te(this, o, 1).times(t.s > 0 ? 0.25 : 0.75)), (r.s = e.s))
+        : !t.d || e.isZero()
+          ? ((r = t.s < 0 ? Te(this, n, i) : new this(0)), (r.s = e.s))
+          : !e.d || t.isZero()
+            ? ((r = Te(this, o, 1).times(0.5)), (r.s = e.s))
+            : t.s < 0
+              ? ((this.precision = o),
+                (this.rounding = 1),
+                (r = this.atan(N(e, t, o, 1))),
+                (t = Te(this, o, 1)),
+                (this.precision = n),
+                (this.rounding = i),
+                (r = e.s < 0 ? r.minus(t) : r.plus(t)))
+              : (r = this.atan(N(e, t, o, 1))),
     r
   );
 }
@@ -4316,8 +4320,8 @@ function da(e) {
           ? !o.d || o.e > i.maxE
             ? ((u.e = NaN), (u.d = null))
             : o.e < i.minE
-            ? ((u.e = 0), (u.d = [0]))
-            : ((u.e = o.e), (u.d = o.d.slice()))
+              ? ((u.e = 0), (u.d = [0]))
+              : ((u.e = o.e), (u.d = o.d.slice()))
           : ((u.e = o.e), (u.d = o.d ? o.d.slice() : o.d));
       return;
     }
@@ -4332,8 +4336,8 @@ function da(e) {
           ? s > i.maxE
             ? ((u.e = NaN), (u.d = null))
             : s < i.minE
-            ? ((u.e = 0), (u.d = [0]))
-            : ((u.e = s), (u.d = [o]))
+              ? ((u.e = 0), (u.d = [0]))
+              : ((u.e = s), (u.d = [o]))
           : ((u.e = s), (u.d = [o]));
         return;
       } else if (o * 0 !== 0) {
@@ -4843,12 +4847,12 @@ function ya(e) {
   return e instanceof ke
     ? new Z(`Prisma.${e._getName()}`)
     : qt(e)
-    ? new Z(`prisma.${Ko(e.modelName)}.$fields.${e.name}`)
-    : Array.isArray(e)
-    ? Lp(e)
-    : typeof e == 'object'
-    ? ga(e)
-    : new Z(Object.prototype.toString.call(e));
+      ? new Z(`prisma.${Ko(e.modelName)}.$fields.${e.name}`)
+      : Array.isArray(e)
+        ? Lp(e)
+        : typeof e == 'object'
+          ? ga(e)
+          : new Z(Object.prototype.toString.call(e));
 }
 function Lp(e) {
   let t = new Vt();
@@ -5384,12 +5388,12 @@ _e.stringify = function (e, t) {
   return typeof e == 'string'
     ? e
     : Array.isArray(e)
-    ? e
-        .map(function (r) {
-          return _e.stringify(r, t);
-        })
-        .join('')
-    : ad(e.type)(e.content);
+      ? e
+          .map(function (r) {
+            return _e.stringify(r, t);
+          })
+          .join('')
+      : ad(e.type)(e.content);
 };
 function ad(e) {
   return Aa[e] || od;
@@ -6016,8 +6020,8 @@ function Za(e, t) {
     ? e.datasources
       ? e.datasources
       : e.datasourceUrl
-      ? { [t[0]]: { url: e.datasourceUrl } }
-      : {}
+        ? { [t[0]]: { url: e.datasourceUrl } }
+        : {}
     : {};
 }
 function Pr({ error: e, user_facing_error: t }, r) {
@@ -6272,10 +6276,10 @@ function qn({ inlineDatasources: e, overrideDatasources: t, env: r, clientVersio
     (o === void 0
       ? (i = void 0)
       : a
-      ? (i = a)
-      : s?.value
-      ? (i = s.value)
-      : s?.fromEnvVar && (i = r[s.fromEnvVar]),
+        ? (i = a)
+        : s?.value
+          ? (i = s.value)
+          : s?.fromEnvVar && (i = r[s.fromEnvVar]),
     s?.fromEnvVar !== void 0 && i === void 0)
   )
     throw new k(`error: Environment variable not found: ${s.fromEnvVar}.`, n);
@@ -7581,17 +7585,17 @@ You may have to run ${ct('prisma generate')} for your changes to take effect.`,
                 target: n.module_path,
               })
             : km(n)
-            ? (this.loggerRustPanic = new he(
-                this.getErrorMessageWithLink(
-                  `${n.message}: ${n.reason} in ${n.file}:${n.line}:${n.column}`,
-                ),
-                this.config.clientVersion,
-              ))
-            : this.logEmitter.emit(n.level, {
-                timestamp: new Date(),
-                message: n.message,
-                target: n.module_path,
-              });
+              ? (this.loggerRustPanic = new he(
+                  this.getErrorMessageWithLink(
+                    `${n.message}: ${n.reason} in ${n.file}:${n.line}:${n.column}`,
+                  ),
+                  this.config.clientVersion,
+                ))
+              : this.logEmitter.emit(n.level, {
+                  timestamp: new Date(),
+                  message: n.message,
+                  target: n.module_path,
+                });
       }
     }
     getErrorMessageWithLink(r) {
@@ -8152,8 +8156,8 @@ function Jm(e, t) {
       e.constraints.minFieldCount === 1 && e.constraints.maxFieldCount == 1
         ? s.push(`${o.green('exactly one')} argument,`)
         : e.constraints.maxFieldCount == 1
-        ? s.push(`${o.green('at most one')} argument,`)
-        : s.push(`${o.green(`at most ${e.constraints.maxFieldCount}`)} arguments,`),
+          ? s.push(`${o.green('at most one')} argument,`)
+          : s.push(`${o.green(`at most ${e.constraints.maxFieldCount}`)} arguments,`),
       s.push(
         `but you provided ${Yn(
           'and',
@@ -8459,23 +8463,23 @@ function sf(e, t) {
   return typeof e == 'bigint'
     ? { prisma__type: 'bigint', prisma__value: e.toString() }
     : Ot(e)
-    ? { prisma__type: 'date', prisma__value: e.toJSON() }
-    : Oe.isDecimal(e)
-    ? { prisma__type: 'decimal', prisma__value: e.toJSON() }
-    : Buffer.isBuffer(e)
-    ? { prisma__type: 'bytes', prisma__value: e.toString('base64') }
-    : af(e) || ArrayBuffer.isView(e)
-    ? { prisma__type: 'bytes', prisma__value: Buffer.from(e).toString('base64') }
-    : typeof e == 'object' && t === 'slow'
-    ? Bl(e)
-    : e;
+      ? { prisma__type: 'date', prisma__value: e.toJSON() }
+      : Oe.isDecimal(e)
+        ? { prisma__type: 'decimal', prisma__value: e.toJSON() }
+        : Buffer.isBuffer(e)
+          ? { prisma__type: 'bytes', prisma__value: e.toString('base64') }
+          : af(e) || ArrayBuffer.isView(e)
+            ? { prisma__type: 'bytes', prisma__value: Buffer.from(e).toString('base64') }
+            : typeof e == 'object' && t === 'slow'
+              ? Bl(e)
+              : e;
 }
 function af(e) {
   return e instanceof ArrayBuffer || e instanceof SharedArrayBuffer
     ? !0
     : typeof e == 'object' && e !== null
-    ? e[Symbol.toStringTag] === 'ArrayBuffer' || e[Symbol.toStringTag] === 'SharedArrayBuffer'
-    : !1;
+      ? e[Symbol.toStringTag] === 'ArrayBuffer' || e[Symbol.toStringTag] === 'SharedArrayBuffer'
+      : !1;
 }
 function Bl(e) {
   if (typeof e != 'object' || e === null) return e;
@@ -8666,12 +8670,12 @@ function ti(e) {
   return e === null
     ? e
     : Array.isArray(e)
-    ? e.map(ti)
-    : typeof e == 'object'
-    ? cf(e)
-      ? pf(e)
-      : It(e, ti)
-    : e;
+      ? e.map(ti)
+      : typeof e == 'object'
+        ? cf(e)
+          ? pf(e)
+          : It(e, ti)
+        : e;
 }
 function cf(e) {
   return e !== null && typeof e == 'object' && typeof e.$type == 'string';
@@ -8902,17 +8906,17 @@ var mf = L('prisma:client:request_handler'),
               batchRequestIdx: t.batchRequestIdx,
             })
           : t.isPanic
-          ? new he(s, this.client._clientVersion)
-          : t instanceof z
-          ? new z(s, {
-              clientVersion: this.client._clientVersion,
-              batchRequestIdx: t.batchRequestIdx,
-            })
-          : t instanceof k
-          ? new k(s, this.client._clientVersion)
-          : t instanceof he
-          ? new he(s, this.client._clientVersion)
-          : ((t.clientVersion = this.client._clientVersion), t))
+            ? new he(s, this.client._clientVersion)
+            : t instanceof z
+              ? new z(s, {
+                  clientVersion: this.client._clientVersion,
+                  batchRequestIdx: t.batchRequestIdx,
+                })
+              : t instanceof k
+                ? new k(s, this.client._clientVersion)
+                : t instanceof he
+                  ? new he(s, this.client._clientVersion)
+                  : ((t.clientVersion = this.client._clientVersion), t))
       );
     }
     sanitizeMessage(t) {
@@ -9227,10 +9231,10 @@ function gu(e) {
           (l.errorFormat
             ? (this._errorFormat = l.errorFormat)
             : process.env.NODE_ENV === 'production'
-            ? (this._errorFormat = 'minimal')
-            : process.env.NO_COLOR
-            ? (this._errorFormat = 'colorless')
-            : (this._errorFormat = 'colorless'),
+              ? (this._errorFormat = 'minimal')
+              : process.env.NO_COLOR
+                ? (this._errorFormat = 'colorless')
+                : (this._errorFormat = 'colorless'),
           (this._runtimeDataModel = e.runtimeDataModel),
           (this._engineConfig = {
             cwd: p,
