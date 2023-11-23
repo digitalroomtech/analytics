@@ -1,6 +1,5 @@
 import express from 'express';
 import analyticsRoutes from './controllers/analytics/analytics.routes';
-import { checkOriginMiddleware } from './middlewares/check-origin.middleware';
 import { PrismaClient } from './generated/client';
 import cors from 'cors';
 import http from 'http';
@@ -19,7 +18,6 @@ app.use(
     maxAge: 86400,
   }),
   express.json(),
-  checkOriginMiddleware,
   analyticsRoutes,
 );
 

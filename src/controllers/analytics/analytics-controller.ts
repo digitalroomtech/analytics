@@ -41,3 +41,13 @@ export async function analyticsCreate(req: Request, res: Response) {
 
   return res.json({ message: 'Register event successfully.' });
 }
+
+export const isUuidAuthenticated = async (uuid: string) => {
+  const session = await prisma.analytics.findUnique({
+    where: {
+      uuid: uuid,
+    },
+  });
+
+  return !!session;
+};
