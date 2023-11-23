@@ -13,7 +13,7 @@ const prisma = new PrismaClient();
 
 app.use(
   cors({
-    origin: '*',
+    origin: process.env.ANALYTICS_ALLOWED_DOMAINS || '',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     maxAge: 86400,
