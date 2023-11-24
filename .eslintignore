@@ -1,0 +1,6 @@
+#React
+node_modules
+build
+prisma
+src/generated
+src/types
