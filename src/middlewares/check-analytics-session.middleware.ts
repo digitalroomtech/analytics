@@ -7,6 +7,7 @@ interface Request extends ExpressRequest {
 }
 
 const prisma = new PrismaClient();
+const requestCounts: { [key: string]: number } = {};
 
 export const checkSessionMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const session = req.headers['analytics-session'];
@@ -23,12 +24,31 @@ export const checkSessionMiddleware = async (req: Request, res: Response, next: 
   });
 
   if (!tenantRecord) {
-    return res.status(400).send('Dominio no válido');
+    return res.status(400).send('Invalid origin');
   }
 
   req.tenant_id = Number(tenantRecord.id);
 
-  const isAuthenticated = await isUuidAuthenticated(session.toString());
+  const uuid = session.toString();
+
+  if (!requestCounts[uuid]) {
+    requestCounts[uuid] = 0;
+  }
+
+  requestCounts[uuid]++;
+
+  if (requestCounts[uuid] > 20) {
+    return res.status(429).send('Too Many Requests');
+  }
+
+  setTimeout(() => {
+    requestCounts[uuid]--;
+    if (requestCounts[uuid] === 0) {
+      delete requestCounts[uuid];
+    }
+  }, 60000);
+
+  const isAuthenticated = await isUuidAuthenticated(uuid);
 
   if (!isAuthenticated) {
     return res.status(403).send('Forbidden');
