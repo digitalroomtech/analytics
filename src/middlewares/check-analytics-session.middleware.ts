@@ -28,27 +28,7 @@ export const checkSessionMiddleware = async (req: Request, res: Response, next: 
   }
 
   req.tenant_id = Number(tenantRecord.id);
-
-  const uuid = session.toString();
-
-  if (!requestCounts[uuid]) {
-    requestCounts[uuid] = 0;
-  }
-
-  requestCounts[uuid]++;
-
-  if (requestCounts[uuid] > 20) {
-    return res.status(429).send('Too Many Requests');
-  }
-
-  setTimeout(() => {
-    requestCounts[uuid]--;
-    if (requestCounts[uuid] === 0) {
-      delete requestCounts[uuid];
-    }
-  }, 60000);
-
-  const isAuthenticated = await isUuidAuthenticated(uuid);
+  const isAuthenticated = await isUuidAuthenticated(session.toString());
 
   if (!isAuthenticated) {
     return res.status(403).send('Forbidden');
