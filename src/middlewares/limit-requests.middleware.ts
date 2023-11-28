@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { MAX_REQUESTS } from '../utils/constants';
 
 const requestCounts: { [key: string]: number } = {};
 
@@ -17,9 +18,17 @@ export const limitRequests = async (req: Request, res: Response, next: NextFunct
 
   requestCounts[uuid]++;
 
-  if (requestCounts[uuid] > 2) {
+  if (requestCounts[uuid] > MAX_REQUESTS) {
     return res.status(429).send('Too Many Requests');
   }
+
+  const intervalId = setInterval(() => {
+    requestCounts[uuid]--;
+    if (requestCounts[uuid] === 0) {
+      delete requestCounts[uuid];
+      clearInterval(intervalId);
+    }
+  }, 60000);
 
   next();
 };

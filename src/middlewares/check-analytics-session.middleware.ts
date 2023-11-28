@@ -7,7 +7,6 @@ interface Request extends ExpressRequest {
 }
 
 const prisma = new PrismaClient();
-const requestCounts: { [key: string]: number } = {};
 
 export const checkSessionMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const session = req.headers['analytics-session'];
