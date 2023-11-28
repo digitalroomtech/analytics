@@ -111,7 +111,13 @@ exports.Prisma.AnalyticsScalarFieldEnum = {
   uuid: 'uuid',
   url: 'url',
   user_id: 'user_id',
-  tenant: 'tenant',
+  tenant_id: 'tenant_id',
+};
+
+exports.Prisma.TenantsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  domain: 'domain',
 };
 
 exports.Prisma.SortOrder = {
@@ -126,6 +132,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Analytics: 'Analytics',
+  Tenants: 'Tenants',
 };
 
 /**

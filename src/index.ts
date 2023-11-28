@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 
 app.use(
   cors({
-    origin: process.env.ANALYTICS_ALLOWED_DOMAINS || '',
+    origin: '*',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     maxAge: 86400,
@@ -28,7 +28,7 @@ const main = async () => {
 
 main()
   .catch((e) => {
-    throw e;
+    console.error(e);
   })
   .finally(async () => {
     await prisma.$disconnect();

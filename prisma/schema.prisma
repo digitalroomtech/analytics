@@ -10,10 +10,19 @@ datasource db {
 }
 
 model Analytics {
-  id     Int    @id @default(autoincrement())
-  name   String
-  uuid   String @unique
-  url    String?
-  user_id Int?
-  tenant String?
+  id        Int      @id @default(autoincrement())
+  name      String
+  uuid      String   @unique
+  url       String?
+  user_id   Int?
+  tenant_id Int?
+  tenant    Tenants?  @relation(fields: [tenant_id], references: [id])
 }
+
+model Tenants {
+  id        Int         @id @default(autoincrement())
+  name      String
+  domain    String @unique
+  analytics Analytics[]
+}
+
