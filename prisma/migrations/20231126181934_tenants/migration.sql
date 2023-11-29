@@ -10,7 +10,7 @@ ALTER TABLE `Analytics` DROP COLUMN `tenant`,
     ADD COLUMN `tenant_id` INTEGER NULL;
 
 -- AlterTable
-ALTER TABLE `tenants` ADD COLUMN `domain` VARCHAR(191) NOT NULL;
+ALTER TABLE `Tenants` ADD COLUMN `domain` VARCHAR(191) NOT NULL;
 
 -- AddForeignKey
 ALTER TABLE `Analytics` ADD CONSTRAINT `Analytics_tenant_id_fkey` FOREIGN KEY (`tenant_id`) REFERENCES `Tenants`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
