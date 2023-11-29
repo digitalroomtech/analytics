@@ -11,14 +11,16 @@ export const limitRequests = async (req: Request, res: Response, next: NextFunct
   const session = req.headers['analytics-session'];
 
   if (!session) {
-    return res.status(400).send('La cabecera "analytics-session" es requerida');
+    return res.status(403).send({ message: 'No analytics-session header' });
   }
-  const uuid = session.toString();
-  const requestuuid = requestCounts.get(uuid) || 2;
 
-  requestCounts.set(uuid, requestuuid + 1);
-  if (requestuuid > MAX_REQUESTS) {
-    return res.status(429).send('Too Many Requests');
+  const uuid = session.toString();
+  const requestUuid = requestCounts.get(uuid) || 1;
+
+  requestCounts.set(uuid, requestUuid + 1);
+
+  if (requestUuid > MAX_REQUESTS) {
+    return res.status(429).send({ message: 'Too Many Requests' });
   }
 
   if (!cleanupTasks.has(uuid)) {

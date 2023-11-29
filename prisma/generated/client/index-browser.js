@@ -112,12 +112,16 @@ exports.Prisma.AnalyticsScalarFieldEnum = {
   url: 'url',
   user_id: 'user_id',
   tenant_id: 'tenant_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
 };
 
 exports.Prisma.TenantsScalarFieldEnum = {
   id: 'id',
   name: 'name',
   domain: 'domain',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
 };
 
 exports.Prisma.SortOrder = {

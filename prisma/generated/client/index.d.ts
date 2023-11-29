@@ -1032,6 +1032,8 @@ export namespace Prisma {
     url: string | null;
     user_id: number | null;
     tenant_id: number | null;
+    created_at: Date | null;
+    updated_at: Date | null;
   };
 
   export type AnalyticsMaxAggregateOutputType = {
@@ -1041,6 +1043,8 @@ export namespace Prisma {
     url: string | null;
     user_id: number | null;
     tenant_id: number | null;
+    created_at: Date | null;
+    updated_at: Date | null;
   };
 
   export type AnalyticsCountAggregateOutputType = {
@@ -1050,6 +1054,8 @@ export namespace Prisma {
     url: number;
     user_id: number;
     tenant_id: number;
+    created_at: number;
+    updated_at: number;
     _all: number;
   };
 
@@ -1072,6 +1078,8 @@ export namespace Prisma {
     url?: true;
     user_id?: true;
     tenant_id?: true;
+    created_at?: true;
+    updated_at?: true;
   };
 
   export type AnalyticsMaxAggregateInputType = {
@@ -1081,6 +1089,8 @@ export namespace Prisma {
     url?: true;
     user_id?: true;
     tenant_id?: true;
+    created_at?: true;
+    updated_at?: true;
   };
 
   export type AnalyticsCountAggregateInputType = {
@@ -1090,6 +1100,8 @@ export namespace Prisma {
     url?: true;
     user_id?: true;
     tenant_id?: true;
+    created_at?: true;
+    updated_at?: true;
     _all?: true;
   };
 
@@ -1187,6 +1199,8 @@ export namespace Prisma {
     url: string | null;
     user_id: number | null;
     tenant_id: number | null;
+    created_at: Date;
+    updated_at: Date;
     _count: AnalyticsCountAggregateOutputType | null;
     _avg: AnalyticsAvgAggregateOutputType | null;
     _sum: AnalyticsSumAggregateOutputType | null;
@@ -1215,6 +1229,8 @@ export namespace Prisma {
         url?: boolean;
         user_id?: boolean;
         tenant_id?: boolean;
+        created_at?: boolean;
+        updated_at?: boolean;
         tenant?: boolean | Analytics$tenantArgs<ExtArgs>;
       },
       ExtArgs['result']['analytics']
@@ -1227,6 +1243,8 @@ export namespace Prisma {
     url?: boolean;
     user_id?: boolean;
     tenant_id?: boolean;
+    created_at?: boolean;
+    updated_at?: boolean;
   };
 
   export type AnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
@@ -1249,6 +1267,8 @@ export namespace Prisma {
         url: string | null;
         user_id: number | null;
         tenant_id: number | null;
+        created_at: Date;
+        updated_at: Date;
       },
       ExtArgs['result']['analytics']
     >;
@@ -1698,6 +1718,8 @@ export namespace Prisma {
     readonly url: FieldRef<'Analytics', 'String'>;
     readonly user_id: FieldRef<'Analytics', 'Int'>;
     readonly tenant_id: FieldRef<'Analytics', 'Int'>;
+    readonly created_at: FieldRef<'Analytics', 'DateTime'>;
+    readonly updated_at: FieldRef<'Analytics', 'DateTime'>;
   }
 
   // Custom InputTypes
@@ -2077,18 +2099,24 @@ export namespace Prisma {
     id: number | null;
     name: string | null;
     domain: string | null;
+    created_at: Date | null;
+    updated_at: Date | null;
   };
 
   export type TenantsMaxAggregateOutputType = {
     id: number | null;
     name: string | null;
     domain: string | null;
+    created_at: Date | null;
+    updated_at: Date | null;
   };
 
   export type TenantsCountAggregateOutputType = {
     id: number;
     name: number;
     domain: number;
+    created_at: number;
+    updated_at: number;
     _all: number;
   };
 
@@ -2104,18 +2132,24 @@ export namespace Prisma {
     id?: true;
     name?: true;
     domain?: true;
+    created_at?: true;
+    updated_at?: true;
   };
 
   export type TenantsMaxAggregateInputType = {
     id?: true;
     name?: true;
     domain?: true;
+    created_at?: true;
+    updated_at?: true;
   };
 
   export type TenantsCountAggregateInputType = {
     id?: true;
     name?: true;
     domain?: true;
+    created_at?: true;
+    updated_at?: true;
     _all?: true;
   };
 
@@ -2210,6 +2244,8 @@ export namespace Prisma {
     id: number;
     name: string;
     domain: string;
+    created_at: Date;
+    updated_at: Date;
     _count: TenantsCountAggregateOutputType | null;
     _avg: TenantsAvgAggregateOutputType | null;
     _sum: TenantsSumAggregateOutputType | null;
@@ -2235,6 +2271,8 @@ export namespace Prisma {
         id?: boolean;
         name?: boolean;
         domain?: boolean;
+        created_at?: boolean;
+        updated_at?: boolean;
         analytics?: boolean | Tenants$analyticsArgs<ExtArgs>;
         _count?: boolean | TenantsCountOutputTypeDefaultArgs<ExtArgs>;
       },
@@ -2245,6 +2283,8 @@ export namespace Prisma {
     id?: boolean;
     name?: boolean;
     domain?: boolean;
+    created_at?: boolean;
+    updated_at?: boolean;
   };
 
   export type TenantsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2263,6 +2303,8 @@ export namespace Prisma {
           id: number;
           name: string;
           domain: string;
+          created_at: Date;
+          updated_at: Date;
         },
         ExtArgs['result']['tenants']
       >;
@@ -2706,6 +2748,8 @@ export namespace Prisma {
     readonly id: FieldRef<'Tenants', 'Int'>;
     readonly name: FieldRef<'Tenants', 'String'>;
     readonly domain: FieldRef<'Tenants', 'String'>;
+    readonly created_at: FieldRef<'Tenants', 'DateTime'>;
+    readonly updated_at: FieldRef<'Tenants', 'DateTime'>;
   }
 
   // Custom InputTypes
@@ -3087,6 +3131,8 @@ export namespace Prisma {
     url: 'url';
     user_id: 'user_id';
     tenant_id: 'tenant_id';
+    created_at: 'created_at';
+    updated_at: 'updated_at';
   };
 
   export type AnalyticsScalarFieldEnum =
@@ -3096,6 +3142,8 @@ export namespace Prisma {
     id: 'id';
     name: 'name';
     domain: 'domain';
+    created_at: 'created_at';
+    updated_at: 'updated_at';
   };
 
   export type TenantsScalarFieldEnum =
@@ -3130,6 +3178,11 @@ export namespace Prisma {
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>;
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>;
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>;
@@ -3148,6 +3201,8 @@ export namespace Prisma {
     url?: StringNullableFilter<'Analytics'> | string | null;
     user_id?: IntNullableFilter<'Analytics'> | number | null;
     tenant_id?: IntNullableFilter<'Analytics'> | number | null;
+    created_at?: DateTimeFilter<'Analytics'> | Date | string;
+    updated_at?: DateTimeFilter<'Analytics'> | Date | string;
     tenant?: XOR<TenantsNullableRelationFilter, TenantsWhereInput> | null;
   };
 
@@ -3158,23 +3213,27 @@ export namespace Prisma {
     url?: SortOrderInput | SortOrder;
     user_id?: SortOrderInput | SortOrder;
     tenant_id?: SortOrderInput | SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
     tenant?: TenantsOrderByWithRelationInput;
   };
 
   export type AnalyticsWhereUniqueInput = Prisma.AtLeast<
     {
       id?: number;
-      uuid?: string;
       AND?: AnalyticsWhereInput | AnalyticsWhereInput[];
       OR?: AnalyticsWhereInput[];
       NOT?: AnalyticsWhereInput | AnalyticsWhereInput[];
       name?: StringFilter<'Analytics'> | string;
+      uuid?: StringFilter<'Analytics'> | string;
       url?: StringNullableFilter<'Analytics'> | string | null;
       user_id?: IntNullableFilter<'Analytics'> | number | null;
       tenant_id?: IntNullableFilter<'Analytics'> | number | null;
+      created_at?: DateTimeFilter<'Analytics'> | Date | string;
+      updated_at?: DateTimeFilter<'Analytics'> | Date | string;
       tenant?: XOR<TenantsNullableRelationFilter, TenantsWhereInput> | null;
     },
-    'id' | 'uuid'
+    'id'
   >;
 
   export type AnalyticsOrderByWithAggregationInput = {
@@ -3184,6 +3243,8 @@ export namespace Prisma {
     url?: SortOrderInput | SortOrder;
     user_id?: SortOrderInput | SortOrder;
     tenant_id?: SortOrderInput | SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
     _count?: AnalyticsCountOrderByAggregateInput;
     _avg?: AnalyticsAvgOrderByAggregateInput;
     _max?: AnalyticsMaxOrderByAggregateInput;
@@ -3201,6 +3262,8 @@ export namespace Prisma {
     url?: StringNullableWithAggregatesFilter<'Analytics'> | string | null;
     user_id?: IntNullableWithAggregatesFilter<'Analytics'> | number | null;
     tenant_id?: IntNullableWithAggregatesFilter<'Analytics'> | number | null;
+    created_at?: DateTimeWithAggregatesFilter<'Analytics'> | Date | string;
+    updated_at?: DateTimeWithAggregatesFilter<'Analytics'> | Date | string;
   };
 
   export type TenantsWhereInput = {
@@ -3210,6 +3273,8 @@ export namespace Prisma {
     id?: IntFilter<'Tenants'> | number;
     name?: StringFilter<'Tenants'> | string;
     domain?: StringFilter<'Tenants'> | string;
+    created_at?: DateTimeFilter<'Tenants'> | Date | string;
+    updated_at?: DateTimeFilter<'Tenants'> | Date | string;
     analytics?: AnalyticsListRelationFilter;
   };
 
@@ -3217,6 +3282,8 @@ export namespace Prisma {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
     analytics?: AnalyticsOrderByRelationAggregateInput;
   };
 
@@ -3228,6 +3295,8 @@ export namespace Prisma {
       OR?: TenantsWhereInput[];
       NOT?: TenantsWhereInput | TenantsWhereInput[];
       name?: StringFilter<'Tenants'> | string;
+      created_at?: DateTimeFilter<'Tenants'> | Date | string;
+      updated_at?: DateTimeFilter<'Tenants'> | Date | string;
       analytics?: AnalyticsListRelationFilter;
     },
     'id' | 'domain'
@@ -3237,6 +3306,8 @@ export namespace Prisma {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
     _count?: TenantsCountOrderByAggregateInput;
     _avg?: TenantsAvgOrderByAggregateInput;
     _max?: TenantsMaxOrderByAggregateInput;
@@ -3251,6 +3322,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<'Tenants'> | number;
     name?: StringWithAggregatesFilter<'Tenants'> | string;
     domain?: StringWithAggregatesFilter<'Tenants'> | string;
+    created_at?: DateTimeWithAggregatesFilter<'Tenants'> | Date | string;
+    updated_at?: DateTimeWithAggregatesFilter<'Tenants'> | Date | string;
   };
 
   export type AnalyticsCreateInput = {
@@ -3258,6 +3331,8 @@ export namespace Prisma {
     uuid: string;
     url?: string | null;
     user_id?: number | null;
+    created_at?: Date | string;
+    updated_at?: Date | string;
     tenant?: TenantsCreateNestedOneWithoutAnalyticsInput;
   };
 
@@ -3268,6 +3343,8 @@ export namespace Prisma {
     url?: string | null;
     user_id?: number | null;
     tenant_id?: number | null;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type AnalyticsUpdateInput = {
@@ -3275,6 +3352,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     tenant?: TenantsUpdateOneWithoutAnalyticsNestedInput;
   };
 
@@ -3285,6 +3364,8 @@ export namespace Prisma {
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
     tenant_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type AnalyticsCreateManyInput = {
@@ -3294,6 +3375,8 @@ export namespace Prisma {
     url?: string | null;
     user_id?: number | null;
     tenant_id?: number | null;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type AnalyticsUpdateManyMutationInput = {
@@ -3301,6 +3384,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type AnalyticsUncheckedUpdateManyInput = {
@@ -3310,11 +3395,15 @@ export namespace Prisma {
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
     tenant_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type TenantsCreateInput = {
     name: string;
     domain: string;
+    created_at?: Date | string;
+    updated_at?: Date | string;
     analytics?: AnalyticsCreateNestedManyWithoutTenantInput;
   };
 
@@ -3322,12 +3411,16 @@ export namespace Prisma {
     id?: number;
     name: string;
     domain: string;
+    created_at?: Date | string;
+    updated_at?: Date | string;
     analytics?: AnalyticsUncheckedCreateNestedManyWithoutTenantInput;
   };
 
   export type TenantsUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     analytics?: AnalyticsUpdateManyWithoutTenantNestedInput;
   };
 
@@ -3335,6 +3428,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     analytics?: AnalyticsUncheckedUpdateManyWithoutTenantNestedInput;
   };
 
@@ -3342,17 +3437,23 @@ export namespace Prisma {
     id?: number;
     name: string;
     domain: string;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type TenantsUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type TenantsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3405,6 +3506,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null;
   };
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[];
+    notIn?: Date[] | string[];
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string;
+  };
+
   export type TenantsNullableRelationFilter = {
     is?: TenantsWhereInput | null;
     isNot?: TenantsWhereInput | null;
@@ -3422,6 +3534,8 @@ export namespace Prisma {
     url?: SortOrder;
     user_id?: SortOrder;
     tenant_id?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
   };
 
   export type AnalyticsAvgOrderByAggregateInput = {
@@ -3437,6 +3551,8 @@ export namespace Prisma {
     url?: SortOrder;
     user_id?: SortOrder;
     tenant_id?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
   };
 
   export type AnalyticsMinOrderByAggregateInput = {
@@ -3446,6 +3562,8 @@ export namespace Prisma {
     url?: SortOrder;
     user_id?: SortOrder;
     tenant_id?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
   };
 
   export type AnalyticsSumOrderByAggregateInput = {
@@ -3520,6 +3638,20 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>;
   };
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[];
+    notIn?: Date[] | string[];
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedDateTimeFilter<$PrismaModel>;
+    _max?: NestedDateTimeFilter<$PrismaModel>;
+  };
+
   export type AnalyticsListRelationFilter = {
     every?: AnalyticsWhereInput;
     some?: AnalyticsWhereInput;
@@ -3534,6 +3666,8 @@ export namespace Prisma {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
   };
 
   export type TenantsAvgOrderByAggregateInput = {
@@ -3544,12 +3678,16 @@ export namespace Prisma {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
   };
 
   export type TenantsMinOrderByAggregateInput = {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
+    created_at?: SortOrder;
+    updated_at?: SortOrder;
   };
 
   export type TenantsSumOrderByAggregateInput = {
@@ -3576,6 +3714,10 @@ export namespace Prisma {
     decrement?: number;
     multiply?: number;
     divide?: number;
+  };
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string;
   };
 
   export type TenantsUpdateOneWithoutAnalyticsNestedInput = {
@@ -3723,6 +3865,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null;
   };
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[];
+    notIn?: Date[] | string[];
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string;
+  };
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>;
     in?: number[];
@@ -3811,15 +3964,33 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null;
   };
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    in?: Date[] | string[];
+    notIn?: Date[] | string[];
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string;
+    _count?: NestedIntFilter<$PrismaModel>;
+    _min?: NestedDateTimeFilter<$PrismaModel>;
+    _max?: NestedDateTimeFilter<$PrismaModel>;
+  };
+
   export type TenantsCreateWithoutAnalyticsInput = {
     name: string;
     domain: string;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type TenantsUncheckedCreateWithoutAnalyticsInput = {
     id?: number;
     name: string;
     domain: string;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type TenantsCreateOrConnectWithoutAnalyticsInput = {
@@ -3841,12 +4012,16 @@ export namespace Prisma {
   export type TenantsUpdateWithoutAnalyticsInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type TenantsUncheckedUpdateWithoutAnalyticsInput = {
     id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type AnalyticsCreateWithoutTenantInput = {
@@ -3854,6 +4029,8 @@ export namespace Prisma {
     uuid: string;
     url?: string | null;
     user_id?: number | null;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type AnalyticsUncheckedCreateWithoutTenantInput = {
@@ -3862,6 +4039,8 @@ export namespace Prisma {
     uuid: string;
     url?: string | null;
     user_id?: number | null;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type AnalyticsCreateOrConnectWithoutTenantInput = {
@@ -3900,6 +4079,8 @@ export namespace Prisma {
     url?: StringNullableFilter<'Analytics'> | string | null;
     user_id?: IntNullableFilter<'Analytics'> | number | null;
     tenant_id?: IntNullableFilter<'Analytics'> | number | null;
+    created_at?: DateTimeFilter<'Analytics'> | Date | string;
+    updated_at?: DateTimeFilter<'Analytics'> | Date | string;
   };
 
   export type AnalyticsCreateManyTenantInput = {
@@ -3908,6 +4089,8 @@ export namespace Prisma {
     uuid: string;
     url?: string | null;
     user_id?: number | null;
+    created_at?: Date | string;
+    updated_at?: Date | string;
   };
 
   export type AnalyticsUpdateWithoutTenantInput = {
@@ -3915,6 +4098,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type AnalyticsUncheckedUpdateWithoutTenantInput = {
@@ -3923,6 +4108,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type AnalyticsUncheckedUpdateManyWithoutTenantInput = {
@@ -3931,6 +4118,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   /**

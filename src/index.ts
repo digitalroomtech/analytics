@@ -14,12 +14,16 @@ app.use(
   cors({
     origin: '*',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Authorization', 'Content-Type'],
+    allowedHeaders: ['Authorization', 'Content-Type', 'analytics-session'],
     maxAge: 86400,
   }),
   express.json(),
   analyticsRoutes,
 );
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not Found' });
+});
 
 const main = async () => {
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));

@@ -3,13 +3,15 @@ import { Request as ExpressRequest, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
 const prisma = new PrismaClient();
+
 interface Request extends ExpressRequest {
   tenant_id?: number;
+  name?: string;
+  uuid?: string;
 }
 
 export async function authenticate(req: Request, res: Response) {
   const uuid = uuidv4();
-
   try {
     await prisma.analytics.create({
       data: {
@@ -17,7 +19,7 @@ export async function authenticate(req: Request, res: Response) {
         uuid: uuid,
         user_id: 0,
         url: req.headers.origin || '',
-        tenant_id: null,
+        tenant_id: req.body.tenant_id,
       },
     });
   } catch (error: any) {
@@ -29,18 +31,20 @@ export async function authenticate(req: Request, res: Response) {
 
 export async function analyticsCreate(req: Request, res: Response) {
   const data = req.body;
-
-  if (!data.name || !data.uuid) {
+  if (!(data.name || data.tenant_id || data.uuid || data.user_id)) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
 
   try {
     await prisma.analytics.create({
       data: {
-        ...data,
+        name: data.name,
+        uuid: data.uuid,
+        user_id: data.user_id,
+        url: req.headers.origin,
         tenant: {
           connect: {
-            id: req.tenant_id,
+            id: req.body.tenant_id,
           },
         },
       },
@@ -53,7 +57,7 @@ export async function analyticsCreate(req: Request, res: Response) {
 }
 
 export const isUuidAuthenticated = async (uuid: string) => {
-  const session = await prisma.analytics.findUnique({
+  const session = await prisma.analytics.findFirst({
     where: {
       uuid: uuid,
     },
