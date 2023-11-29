@@ -6,7 +6,7 @@
 
 */
 -- AlterTable
-ALTER TABLE `analytics` DROP COLUMN `tenant`,
+ALTER TABLE `Analytics` DROP COLUMN `tenant`,
     ADD COLUMN `tenant_id` INTEGER NULL;
 
 -- AlterTable
