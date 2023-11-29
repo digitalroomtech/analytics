@@ -14,7 +14,12 @@ app.use(
   cors({
     origin: '*',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Authorization', 'Content-Type', 'analytics-session'],
+    allowedHeaders: [
+      'Authorization',
+      'Content-Type',
+      'analytics-session',
+      'analytics-session-origin',
+    ],
     maxAge: 86400,
   }),
   express.json(),

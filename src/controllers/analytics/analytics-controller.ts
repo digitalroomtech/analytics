@@ -8,6 +8,7 @@ interface Request extends ExpressRequest {
   tenant_id?: number;
   name?: string;
   uuid?: string;
+  originUrl?: string;
 }
 
 export async function authenticate(req: Request, res: Response) {
@@ -31,7 +32,7 @@ export async function authenticate(req: Request, res: Response) {
 
 export async function analyticsCreate(req: Request, res: Response) {
   const data = req.body;
-  if (!(data.name || data.tenant_id || data.uuid || data.user_id)) {
+  if (!(data.name || data.tenant_id || data.uuid || data.user_id || data.originUrl)) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
 
@@ -41,7 +42,7 @@ export async function analyticsCreate(req: Request, res: Response) {
         name: data.name,
         uuid: data.uuid,
         user_id: data.user_id,
-        url: req.headers.origin,
+        url: data.originUrl,
         tenant: {
           connect: {
             id: req.body.tenant_id,
