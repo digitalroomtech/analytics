@@ -9,9 +9,8 @@
     "nodemon": "npx nodemon index.ts",
     "nodemon:app": "npx nodemon app.ts",
     "dev": "nodemon src/index.ts",
-    "build": "npx prisma generate && rimraf ./build && tsc && npm run copyFiles",
+    "build": "prisma generate && prisma db push && rimraf ./build && tsc",
     "app": "npm run build && node build/app.js",
-    "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build",
     "prepare": "husky install"
   },
   "repository": {
