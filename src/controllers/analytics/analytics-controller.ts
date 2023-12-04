@@ -23,6 +23,8 @@ export async function authenticate(req: Request, res: Response) {
         tenant_id: req.body.tenant_id,
       },
     });
+
+    await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
@@ -50,6 +52,7 @@ export async function analyticsCreate(req: Request, res: Response) {
         },
       },
     });
+    await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
