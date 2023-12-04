@@ -11,8 +11,8 @@ router.post('/authenticate', checkOriginMiddleware, checkSessionOriginMiddleware
 
 router.post(
   '/create',
-  checkOriginMiddleware,
   checkSessionOriginMiddleware,
+  checkOriginMiddleware,
   checkSessionMiddleware,
   limitRequests,
   analyticsCreate,
