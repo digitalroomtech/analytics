@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9ab5baa-a79f-4874-8cde-0ac924b165b9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../paywall/my-app/eas.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../paywall/paywall-preview/eas.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia-script/easy-wall.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia-script/easy-wall.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia-script/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia-script/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia-script/x.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/event-analytics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/mailchimp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/moment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../vanguardia/vanguardia-script/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/.eslintignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/.prettierignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/.prettierrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/android/app/src/main/res/drawable-hdpi/launch_screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/android/app/src/main/res/layout/launch_screen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/android/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/codegen.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/components/PostCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/graphql/post.graphql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/post-actions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/screens/PostListByFilterView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/screens/PostListView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/store/post-store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/modules/post/utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/apollo/ApolloProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/apollo/client.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/bottom-tab-navigation/BottomTabNavigation.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/bottom-tab-navigation/PostsFilterTabNavigation.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/colors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/DateText.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/HeaderProfile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/Icons.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/Loading.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/Pill.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/Text.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/TextInput.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/View.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/styles/StyledComponents.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/components/styles/loading-styled.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/drawer/MainDrawer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/navigation/MainNavigation.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/state/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdMobileApp/src/shared/utils/utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/analytics/analytics.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/analytics/analytics.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../brightmetro-scripts/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../brightmetro-scripts/src/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/.prettierrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/codegen.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/public/Logo-Digital-120x120.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/public/google-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/Session.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/auth/AuthGoogleCallback.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/auth/auth-events.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/auth/auth-google-hook.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/auth/auth-types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/auth/auth-utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/PostList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/PostRelatedList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/PostView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/components/PostDetails.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/components/PostItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/components/PostRelatedItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/components/SkeletonPostDetails.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/components/SkeletonPostItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/components/SkeletonPostRelatedItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/components/SkeletonRelatedPostItemList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/post-utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/post/post.graphql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/user/components/SignInForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/user/components/SignUpDialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/user/components/SignUpForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/user/user-actions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/modules/user/user-events.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/routes.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/apollo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/css/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/css/theme.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/layout/Footer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/layout/Header.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/layout/Layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-client/src/shared/layout/Sidebar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/.styleci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Console/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Exceptions/Handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Enums/OrderEnum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Enums/UserSocialProviderEnum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Inputs/CreateUserInput.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Inputs/CreateUserSocialProviderInput.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Mutations/CreateUserMutation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Mutations/CreateUserSocialProviderMutation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Queries/PostQuery.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Queries/PostsQuery.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Queries/UserByEmailQuery.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Queries/UserQuery.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Schemas/DefaultSchema.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Types/PostType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Types/UserPostType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Types/UserSocialProviderType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/GraphQL/Types/UserType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Controllers/Controller.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Controllers/GoogleController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Kernel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/Authenticate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/EncryptCookies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/PreventRequestsDuringMaintenance.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/TrimStrings.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/TrustHosts.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/TrustProxies.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Models/Blog.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Models/Post.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Models/PostAuthor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Models/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Models/UserSocialProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Providers/AppServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Providers/AuthServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Providers/BroadcastServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Providers/EventServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/app/Providers/RouteServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/artisan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/bootstrap/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/bootstrap/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/broadcasting.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/cache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/cors.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/database.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/filesystems.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/graphql.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/hashing.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/logging.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/mail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/queue.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/sanctum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/services.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/session.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/config/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/factories/PostAuthorFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/factories/PostFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/factories/UserFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2019_12_14_000001_create_personal_access_tokens_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2023_01_25_143656_create_posts_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2023_01_25_143948_create_post_authors_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2023_01_25_145233_create_blogs_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2023_01_25_145848_add_post_url_image_field.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2023_01_27_014837_alter_user_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/migrations/2023_01_27_021017_create_user_social_provider_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/seeders/DatabaseSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/seeders/PostSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/database/seeders/UserSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/google-credentials.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/phpunit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/public/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/public/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/lang/en/auth.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/lang/en/pagination.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/lang/en/passwords.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/lang/en/validation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/resources/views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/routes/api.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/routes/channels.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/routes/console.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/routes/web.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/server.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/app/public/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/framework/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/framework/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/framework/cache/data/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/framework/sessions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/framework/testing/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/framework/views/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/storage/logs/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/tests/CreatesApplication.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/tests/Feature/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/tests/TestCase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/tests/Unit/ExampleTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../easy-wall-server/webpack.mix.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kunaisoft/maquillate-backend-maquillate.com/app/Helpers/PaypalHelper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/print-referral.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/xt_appointment.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/xt_departments_by_provider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/xt_patient-referral.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/xt_provider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/xt_reason.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new-files/www/admin/referrals/xt_uploadRecord.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../paywall-preview/eas.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../script-bullhorn/backup.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../script-bullhorn/candidate-script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../script-bullhorn/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/appointment.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/appt.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/file.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/icd.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/phone.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/refer.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/referred.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/transportation.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/user.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/CREDITS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/RELEASE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/UPGRADING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/bin/entities.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Elements.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Entities.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Exception.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/InstructionProcessor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/CharacterReference.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/DOMTreeBuilder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/EventHandler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/FileInputStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/InputStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/ParseError.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/Scanner.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/StringInputStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/Tokenizer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/TreeBuildingRules.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Parser/UTF8Utils.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Serializer/HTML5Entities.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Serializer/OutputRules.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Serializer/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Serializer/RulesInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/masterminds/html5/src/HTML5/Serializer/Traverser.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/.github/workflows/phpunit.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/adobe-standard-encoding.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1250.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1251.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1252.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1253.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1254.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1255.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1257.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp1258.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/cp874.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-1.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-11.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-15.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-16.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-2.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-4.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-5.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-7.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/iso-8859-9.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/koi8-r.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/maps/koi8-u.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/AdobeFontMetrics.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Autoloader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/BinaryStream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/EOT/File.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/EOT/Header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/EncodingMap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Exception/FontNotFoundException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Font.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Glyph/Outline.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Glyph/OutlineComponent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Glyph/OutlineComposite.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Glyph/OutlineSimple.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/OpenType/File.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/OpenType/TableDirectoryEntry.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/DirectoryEntry.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/cmap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/glyf.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/head.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/hhea.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/hmtx.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/kern.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/loca.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/maxp.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/name.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/nameRecord.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/os2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/Table/Type/post.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/TrueType/Collection.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/TrueType/File.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/TrueType/Header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/TrueType/TableDirectoryEntry.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/WOFF/File.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/WOFF/Header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/CssLength.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/DefaultStyle.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Document.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Gradient/Stop.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Style.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Surface/CPdf.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Surface/SurfaceCpdf.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Surface/SurfaceInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Surface/SurfacePDFLib.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/AbstractTag.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Anchor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Circle.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/ClipPath.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Ellipse.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Group.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Image.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Line.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/LinearGradient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Path.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Polygon.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Polyline.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/RadialGradient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Rect.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Shape.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Stop.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/Text.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts-php/vendor/phenx/php-svg-lib/src/Svg/Tag/UseTag.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/copy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/logic-tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/moment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/paypal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/phone.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/phone.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/pure-logger.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/winston.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/my-app/eas.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2YabHMetuHAp0FawrpHh5LIwJWQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/luise/OneDrive/Escritorio/analytics&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\luise\\OneDrive\\Escritorio\\analytics\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9ab5baa-a79f-4874-8cde-0ac924b165b9" name="Changes" comment="" />
+      <created>1700766548980</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700766548980</updated>
+      <workItem from="1700766550011" duration="7783000" />
+      <workItem from="1700787154961" duration="1440000" />
+      <workItem from="1701017161793" duration="1751000" />
+      <workItem from="1701021011349" duration="1981000" />
+      <workItem from="1701181622441" duration="16295000" />
+      <workItem from="1701722012257" duration="3506000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

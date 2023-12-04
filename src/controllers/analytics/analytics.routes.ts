@@ -14,7 +14,7 @@ router.post(
   checkSessionOriginMiddleware,
   checkOriginMiddleware,
   checkSessionMiddleware,
-  limitRequests,
+  // limitRequests,
   analyticsCreate,
 );
 
