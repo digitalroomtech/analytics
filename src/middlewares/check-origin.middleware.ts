@@ -16,6 +16,8 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
     },
   });
 
+  await prisma.$disconnect();
+
   if (!tenantRecord) {
     return res.status(400).send({ message: 'Invalid origin' });
   }
