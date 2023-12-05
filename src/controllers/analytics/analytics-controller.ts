@@ -67,5 +67,7 @@ export const isUuidAuthenticated = async (uuid: string) => {
     },
   });
 
+  await prisma.$disconnect();
+
   return !!session;
 };
