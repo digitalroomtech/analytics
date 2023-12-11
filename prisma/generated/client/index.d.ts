@@ -135,11 +135,11 @@ export class PrismaClient<
   get analytics(): Prisma.AnalyticsDelegate<ExtArgs>;
 
   /**
-   * `prisma.tenants`: Exposes CRUD operations for the **Tenants** model.
+   * `prisma.tenant`: Exposes CRUD operations for the **Tenants** model.
    * Example usage:
    * ```ts
    * // Fetch zero or more Tenants
-   * const tenants = await prisma.tenants.findMany()
+   * const tenant = await prisma.tenant.findMany()
    * ```
    */
   get tenants(): Prisma.TenantsDelegate<ExtArgs>;
@@ -2304,7 +2304,7 @@ export namespace Prisma {
      * @param {TenantsFindUniqueArgs} args - Arguments to find a Tenants
      * @example
      * // Get one Tenants
-     * const tenants = await prisma.tenants.findUnique({
+     * const tenant = await prisma.tenant.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2324,7 +2324,7 @@ export namespace Prisma {
      * @param {TenantsFindUniqueOrThrowArgs} args - Arguments to find a Tenants
      * @example
      * // Get one Tenants
-     * const tenants = await prisma.tenants.findUniqueOrThrow({
+     * const tenant = await prisma.tenant.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2345,7 +2345,7 @@ export namespace Prisma {
      * @param {TenantsFindFirstArgs} args - Arguments to find a Tenants
      * @example
      * // Get one Tenants
-     * const tenants = await prisma.tenants.findFirst({
+     * const tenant = await prisma.tenant.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2367,7 +2367,7 @@ export namespace Prisma {
      * @param {TenantsFindFirstOrThrowArgs} args - Arguments to find a Tenants
      * @example
      * // Get one Tenants
-     * const tenants = await prisma.tenants.findFirstOrThrow({
+     * const tenant = await prisma.tenant.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2388,13 +2388,13 @@ export namespace Prisma {
      * @param {TenantsFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Tenants
-     * const tenants = await prisma.tenants.findMany()
+     * const tenant = await prisma.tenant.findMany()
      *
      * // Get first 10 Tenants
-     * const tenants = await prisma.tenants.findMany({ take: 10 })
+     * const tenant = await prisma.tenant.findMany({ take: 10 })
      *
      * // Only select the `id`
-     * const tenantsWithIdOnly = await prisma.tenants.findMany({ select: { id: true } })
+     * const tenantsWithIdOnly = await prisma.tenant.findMany({ select: { id: true } })
      *
      **/
     findMany<T extends TenantsFindManyArgs<ExtArgs>>(
@@ -2406,7 +2406,7 @@ export namespace Prisma {
      * @param {TenantsCreateArgs} args - Arguments to create a Tenants.
      * @example
      * // Create one Tenants
-     * const Tenants = await prisma.tenants.create({
+     * const Tenants = await prisma.tenant.create({
      *   data: {
      *     // ... data to create a Tenants
      *   }
@@ -2426,7 +2426,7 @@ export namespace Prisma {
      *     @param {TenantsCreateManyArgs} args - Arguments to create many Tenants.
      *     @example
      *     // Create many Tenants
-     *     const tenants = await prisma.tenants.createMany({
+     *     const tenant = await prisma.tenant.createMany({
      *       data: {
      *         // ... provide data here
      *       }
@@ -2442,7 +2442,7 @@ export namespace Prisma {
      * @param {TenantsDeleteArgs} args - Arguments to delete one Tenants.
      * @example
      * // Delete one Tenants
-     * const Tenants = await prisma.tenants.delete({
+     * const Tenants = await prisma.tenant.delete({
      *   where: {
      *     // ... filter to delete one Tenants
      *   }
@@ -2462,7 +2462,7 @@ export namespace Prisma {
      * @param {TenantsUpdateArgs} args - Arguments to update one Tenants.
      * @example
      * // Update one Tenants
-     * const tenants = await prisma.tenants.update({
+     * const tenant = await prisma.tenant.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2485,7 +2485,7 @@ export namespace Prisma {
      * @param {TenantsDeleteManyArgs} args - Arguments to filter Tenants to delete.
      * @example
      * // Delete a few Tenants
-     * const { count } = await prisma.tenants.deleteMany({
+     * const { count } = await prisma.tenant.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2503,7 +2503,7 @@ export namespace Prisma {
      * @param {TenantsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Tenants
-     * const tenants = await prisma.tenants.updateMany({
+     * const tenant = await prisma.tenant.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2522,7 +2522,7 @@ export namespace Prisma {
      * @param {TenantsUpsertArgs} args - Arguments to update or create a Tenants.
      * @example
      * // Update or create a Tenants
-     * const tenants = await prisma.tenants.upsert({
+     * const tenant = await prisma.tenant.upsert({
      *   create: {
      *     // ... data to create a Tenants
      *   },
@@ -2546,7 +2546,7 @@ export namespace Prisma {
      * Find zero or more Tenants that matches the filter.
      * @param {TenantsFindRawArgs} args - Select which filters you would like to apply.
      * @example
-     * const tenants = await prisma.tenants.findRaw({
+     * const tenant = await prisma.tenant.findRaw({
      *   filter: { age: { $gt: 25 } }
      * })
      **/
@@ -2556,7 +2556,7 @@ export namespace Prisma {
      * Perform aggregation operations on a Tenants.
      * @param {TenantsAggregateRawArgs} args - Select which aggregations you would like to apply.
      * @example
-     * const tenants = await prisma.tenants.aggregateRaw({
+     * const tenant = await prisma.tenant.aggregateRaw({
      *   pipeline: [
      *     { $match: { status: "registered" } },
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
@@ -2572,7 +2572,7 @@ export namespace Prisma {
      * @param {TenantsCountArgs} args - Arguments to filter Tenants to count.
      * @example
      * // Count the number of Tenants
-     * const count = await prisma.tenants.count({
+     * const count = await prisma.tenant.count({
      *   where: {
      *     // ... the filter for the Tenants we want to count
      *   }

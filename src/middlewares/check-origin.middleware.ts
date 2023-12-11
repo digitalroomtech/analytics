@@ -9,9 +9,8 @@ interface Request extends ExpressRequest {
 const prisma = new PrismaClient();
 
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  if (ENVIRONMENT === 'local') return next();
   const sessionOrigin = req.headers['analytics-session-origin'] as string;
-  const origin = req.headers.origin || sessionOrigin;
+  const origin = (req.headers.origin || sessionOrigin).slice(0, -1);
   const tenantRecord = await prisma.tenants.findUnique({
     where: {
       domain: origin || '',
@@ -23,8 +22,8 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
   if (!tenantRecord) {
     return res.status(400).send({ message: 'Invalid origin' });
   }
-
-  req.body.tenant_id = Number(tenantRecord.id);
+  req.body.tenant_id = tenantRecord.id;
+  req.body.originUrl = origin;
 
   return next();
 };

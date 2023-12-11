@@ -1,5 +1,6 @@
 import express from 'express';
 import analyticsRoutes from './controllers/analytics/analytics.routes';
+import tenantRoutes from './controllers/tenant/tenant.routes';
 import { PrismaClient } from '../prisma/generated/client';
 import cors from 'cors';
 import http from 'http';
@@ -25,6 +26,8 @@ app.use(
   express.json(),
   analyticsRoutes,
 );
+
+app.use('/tenant', tenantRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not Found' });

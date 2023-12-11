@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 const prisma = new PrismaClient();
 
 interface Request extends ExpressRequest {
-  tenant_id?: number;
+  tenant_id?: string;
   name?: string;
   uuid?: string;
   originUrl?: string;
@@ -37,7 +37,6 @@ export async function analyticsCreate(req: Request, res: Response) {
   if (!(data.name || data.tenant_id || data.uuid || data.user_id || data.originUrl)) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
-
   try {
     await prisma.analytics.create({
       data: {

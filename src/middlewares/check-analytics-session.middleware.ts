@@ -1,5 +1,5 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
-import { isUuidAuthenticated } from '../controllers/analytics/analytics-controller';
+import { isUuidAuthenticated } from '../controllers/analytics/analytics.controller';
 import { ENVIRONMENT } from '../utils/constants';
 
 interface Request extends ExpressRequest {
@@ -7,9 +7,12 @@ interface Request extends ExpressRequest {
 }
 
 export const checkSessionMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  if (ENVIRONMENT === 'local') return next();
-
   const session = req.headers['analytics-session'];
+
+  if (ENVIRONMENT === 'local') {
+    req.body.uuid = session;
+    return next();
+  }
 
   if (!session) {
     return res.status(403).send({ message: 'No analytics-session header' });
