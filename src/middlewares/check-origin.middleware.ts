@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const sessionOrigin = req.headers['analytics-session-origin'] as string;
-  const origin = (req.headers.origin || sessionOrigin).slice(0, -1);
+  const origin = (req.headers.origin || sessionOrigin).replace(/\/+$/, '');
   const tenantRecord = await prisma.tenants.findUnique({
     where: {
       domain: origin || '',

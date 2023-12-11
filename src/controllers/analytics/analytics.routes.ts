@@ -7,7 +7,7 @@ import { checkOriginMiddleware } from '../../middlewares/check-origin.middleware
 
 const router = express.Router();
 
-router.post('/authenticate', checkOriginMiddleware, checkSessionOriginMiddleware, authenticate);
+router.post('/authenticate', checkSessionOriginMiddleware, checkOriginMiddleware, authenticate);
 
 router.post(
   '/create',
