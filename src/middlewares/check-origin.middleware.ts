@@ -1,5 +1,6 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
 import { PrismaClient } from '../../prisma/generated/client';
+import { ENVIRONMENT } from '../utils/constants';
 
 interface Request extends ExpressRequest {
   tenant_id?: number;
@@ -8,6 +9,7 @@ interface Request extends ExpressRequest {
 const prisma = new PrismaClient();
 
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+  if (ENVIRONMENT === 'local') return next();
   const sessionOrigin = req.headers['analytics-session-origin'] as string;
   const origin = req.headers.origin || sessionOrigin;
   const tenantRecord = await prisma.tenants.findUnique({

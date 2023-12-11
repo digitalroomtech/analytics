@@ -86,58 +86,6 @@ export class PrismaClient<
   $use(cb: Prisma.Middleware): void;
 
   /**
-   * Executes a prepared raw query and returns the number of affected rows.
-   * @example
-   * ```
-   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
-   * ```
-   *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-   */
-  $executeRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>;
-
-  /**
-   * Executes a raw query and returns the number of affected rows.
-   * Susceptible to SQL injections, see documentation.
-   * @example
-   * ```
-   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
-   * ```
-   *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-   */
-  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
-
-  /**
-   * Performs a prepared raw query and returns the `SELECT` data.
-   * @example
-   * ```
-   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
-   * ```
-   *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-   */
-  $queryRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>;
-
-  /**
-   * Performs a raw query and returns the `SELECT` data.
-   * Susceptible to SQL injections, see documentation.
-   * @example
-   * ```
-   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
-   * ```
-   *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
-   */
-  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
-
-  /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
    * @example
    * ```
@@ -152,17 +100,27 @@ export class PrismaClient<
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(
     arg: [...P],
-    options?: { isolationLevel?: Prisma.TransactionIsolationLevel },
   ): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>;
 
   $transaction<R>(
     fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>,
-    options?: {
-      maxWait?: number;
-      timeout?: number;
-      isolationLevel?: Prisma.TransactionIsolationLevel;
-    },
+    options?: { maxWait?: number; timeout?: number },
   ): $Utils.JsPromise<R>;
+
+  /**
+   * Executes a raw MongoDB command and returns the result of it.
+   * @example
+   * ```
+   * const user = await prisma.$runCommandRaw({
+   *   aggregate: 'User',
+   *   pipeline: [{ $match: { name: 'Bob' } }, { $project: { email: true, _id: false } }],
+   *   explain: false,
+   * })
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $runCommandRaw(command: Prisma.InputJsonObject): Prisma.PrismaPromise<Prisma.JsonObject>;
 
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>;
 
@@ -675,7 +633,7 @@ export namespace Prisma {
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
       modelProps: 'analytics' | 'tenants';
-      txIsolationLevel: Prisma.TransactionIsolationLevel;
+      txIsolationLevel: never;
     };
     model: {
       Analytics: {
@@ -737,6 +695,14 @@ export namespace Prisma {
           groupBy: {
             args: Prisma.AnalyticsGroupByArgs<ExtArgs>;
             result: $Utils.Optional<AnalyticsGroupByOutputType>[];
+          };
+          findRaw: {
+            args: Prisma.AnalyticsFindRawArgs<ExtArgs>;
+            result: Prisma.JsonObject;
+          };
+          aggregateRaw: {
+            args: Prisma.AnalyticsAggregateRawArgs<ExtArgs>;
+            result: Prisma.JsonObject;
           };
           count: {
             args: Prisma.AnalyticsCountArgs<ExtArgs>;
@@ -804,6 +770,14 @@ export namespace Prisma {
             args: Prisma.TenantsGroupByArgs<ExtArgs>;
             result: $Utils.Optional<TenantsGroupByOutputType>[];
           };
+          findRaw: {
+            args: Prisma.TenantsFindRawArgs<ExtArgs>;
+            result: Prisma.JsonObject;
+          };
+          aggregateRaw: {
+            args: Prisma.TenantsAggregateRawArgs<ExtArgs>;
+            result: Prisma.JsonObject;
+          };
           count: {
             args: Prisma.TenantsCountArgs<ExtArgs>;
             result: $Utils.Optional<TenantsCountAggregateOutputType> | number;
@@ -815,21 +789,9 @@ export namespace Prisma {
     other: {
       payload: any;
       operations: {
-        $executeRawUnsafe: {
-          args: [query: string, ...values: any[]];
-          result: any;
-        };
-        $executeRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]];
-          result: any;
-        };
-        $queryRawUnsafe: {
-          args: [query: string, ...values: any[]];
-          result: any;
-        };
-        $queryRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]];
-          result: any;
+        $runCommandRaw: {
+          args: Prisma.InputJsonObject;
+          result: Prisma.JsonObject;
         };
       };
     };
@@ -1014,35 +976,31 @@ export namespace Prisma {
   };
 
   export type AnalyticsAvgAggregateOutputType = {
-    id: number | null;
     user_id: number | null;
-    tenant_id: number | null;
   };
 
   export type AnalyticsSumAggregateOutputType = {
-    id: number | null;
     user_id: number | null;
-    tenant_id: number | null;
   };
 
   export type AnalyticsMinAggregateOutputType = {
-    id: number | null;
+    id: string | null;
     name: string | null;
     uuid: string | null;
     url: string | null;
     user_id: number | null;
-    tenant_id: number | null;
+    tenant_id: string | null;
     created_at: Date | null;
     updated_at: Date | null;
   };
 
   export type AnalyticsMaxAggregateOutputType = {
-    id: number | null;
+    id: string | null;
     name: string | null;
     uuid: string | null;
     url: string | null;
     user_id: number | null;
-    tenant_id: number | null;
+    tenant_id: string | null;
     created_at: Date | null;
     updated_at: Date | null;
   };
@@ -1060,15 +1018,11 @@ export namespace Prisma {
   };
 
   export type AnalyticsAvgAggregateInputType = {
-    id?: true;
     user_id?: true;
-    tenant_id?: true;
   };
 
   export type AnalyticsSumAggregateInputType = {
-    id?: true;
     user_id?: true;
-    tenant_id?: true;
   };
 
   export type AnalyticsMinAggregateInputType = {
@@ -1193,12 +1147,12 @@ export namespace Prisma {
   };
 
   export type AnalyticsGroupByOutputType = {
-    id: number;
+    id: string;
     name: string;
     uuid: string;
     url: string | null;
     user_id: number | null;
-    tenant_id: number | null;
+    tenant_id: string | null;
     created_at: Date;
     updated_at: Date;
     _count: AnalyticsCountAggregateOutputType | null;
@@ -1261,12 +1215,12 @@ export namespace Prisma {
     };
     scalars: $Extensions.GetPayloadResult<
       {
-        id: number;
+        id: string;
         name: string;
         uuid: string;
         url: string | null;
         user_id: number | null;
-        tenant_id: number | null;
+        tenant_id: string | null;
         created_at: Date;
         updated_at: Date;
       },
@@ -1534,6 +1488,29 @@ export namespace Prisma {
     >;
 
     /**
+     * Find zero or more Analytics that matches the filter.
+     * @param {AnalyticsFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const analytics = await prisma.analytics.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     **/
+    findRaw(args?: AnalyticsFindRawArgs): Prisma.PrismaPromise<JsonObject>;
+
+    /**
+     * Perform aggregation operations on a Analytics.
+     * @param {AnalyticsAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const analytics = await prisma.analytics.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     **/
+    aggregateRaw(args?: AnalyticsAggregateRawArgs): Prisma.PrismaPromise<JsonObject>;
+
+    /**
      * Count the number of Analytics.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
@@ -1712,12 +1689,12 @@ export namespace Prisma {
    * Fields of the Analytics model
    */
   interface AnalyticsFieldRefs {
-    readonly id: FieldRef<'Analytics', 'Int'>;
+    readonly id: FieldRef<'Analytics', 'String'>;
     readonly name: FieldRef<'Analytics', 'String'>;
     readonly uuid: FieldRef<'Analytics', 'String'>;
     readonly url: FieldRef<'Analytics', 'String'>;
     readonly user_id: FieldRef<'Analytics', 'Int'>;
-    readonly tenant_id: FieldRef<'Analytics', 'Int'>;
+    readonly tenant_id: FieldRef<'Analytics', 'String'>;
     readonly created_at: FieldRef<'Analytics', 'DateTime'>;
     readonly updated_at: FieldRef<'Analytics', 'DateTime'>;
   }
@@ -1939,7 +1916,6 @@ export namespace Prisma {
      * The data used to create many Analytics.
      */
     data: AnalyticsCreateManyInput | AnalyticsCreateManyInput[];
-    skipDuplicates?: boolean;
   };
 
   /**
@@ -2043,6 +2019,38 @@ export namespace Prisma {
   };
 
   /**
+   * Analytics findRaw
+   */
+  export type AnalyticsFindRawArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue;
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue;
+  };
+
+  /**
+   * Analytics aggregateRaw
+   */
+  export type AnalyticsAggregateRawArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[];
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue;
+  };
+
+  /**
    * Analytics.tenant
    */
   export type Analytics$tenantArgs<
@@ -2081,22 +2089,12 @@ export namespace Prisma {
 
   export type AggregateTenants = {
     _count: TenantsCountAggregateOutputType | null;
-    _avg: TenantsAvgAggregateOutputType | null;
-    _sum: TenantsSumAggregateOutputType | null;
     _min: TenantsMinAggregateOutputType | null;
     _max: TenantsMaxAggregateOutputType | null;
   };
 
-  export type TenantsAvgAggregateOutputType = {
-    id: number | null;
-  };
-
-  export type TenantsSumAggregateOutputType = {
-    id: number | null;
-  };
-
   export type TenantsMinAggregateOutputType = {
-    id: number | null;
+    id: string | null;
     name: string | null;
     domain: string | null;
     created_at: Date | null;
@@ -2104,7 +2102,7 @@ export namespace Prisma {
   };
 
   export type TenantsMaxAggregateOutputType = {
-    id: number | null;
+    id: string | null;
     name: string | null;
     domain: string | null;
     created_at: Date | null;
@@ -2118,14 +2116,6 @@ export namespace Prisma {
     created_at: number;
     updated_at: number;
     _all: number;
-  };
-
-  export type TenantsAvgAggregateInputType = {
-    id?: true;
-  };
-
-  export type TenantsSumAggregateInputType = {
-    id?: true;
   };
 
   export type TenantsMinAggregateInputType = {
@@ -2193,18 +2183,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
-     * Select which fields to average
-     **/
-    _avg?: TenantsAvgAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to sum
-     **/
-    _sum?: TenantsSumAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
      * Select which fields to find the minimum value
      **/
     _min?: TenantsMinAggregateInputType;
@@ -2234,21 +2212,17 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     _count?: TenantsCountAggregateInputType | true;
-    _avg?: TenantsAvgAggregateInputType;
-    _sum?: TenantsSumAggregateInputType;
     _min?: TenantsMinAggregateInputType;
     _max?: TenantsMaxAggregateInputType;
   };
 
   export type TenantsGroupByOutputType = {
-    id: number;
+    id: string;
     name: string;
     domain: string;
     created_at: Date;
     updated_at: Date;
     _count: TenantsCountAggregateOutputType | null;
-    _avg: TenantsAvgAggregateOutputType | null;
-    _sum: TenantsSumAggregateOutputType | null;
     _min: TenantsMinAggregateOutputType | null;
     _max: TenantsMaxAggregateOutputType | null;
   };
@@ -2300,7 +2274,7 @@ export namespace Prisma {
       };
       scalars: $Extensions.GetPayloadResult<
         {
-          id: number;
+          id: string;
           name: string;
           domain: string;
           created_at: Date;
@@ -2569,6 +2543,29 @@ export namespace Prisma {
     >;
 
     /**
+     * Find zero or more Tenants that matches the filter.
+     * @param {TenantsFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const tenants = await prisma.tenants.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     **/
+    findRaw(args?: TenantsFindRawArgs): Prisma.PrismaPromise<JsonObject>;
+
+    /**
+     * Perform aggregation operations on a Tenants.
+     * @param {TenantsAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const tenants = await prisma.tenants.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     **/
+    aggregateRaw(args?: TenantsAggregateRawArgs): Prisma.PrismaPromise<JsonObject>;
+
+    /**
      * Count the number of Tenants.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
@@ -2745,7 +2742,7 @@ export namespace Prisma {
    * Fields of the Tenants model
    */
   interface TenantsFieldRefs {
-    readonly id: FieldRef<'Tenants', 'Int'>;
+    readonly id: FieldRef<'Tenants', 'String'>;
     readonly name: FieldRef<'Tenants', 'String'>;
     readonly domain: FieldRef<'Tenants', 'String'>;
     readonly created_at: FieldRef<'Tenants', 'DateTime'>;
@@ -2969,7 +2966,6 @@ export namespace Prisma {
      * The data used to create many Tenants.
      */
     data: TenantsCreateManyInput | TenantsCreateManyInput[];
-    skipDuplicates?: boolean;
   };
 
   /**
@@ -3073,6 +3069,38 @@ export namespace Prisma {
   };
 
   /**
+   * Tenants findRaw
+   */
+  export type TenantsFindRawArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue;
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue;
+  };
+
+  /**
+   * Tenants aggregateRaw
+   */
+  export type TenantsAggregateRawArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[];
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue;
+  };
+
+  /**
    * Tenants.analytics
    */
   export type Tenants$analyticsArgs<
@@ -3114,16 +3142,6 @@ export namespace Prisma {
    * Enums
    */
 
-  export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted';
-    ReadCommitted: 'ReadCommitted';
-    RepeatableRead: 'RepeatableRead';
-    Serializable: 'Serializable';
-  };
-
-  export type TransactionIsolationLevel =
-    (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
-
   export const AnalyticsScalarFieldEnum: {
     id: 'id';
     name: 'name';
@@ -3156,21 +3174,16 @@ export namespace Prisma {
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
-  export const NullsOrder: {
-    first: 'first';
-    last: 'last';
+  export const QueryMode: {
+    default: 'default';
+    insensitive: 'insensitive';
   };
 
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
 
   /**
    * Field references
    */
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>;
 
   /**
    * Reference to a field of type 'String'
@@ -3178,14 +3191,42 @@ export namespace Prisma {
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>;
 
   /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>;
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>;
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>;
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>;
 
   /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'DateTime[]'
+  >;
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>;
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>;
 
   /**
    * Deep Input Types
@@ -3195,12 +3236,12 @@ export namespace Prisma {
     AND?: AnalyticsWhereInput | AnalyticsWhereInput[];
     OR?: AnalyticsWhereInput[];
     NOT?: AnalyticsWhereInput | AnalyticsWhereInput[];
-    id?: IntFilter<'Analytics'> | number;
+    id?: StringFilter<'Analytics'> | string;
     name?: StringFilter<'Analytics'> | string;
     uuid?: StringFilter<'Analytics'> | string;
     url?: StringNullableFilter<'Analytics'> | string | null;
     user_id?: IntNullableFilter<'Analytics'> | number | null;
-    tenant_id?: IntNullableFilter<'Analytics'> | number | null;
+    tenant_id?: StringNullableFilter<'Analytics'> | string | null;
     created_at?: DateTimeFilter<'Analytics'> | Date | string;
     updated_at?: DateTimeFilter<'Analytics'> | Date | string;
     tenant?: XOR<TenantsNullableRelationFilter, TenantsWhereInput> | null;
@@ -3210,9 +3251,9 @@ export namespace Prisma {
     id?: SortOrder;
     name?: SortOrder;
     uuid?: SortOrder;
-    url?: SortOrderInput | SortOrder;
-    user_id?: SortOrderInput | SortOrder;
-    tenant_id?: SortOrderInput | SortOrder;
+    url?: SortOrder;
+    user_id?: SortOrder;
+    tenant_id?: SortOrder;
     created_at?: SortOrder;
     updated_at?: SortOrder;
     tenant?: TenantsOrderByWithRelationInput;
@@ -3220,7 +3261,7 @@ export namespace Prisma {
 
   export type AnalyticsWhereUniqueInput = Prisma.AtLeast<
     {
-      id?: number;
+      id?: string;
       AND?: AnalyticsWhereInput | AnalyticsWhereInput[];
       OR?: AnalyticsWhereInput[];
       NOT?: AnalyticsWhereInput | AnalyticsWhereInput[];
@@ -3228,7 +3269,7 @@ export namespace Prisma {
       uuid?: StringFilter<'Analytics'> | string;
       url?: StringNullableFilter<'Analytics'> | string | null;
       user_id?: IntNullableFilter<'Analytics'> | number | null;
-      tenant_id?: IntNullableFilter<'Analytics'> | number | null;
+      tenant_id?: StringNullableFilter<'Analytics'> | string | null;
       created_at?: DateTimeFilter<'Analytics'> | Date | string;
       updated_at?: DateTimeFilter<'Analytics'> | Date | string;
       tenant?: XOR<TenantsNullableRelationFilter, TenantsWhereInput> | null;
@@ -3240,9 +3281,9 @@ export namespace Prisma {
     id?: SortOrder;
     name?: SortOrder;
     uuid?: SortOrder;
-    url?: SortOrderInput | SortOrder;
-    user_id?: SortOrderInput | SortOrder;
-    tenant_id?: SortOrderInput | SortOrder;
+    url?: SortOrder;
+    user_id?: SortOrder;
+    tenant_id?: SortOrder;
     created_at?: SortOrder;
     updated_at?: SortOrder;
     _count?: AnalyticsCountOrderByAggregateInput;
@@ -3256,12 +3297,12 @@ export namespace Prisma {
     AND?: AnalyticsScalarWhereWithAggregatesInput | AnalyticsScalarWhereWithAggregatesInput[];
     OR?: AnalyticsScalarWhereWithAggregatesInput[];
     NOT?: AnalyticsScalarWhereWithAggregatesInput | AnalyticsScalarWhereWithAggregatesInput[];
-    id?: IntWithAggregatesFilter<'Analytics'> | number;
+    id?: StringWithAggregatesFilter<'Analytics'> | string;
     name?: StringWithAggregatesFilter<'Analytics'> | string;
     uuid?: StringWithAggregatesFilter<'Analytics'> | string;
     url?: StringNullableWithAggregatesFilter<'Analytics'> | string | null;
     user_id?: IntNullableWithAggregatesFilter<'Analytics'> | number | null;
-    tenant_id?: IntNullableWithAggregatesFilter<'Analytics'> | number | null;
+    tenant_id?: StringNullableWithAggregatesFilter<'Analytics'> | string | null;
     created_at?: DateTimeWithAggregatesFilter<'Analytics'> | Date | string;
     updated_at?: DateTimeWithAggregatesFilter<'Analytics'> | Date | string;
   };
@@ -3270,7 +3311,7 @@ export namespace Prisma {
     AND?: TenantsWhereInput | TenantsWhereInput[];
     OR?: TenantsWhereInput[];
     NOT?: TenantsWhereInput | TenantsWhereInput[];
-    id?: IntFilter<'Tenants'> | number;
+    id?: StringFilter<'Tenants'> | string;
     name?: StringFilter<'Tenants'> | string;
     domain?: StringFilter<'Tenants'> | string;
     created_at?: DateTimeFilter<'Tenants'> | Date | string;
@@ -3289,7 +3330,7 @@ export namespace Prisma {
 
   export type TenantsWhereUniqueInput = Prisma.AtLeast<
     {
-      id?: number;
+      id?: string;
       domain?: string;
       AND?: TenantsWhereInput | TenantsWhereInput[];
       OR?: TenantsWhereInput[];
@@ -3309,17 +3350,15 @@ export namespace Prisma {
     created_at?: SortOrder;
     updated_at?: SortOrder;
     _count?: TenantsCountOrderByAggregateInput;
-    _avg?: TenantsAvgOrderByAggregateInput;
     _max?: TenantsMaxOrderByAggregateInput;
     _min?: TenantsMinOrderByAggregateInput;
-    _sum?: TenantsSumOrderByAggregateInput;
   };
 
   export type TenantsScalarWhereWithAggregatesInput = {
     AND?: TenantsScalarWhereWithAggregatesInput | TenantsScalarWhereWithAggregatesInput[];
     OR?: TenantsScalarWhereWithAggregatesInput[];
     NOT?: TenantsScalarWhereWithAggregatesInput | TenantsScalarWhereWithAggregatesInput[];
-    id?: IntWithAggregatesFilter<'Tenants'> | number;
+    id?: StringWithAggregatesFilter<'Tenants'> | string;
     name?: StringWithAggregatesFilter<'Tenants'> | string;
     domain?: StringWithAggregatesFilter<'Tenants'> | string;
     created_at?: DateTimeWithAggregatesFilter<'Tenants'> | Date | string;
@@ -3327,6 +3366,7 @@ export namespace Prisma {
   };
 
   export type AnalyticsCreateInput = {
+    id?: string;
     name: string;
     uuid: string;
     url?: string | null;
@@ -3337,12 +3377,12 @@ export namespace Prisma {
   };
 
   export type AnalyticsUncheckedCreateInput = {
-    id?: number;
+    id?: string;
     name: string;
     uuid: string;
     url?: string | null;
     user_id?: number | null;
-    tenant_id?: number | null;
+    tenant_id?: string | null;
     created_at?: Date | string;
     updated_at?: Date | string;
   };
@@ -3358,23 +3398,22 @@ export namespace Prisma {
   };
 
   export type AnalyticsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
-    tenant_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    tenant_id?: NullableStringFieldUpdateOperationsInput | string | null;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type AnalyticsCreateManyInput = {
-    id?: number;
+    id?: string;
     name: string;
     uuid: string;
     url?: string | null;
     user_id?: number | null;
-    tenant_id?: number | null;
+    tenant_id?: string | null;
     created_at?: Date | string;
     updated_at?: Date | string;
   };
@@ -3389,17 +3428,17 @@ export namespace Prisma {
   };
 
   export type AnalyticsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
-    tenant_id?: NullableIntFieldUpdateOperationsInput | number | null;
+    tenant_id?: NullableStringFieldUpdateOperationsInput | string | null;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type TenantsCreateInput = {
+    id?: string;
     name: string;
     domain: string;
     created_at?: Date | string;
@@ -3408,7 +3447,7 @@ export namespace Prisma {
   };
 
   export type TenantsUncheckedCreateInput = {
-    id?: number;
+    id?: string;
     name: string;
     domain: string;
     created_at?: Date | string;
@@ -3425,7 +3464,6 @@ export namespace Prisma {
   };
 
   export type TenantsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -3434,7 +3472,7 @@ export namespace Prisma {
   };
 
   export type TenantsCreateManyInput = {
-    id?: number;
+    id?: string;
     name: string;
     domain: string;
     created_at?: Date | string;
@@ -3449,28 +3487,16 @@ export namespace Prisma {
   };
 
   export type TenantsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>;
-    in?: number[];
-    notIn?: number[];
-    lt?: number | IntFieldRefInput<$PrismaModel>;
-    lte?: number | IntFieldRefInput<$PrismaModel>;
-    gt?: number | IntFieldRefInput<$PrismaModel>;
-    gte?: number | IntFieldRefInput<$PrismaModel>;
-    not?: NestedIntFilter<$PrismaModel> | number;
-  };
-
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>;
-    in?: string[];
-    notIn?: string[];
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3478,13 +3504,14 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>;
     startsWith?: string | StringFieldRefInput<$PrismaModel>;
     endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
     not?: NestedStringFilter<$PrismaModel> | string;
   };
 
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null;
-    in?: string[] | null;
-    notIn?: string[] | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3492,24 +3519,27 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>;
     startsWith?: string | StringFieldRefInput<$PrismaModel>;
     endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
     not?: NestedStringNullableFilter<$PrismaModel> | string | null;
+    isSet?: boolean;
   };
 
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null;
-    in?: number[] | null;
-    notIn?: number[] | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
     lt?: number | IntFieldRefInput<$PrismaModel>;
     lte?: number | IntFieldRefInput<$PrismaModel>;
     gt?: number | IntFieldRefInput<$PrismaModel>;
     gte?: number | IntFieldRefInput<$PrismaModel>;
     not?: NestedIntNullableFilter<$PrismaModel> | number | null;
+    isSet?: boolean;
   };
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    in?: Date[] | string[];
-    notIn?: Date[] | string[];
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
@@ -3520,11 +3550,6 @@ export namespace Prisma {
   export type TenantsNullableRelationFilter = {
     is?: TenantsWhereInput | null;
     isNot?: TenantsWhereInput | null;
-  };
-
-  export type SortOrderInput = {
-    sort: SortOrder;
-    nulls?: NullsOrder;
   };
 
   export type AnalyticsCountOrderByAggregateInput = {
@@ -3539,9 +3564,7 @@ export namespace Prisma {
   };
 
   export type AnalyticsAvgOrderByAggregateInput = {
-    id?: SortOrder;
     user_id?: SortOrder;
-    tenant_id?: SortOrder;
   };
 
   export type AnalyticsMaxOrderByAggregateInput = {
@@ -3567,31 +3590,13 @@ export namespace Prisma {
   };
 
   export type AnalyticsSumOrderByAggregateInput = {
-    id?: SortOrder;
     user_id?: SortOrder;
-    tenant_id?: SortOrder;
-  };
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>;
-    in?: number[];
-    notIn?: number[];
-    lt?: number | IntFieldRefInput<$PrismaModel>;
-    lte?: number | IntFieldRefInput<$PrismaModel>;
-    gt?: number | IntFieldRefInput<$PrismaModel>;
-    gte?: number | IntFieldRefInput<$PrismaModel>;
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number;
-    _count?: NestedIntFilter<$PrismaModel>;
-    _avg?: NestedFloatFilter<$PrismaModel>;
-    _sum?: NestedIntFilter<$PrismaModel>;
-    _min?: NestedIntFilter<$PrismaModel>;
-    _max?: NestedIntFilter<$PrismaModel>;
   };
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>;
-    in?: string[];
-    notIn?: string[];
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3599,6 +3604,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>;
     startsWith?: string | StringFieldRefInput<$PrismaModel>;
     endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string;
     _count?: NestedIntFilter<$PrismaModel>;
     _min?: NestedStringFilter<$PrismaModel>;
@@ -3607,8 +3613,8 @@ export namespace Prisma {
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null;
-    in?: string[] | null;
-    notIn?: string[] | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3616,16 +3622,18 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>;
     startsWith?: string | StringFieldRefInput<$PrismaModel>;
     endsWith?: string | StringFieldRefInput<$PrismaModel>;
+    mode?: QueryMode;
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null;
     _count?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedStringNullableFilter<$PrismaModel>;
     _max?: NestedStringNullableFilter<$PrismaModel>;
+    isSet?: boolean;
   };
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null;
-    in?: number[] | null;
-    notIn?: number[] | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
     lt?: number | IntFieldRefInput<$PrismaModel>;
     lte?: number | IntFieldRefInput<$PrismaModel>;
     gt?: number | IntFieldRefInput<$PrismaModel>;
@@ -3636,12 +3644,13 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedIntNullableFilter<$PrismaModel>;
     _max?: NestedIntNullableFilter<$PrismaModel>;
+    isSet?: boolean;
   };
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    in?: Date[] | string[];
-    notIn?: Date[] | string[];
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
@@ -3670,10 +3679,6 @@ export namespace Prisma {
     updated_at?: SortOrder;
   };
 
-  export type TenantsAvgOrderByAggregateInput = {
-    id?: SortOrder;
-  };
-
   export type TenantsMaxOrderByAggregateInput = {
     id?: SortOrder;
     name?: SortOrder;
@@ -3690,10 +3695,6 @@ export namespace Prisma {
     updated_at?: SortOrder;
   };
 
-  export type TenantsSumOrderByAggregateInput = {
-    id?: SortOrder;
-  };
-
   export type TenantsCreateNestedOneWithoutAnalyticsInput = {
     create?: XOR<TenantsCreateWithoutAnalyticsInput, TenantsUncheckedCreateWithoutAnalyticsInput>;
     connectOrCreate?: TenantsCreateOrConnectWithoutAnalyticsInput;
@@ -3706,6 +3707,7 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null;
+    unset?: boolean;
   };
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -3714,6 +3716,7 @@ export namespace Prisma {
     decrement?: number;
     multiply?: number;
     divide?: number;
+    unset?: boolean;
   };
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -3724,21 +3727,13 @@ export namespace Prisma {
     create?: XOR<TenantsCreateWithoutAnalyticsInput, TenantsUncheckedCreateWithoutAnalyticsInput>;
     connectOrCreate?: TenantsCreateOrConnectWithoutAnalyticsInput;
     upsert?: TenantsUpsertWithoutAnalyticsInput;
-    disconnect?: TenantsWhereInput | boolean;
+    disconnect?: boolean;
     delete?: TenantsWhereInput | boolean;
     connect?: TenantsWhereUniqueInput;
     update?: XOR<
       XOR<TenantsUpdateToOneWithWhereWithoutAnalyticsInput, TenantsUpdateWithoutAnalyticsInput>,
       TenantsUncheckedUpdateWithoutAnalyticsInput
     >;
-  };
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number;
-    increment?: number;
-    decrement?: number;
-    multiply?: number;
-    divide?: number;
   };
 
   export type AnalyticsCreateNestedManyWithoutTenantInput = {
@@ -3815,21 +3810,10 @@ export namespace Prisma {
     deleteMany?: AnalyticsScalarWhereInput | AnalyticsScalarWhereInput[];
   };
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>;
-    in?: number[];
-    notIn?: number[];
-    lt?: number | IntFieldRefInput<$PrismaModel>;
-    lte?: number | IntFieldRefInput<$PrismaModel>;
-    gt?: number | IntFieldRefInput<$PrismaModel>;
-    gte?: number | IntFieldRefInput<$PrismaModel>;
-    not?: NestedIntFilter<$PrismaModel> | number;
-  };
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>;
-    in?: string[];
-    notIn?: string[];
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3842,8 +3826,8 @@ export namespace Prisma {
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null;
-    in?: string[] | null;
-    notIn?: string[] | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3852,23 +3836,25 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>;
     endsWith?: string | StringFieldRefInput<$PrismaModel>;
     not?: NestedStringNullableFilter<$PrismaModel> | string | null;
+    isSet?: boolean;
   };
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null;
-    in?: number[] | null;
-    notIn?: number[] | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
     lt?: number | IntFieldRefInput<$PrismaModel>;
     lte?: number | IntFieldRefInput<$PrismaModel>;
     gt?: number | IntFieldRefInput<$PrismaModel>;
     gte?: number | IntFieldRefInput<$PrismaModel>;
     not?: NestedIntNullableFilter<$PrismaModel> | number | null;
+    isSet?: boolean;
   };
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    in?: Date[] | string[];
-    notIn?: Date[] | string[];
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
@@ -3876,37 +3862,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string;
   };
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>;
-    in?: number[];
-    notIn?: number[];
-    lt?: number | IntFieldRefInput<$PrismaModel>;
-    lte?: number | IntFieldRefInput<$PrismaModel>;
-    gt?: number | IntFieldRefInput<$PrismaModel>;
-    gte?: number | IntFieldRefInput<$PrismaModel>;
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number;
-    _count?: NestedIntFilter<$PrismaModel>;
-    _avg?: NestedFloatFilter<$PrismaModel>;
-    _sum?: NestedIntFilter<$PrismaModel>;
-    _min?: NestedIntFilter<$PrismaModel>;
-    _max?: NestedIntFilter<$PrismaModel>;
-  };
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>;
-    in?: number[];
-    notIn?: number[];
-    lt?: number | FloatFieldRefInput<$PrismaModel>;
-    lte?: number | FloatFieldRefInput<$PrismaModel>;
-    gt?: number | FloatFieldRefInput<$PrismaModel>;
-    gte?: number | FloatFieldRefInput<$PrismaModel>;
-    not?: NestedFloatFilter<$PrismaModel> | number;
-  };
-
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>;
-    in?: string[];
-    notIn?: string[];
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3920,10 +3879,21 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>;
   };
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>;
+    lt?: number | IntFieldRefInput<$PrismaModel>;
+    lte?: number | IntFieldRefInput<$PrismaModel>;
+    gt?: number | IntFieldRefInput<$PrismaModel>;
+    gte?: number | IntFieldRefInput<$PrismaModel>;
+    not?: NestedIntFilter<$PrismaModel> | number;
+  };
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null;
-    in?: string[] | null;
-    notIn?: string[] | null;
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null;
     lt?: string | StringFieldRefInput<$PrismaModel>;
     lte?: string | StringFieldRefInput<$PrismaModel>;
     gt?: string | StringFieldRefInput<$PrismaModel>;
@@ -3935,12 +3905,13 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedStringNullableFilter<$PrismaModel>;
     _max?: NestedStringNullableFilter<$PrismaModel>;
+    isSet?: boolean;
   };
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null;
-    in?: number[] | null;
-    notIn?: number[] | null;
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null;
     lt?: number | IntFieldRefInput<$PrismaModel>;
     lte?: number | IntFieldRefInput<$PrismaModel>;
     gt?: number | IntFieldRefInput<$PrismaModel>;
@@ -3951,23 +3922,25 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>;
     _min?: NestedIntNullableFilter<$PrismaModel>;
     _max?: NestedIntNullableFilter<$PrismaModel>;
+    isSet?: boolean;
   };
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null;
-    in?: number[] | null;
-    notIn?: number[] | null;
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null;
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null;
     lt?: number | FloatFieldRefInput<$PrismaModel>;
     lte?: number | FloatFieldRefInput<$PrismaModel>;
     gt?: number | FloatFieldRefInput<$PrismaModel>;
     gte?: number | FloatFieldRefInput<$PrismaModel>;
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null;
+    isSet?: boolean;
   };
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
-    in?: Date[] | string[];
-    notIn?: Date[] | string[];
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>;
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>;
@@ -3979,6 +3952,7 @@ export namespace Prisma {
   };
 
   export type TenantsCreateWithoutAnalyticsInput = {
+    id?: string;
     name: string;
     domain: string;
     created_at?: Date | string;
@@ -3986,7 +3960,7 @@ export namespace Prisma {
   };
 
   export type TenantsUncheckedCreateWithoutAnalyticsInput = {
-    id?: number;
+    id?: string;
     name: string;
     domain: string;
     created_at?: Date | string;
@@ -4017,7 +3991,6 @@ export namespace Prisma {
   };
 
   export type TenantsUncheckedUpdateWithoutAnalyticsInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -4025,6 +3998,7 @@ export namespace Prisma {
   };
 
   export type AnalyticsCreateWithoutTenantInput = {
+    id?: string;
     name: string;
     uuid: string;
     url?: string | null;
@@ -4034,7 +4008,7 @@ export namespace Prisma {
   };
 
   export type AnalyticsUncheckedCreateWithoutTenantInput = {
-    id?: number;
+    id?: string;
     name: string;
     uuid: string;
     url?: string | null;
@@ -4050,7 +4024,6 @@ export namespace Prisma {
 
   export type AnalyticsCreateManyTenantInputEnvelope = {
     data: AnalyticsCreateManyTenantInput | AnalyticsCreateManyTenantInput[];
-    skipDuplicates?: boolean;
   };
 
   export type AnalyticsUpsertWithWhereUniqueWithoutTenantInput = {
@@ -4073,18 +4046,18 @@ export namespace Prisma {
     AND?: AnalyticsScalarWhereInput | AnalyticsScalarWhereInput[];
     OR?: AnalyticsScalarWhereInput[];
     NOT?: AnalyticsScalarWhereInput | AnalyticsScalarWhereInput[];
-    id?: IntFilter<'Analytics'> | number;
+    id?: StringFilter<'Analytics'> | string;
     name?: StringFilter<'Analytics'> | string;
     uuid?: StringFilter<'Analytics'> | string;
     url?: StringNullableFilter<'Analytics'> | string | null;
     user_id?: IntNullableFilter<'Analytics'> | number | null;
-    tenant_id?: IntNullableFilter<'Analytics'> | number | null;
+    tenant_id?: StringNullableFilter<'Analytics'> | string | null;
     created_at?: DateTimeFilter<'Analytics'> | Date | string;
     updated_at?: DateTimeFilter<'Analytics'> | Date | string;
   };
 
   export type AnalyticsCreateManyTenantInput = {
-    id?: number;
+    id?: string;
     name: string;
     uuid: string;
     url?: string | null;
@@ -4103,7 +4076,6 @@ export namespace Prisma {
   };
 
   export type AnalyticsUncheckedUpdateWithoutTenantInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;
@@ -4113,7 +4085,6 @@ export namespace Prisma {
   };
 
   export type AnalyticsUncheckedUpdateManyWithoutTenantInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     uuid?: StringFieldUpdateOperationsInput | string;
     url?: NullableStringFieldUpdateOperationsInput | string | null;

@@ -4,27 +4,27 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Analytics {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   uuid       String
   url        String?
   user_id    Int?
-  tenant_id  Int?
+  tenant_id  String?  @db.ObjectId
   tenant     Tenants? @relation(fields: [tenant_id], references: [id])
-  created_at DateTime @default(now()) @db.Timestamp(0)
-  updated_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 model Tenants {
-  id         Int         @id @default(autoincrement())
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   domain     String      @unique
   analytics  Analytics[]
-  created_at DateTime    @default(now()) @db.Timestamp(0)
-  updated_at DateTime    @default(now()) @db.Timestamp(0)
+  created_at DateTime    @default(now())
+  updated_at DateTime    @default(now())
 }
