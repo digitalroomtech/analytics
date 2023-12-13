@@ -10,10 +10,10 @@ const prisma = new PrismaClient();
 
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const sessionOrigin = req.headers['analytics-session-origin'] as string;
-  const origin = (req.headers.origin || sessionOrigin).replace(/\/+$/, '');
+  const url = new URL(req.headers.origin || sessionOrigin);
   const tenantRecord = await prisma.tenants.findUnique({
     where: {
-      domain: origin || '',
+      domain: url.origin || '',
     },
   });
 
@@ -23,7 +23,7 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
     return res.status(400).send({ message: 'Invalid origin' });
   }
   req.body.tenant_id = tenantRecord.id;
-  req.body.originUrl = origin;
+  req.body.originUrl = url.origin;
 
   return next();
 };
