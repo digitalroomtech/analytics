@@ -23,7 +23,7 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
     return res.status(400).send({ message: 'Invalid origin' });
   }
   req.body.tenant_id = tenantRecord.id;
-  req.body.originUrl = url.origin;
+  req.body.originUrl = url.href;
 
   return next();
 };
