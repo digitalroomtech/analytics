@@ -9,8 +9,8 @@ interface Request extends ExpressRequest {
 const prisma = new PrismaClient();
 
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  const sessionOrigin = req.headers['analytics-session-origin'] as string;
-  const url = new URL(req.headers.origin || sessionOrigin);
+  const sessionOrigin = req.headers['analytics-session-origin'];
+  const url = new URL((sessionOrigin || req.headers.origin) as string);
   const tenantRecord = await prisma.tenants.findUnique({
     where: {
       domain: url.origin || '',
