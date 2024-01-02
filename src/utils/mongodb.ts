@@ -1,8 +1,8 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import { MONGODB_URI } from './constants';
 
 interface Analytics {
-  id?: string;
+  _id?: ObjectId;
   name?: string;
   uuid?: string;
   url?: string;
@@ -13,7 +13,7 @@ interface Analytics {
 }
 
 interface Tenants {
-  id?: string;
+  _id?: string;
   name?: string;
   domain?: string;
   analytics?: Analytics[];

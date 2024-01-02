@@ -20,7 +20,7 @@ export const checkSessionMiddleware = async (req: Request, res: Response, next: 
 
   const isAuthenticated = await isUuidAuthenticated(session.toString());
   if (!isAuthenticated) {
-    return res.status(403).send({ message: 'Forbidden' });
+    return res.status(403).send({ message: 'Forbidden !' });
   }
   req.body.uuid = session;
 

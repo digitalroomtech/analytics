@@ -2,6 +2,7 @@ import { PrismaClient } from '../../../prisma/generated/client';
 import { Request as ExpressRequest, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { analyticsCollection, tenantsCollection } from '../../utils/mongodb';
+import { ObjectId } from 'mongodb';
 
 const prisma = new PrismaClient();
 
@@ -24,6 +25,8 @@ export async function authenticate(req: Request, res: Response) {
       url: req.headers.origin || '',
       tenant_id: req.body.tenant_id,
     });
+
+    await analytics.createIndex({ uuid: 1 });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
@@ -54,6 +57,7 @@ export async function analyticsCreate(req: Request, res: Response) {
 
 export const isUuidAuthenticated = async (uuid: string) => {
   const analytics = await analyticsCollection();
+
   const session = await analytics.findOne({
     uuid,
   });
