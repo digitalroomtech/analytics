@@ -1,10 +1,8 @@
 import { PrismaClient } from '../../../prisma/generated/client';
 import { Request as ExpressRequest, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { MongoClient } from 'mongodb';
-import { MONGODB_URI } from '../../utils/constants';
-console.log('MONGODB_URI', MONGODB_URI);
-const client = new MongoClient(MONGODB_URI);
+import { analyticsCollection } from '../../utils/mongodb';
+
 const prisma = new PrismaClient();
 
 interface Request extends ExpressRequest {
@@ -14,41 +12,18 @@ interface Request extends ExpressRequest {
   originUrl?: string;
 }
 
-interface Analytics {
-  id?: string;
-  name?: string;
-  uuid?: string;
-  url?: string;
-  user_id?: number;
-  tenant_id?: string;
-  created_at?: string;
-  updated_at?: string;
-}
-
 export async function authenticate(req: Request, res: Response) {
   const uuid = uuidv4();
   try {
-    const database = client.db('admin');
-
-    const analytics = await database.collection<Analytics>('Analytics');
+    const analytics = await analyticsCollection();
 
     await analytics.insertOne({
       name: 'analytics_authenticate',
       uuid: uuid,
       user_id: 0,
-      url: 'https://vanguardia.com.mx',
-      tenant_id: '65774a5ea3a3f7bf16c78232',
+      url: req.headers.origin || '',
+      tenant_id: req.body.tenant_id,
     });
-    // await prisma.analytics.create({
-    //   data: {
-    //     name: 'analytics_authenticate',
-    //     uuid: uuid,
-    //     user_id: 0,
-    //     url: 'https://vanguardia.com.mx',
-    //     tenant_id: '65774a5ea3a3f7bf16c78232',
-    //   },
-    // });
-    // await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   } finally {
@@ -64,22 +39,24 @@ export async function analyticsCreate(req: Request, res: Response) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
   try {
-    await prisma.analytics.create({
-      data: {
-        name: data.name,
-        uuid: data.uuid,
-        user_id: data.user_id,
-        url: data.originUrl,
-        tenant: {
-          connect: {
-            id: req.body.tenant_id,
-          },
-        },
-      },
-    });
-    await prisma.$disconnect();
+    // await prisma.analytics.create({
+    //   data: {
+    //     name: data.name,
+    //     uuid: data.uuid,
+    //     user_id: data.user_id,
+    //     url: data.originUrl,
+    //     tenant: {
+    //       connect: {
+    //         id: req.body.tenant_id,
+    //       },
+    //     },
+    //   },
+    // });
+    // await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
+  } finally {
+    // await client.close();
   }
 
   return res.json({ message: 'Register event successfully.' });
