@@ -1356,7 +1356,7 @@ function Ee(e, n) {
     g = h.rounding,
     v = h.precision;
   if (!e.d || !e.d[0] || e.e > 17)
-    return new h(e.d ? (e.d[0] ? (e.s < 0 ? 0 : 1 / 0) : 1) : e.s ? (e.s < 0 ? 0 : e) : 0 / 0);
+    return new h(e.d ? (e.d[0] ? (e.s < 0 ? 0 : 1 / 0) : 1) : e.s ? (e.s < 0 ? 0 : e) : NaN);
   for (n == null ? ((w = !1), (l = v)) : (l = n), u = new h(0.03125); e.e > -2; )
     (e = e.times(u)), (a += 5);
   for (

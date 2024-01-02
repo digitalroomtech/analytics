@@ -74,6 +74,7 @@
     "mongodb": "^6.3.0",
     "node-cron": "^3.0.3",
     "pre-commit": "^1.2.2",
+    "prisma": "^5.7.1",
     "request": "^2.88.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
