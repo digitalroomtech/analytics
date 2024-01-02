@@ -25,8 +25,6 @@ export async function authenticate(req: Request, res: Response) {
       url: req.headers.origin || '',
       tenant_id: req.body.tenant_id,
     });
-
-    await analytics.createIndex({ uuid: 1 });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
