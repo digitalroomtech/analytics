@@ -3,7 +3,7 @@ import { Request as ExpressRequest, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { MongoClient } from 'mongodb';
 import { MONGODB_URI } from '../../utils/constants';
-
+console.log('MONGODB_URI', MONGODB_URI);
 const client = new MongoClient(MONGODB_URI);
 const prisma = new PrismaClient();
 
@@ -30,7 +30,8 @@ export async function authenticate(req: Request, res: Response) {
   try {
     const database = client.db('admin');
 
-    const analytics = database.collection<Analytics>('Analytics');
+    const analytics = await database.collection<Analytics>('Analytics');
+
     await analytics.insertOne({
       name: 'analytics_authenticate',
       uuid: uuid,
