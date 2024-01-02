@@ -1,7 +1,10 @@
 import { PrismaClient } from '../../../prisma/generated/client';
 import { Request as ExpressRequest, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import { MongoClient } from 'mongodb';
+import { MONGODB_URI } from '../../utils/constants';
 
+const client = new MongoClient(MONGODB_URI);
 const prisma = new PrismaClient();
 
 interface Request extends ExpressRequest {
@@ -11,9 +14,30 @@ interface Request extends ExpressRequest {
   originUrl?: string;
 }
 
+interface Analytics {
+  id?: string;
+  name?: string;
+  uuid?: string;
+  url?: string;
+  user_id?: number;
+  tenant_id?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export async function authenticate(req: Request, res: Response) {
   const uuid = uuidv4();
   try {
+    const database = client.db('admin');
+
+    const analytics = database.collection<Analytics>('Analytics');
+    await analytics.insertOne({
+      name: 'analytics_authenticate',
+      uuid: uuid,
+      user_id: 0,
+      url: 'https://vanguardia.com.mx',
+      tenant_id: '65774a5ea3a3f7bf16c78232',
+    });
     // await prisma.analytics.create({
     //   data: {
     //     name: 'analytics_authenticate',
@@ -26,6 +50,8 @@ export async function authenticate(req: Request, res: Response) {
     // await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
+  } finally {
+    await client.close();
   }
 
   return res.json({ message: 'Authenticate successfully.', uuid: uuid });
