@@ -29,11 +29,11 @@ exports.$Enums = {};
 
 /**
  * Prisma Client JS version: 5.6.0
- * Query Engine version: e95e739751f42d8ca026f6b910f5a2dc5adeaeee
+ * Query Engine version: aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a
  */
 Prisma.prismaVersion = {
   client: '5.6.0',
-  engine: 'e95e739751f42d8ca026f6b910f5a2dc5adeaeee',
+  engine: 'aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a',
 };
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -143,9 +143,10 @@ const config = {
   },
   relativePath: '../..',
   clientVersion: '5.6.0',
-  engineVersion: 'e95e739751f42d8ca026f6b910f5a2dc5adeaeee',
+  engineVersion: 'aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a',
   datasourceNames: ['db'],
   activeProvider: 'mongodb',
+  postinstall: false,
   inlineDatasources: {
     db: {
       url: {
@@ -157,6 +158,7 @@ const config = {
   inlineSchema:
     'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogIG91dHB1dCAgID0gIi4vZ2VuZXJhdGVkL2NsaWVudCINCn0NCg0KZGF0YXNvdXJjZSBkYiB7DQogIHByb3ZpZGVyID0gIm1vbmdvZGIiDQogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQ0KfQ0KDQptb2RlbCBBbmFseXRpY3Mgew0KICBpZCAgICAgICAgIFN0cmluZyAgIEBpZCBAZGVmYXVsdChhdXRvKCkpIEBtYXAoIl9pZCIpIEBkYi5PYmplY3RJZA0KICBuYW1lICAgICAgIFN0cmluZw0KICB1dWlkICAgICAgIFN0cmluZw0KICB1cmwgICAgICAgIFN0cmluZz8NCiAgdXNlcl9pZCAgICBJbnQ/DQogIHRlbmFudF9pZCAgU3RyaW5nPyAgQGRiLk9iamVjdElkDQogIHRlbmFudCAgICAgVGVuYW50cz8gQHJlbGF0aW9uKGZpZWxkczogW3RlbmFudF9pZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGNyZWF0ZWRfYXQgRGF0ZVRpbWUgQGRlZmF1bHQobm93KCkpDQogIHVwZGF0ZWRfYXQgRGF0ZVRpbWUgQGRlZmF1bHQobm93KCkpDQp9DQoNCm1vZGVsIFRlbmFudHMgew0KICBpZCAgICAgICAgIFN0cmluZyAgICAgIEBpZCBAZGVmYXVsdChhdXRvKCkpIEBtYXAoIl9pZCIpIEBkYi5PYmplY3RJZA0KICBuYW1lICAgICAgIFN0cmluZw0KICBkb21haW4gICAgIFN0cmluZyAgICAgIEB1bmlxdWUNCiAgYW5hbHl0aWNzICBBbmFseXRpY3NbXQ0KICBjcmVhdGVkX2F0IERhdGVUaW1lICAgIEBkZWZhdWx0KG5vdygpKQ0KICB1cGRhdGVkX2F0IERhdGVUaW1lICAgIEBkZWZhdWx0KG5vdygpKQ0KfQ0K',
   inlineSchemaHash: 'f18cc6b8d406a9b8175a8f753e633850d20cb5f6957935e889ba8c2f89a30a61',
+  noEngine: false,
 };
 
 const fs = require('fs');
