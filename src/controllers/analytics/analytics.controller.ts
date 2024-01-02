@@ -24,7 +24,7 @@ export async function authenticate(req: Request, res: Response) {
       },
     });
 
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
