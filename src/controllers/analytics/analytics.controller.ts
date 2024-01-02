@@ -14,16 +14,15 @@ interface Request extends ExpressRequest {
 export async function authenticate(req: Request, res: Response) {
   const uuid = uuidv4();
   try {
-    await prisma.analytics.create({
-      data: {
-        name: 'analytics_authenticate',
-        uuid: uuid,
-        user_id: 0,
-        url: 'https://vanguardia.com.mx',
-        tenant_id: '65774a5ea3a3f7bf16c78232',
-      },
-    });
-
+    // await prisma.analytics.create({
+    //   data: {
+    //     name: 'analytics_authenticate',
+    //     uuid: uuid,
+    //     user_id: 0,
+    //     url: 'https://vanguardia.com.mx',
+    //     tenant_id: '65774a5ea3a3f7bf16c78232',
+    //   },
+    // });
     // await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
