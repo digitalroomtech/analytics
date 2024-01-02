@@ -52,7 +52,7 @@ export async function authenticate(req: Request, res: Response) {
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   } finally {
-    await client.close();
+    // await client.close();
   }
 
   return res.json({ message: 'Authenticate successfully.', uuid: uuid });
