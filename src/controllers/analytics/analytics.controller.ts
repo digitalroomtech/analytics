@@ -19,8 +19,8 @@ export async function authenticate(req: Request, res: Response) {
         name: 'analytics_authenticate',
         uuid: uuid,
         user_id: 0,
-        url: req.headers.origin || '',
-        tenant_id: req.body.tenant_id,
+        url: 'https://vanguardia.com.mx',
+        tenant_id: '65774a5ea3a3f7bf16c78232',
       },
     });
 
