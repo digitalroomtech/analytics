@@ -147,7 +147,7 @@ const config = {
   engineVersion: '0ca5ccbcfa6bdc81c003cf549abe4269f59c41e5',
   datasourceNames: ['db'],
   activeProvider: 'mongodb',
-  postinstall: false,
+  postinstall: true,
   inlineDatasources: {
     db: {
       url: {
