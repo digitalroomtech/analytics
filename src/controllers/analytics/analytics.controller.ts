@@ -1,7 +1,7 @@
 import { PrismaClient } from '../../../prisma/generated/client';
 import { Request as ExpressRequest, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { analyticsCollection } from '../../utils/mongodb';
+import { analyticsCollection, tenantsCollection } from '../../utils/mongodb';
 
 const prisma = new PrismaClient();
 
@@ -26,8 +26,6 @@ export async function authenticate(req: Request, res: Response) {
     });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
-  } finally {
-    // await client.close();
   }
 
   return res.json({ message: 'Authenticate successfully.', uuid: uuid });
@@ -39,37 +37,26 @@ export async function analyticsCreate(req: Request, res: Response) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
   try {
-    // await prisma.analytics.create({
-    //   data: {
-    //     name: data.name,
-    //     uuid: data.uuid,
-    //     user_id: data.user_id,
-    //     url: data.originUrl,
-    //     tenant: {
-    //       connect: {
-    //         id: req.body.tenant_id,
-    //       },
-    //     },
-    //   },
-    // });
-    // await prisma.$disconnect();
+    const analytics = await analyticsCollection();
+    await analytics.insertOne({
+      name: data.name,
+      uuid: data.uuid,
+      user_id: data.user_id,
+      url: data.originUrl,
+      tenant_id: req.body.tenant_id,
+    });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
-  } finally {
-    // await client.close();
   }
 
   return res.json({ message: 'Register event successfully.' });
 }
 
 export const isUuidAuthenticated = async (uuid: string) => {
-  const session = await prisma.analytics.findFirst({
-    where: {
-      uuid: uuid,
-    },
+  const analytics = await analyticsCollection();
+  const session = await analytics.findOne({
+    uuid,
   });
-
-  await prisma.$disconnect();
 
   return !!session;
 };
