@@ -35,8 +35,8 @@ const main = async () => {
       const data = await mongoAnalytics.insertMany(newValues);
 
       console.log('insertedCount in mongodb', data.insertedCount);
-    } catch (e: any) {
-      console.log('e', e.error);
+    } catch (e) {
+      console.log('e', e);
     }
   }
 };
