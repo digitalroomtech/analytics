@@ -32,24 +32,25 @@ var __awaiter =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.checkOriginMiddleware = void 0;
-// const prisma = new PrismaClient();
+const mongodb_1 = require('../utils/mongodb');
 const checkOriginMiddleware = (req, res, next) =>
   __awaiter(void 0, void 0, void 0, function* () {
-    // const sessionOrigin = req.headers['analytics-session-origin'];
-    // const url = new URL((sessionOrigin || req.headers.origin) as string);
-    // const tenantRecord = await prisma.tenants.findUnique({
-    //   where: {
-    //     domain: url.origin || '',
-    //   },
-    // });
-    //
-    // await prisma.$disconnect();
-    //
-    // if (!tenantRecord) {
-    //   return res.status(400).send({ message: 'Invalid origin' });
-    // }
-    // req.body.tenant_id = tenantRecord.id;
-    // req.body.originUrl = url.origin;
+    const sessionOrigin = req.headers['analytics-session-origin'];
+    const url = new URL(sessionOrigin || req.headers.origin);
+    let tenantRecord = undefined;
+    try {
+      const tenants = yield (0, mongodb_1.tenantsCollection)();
+      tenantRecord = yield tenants.findOne({
+        domain: url.origin || '',
+      });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+    if (!tenantRecord) {
+      return res.status(400).send({ message: 'Invalid origin' });
+    }
+    req.body.tenant_id = tenantRecord._id;
+    req.body.originUrl = url.href;
     return next();
   });
 exports.checkOriginMiddleware = checkOriginMiddleware;
