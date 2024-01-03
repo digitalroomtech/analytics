@@ -16,24 +16,28 @@ const main = async () => {
   const pages = Math.ceil(analyticsCount / take);
 
   for (let i = 0; i < pages; i++) {
-    const analytics = await prisma.analytics.findMany({
-      take,
-      skip: i * take,
-    });
-    const mongoAnalytics = await database.collection('Analytics');
+    try {
+      const analytics = await prisma.analytics.findMany({
+        take,
+        skip: i * take,
+      });
+      const mongoAnalytics = await database.collection('Analytics');
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const newValues = analytics.map((analytic) => {
-      delete analytic.id;
-      analytic.tenant_id =
-        analytic.tenant_id === 1 ? '65774a5ea3a3f7bf16c78232' : '657749f948ced9a88db55d5f';
-      return analytic;
-    });
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const newValues = analytics.map((analytic) => {
+        delete analytic.id;
+        analytic.tenant_id =
+          analytic.tenant_id === 1 ? '65774a5ea3a3f7bf16c78232' : '657749f948ced9a88db55d5f';
+        return analytic;
+      });
 
-    const data = await mongoAnalytics.insertMany(newValues);
+      const data = await mongoAnalytics.insertMany(newValues);
 
-    console.log('insertedCount in mongodb', data.insertedCount);
+      console.log('insertedCount in mongodb', data.insertedCount);
+    } catch (e: any) {
+      console.log('e', e.error);
+    }
   }
 };
 
