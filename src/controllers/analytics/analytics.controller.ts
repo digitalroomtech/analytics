@@ -1,10 +1,6 @@
-import { PrismaClient } from '../../../prisma/generated/client';
 import { Request as ExpressRequest, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { analyticsCollection, tenantsCollection } from '../../utils/mongodb';
-import { ObjectId } from 'mongodb';
-
-const prisma = new PrismaClient();
+import { analyticsCollection } from '../../utils/mongodb';
 
 interface Request extends ExpressRequest {
   tenant_id?: string;
