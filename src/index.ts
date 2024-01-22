@@ -43,28 +43,28 @@ const main = async () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 };
 
-// cron
-//   .schedule(
-//     '0 0 */1  * * *',
-//     async () =>
-//       await metricTask(MetricModels.socialNetworkMetrics, {
-//         amount: 1,
-//         unit: 'hour',
-//       }),
-//   )
-//   .start();
-// cron
-//   .schedule('0 0 */1  * * *', async () =>
-//     metricTask(MetricModels.pageMetrics, { amount: 1, unit: 'hour' }),
-//   )
-//   .start();
-// cron
-//   .schedule('0 0 */1  * * *', async () =>
-//     metricTask(MetricModels.socialNetworkSessionMetrics, {
-//       amount: 1,
-//       unit: 'hour',
-//     }),
-//   )
-//   .start();
+cron
+  .schedule(
+    '0 0 */1  * * *',
+    async () =>
+      await metricTask(MetricModels.socialNetworkMetrics, {
+        amount: 1,
+        unit: 'hour',
+      }),
+  )
+  .start();
+cron
+  .schedule('0 0 */1  * * *', async () =>
+    metricTask(MetricModels.pageMetrics, { amount: 1, unit: 'hour' }),
+  )
+  .start();
+cron
+  .schedule('0 0 */1  * * *', async () =>
+    metricTask(MetricModels.socialNetworkSessionMetrics, {
+      amount: 1,
+      unit: 'hour',
+    }),
+  )
+  .start();
 
 main();
