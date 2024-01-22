@@ -45,28 +45,28 @@ const main = async () => {
 
 const JOB_TIME = 8;
 
-cron
-  .schedule(
-    '0 0 */1  * * *',
-    async () =>
-      await metricTask(MetricModels.socialNetworkMetrics, {
-        amount: JOB_TIME,
-        unit: 'hour',
-      }),
-  )
-  .start();
-cron
-  .schedule('0 0 */1  * * *', async () =>
-    metricTask(MetricModels.pageMetrics, { amount: JOB_TIME, unit: 'hour' }),
-  )
-  .start();
-cron
-  .schedule('0 0 */1  * * *', async () =>
-    metricTask(MetricModels.socialNetworkSessionMetrics, {
-      amount: JOB_TIME,
-      unit: 'hour',
-    }),
-  )
-  .start();
+// cron
+//   .schedule(
+//     '0 0 */1  * * *',
+//     async () =>
+//       await metricTask(MetricModels.socialNetworkMetrics, {
+//         amount: JOB_TIME,
+//         unit: 'hour',
+//       }),
+//   )
+//   .start();
+// cron
+//   .schedule('0 0 */1  * * *', async () =>
+//     metricTask(MetricModels.pageMetrics, { amount: JOB_TIME, unit: 'hour' }),
+//   )
+//   .start();
+// cron
+//   .schedule('0 0 */1  * * *', async () =>
+//     metricTask(MetricModels.socialNetworkSessionMetrics, {
+//       amount: JOB_TIME,
+//       unit: 'hour',
+//     }),
+//   )
+//   .start();
 
 main();
