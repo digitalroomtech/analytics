@@ -8,6 +8,7 @@ interface Request extends ExpressRequest {
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const sessionOrigin = req.headers['analytics-session-origin'];
   const url = new URL((sessionOrigin || req.headers.origin) as string);
+
   let tenantRecord = undefined;
   try {
     tenantRecord = await TenantModel.findOne({
@@ -16,7 +17,6 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
-
   if (!tenantRecord) {
     return res.status(400).send({ message: 'Invalid origin' });
   }

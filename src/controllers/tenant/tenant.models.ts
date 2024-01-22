@@ -22,7 +22,7 @@ const tenantModel = new Schema<ITenant>(
       ref: 'AuthenticateAnalytics',
     },
   },
-  { collection: 'Tenants' },
+  { collection: 'tenants' },
 );
 
 export const TenantModel = model('Tenants', tenantModel);
