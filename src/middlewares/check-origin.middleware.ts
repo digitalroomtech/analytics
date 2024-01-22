@@ -18,7 +18,7 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
     return res.status(500).json({ message: error.message });
   }
   if (!tenantRecord) {
-    return res.status(400).send({ message: 'Invalid origin' });
+    return res.status(400).send({ message: `Invalid origin: ${url.origin}` });
   }
 
   console.log('tenantRecord', tenantRecord);
