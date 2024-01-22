@@ -11,7 +11,8 @@
     "dev": "nodemon src/index.ts",
     "build": "npx prisma generate --schema prisma/schema.prisma && npx prisma generate --schema prisma/schema-mysql.prisma && rimraf ./build && tsc",
     "app": "npm run build && node build/app.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "create-index": "npm run ts-node src/scripts/create-index.ts"
   },
   "repository": {
     "type": "git",
