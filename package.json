@@ -13,7 +13,8 @@
     "app": "npm run build && node build/app.js",
     "prepare": "husky install",
     "fake-data": "ts-node src/scripts/fake-analytics.ts",
-    "migrate": "ts-node src/scripts/migrate-data.ts"
+    "migrate": "ts-node src/scripts/migrate-data.ts",
+    "renanme-collection": "ts-node src/scripts/rename-collection.ts"
   },
   "repository": {
     "type": "git",

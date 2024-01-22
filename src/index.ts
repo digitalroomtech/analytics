@@ -55,11 +55,13 @@ cron
       }),
   )
   .start();
+
 cron
   .schedule('0 0 */1  * * *', async () =>
     metricTask(MetricModels.pageMetrics, { amount: JOB_TIME, unit: 'hour' }),
   )
   .start();
+
 cron
   .schedule('0 0 */1  * * *', async () =>
     metricTask(MetricModels.socialNetworkSessionMetrics, {
