@@ -9,18 +9,18 @@ datasource db {
 }
 
 model Analytics {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   uuid       String
   url        String?
   user_id    Int?
-  tenant_id  String?  @db.ObjectId
-  tenant     Tenants? @relation(fields: [tenant_id], references: [id])
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  tenant_id  String?     @db.ObjectId
+  tenant     OldTenants? @relation(fields: [tenant_id], references: [id])
+  created_at DateTime    @default(now())
+  updated_at DateTime    @default(now())
 }
 
-model Tenants {
+model OldTenants {
   id         String      @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   domain     String      @unique

@@ -14,7 +14,7 @@ export async function tenantCreate(req: Request, res: Response) {
   }
 
   try {
-    await prisma.tenants.create({
+    await prisma.oldTenants.create({
       data: {
         name: data.name,
         domain: data.domain,

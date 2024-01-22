@@ -17,10 +17,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>;
  */
 export type Analytics = $Result.DefaultSelection<Prisma.$AnalyticsPayload>;
 /**
- * Model Tenants
+ * Model OldTenants
  *
  */
-export type Tenants = $Result.DefaultSelection<Prisma.$TenantsPayload>;
+export type OldTenants = $Result.DefaultSelection<Prisma.$OldTenantsPayload>;
 
 /**
  * ##  Prisma Client ʲˢ
@@ -135,14 +135,14 @@ export class PrismaClient<
   get analytics(): Prisma.AnalyticsDelegate<ExtArgs>;
 
   /**
-   * `prisma.tenants`: Exposes CRUD operations for the **Tenants** model.
+   * `prisma.oldTenants`: Exposes CRUD operations for the **OldTenants** model.
    * Example usage:
    * ```ts
-   * // Fetch zero or more Tenants
-   * const tenants = await prisma.tenants.findMany()
+   * // Fetch zero or more OldTenants
+   * const oldTenants = await prisma.oldTenants.findMany()
    * ```
    */
-  get tenants(): Prisma.TenantsDelegate<ExtArgs>;
+  get oldTenants(): Prisma.OldTenantsDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -200,8 +200,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact;
 
   /**
-   * Prisma Client JS version: 5.7.1
-   * Query Engine version: 0ca5ccbcfa6bdc81c003cf549abe4269f59c41e5
+   * Prisma Client JS version: 5.8.1
+   * Query Engine version: 78caf6feeaed953168c64e15a249c3e9a033ebe2
    */
   export type PrismaVersion = {
     client: string;
@@ -616,7 +616,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Analytics: 'Analytics';
-    Tenants: 'Tenants';
+    OldTenants: 'OldTenants';
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -632,7 +632,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'analytics' | 'tenants';
+      modelProps: 'analytics' | 'oldTenants';
       txIsolationLevel: never;
     };
     model: {
@@ -710,77 +710,77 @@ export namespace Prisma {
           };
         };
       };
-      Tenants: {
-        payload: Prisma.$TenantsPayload<ExtArgs>;
-        fields: Prisma.TenantsFieldRefs;
+      OldTenants: {
+        payload: Prisma.$OldTenantsPayload<ExtArgs>;
+        fields: Prisma.OldTenantsFieldRefs;
         operations: {
           findUnique: {
-            args: Prisma.TenantsFindUniqueArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload> | null;
+            args: Prisma.OldTenantsFindUniqueArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload> | null;
           };
           findUniqueOrThrow: {
-            args: Prisma.TenantsFindUniqueOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload>;
+            args: Prisma.OldTenantsFindUniqueOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload>;
           };
           findFirst: {
-            args: Prisma.TenantsFindFirstArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload> | null;
+            args: Prisma.OldTenantsFindFirstArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload> | null;
           };
           findFirstOrThrow: {
-            args: Prisma.TenantsFindFirstOrThrowArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload>;
+            args: Prisma.OldTenantsFindFirstOrThrowArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload>;
           };
           findMany: {
-            args: Prisma.TenantsFindManyArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload>[];
+            args: Prisma.OldTenantsFindManyArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload>[];
           };
           create: {
-            args: Prisma.TenantsCreateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload>;
+            args: Prisma.OldTenantsCreateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload>;
           };
           createMany: {
-            args: Prisma.TenantsCreateManyArgs<ExtArgs>;
+            args: Prisma.OldTenantsCreateManyArgs<ExtArgs>;
             result: Prisma.BatchPayload;
           };
           delete: {
-            args: Prisma.TenantsDeleteArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload>;
+            args: Prisma.OldTenantsDeleteArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload>;
           };
           update: {
-            args: Prisma.TenantsUpdateArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload>;
+            args: Prisma.OldTenantsUpdateArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload>;
           };
           deleteMany: {
-            args: Prisma.TenantsDeleteManyArgs<ExtArgs>;
+            args: Prisma.OldTenantsDeleteManyArgs<ExtArgs>;
             result: Prisma.BatchPayload;
           };
           updateMany: {
-            args: Prisma.TenantsUpdateManyArgs<ExtArgs>;
+            args: Prisma.OldTenantsUpdateManyArgs<ExtArgs>;
             result: Prisma.BatchPayload;
           };
           upsert: {
-            args: Prisma.TenantsUpsertArgs<ExtArgs>;
-            result: $Utils.PayloadToResult<Prisma.$TenantsPayload>;
+            args: Prisma.OldTenantsUpsertArgs<ExtArgs>;
+            result: $Utils.PayloadToResult<Prisma.$OldTenantsPayload>;
           };
           aggregate: {
-            args: Prisma.TenantsAggregateArgs<ExtArgs>;
-            result: $Utils.Optional<AggregateTenants>;
+            args: Prisma.OldTenantsAggregateArgs<ExtArgs>;
+            result: $Utils.Optional<AggregateOldTenants>;
           };
           groupBy: {
-            args: Prisma.TenantsGroupByArgs<ExtArgs>;
-            result: $Utils.Optional<TenantsGroupByOutputType>[];
+            args: Prisma.OldTenantsGroupByArgs<ExtArgs>;
+            result: $Utils.Optional<OldTenantsGroupByOutputType>[];
           };
           findRaw: {
-            args: Prisma.TenantsFindRawArgs<ExtArgs>;
+            args: Prisma.OldTenantsFindRawArgs<ExtArgs>;
             result: Prisma.JsonObject;
           };
           aggregateRaw: {
-            args: Prisma.TenantsAggregateRawArgs<ExtArgs>;
+            args: Prisma.OldTenantsAggregateRawArgs<ExtArgs>;
             result: Prisma.JsonObject;
           };
           count: {
-            args: Prisma.TenantsCountArgs<ExtArgs>;
-            result: $Utils.Optional<TenantsCountAggregateOutputType> | number;
+            args: Prisma.OldTenantsCountArgs<ExtArgs>;
+            result: $Utils.Optional<OldTenantsCountAggregateOutputType> | number;
           };
         };
       };
@@ -923,37 +923,37 @@ export namespace Prisma {
    */
 
   /**
-   * Count Type TenantsCountOutputType
+   * Count Type OldTenantsCountOutputType
    */
 
-  export type TenantsCountOutputType = {
+  export type OldTenantsCountOutputType = {
     analytics: number;
   };
 
-  export type TenantsCountOutputTypeSelect<
+  export type OldTenantsCountOutputTypeSelect<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    analytics?: boolean | TenantsCountOutputTypeCountAnalyticsArgs;
+    analytics?: boolean | OldTenantsCountOutputTypeCountAnalyticsArgs;
   };
 
   // Custom InputTypes
 
   /**
-   * TenantsCountOutputType without action
+   * OldTenantsCountOutputType without action
    */
-  export type TenantsCountOutputTypeDefaultArgs<
+  export type OldTenantsCountOutputTypeDefaultArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the TenantsCountOutputType
+     * Select specific fields to fetch from the OldTenantsCountOutputType
      */
-    select?: TenantsCountOutputTypeSelect<ExtArgs> | null;
+    select?: OldTenantsCountOutputTypeSelect<ExtArgs> | null;
   };
 
   /**
-   * TenantsCountOutputType without action
+   * OldTenantsCountOutputType without action
    */
-  export type TenantsCountOutputTypeCountAnalyticsArgs<
+  export type OldTenantsCountOutputTypeCountAnalyticsArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     where?: AnalyticsWhereInput;
@@ -1211,7 +1211,7 @@ export namespace Prisma {
   > = {
     name: 'Analytics';
     objects: {
-      tenant: Prisma.$TenantsPayload<ExtArgs> | null;
+      tenant: Prisma.$OldTenantsPayload<ExtArgs> | null;
     };
     scalars: $Extensions.GetPayloadResult<
       {
@@ -1652,8 +1652,8 @@ export namespace Prisma {
 
     tenant<T extends Analytics$tenantArgs<ExtArgs> = {}>(
       args?: Subset<T, Analytics$tenantArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null,
       null,
       ExtArgs
     >;
@@ -2057,14 +2057,14 @@ export namespace Prisma {
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
-    where?: TenantsWhereInput;
+    include?: OldTenantsInclude<ExtArgs> | null;
+    where?: OldTenantsWhereInput;
   };
 
   /**
@@ -2084,16 +2084,16 @@ export namespace Prisma {
   };
 
   /**
-   * Model Tenants
+   * Model OldTenants
    */
 
-  export type AggregateTenants = {
-    _count: TenantsCountAggregateOutputType | null;
-    _min: TenantsMinAggregateOutputType | null;
-    _max: TenantsMaxAggregateOutputType | null;
+  export type AggregateOldTenants = {
+    _count: OldTenantsCountAggregateOutputType | null;
+    _min: OldTenantsMinAggregateOutputType | null;
+    _max: OldTenantsMaxAggregateOutputType | null;
   };
 
-  export type TenantsMinAggregateOutputType = {
+  export type OldTenantsMinAggregateOutputType = {
     id: string | null;
     name: string | null;
     domain: string | null;
@@ -2101,7 +2101,7 @@ export namespace Prisma {
     updated_at: Date | null;
   };
 
-  export type TenantsMaxAggregateOutputType = {
+  export type OldTenantsMaxAggregateOutputType = {
     id: string | null;
     name: string | null;
     domain: string | null;
@@ -2109,7 +2109,7 @@ export namespace Prisma {
     updated_at: Date | null;
   };
 
-  export type TenantsCountAggregateOutputType = {
+  export type OldTenantsCountAggregateOutputType = {
     id: number;
     name: number;
     domain: number;
@@ -2118,7 +2118,7 @@ export namespace Prisma {
     _all: number;
   };
 
-  export type TenantsMinAggregateInputType = {
+  export type OldTenantsMinAggregateInputType = {
     id?: true;
     name?: true;
     domain?: true;
@@ -2126,7 +2126,7 @@ export namespace Prisma {
     updated_at?: true;
   };
 
-  export type TenantsMaxAggregateInputType = {
+  export type OldTenantsMaxAggregateInputType = {
     id?: true;
     name?: true;
     domain?: true;
@@ -2134,7 +2134,7 @@ export namespace Prisma {
     updated_at?: true;
   };
 
-  export type TenantsCountAggregateInputType = {
+  export type OldTenantsCountAggregateInputType = {
     id?: true;
     name?: true;
     domain?: true;
@@ -2143,103 +2143,103 @@ export namespace Prisma {
     _all?: true;
   };
 
-  export type TenantsAggregateArgs<
+  export type OldTenantsAggregateArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which Tenants to aggregate.
+     * Filter which OldTenants to aggregate.
      */
-    where?: TenantsWhereInput;
+    where?: OldTenantsWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Tenants to fetch.
+     * Determine the order of OldTenants to fetch.
      */
-    orderBy?: TenantsOrderByWithRelationInput | TenantsOrderByWithRelationInput[];
+    orderBy?: OldTenantsOrderByWithRelationInput | OldTenantsOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
      * Sets the start position
      */
-    cursor?: TenantsWhereUniqueInput;
+    cursor?: OldTenantsWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` OldTenants from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Tenants.
+     * Skip the first `n` OldTenants.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
-     * Count returned Tenants
+     * Count returned OldTenants
      **/
-    _count?: true | TenantsCountAggregateInputType;
+    _count?: true | OldTenantsCountAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
      * Select which fields to find the minimum value
      **/
-    _min?: TenantsMinAggregateInputType;
+    _min?: OldTenantsMinAggregateInputType;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
      * Select which fields to find the maximum value
      **/
-    _max?: TenantsMaxAggregateInputType;
+    _max?: OldTenantsMaxAggregateInputType;
   };
 
-  export type GetTenantsAggregateType<T extends TenantsAggregateArgs> = {
-    [P in keyof T & keyof AggregateTenants]: P extends '_count' | 'count'
+  export type GetOldTenantsAggregateType<T extends OldTenantsAggregateArgs> = {
+    [P in keyof T & keyof AggregateOldTenants]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTenants[P]>
-      : GetScalarType<T[P], AggregateTenants[P]>;
+        : GetScalarType<T[P], AggregateOldTenants[P]>
+      : GetScalarType<T[P], AggregateOldTenants[P]>;
   };
 
-  export type TenantsGroupByArgs<
+  export type OldTenantsGroupByArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
-    where?: TenantsWhereInput;
-    orderBy?: TenantsOrderByWithAggregationInput | TenantsOrderByWithAggregationInput[];
-    by: TenantsScalarFieldEnum[] | TenantsScalarFieldEnum;
-    having?: TenantsScalarWhereWithAggregatesInput;
+    where?: OldTenantsWhereInput;
+    orderBy?: OldTenantsOrderByWithAggregationInput | OldTenantsOrderByWithAggregationInput[];
+    by: OldTenantsScalarFieldEnum[] | OldTenantsScalarFieldEnum;
+    having?: OldTenantsScalarWhereWithAggregatesInput;
     take?: number;
     skip?: number;
-    _count?: TenantsCountAggregateInputType | true;
-    _min?: TenantsMinAggregateInputType;
-    _max?: TenantsMaxAggregateInputType;
+    _count?: OldTenantsCountAggregateInputType | true;
+    _min?: OldTenantsMinAggregateInputType;
+    _max?: OldTenantsMaxAggregateInputType;
   };
 
-  export type TenantsGroupByOutputType = {
+  export type OldTenantsGroupByOutputType = {
     id: string;
     name: string;
     domain: string;
     created_at: Date;
     updated_at: Date;
-    _count: TenantsCountAggregateOutputType | null;
-    _min: TenantsMinAggregateOutputType | null;
-    _max: TenantsMaxAggregateOutputType | null;
+    _count: OldTenantsCountAggregateOutputType | null;
+    _min: OldTenantsMinAggregateOutputType | null;
+    _max: OldTenantsMaxAggregateOutputType | null;
   };
 
-  type GetTenantsGroupByPayload<T extends TenantsGroupByArgs> = Prisma.PrismaPromise<
+  type GetOldTenantsGroupByPayload<T extends OldTenantsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TenantsGroupByOutputType, T['by']> & {
-        [P in keyof T & keyof TenantsGroupByOutputType]: P extends '_count'
+      PickEnumerable<OldTenantsGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof OldTenantsGroupByOutputType]: P extends '_count'
           ? T[P] extends boolean
             ? number
-            : GetScalarType<T[P], TenantsGroupByOutputType[P]>
-          : GetScalarType<T[P], TenantsGroupByOutputType[P]>;
+            : GetScalarType<T[P], OldTenantsGroupByOutputType[P]>
+          : GetScalarType<T[P], OldTenantsGroupByOutputType[P]>;
       }
     >
   >;
 
-  export type TenantsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+  export type OldTenantsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetSelect<
       {
         id?: boolean;
@@ -2247,13 +2247,13 @@ export namespace Prisma {
         domain?: boolean;
         created_at?: boolean;
         updated_at?: boolean;
-        analytics?: boolean | Tenants$analyticsArgs<ExtArgs>;
-        _count?: boolean | TenantsCountOutputTypeDefaultArgs<ExtArgs>;
+        analytics?: boolean | OldTenants$analyticsArgs<ExtArgs>;
+        _count?: boolean | OldTenantsCountOutputTypeDefaultArgs<ExtArgs>;
       },
-      ExtArgs['result']['tenants']
+      ExtArgs['result']['oldTenants']
     >;
 
-  export type TenantsSelectScalar = {
+  export type OldTenantsSelectScalar = {
     id?: boolean;
     name?: boolean;
     domain?: boolean;
@@ -2261,208 +2261,212 @@ export namespace Prisma {
     updated_at?: boolean;
   };
 
-  export type TenantsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    analytics?: boolean | Tenants$analyticsArgs<ExtArgs>;
-    _count?: boolean | TenantsCountOutputTypeDefaultArgs<ExtArgs>;
+  export type OldTenantsInclude<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    analytics?: boolean | OldTenants$analyticsArgs<ExtArgs>;
+    _count?: boolean | OldTenantsCountOutputTypeDefaultArgs<ExtArgs>;
   };
 
-  export type $TenantsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    {
-      name: 'Tenants';
-      objects: {
-        analytics: Prisma.$AnalyticsPayload<ExtArgs>[];
-      };
-      scalars: $Extensions.GetPayloadResult<
-        {
-          id: string;
-          name: string;
-          domain: string;
-          created_at: Date;
-          updated_at: Date;
-        },
-        ExtArgs['result']['tenants']
-      >;
-      composites: {};
+  export type $OldTenantsPayload<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    name: 'OldTenants';
+    objects: {
+      analytics: Prisma.$AnalyticsPayload<ExtArgs>[];
+    };
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string;
+        name: string;
+        domain: string;
+        created_at: Date;
+        updated_at: Date;
+      },
+      ExtArgs['result']['oldTenants']
+    >;
+    composites: {};
+  };
+
+  type OldTenantsGetPayload<S extends boolean | null | undefined | OldTenantsDefaultArgs> =
+    $Result.GetResult<Prisma.$OldTenantsPayload, S>;
+
+  type OldTenantsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OldTenantsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: OldTenantsCountAggregateInputType | true;
     };
 
-  type TenantsGetPayload<S extends boolean | null | undefined | TenantsDefaultArgs> =
-    $Result.GetResult<Prisma.$TenantsPayload, S>;
-
-  type TenantsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
-    TenantsFindManyArgs,
-    'select' | 'include' | 'distinct'
-  > & {
-    select?: TenantsCountAggregateInputType | true;
-  };
-
-  export interface TenantsDelegate<
+  export interface OldTenantsDelegate<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tenants']; meta: { name: 'Tenants' } };
+    [K: symbol]: {
+      types: Prisma.TypeMap<ExtArgs>['model']['OldTenants'];
+      meta: { name: 'OldTenants' };
+    };
     /**
-     * Find zero or one Tenants that matches the filter.
-     * @param {TenantsFindUniqueArgs} args - Arguments to find a Tenants
+     * Find zero or one OldTenants that matches the filter.
+     * @param {OldTenantsFindUniqueArgs} args - Arguments to find a OldTenants
      * @example
-     * // Get one Tenants
-     * const tenants = await prisma.tenants.findUnique({
+     * // Get one OldTenants
+     * const oldTenants = await prisma.oldTenants.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      **/
-    findUnique<T extends TenantsFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, TenantsFindUniqueArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'findUnique'> | null,
+    findUnique<T extends OldTenantsFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, OldTenantsFindUniqueArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'findUnique'> | null,
       null,
       ExtArgs
     >;
 
     /**
-     * Find one Tenants that matches the filter or throw an error  with `error.code='P2025'`
+     * Find one OldTenants that matches the filter or throw an error  with `error.code='P2025'`
      *     if no matches were found.
-     * @param {TenantsFindUniqueOrThrowArgs} args - Arguments to find a Tenants
+     * @param {OldTenantsFindUniqueOrThrowArgs} args - Arguments to find a OldTenants
      * @example
-     * // Get one Tenants
-     * const tenants = await prisma.tenants.findUniqueOrThrow({
+     * // Get one OldTenants
+     * const oldTenants = await prisma.oldTenants.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      **/
-    findUniqueOrThrow<T extends TenantsFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, TenantsFindUniqueOrThrowArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
+    findUniqueOrThrow<T extends OldTenantsFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OldTenantsFindUniqueOrThrowArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'findUniqueOrThrow'>,
       never,
       ExtArgs
     >;
 
     /**
-     * Find the first Tenants that matches the filter.
+     * Find the first OldTenants that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantsFindFirstArgs} args - Arguments to find a Tenants
+     * @param {OldTenantsFindFirstArgs} args - Arguments to find a OldTenants
      * @example
-     * // Get one Tenants
-     * const tenants = await prisma.tenants.findFirst({
+     * // Get one OldTenants
+     * const oldTenants = await prisma.oldTenants.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      **/
-    findFirst<T extends TenantsFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, TenantsFindFirstArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'findFirst'> | null,
+    findFirst<T extends OldTenantsFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, OldTenantsFindFirstArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'findFirst'> | null,
       null,
       ExtArgs
     >;
 
     /**
-     * Find the first Tenants that matches the filter or
+     * Find the first OldTenants that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantsFindFirstOrThrowArgs} args - Arguments to find a Tenants
+     * @param {OldTenantsFindFirstOrThrowArgs} args - Arguments to find a OldTenants
      * @example
-     * // Get one Tenants
-     * const tenants = await prisma.tenants.findFirstOrThrow({
+     * // Get one OldTenants
+     * const oldTenants = await prisma.oldTenants.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      **/
-    findFirstOrThrow<T extends TenantsFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, TenantsFindFirstOrThrowArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'findFirstOrThrow'>,
+    findFirstOrThrow<T extends OldTenantsFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, OldTenantsFindFirstOrThrowArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'findFirstOrThrow'>,
       never,
       ExtArgs
     >;
 
     /**
-     * Find zero or more Tenants that matches the filter.
+     * Find zero or more OldTenants that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {OldTenantsFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Tenants
-     * const tenants = await prisma.tenants.findMany()
+     * // Get all OldTenants
+     * const oldTenants = await prisma.oldTenants.findMany()
      *
-     * // Get first 10 Tenants
-     * const tenants = await prisma.tenants.findMany({ take: 10 })
+     * // Get first 10 OldTenants
+     * const oldTenants = await prisma.oldTenants.findMany({ take: 10 })
      *
      * // Only select the `id`
-     * const tenantsWithIdOnly = await prisma.tenants.findMany({ select: { id: true } })
+     * const oldTenantsWithIdOnly = await prisma.oldTenants.findMany({ select: { id: true } })
      *
      **/
-    findMany<T extends TenantsFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, TenantsFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'findMany'>>;
+    findMany<T extends OldTenantsFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OldTenantsFindManyArgs<ExtArgs>>,
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'findMany'>>;
 
     /**
-     * Create a Tenants.
-     * @param {TenantsCreateArgs} args - Arguments to create a Tenants.
+     * Create a OldTenants.
+     * @param {OldTenantsCreateArgs} args - Arguments to create a OldTenants.
      * @example
-     * // Create one Tenants
-     * const Tenants = await prisma.tenants.create({
+     * // Create one OldTenants
+     * const OldTenants = await prisma.oldTenants.create({
      *   data: {
-     *     // ... data to create a Tenants
+     *     // ... data to create a OldTenants
      *   }
      * })
      *
      **/
-    create<T extends TenantsCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, TenantsCreateArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'create'>,
+    create<T extends OldTenantsCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, OldTenantsCreateArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'create'>,
       never,
       ExtArgs
     >;
 
     /**
-     * Create many Tenants.
-     *     @param {TenantsCreateManyArgs} args - Arguments to create many Tenants.
+     * Create many OldTenants.
+     *     @param {OldTenantsCreateManyArgs} args - Arguments to create many OldTenants.
      *     @example
-     *     // Create many Tenants
-     *     const tenants = await prisma.tenants.createMany({
+     *     // Create many OldTenants
+     *     const oldTenants = await prisma.oldTenants.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *
      **/
-    createMany<T extends TenantsCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, TenantsCreateManyArgs<ExtArgs>>,
+    createMany<T extends OldTenantsCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OldTenantsCreateManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
-     * Delete a Tenants.
-     * @param {TenantsDeleteArgs} args - Arguments to delete one Tenants.
+     * Delete a OldTenants.
+     * @param {OldTenantsDeleteArgs} args - Arguments to delete one OldTenants.
      * @example
-     * // Delete one Tenants
-     * const Tenants = await prisma.tenants.delete({
+     * // Delete one OldTenants
+     * const OldTenants = await prisma.oldTenants.delete({
      *   where: {
-     *     // ... filter to delete one Tenants
+     *     // ... filter to delete one OldTenants
      *   }
      * })
      *
      **/
-    delete<T extends TenantsDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, TenantsDeleteArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'delete'>,
+    delete<T extends OldTenantsDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, OldTenantsDeleteArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'delete'>,
       never,
       ExtArgs
     >;
 
     /**
-     * Update one Tenants.
-     * @param {TenantsUpdateArgs} args - Arguments to update one Tenants.
+     * Update one OldTenants.
+     * @param {OldTenantsUpdateArgs} args - Arguments to update one OldTenants.
      * @example
-     * // Update one Tenants
-     * const tenants = await prisma.tenants.update({
+     * // Update one OldTenants
+     * const oldTenants = await prisma.oldTenants.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2472,38 +2476,38 @@ export namespace Prisma {
      * })
      *
      **/
-    update<T extends TenantsUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, TenantsUpdateArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'update'>,
+    update<T extends OldTenantsUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, OldTenantsUpdateArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'update'>,
       never,
       ExtArgs
     >;
 
     /**
-     * Delete zero or more Tenants.
-     * @param {TenantsDeleteManyArgs} args - Arguments to filter Tenants to delete.
+     * Delete zero or more OldTenants.
+     * @param {OldTenantsDeleteManyArgs} args - Arguments to filter OldTenants to delete.
      * @example
-     * // Delete a few Tenants
-     * const { count } = await prisma.tenants.deleteMany({
+     * // Delete a few OldTenants
+     * const { count } = await prisma.oldTenants.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      *
      **/
-    deleteMany<T extends TenantsDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, TenantsDeleteManyArgs<ExtArgs>>,
+    deleteMany<T extends OldTenantsDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, OldTenantsDeleteManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
-     * Update zero or more Tenants.
+     * Update zero or more OldTenants.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {OldTenantsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Tenants
-     * const tenants = await prisma.tenants.updateMany({
+     * // Update many OldTenants
+     * const oldTenants = await prisma.oldTenants.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2513,86 +2517,86 @@ export namespace Prisma {
      * })
      *
      **/
-    updateMany<T extends TenantsUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, TenantsUpdateManyArgs<ExtArgs>>,
+    updateMany<T extends OldTenantsUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, OldTenantsUpdateManyArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<BatchPayload>;
 
     /**
-     * Create or update one Tenants.
-     * @param {TenantsUpsertArgs} args - Arguments to update or create a Tenants.
+     * Create or update one OldTenants.
+     * @param {OldTenantsUpsertArgs} args - Arguments to update or create a OldTenants.
      * @example
-     * // Update or create a Tenants
-     * const tenants = await prisma.tenants.upsert({
+     * // Update or create a OldTenants
+     * const oldTenants = await prisma.oldTenants.upsert({
      *   create: {
-     *     // ... data to create a Tenants
+     *     // ... data to create a OldTenants
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Tenants we want to update
+     *     // ... the filter for the OldTenants we want to update
      *   }
      * })
      **/
-    upsert<T extends TenantsUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, TenantsUpsertArgs<ExtArgs>>,
-    ): Prisma__TenantsClient<
-      $Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, 'upsert'>,
+    upsert<T extends OldTenantsUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, OldTenantsUpsertArgs<ExtArgs>>,
+    ): Prisma__OldTenantsClient<
+      $Result.GetResult<Prisma.$OldTenantsPayload<ExtArgs>, T, 'upsert'>,
       never,
       ExtArgs
     >;
 
     /**
-     * Find zero or more Tenants that matches the filter.
-     * @param {TenantsFindRawArgs} args - Select which filters you would like to apply.
+     * Find zero or more OldTenants that matches the filter.
+     * @param {OldTenantsFindRawArgs} args - Select which filters you would like to apply.
      * @example
-     * const tenants = await prisma.tenants.findRaw({
+     * const oldTenants = await prisma.oldTenants.findRaw({
      *   filter: { age: { $gt: 25 } }
      * })
      **/
-    findRaw(args?: TenantsFindRawArgs): Prisma.PrismaPromise<JsonObject>;
+    findRaw(args?: OldTenantsFindRawArgs): Prisma.PrismaPromise<JsonObject>;
 
     /**
-     * Perform aggregation operations on a Tenants.
-     * @param {TenantsAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * Perform aggregation operations on a OldTenants.
+     * @param {OldTenantsAggregateRawArgs} args - Select which aggregations you would like to apply.
      * @example
-     * const tenants = await prisma.tenants.aggregateRaw({
+     * const oldTenants = await prisma.oldTenants.aggregateRaw({
      *   pipeline: [
      *     { $match: { status: "registered" } },
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
      *   ]
      * })
      **/
-    aggregateRaw(args?: TenantsAggregateRawArgs): Prisma.PrismaPromise<JsonObject>;
+    aggregateRaw(args?: OldTenantsAggregateRawArgs): Prisma.PrismaPromise<JsonObject>;
 
     /**
-     * Count the number of Tenants.
+     * Count the number of OldTenants.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantsCountArgs} args - Arguments to filter Tenants to count.
+     * @param {OldTenantsCountArgs} args - Arguments to filter OldTenants to count.
      * @example
-     * // Count the number of Tenants
-     * const count = await prisma.tenants.count({
+     * // Count the number of OldTenants
+     * const count = await prisma.oldTenants.count({
      *   where: {
-     *     // ... the filter for the Tenants we want to count
+     *     // ... the filter for the OldTenants we want to count
      *   }
      * })
      **/
-    count<T extends TenantsCountArgs>(
-      args?: Subset<T, TenantsCountArgs>,
+    count<T extends OldTenantsCountArgs>(
+      args?: Subset<T, OldTenantsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TenantsCountAggregateOutputType>
+          : GetScalarType<T['select'], OldTenantsCountAggregateOutputType>
         : number
     >;
 
     /**
-     * Allows you to perform aggregations operations on a Tenants.
+     * Allows you to perform aggregations operations on a OldTenants.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {OldTenantsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2612,15 +2616,15 @@ export namespace Prisma {
      *   take: 10,
      * })
      **/
-    aggregate<T extends TenantsAggregateArgs>(
-      args: Subset<T, TenantsAggregateArgs>,
-    ): Prisma.PrismaPromise<GetTenantsAggregateType<T>>;
+    aggregate<T extends OldTenantsAggregateArgs>(
+      args: Subset<T, OldTenantsAggregateArgs>,
+    ): Prisma.PrismaPromise<GetOldTenantsAggregateType<T>>;
 
     /**
-     * Group by Tenants.
+     * Group by OldTenants.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TenantsGroupByArgs} args - Group by arguments.
+     * @param {OldTenantsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2635,11 +2639,11 @@ export namespace Prisma {
      *
      **/
     groupBy<
-      T extends TenantsGroupByArgs,
+      T extends OldTenantsGroupByArgs,
       HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TenantsGroupByArgs['orderBy'] }
-        : { orderBy?: TenantsGroupByArgs['orderBy'] },
+        ? { orderBy: OldTenantsGroupByArgs['orderBy'] }
+        : { orderBy?: OldTenantsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2684,29 +2688,29 @@ export namespace Prisma {
                       : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
                   }[OrderFields],
     >(
-      args: SubsetIntersection<T, TenantsGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors ? GetTenantsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+      args: SubsetIntersection<T, OldTenantsGroupByArgs, OrderByArg> & InputErrors,
+    ): {} extends InputErrors ? GetOldTenantsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
     /**
-     * Fields of the Tenants model
+     * Fields of the OldTenants model
      */
-    readonly fields: TenantsFieldRefs;
+    readonly fields: OldTenantsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Tenants.
+   * The delegate class that acts as a "Promise-like" for OldTenants.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TenantsClient<
+  export interface Prisma__OldTenantsClient<
     T,
     Null = never,
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    analytics<T extends Tenants$analyticsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Tenants$analyticsArgs<ExtArgs>>,
+    analytics<T extends OldTenants$analyticsArgs<ExtArgs> = {}>(
+      args?: Subset<T, OldTenants$analyticsArgs<ExtArgs>>,
     ): Prisma.PrismaPromise<
       $Result.GetResult<Prisma.$AnalyticsPayload<ExtArgs>, T, 'findMany'> | Null
     >;
@@ -2739,339 +2743,339 @@ export namespace Prisma {
   }
 
   /**
-   * Fields of the Tenants model
+   * Fields of the OldTenants model
    */
-  interface TenantsFieldRefs {
-    readonly id: FieldRef<'Tenants', 'String'>;
-    readonly name: FieldRef<'Tenants', 'String'>;
-    readonly domain: FieldRef<'Tenants', 'String'>;
-    readonly created_at: FieldRef<'Tenants', 'DateTime'>;
-    readonly updated_at: FieldRef<'Tenants', 'DateTime'>;
+  interface OldTenantsFieldRefs {
+    readonly id: FieldRef<'OldTenants', 'String'>;
+    readonly name: FieldRef<'OldTenants', 'String'>;
+    readonly domain: FieldRef<'OldTenants', 'String'>;
+    readonly created_at: FieldRef<'OldTenants', 'DateTime'>;
+    readonly updated_at: FieldRef<'OldTenants', 'DateTime'>;
   }
 
   // Custom InputTypes
 
   /**
-   * Tenants findUnique
+   * OldTenants findUnique
    */
-  export type TenantsFindUniqueArgs<
+  export type OldTenantsFindUniqueArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * Filter, which Tenants to fetch.
+     * Filter, which OldTenants to fetch.
      */
-    where: TenantsWhereUniqueInput;
+    where: OldTenantsWhereUniqueInput;
   };
 
   /**
-   * Tenants findUniqueOrThrow
+   * OldTenants findUniqueOrThrow
    */
-  export type TenantsFindUniqueOrThrowArgs<
+  export type OldTenantsFindUniqueOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * Filter, which Tenants to fetch.
+     * Filter, which OldTenants to fetch.
      */
-    where: TenantsWhereUniqueInput;
+    where: OldTenantsWhereUniqueInput;
   };
 
   /**
-   * Tenants findFirst
+   * OldTenants findFirst
    */
-  export type TenantsFindFirstArgs<
+  export type OldTenantsFindFirstArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * Filter, which Tenants to fetch.
+     * Filter, which OldTenants to fetch.
      */
-    where?: TenantsWhereInput;
+    where?: OldTenantsWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Tenants to fetch.
+     * Determine the order of OldTenants to fetch.
      */
-    orderBy?: TenantsOrderByWithRelationInput | TenantsOrderByWithRelationInput[];
+    orderBy?: OldTenantsOrderByWithRelationInput | OldTenantsOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for Tenants.
+     * Sets the position for searching for OldTenants.
      */
-    cursor?: TenantsWhereUniqueInput;
+    cursor?: OldTenantsWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` OldTenants from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Tenants.
+     * Skip the first `n` OldTenants.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of Tenants.
+     * Filter by unique combinations of OldTenants.
      */
-    distinct?: TenantsScalarFieldEnum | TenantsScalarFieldEnum[];
+    distinct?: OldTenantsScalarFieldEnum | OldTenantsScalarFieldEnum[];
   };
 
   /**
-   * Tenants findFirstOrThrow
+   * OldTenants findFirstOrThrow
    */
-  export type TenantsFindFirstOrThrowArgs<
+  export type OldTenantsFindFirstOrThrowArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * Filter, which Tenants to fetch.
+     * Filter, which OldTenants to fetch.
      */
-    where?: TenantsWhereInput;
+    where?: OldTenantsWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Tenants to fetch.
+     * Determine the order of OldTenants to fetch.
      */
-    orderBy?: TenantsOrderByWithRelationInput | TenantsOrderByWithRelationInput[];
+    orderBy?: OldTenantsOrderByWithRelationInput | OldTenantsOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for searching for Tenants.
+     * Sets the position for searching for OldTenants.
      */
-    cursor?: TenantsWhereUniqueInput;
+    cursor?: OldTenantsWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` OldTenants from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Tenants.
+     * Skip the first `n` OldTenants.
      */
     skip?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      *
-     * Filter by unique combinations of Tenants.
+     * Filter by unique combinations of OldTenants.
      */
-    distinct?: TenantsScalarFieldEnum | TenantsScalarFieldEnum[];
+    distinct?: OldTenantsScalarFieldEnum | OldTenantsScalarFieldEnum[];
   };
 
   /**
-   * Tenants findMany
+   * OldTenants findMany
    */
-  export type TenantsFindManyArgs<
+  export type OldTenantsFindManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * Filter, which Tenants to fetch.
+     * Filter, which OldTenants to fetch.
      */
-    where?: TenantsWhereInput;
+    where?: OldTenantsWhereInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      *
-     * Determine the order of Tenants to fetch.
+     * Determine the order of OldTenants to fetch.
      */
-    orderBy?: TenantsOrderByWithRelationInput | TenantsOrderByWithRelationInput[];
+    orderBy?: OldTenantsOrderByWithRelationInput | OldTenantsOrderByWithRelationInput[];
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      *
-     * Sets the position for listing Tenants.
+     * Sets the position for listing OldTenants.
      */
-    cursor?: TenantsWhereUniqueInput;
+    cursor?: OldTenantsWhereUniqueInput;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Take `±n` Tenants from the position of the cursor.
+     * Take `±n` OldTenants from the position of the cursor.
      */
     take?: number;
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      *
-     * Skip the first `n` Tenants.
+     * Skip the first `n` OldTenants.
      */
     skip?: number;
-    distinct?: TenantsScalarFieldEnum | TenantsScalarFieldEnum[];
+    distinct?: OldTenantsScalarFieldEnum | OldTenantsScalarFieldEnum[];
   };
 
   /**
-   * Tenants create
+   * OldTenants create
    */
-  export type TenantsCreateArgs<
+  export type OldTenantsCreateArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * The data needed to create a Tenants.
+     * The data needed to create a OldTenants.
      */
-    data: XOR<TenantsCreateInput, TenantsUncheckedCreateInput>;
+    data: XOR<OldTenantsCreateInput, OldTenantsUncheckedCreateInput>;
   };
 
   /**
-   * Tenants createMany
+   * OldTenants createMany
    */
-  export type TenantsCreateManyArgs<
+  export type OldTenantsCreateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to create many Tenants.
+     * The data used to create many OldTenants.
      */
-    data: TenantsCreateManyInput | TenantsCreateManyInput[];
+    data: OldTenantsCreateManyInput | OldTenantsCreateManyInput[];
   };
 
   /**
-   * Tenants update
+   * OldTenants update
    */
-  export type TenantsUpdateArgs<
+  export type OldTenantsUpdateArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * The data needed to update a Tenants.
+     * The data needed to update a OldTenants.
      */
-    data: XOR<TenantsUpdateInput, TenantsUncheckedUpdateInput>;
+    data: XOR<OldTenantsUpdateInput, OldTenantsUncheckedUpdateInput>;
     /**
-     * Choose, which Tenants to update.
+     * Choose, which OldTenants to update.
      */
-    where: TenantsWhereUniqueInput;
+    where: OldTenantsWhereUniqueInput;
   };
 
   /**
-   * Tenants updateMany
+   * OldTenants updateMany
    */
-  export type TenantsUpdateManyArgs<
+  export type OldTenantsUpdateManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * The data used to update Tenants.
+     * The data used to update OldTenants.
      */
-    data: XOR<TenantsUpdateManyMutationInput, TenantsUncheckedUpdateManyInput>;
+    data: XOR<OldTenantsUpdateManyMutationInput, OldTenantsUncheckedUpdateManyInput>;
     /**
-     * Filter which Tenants to update
+     * Filter which OldTenants to update
      */
-    where?: TenantsWhereInput;
+    where?: OldTenantsWhereInput;
   };
 
   /**
-   * Tenants upsert
+   * OldTenants upsert
    */
-  export type TenantsUpsertArgs<
+  export type OldTenantsUpsertArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * The filter to search for the Tenants to update in case it exists.
+     * The filter to search for the OldTenants to update in case it exists.
      */
-    where: TenantsWhereUniqueInput;
+    where: OldTenantsWhereUniqueInput;
     /**
-     * In case the Tenants found by the `where` argument doesn't exist, create a new Tenants with this data.
+     * In case the OldTenants found by the `where` argument doesn't exist, create a new OldTenants with this data.
      */
-    create: XOR<TenantsCreateInput, TenantsUncheckedCreateInput>;
+    create: XOR<OldTenantsCreateInput, OldTenantsUncheckedCreateInput>;
     /**
-     * In case the Tenants was found with the provided `where` argument, update it with this data.
+     * In case the OldTenants was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TenantsUpdateInput, TenantsUncheckedUpdateInput>;
+    update: XOR<OldTenantsUpdateInput, OldTenantsUncheckedUpdateInput>;
   };
 
   /**
-   * Tenants delete
+   * OldTenants delete
    */
-  export type TenantsDeleteArgs<
+  export type OldTenantsDeleteArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
     /**
-     * Filter which Tenants to delete.
+     * Filter which OldTenants to delete.
      */
-    where: TenantsWhereUniqueInput;
+    where: OldTenantsWhereUniqueInput;
   };
 
   /**
-   * Tenants deleteMany
+   * OldTenants deleteMany
    */
-  export type TenantsDeleteManyArgs<
+  export type OldTenantsDeleteManyArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Filter which Tenants to delete
+     * Filter which OldTenants to delete
      */
-    where?: TenantsWhereInput;
+    where?: OldTenantsWhereInput;
   };
 
   /**
-   * Tenants findRaw
+   * OldTenants findRaw
    */
-  export type TenantsFindRawArgs<
+  export type OldTenantsFindRawArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
@@ -3085,9 +3089,9 @@ export namespace Prisma {
   };
 
   /**
-   * Tenants aggregateRaw
+   * OldTenants aggregateRaw
    */
-  export type TenantsAggregateRawArgs<
+  export type OldTenantsAggregateRawArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
@@ -3101,9 +3105,9 @@ export namespace Prisma {
   };
 
   /**
-   * Tenants.analytics
+   * OldTenants.analytics
    */
-  export type Tenants$analyticsArgs<
+  export type OldTenants$analyticsArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
@@ -3123,19 +3127,19 @@ export namespace Prisma {
   };
 
   /**
-   * Tenants without action
+   * OldTenants without action
    */
-  export type TenantsDefaultArgs<
+  export type OldTenantsDefaultArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
   > = {
     /**
-     * Select specific fields to fetch from the Tenants
+     * Select specific fields to fetch from the OldTenants
      */
-    select?: TenantsSelect<ExtArgs> | null;
+    select?: OldTenantsSelect<ExtArgs> | null;
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: TenantsInclude<ExtArgs> | null;
+    include?: OldTenantsInclude<ExtArgs> | null;
   };
 
   /**
@@ -3156,7 +3160,7 @@ export namespace Prisma {
   export type AnalyticsScalarFieldEnum =
     (typeof AnalyticsScalarFieldEnum)[keyof typeof AnalyticsScalarFieldEnum];
 
-  export const TenantsScalarFieldEnum: {
+  export const OldTenantsScalarFieldEnum: {
     id: 'id';
     name: 'name';
     domain: 'domain';
@@ -3164,8 +3168,8 @@ export namespace Prisma {
     updated_at: 'updated_at';
   };
 
-  export type TenantsScalarFieldEnum =
-    (typeof TenantsScalarFieldEnum)[keyof typeof TenantsScalarFieldEnum];
+  export type OldTenantsScalarFieldEnum =
+    (typeof OldTenantsScalarFieldEnum)[keyof typeof OldTenantsScalarFieldEnum];
 
   export const SortOrder: {
     asc: 'asc';
@@ -3244,7 +3248,7 @@ export namespace Prisma {
     tenant_id?: StringNullableFilter<'Analytics'> | string | null;
     created_at?: DateTimeFilter<'Analytics'> | Date | string;
     updated_at?: DateTimeFilter<'Analytics'> | Date | string;
-    tenant?: XOR<TenantsNullableRelationFilter, TenantsWhereInput> | null;
+    tenant?: XOR<OldTenantsNullableRelationFilter, OldTenantsWhereInput> | null;
   };
 
   export type AnalyticsOrderByWithRelationInput = {
@@ -3256,7 +3260,7 @@ export namespace Prisma {
     tenant_id?: SortOrder;
     created_at?: SortOrder;
     updated_at?: SortOrder;
-    tenant?: TenantsOrderByWithRelationInput;
+    tenant?: OldTenantsOrderByWithRelationInput;
   };
 
   export type AnalyticsWhereUniqueInput = Prisma.AtLeast<
@@ -3272,7 +3276,7 @@ export namespace Prisma {
       tenant_id?: StringNullableFilter<'Analytics'> | string | null;
       created_at?: DateTimeFilter<'Analytics'> | Date | string;
       updated_at?: DateTimeFilter<'Analytics'> | Date | string;
-      tenant?: XOR<TenantsNullableRelationFilter, TenantsWhereInput> | null;
+      tenant?: XOR<OldTenantsNullableRelationFilter, OldTenantsWhereInput> | null;
     },
     'id'
   >;
@@ -3307,19 +3311,19 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<'Analytics'> | Date | string;
   };
 
-  export type TenantsWhereInput = {
-    AND?: TenantsWhereInput | TenantsWhereInput[];
-    OR?: TenantsWhereInput[];
-    NOT?: TenantsWhereInput | TenantsWhereInput[];
-    id?: StringFilter<'Tenants'> | string;
-    name?: StringFilter<'Tenants'> | string;
-    domain?: StringFilter<'Tenants'> | string;
-    created_at?: DateTimeFilter<'Tenants'> | Date | string;
-    updated_at?: DateTimeFilter<'Tenants'> | Date | string;
+  export type OldTenantsWhereInput = {
+    AND?: OldTenantsWhereInput | OldTenantsWhereInput[];
+    OR?: OldTenantsWhereInput[];
+    NOT?: OldTenantsWhereInput | OldTenantsWhereInput[];
+    id?: StringFilter<'OldTenants'> | string;
+    name?: StringFilter<'OldTenants'> | string;
+    domain?: StringFilter<'OldTenants'> | string;
+    created_at?: DateTimeFilter<'OldTenants'> | Date | string;
+    updated_at?: DateTimeFilter<'OldTenants'> | Date | string;
     analytics?: AnalyticsListRelationFilter;
   };
 
-  export type TenantsOrderByWithRelationInput = {
+  export type OldTenantsOrderByWithRelationInput = {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
@@ -3328,41 +3332,41 @@ export namespace Prisma {
     analytics?: AnalyticsOrderByRelationAggregateInput;
   };
 
-  export type TenantsWhereUniqueInput = Prisma.AtLeast<
+  export type OldTenantsWhereUniqueInput = Prisma.AtLeast<
     {
       id?: string;
       domain?: string;
-      AND?: TenantsWhereInput | TenantsWhereInput[];
-      OR?: TenantsWhereInput[];
-      NOT?: TenantsWhereInput | TenantsWhereInput[];
-      name?: StringFilter<'Tenants'> | string;
-      created_at?: DateTimeFilter<'Tenants'> | Date | string;
-      updated_at?: DateTimeFilter<'Tenants'> | Date | string;
+      AND?: OldTenantsWhereInput | OldTenantsWhereInput[];
+      OR?: OldTenantsWhereInput[];
+      NOT?: OldTenantsWhereInput | OldTenantsWhereInput[];
+      name?: StringFilter<'OldTenants'> | string;
+      created_at?: DateTimeFilter<'OldTenants'> | Date | string;
+      updated_at?: DateTimeFilter<'OldTenants'> | Date | string;
       analytics?: AnalyticsListRelationFilter;
     },
     'id' | 'domain'
   >;
 
-  export type TenantsOrderByWithAggregationInput = {
+  export type OldTenantsOrderByWithAggregationInput = {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
     created_at?: SortOrder;
     updated_at?: SortOrder;
-    _count?: TenantsCountOrderByAggregateInput;
-    _max?: TenantsMaxOrderByAggregateInput;
-    _min?: TenantsMinOrderByAggregateInput;
+    _count?: OldTenantsCountOrderByAggregateInput;
+    _max?: OldTenantsMaxOrderByAggregateInput;
+    _min?: OldTenantsMinOrderByAggregateInput;
   };
 
-  export type TenantsScalarWhereWithAggregatesInput = {
-    AND?: TenantsScalarWhereWithAggregatesInput | TenantsScalarWhereWithAggregatesInput[];
-    OR?: TenantsScalarWhereWithAggregatesInput[];
-    NOT?: TenantsScalarWhereWithAggregatesInput | TenantsScalarWhereWithAggregatesInput[];
-    id?: StringWithAggregatesFilter<'Tenants'> | string;
-    name?: StringWithAggregatesFilter<'Tenants'> | string;
-    domain?: StringWithAggregatesFilter<'Tenants'> | string;
-    created_at?: DateTimeWithAggregatesFilter<'Tenants'> | Date | string;
-    updated_at?: DateTimeWithAggregatesFilter<'Tenants'> | Date | string;
+  export type OldTenantsScalarWhereWithAggregatesInput = {
+    AND?: OldTenantsScalarWhereWithAggregatesInput | OldTenantsScalarWhereWithAggregatesInput[];
+    OR?: OldTenantsScalarWhereWithAggregatesInput[];
+    NOT?: OldTenantsScalarWhereWithAggregatesInput | OldTenantsScalarWhereWithAggregatesInput[];
+    id?: StringWithAggregatesFilter<'OldTenants'> | string;
+    name?: StringWithAggregatesFilter<'OldTenants'> | string;
+    domain?: StringWithAggregatesFilter<'OldTenants'> | string;
+    created_at?: DateTimeWithAggregatesFilter<'OldTenants'> | Date | string;
+    updated_at?: DateTimeWithAggregatesFilter<'OldTenants'> | Date | string;
   };
 
   export type AnalyticsCreateInput = {
@@ -3373,7 +3377,7 @@ export namespace Prisma {
     user_id?: number | null;
     created_at?: Date | string;
     updated_at?: Date | string;
-    tenant?: TenantsCreateNestedOneWithoutAnalyticsInput;
+    tenant?: OldTenantsCreateNestedOneWithoutAnalyticsInput;
   };
 
   export type AnalyticsUncheckedCreateInput = {
@@ -3394,7 +3398,7 @@ export namespace Prisma {
     user_id?: NullableIntFieldUpdateOperationsInput | number | null;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
-    tenant?: TenantsUpdateOneWithoutAnalyticsNestedInput;
+    tenant?: OldTenantsUpdateOneWithoutAnalyticsNestedInput;
   };
 
   export type AnalyticsUncheckedUpdateInput = {
@@ -3437,7 +3441,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type TenantsCreateInput = {
+  export type OldTenantsCreateInput = {
     id?: string;
     name: string;
     domain: string;
@@ -3446,7 +3450,7 @@ export namespace Prisma {
     analytics?: AnalyticsCreateNestedManyWithoutTenantInput;
   };
 
-  export type TenantsUncheckedCreateInput = {
+  export type OldTenantsUncheckedCreateInput = {
     id?: string;
     name: string;
     domain: string;
@@ -3455,7 +3459,7 @@ export namespace Prisma {
     analytics?: AnalyticsUncheckedCreateNestedManyWithoutTenantInput;
   };
 
-  export type TenantsUpdateInput = {
+  export type OldTenantsUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -3463,7 +3467,7 @@ export namespace Prisma {
     analytics?: AnalyticsUpdateManyWithoutTenantNestedInput;
   };
 
-  export type TenantsUncheckedUpdateInput = {
+  export type OldTenantsUncheckedUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -3471,7 +3475,7 @@ export namespace Prisma {
     analytics?: AnalyticsUncheckedUpdateManyWithoutTenantNestedInput;
   };
 
-  export type TenantsCreateManyInput = {
+  export type OldTenantsCreateManyInput = {
     id?: string;
     name: string;
     domain: string;
@@ -3479,14 +3483,14 @@ export namespace Prisma {
     updated_at?: Date | string;
   };
 
-  export type TenantsUpdateManyMutationInput = {
+  export type OldTenantsUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type TenantsUncheckedUpdateManyInput = {
+  export type OldTenantsUncheckedUpdateManyInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -3547,9 +3551,9 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string;
   };
 
-  export type TenantsNullableRelationFilter = {
-    is?: TenantsWhereInput | null;
-    isNot?: TenantsWhereInput | null;
+  export type OldTenantsNullableRelationFilter = {
+    is?: OldTenantsWhereInput | null;
+    isNot?: OldTenantsWhereInput | null;
   };
 
   export type AnalyticsCountOrderByAggregateInput = {
@@ -3671,7 +3675,7 @@ export namespace Prisma {
     _count?: SortOrder;
   };
 
-  export type TenantsCountOrderByAggregateInput = {
+  export type OldTenantsCountOrderByAggregateInput = {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
@@ -3679,7 +3683,7 @@ export namespace Prisma {
     updated_at?: SortOrder;
   };
 
-  export type TenantsMaxOrderByAggregateInput = {
+  export type OldTenantsMaxOrderByAggregateInput = {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
@@ -3687,7 +3691,7 @@ export namespace Prisma {
     updated_at?: SortOrder;
   };
 
-  export type TenantsMinOrderByAggregateInput = {
+  export type OldTenantsMinOrderByAggregateInput = {
     id?: SortOrder;
     name?: SortOrder;
     domain?: SortOrder;
@@ -3695,10 +3699,13 @@ export namespace Prisma {
     updated_at?: SortOrder;
   };
 
-  export type TenantsCreateNestedOneWithoutAnalyticsInput = {
-    create?: XOR<TenantsCreateWithoutAnalyticsInput, TenantsUncheckedCreateWithoutAnalyticsInput>;
-    connectOrCreate?: TenantsCreateOrConnectWithoutAnalyticsInput;
-    connect?: TenantsWhereUniqueInput;
+  export type OldTenantsCreateNestedOneWithoutAnalyticsInput = {
+    create?: XOR<
+      OldTenantsCreateWithoutAnalyticsInput,
+      OldTenantsUncheckedCreateWithoutAnalyticsInput
+    >;
+    connectOrCreate?: OldTenantsCreateOrConnectWithoutAnalyticsInput;
+    connect?: OldTenantsWhereUniqueInput;
   };
 
   export type StringFieldUpdateOperationsInput = {
@@ -3723,16 +3730,22 @@ export namespace Prisma {
     set?: Date | string;
   };
 
-  export type TenantsUpdateOneWithoutAnalyticsNestedInput = {
-    create?: XOR<TenantsCreateWithoutAnalyticsInput, TenantsUncheckedCreateWithoutAnalyticsInput>;
-    connectOrCreate?: TenantsCreateOrConnectWithoutAnalyticsInput;
-    upsert?: TenantsUpsertWithoutAnalyticsInput;
+  export type OldTenantsUpdateOneWithoutAnalyticsNestedInput = {
+    create?: XOR<
+      OldTenantsCreateWithoutAnalyticsInput,
+      OldTenantsUncheckedCreateWithoutAnalyticsInput
+    >;
+    connectOrCreate?: OldTenantsCreateOrConnectWithoutAnalyticsInput;
+    upsert?: OldTenantsUpsertWithoutAnalyticsInput;
     disconnect?: boolean;
-    delete?: TenantsWhereInput | boolean;
-    connect?: TenantsWhereUniqueInput;
+    delete?: OldTenantsWhereInput | boolean;
+    connect?: OldTenantsWhereUniqueInput;
     update?: XOR<
-      XOR<TenantsUpdateToOneWithWhereWithoutAnalyticsInput, TenantsUpdateWithoutAnalyticsInput>,
-      TenantsUncheckedUpdateWithoutAnalyticsInput
+      XOR<
+        OldTenantsUpdateToOneWithWhereWithoutAnalyticsInput,
+        OldTenantsUpdateWithoutAnalyticsInput
+      >,
+      OldTenantsUncheckedUpdateWithoutAnalyticsInput
     >;
   };
 
@@ -3951,7 +3964,7 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>;
   };
 
-  export type TenantsCreateWithoutAnalyticsInput = {
+  export type OldTenantsCreateWithoutAnalyticsInput = {
     id?: string;
     name: string;
     domain: string;
@@ -3959,7 +3972,7 @@ export namespace Prisma {
     updated_at?: Date | string;
   };
 
-  export type TenantsUncheckedCreateWithoutAnalyticsInput = {
+  export type OldTenantsUncheckedCreateWithoutAnalyticsInput = {
     id?: string;
     name: string;
     domain: string;
@@ -3967,30 +3980,42 @@ export namespace Prisma {
     updated_at?: Date | string;
   };
 
-  export type TenantsCreateOrConnectWithoutAnalyticsInput = {
-    where: TenantsWhereUniqueInput;
-    create: XOR<TenantsCreateWithoutAnalyticsInput, TenantsUncheckedCreateWithoutAnalyticsInput>;
+  export type OldTenantsCreateOrConnectWithoutAnalyticsInput = {
+    where: OldTenantsWhereUniqueInput;
+    create: XOR<
+      OldTenantsCreateWithoutAnalyticsInput,
+      OldTenantsUncheckedCreateWithoutAnalyticsInput
+    >;
   };
 
-  export type TenantsUpsertWithoutAnalyticsInput = {
-    update: XOR<TenantsUpdateWithoutAnalyticsInput, TenantsUncheckedUpdateWithoutAnalyticsInput>;
-    create: XOR<TenantsCreateWithoutAnalyticsInput, TenantsUncheckedCreateWithoutAnalyticsInput>;
-    where?: TenantsWhereInput;
+  export type OldTenantsUpsertWithoutAnalyticsInput = {
+    update: XOR<
+      OldTenantsUpdateWithoutAnalyticsInput,
+      OldTenantsUncheckedUpdateWithoutAnalyticsInput
+    >;
+    create: XOR<
+      OldTenantsCreateWithoutAnalyticsInput,
+      OldTenantsUncheckedCreateWithoutAnalyticsInput
+    >;
+    where?: OldTenantsWhereInput;
   };
 
-  export type TenantsUpdateToOneWithWhereWithoutAnalyticsInput = {
-    where?: TenantsWhereInput;
-    data: XOR<TenantsUpdateWithoutAnalyticsInput, TenantsUncheckedUpdateWithoutAnalyticsInput>;
+  export type OldTenantsUpdateToOneWithWhereWithoutAnalyticsInput = {
+    where?: OldTenantsWhereInput;
+    data: XOR<
+      OldTenantsUpdateWithoutAnalyticsInput,
+      OldTenantsUncheckedUpdateWithoutAnalyticsInput
+    >;
   };
 
-  export type TenantsUpdateWithoutAnalyticsInput = {
+  export type OldTenantsUpdateWithoutAnalyticsInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
-  export type TenantsUncheckedUpdateWithoutAnalyticsInput = {
+  export type OldTenantsUncheckedUpdateWithoutAnalyticsInput = {
     name?: StringFieldUpdateOperationsInput | string;
     domain?: StringFieldUpdateOperationsInput | string;
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string;
@@ -4097,21 +4122,21 @@ export namespace Prisma {
    * Aliases for legacy arg types
    */
   /**
-   * @deprecated Use TenantsCountOutputTypeDefaultArgs instead
+   * @deprecated Use OldTenantsCountOutputTypeDefaultArgs instead
    */
-  export type TenantsCountOutputTypeArgs<
+  export type OldTenantsCountOutputTypeArgs<
     ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = TenantsCountOutputTypeDefaultArgs<ExtArgs>;
+  > = OldTenantsCountOutputTypeDefaultArgs<ExtArgs>;
   /**
    * @deprecated Use AnalyticsDefaultArgs instead
    */
   export type AnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     AnalyticsDefaultArgs<ExtArgs>;
   /**
-   * @deprecated Use TenantsDefaultArgs instead
+   * @deprecated Use OldTenantsDefaultArgs instead
    */
-  export type TenantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    TenantsDefaultArgs<ExtArgs>;
+  export type OldTenantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    OldTenantsDefaultArgs<ExtArgs>;
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

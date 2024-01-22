@@ -30,5 +30,5 @@ export const analyticsCollection = async () => {
 };
 
 export const tenantsCollection = async () => {
-  return database.collection<Tenants>('Tenants');
+  return database.collection<Tenants>('OldTenants');
 };
