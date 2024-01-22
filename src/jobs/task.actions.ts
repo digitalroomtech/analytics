@@ -17,6 +17,8 @@ import {
   SocialNetworkSessionMetrics,
 } from '../controllers/metrics/metrics.models';
 import { IAuthenticateAnalyticName } from '../controllers/analytics/analytics.types';
+import { TenantModel } from '../controllers/tenant/tenant.models';
+import { ITenant } from '../controllers/tenant/tenant.types';
 
 const getSelectedAnalyticNames = (model: MetricModels) => {
   let selectedModel: IAuthenticateAnalyticName[];
@@ -83,30 +85,47 @@ export const metricTask = async (
   const mongodbModelAnalytics = getSelectedAnalyticModel(model);
   const mongodbModelMetrics = getSelectedAnalyticMetricModel(model);
 
-  console.log('metricTask', { date: new Date().toLocaleString(), model });
+  const tenants: ITenant[] = await TenantModel.find({});
 
-  const query = [
-    {
-      $match: {
-        name: { $in: [...arrayNames.map((socialNetworkSession) => socialNetworkSession)] },
-        created_at: { $gte: timeAgo.toDate(), $lte: timeSince.toDate() },
+  for (const tenant of tenants) {
+    const query = [
+      {
+        $match: {
+          name: { $in: [...arrayNames.map((socialNetworkSession) => socialNetworkSession)] },
+          created_at: { $gte: timeAgo.toDate(), $lte: timeSince.toDate() },
+        },
       },
-    },
-    { $group: { _id: { name: '$name' }, count: { $sum: 1 } } },
-  ];
+      {
+        $lookup: {
+          from: 'AuthenticateAnalytics',
+          localField: 'authenticate_analytic',
+          foreignField: '_id',
+          as: 'authenticate_analytics',
+          pipeline: [
+            {
+              $match: {
+                tenant: tenant._id,
+              },
+            },
+          ],
+        },
+      },
+      { $group: { _id: { name: '$name' }, count: { $sum: 1 } } },
+    ];
 
-  try {
-    const metricGroup: MetricGroupResult[] = await mongodbModelAnalytics.aggregate(query);
-
-    for (const metricGroupResult of metricGroup) {
-      await mongodbModelMetrics.create({
-        name: metricGroupResult._id?.name,
-        count: metricGroupResult.count,
-        time_ago: timeAgo.toDate(),
-        time_since: timeSince.toDate(),
-      });
+    try {
+      const metricGroup: MetricGroupResult[] = await mongodbModelAnalytics.aggregate(query);
+      for (const metricGroupResult of metricGroup) {
+        await mongodbModelMetrics.create({
+          name: metricGroupResult._id?.name,
+          count: metricGroupResult.count,
+          time_ago: timeAgo.toDate(),
+          time_since: timeSince.toDate(),
+          tenant: tenant._id,
+        });
+      }
+    } catch (e: any) {
+      console.log('error', e.message);
     }
-  } catch (e: any) {
-    console.log('error', e.message);
   }
 };

@@ -16,6 +16,10 @@ const socialNetworkMetrics = new Schema<IMetricAnalytics>(
       type: Date,
       default: Date.now(),
     },
+    tenant: {
+      type: Schema?.Types.ObjectId,
+      ref: 'Tenants',
+    },
   },
   { collection: 'social_network_metrics' },
 );
@@ -33,6 +37,10 @@ const socialNetworkSessionMetrics = new Schema<IMetricAnalytics>(
       type: Date,
       default: Date.now(),
     },
+    tenant: {
+      type: Schema?.Types.ObjectId,
+      ref: 'Tenants',
+    },
   },
   { collection: 'social_network_session_metrics' },
 );
@@ -49,6 +57,10 @@ const pageMetrics = new Schema<IMetricAnalytics>(
     time_since: {
       type: Date,
       default: Date.now(),
+    },
+    tenant: {
+      type: Schema?.Types.ObjectId,
+      ref: 'Tenants',
     },
   },
   { collection: 'page_metrics' },

@@ -54,7 +54,7 @@ const fakeAnalytics = async () => {
           _id: new ObjectId('65a88087a27ce3cd34deabde'),
         },
         authenticate_analytic: {
-          _id: new ObjectId('65a85c197e310a2aaa6cefed'),
+          _id: new ObjectId('65ae69b754766251452da48d'),
         },
         created_at: customHour.toDate(),
         updated_at: customHour.toDate(),

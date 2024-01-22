@@ -1,4 +1,5 @@
 import { IAuthenticateAnalyticName } from '../analytics/analytics.types';
+import { ITenant } from '../tenant/tenant.types';
 
 export type MetricGroupResult = {
   _id?: { name: IAuthenticateAnalyticName };
@@ -10,6 +11,7 @@ export interface IMetricAnalytics {
   count?: number;
   time_ago?: string;
   time_since?: string;
+  tenant: ITenant;
 }
 
 export enum MetricModels {
