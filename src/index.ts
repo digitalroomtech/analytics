@@ -43,7 +43,7 @@ const main = async () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 };
 
-const JOB_TIME = 10;
+const JOB_TIME = 1;
 
 cron
   .schedule(
@@ -68,4 +68,5 @@ cron
     }),
   )
   .start();
+
 main();
