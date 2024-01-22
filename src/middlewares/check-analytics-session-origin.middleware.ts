@@ -1,5 +1,4 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
-import { isUuidAuthenticated } from '../controllers/analytics/analytics.controller';
 import { ENVIRONMENT } from '../utils/constants';
 
 interface Request extends ExpressRequest {

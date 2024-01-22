@@ -1,7 +1,6 @@
 import { Request as ExpressRequest, Response } from 'express';
-import { PrismaClient } from '../../../prisma/generated/client';
+import { TenantModel } from './tenant.models';
 
-const prisma = new PrismaClient();
 interface Request extends ExpressRequest {
   name?: string;
   domain?: string;
@@ -12,18 +11,17 @@ export async function tenantCreate(req: Request, res: Response) {
   if (!(data.name || data.domain)) {
     return res.status(500).json({ message: 'El name y domain son requeridos' });
   }
+  let tenantCreate;
 
   try {
-    await prisma.tenants.create({
-      data: {
-        name: data.name,
-        domain: data.domain,
-      },
+    tenantCreate = await TenantModel.create({
+      name: data.name,
+      domain: data.domain,
+      timezone: data.timezone,
     });
-    await prisma.$disconnect();
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
 
-  return res.json({ message: 'Register tenant successfully.' });
+  return res.json({ message: 'Register tenant successfully.', tenant_id: tenantCreate._id });
 }

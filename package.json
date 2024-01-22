@@ -9,9 +9,11 @@
     "nodemon": "npx nodemon index.ts",
     "nodemon:app": "npx nodemon app.ts",
     "dev": "nodemon src/index.ts",
-    "build": "npx prisma generate --schema prisma/schema.prisma && npx prisma generate --schema prisma/schema-mysql.prisma && rimraf ./build && tsc",
+    "build": "rimraf ./build && tsc",
     "app": "npm run build && node build/app.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "fake-data": "ts-node src/scripts/fake-analytics.ts",
+    "migrate": "ts-node src/scripts/migrate-data.ts"
   },
   "repository": {
     "type": "git",
@@ -57,7 +59,6 @@
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
-    "@prisma/client": "^5.7.1",
     "apollo-server": "^3.12.1",
     "axios": "^1.5.0",
     "colors": "^1.4.0",
@@ -71,10 +72,12 @@
     "jwks-rsa": "^3.0.1",
     "metaapi.cloud-sdk": "^23.6.0",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.44",
     "mongodb": "^6.3.0",
+    "mongoose": "^8.1.0",
+    "mongoose-paginate-v2": "^1.8.0",
     "node-cron": "^3.0.3",
     "pre-commit": "^1.2.2",
-    "prisma": "^5.7.1",
     "request": "^2.88.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
