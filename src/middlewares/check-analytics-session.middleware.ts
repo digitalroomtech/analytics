@@ -13,10 +13,17 @@ export const checkSessionMiddleware = async (req: Request, res: Response, next: 
     return res.status(403).send({ message: 'No analytics-session header' });
   }
 
-  const authenticateAnalytics = await isAuthenticateAnalytics(session.toString());
+  let authenticateAnalytics;
+  try {
+    authenticateAnalytics = await isAuthenticateAnalytics(session.toString());
+  } catch (e: any) {
+    return res.status(400).send({ message: e.message });
+  }
+
   if (!authenticateAnalytics) {
     return res.status(403).send({ message: 'Forbidden !' });
   }
+
   req.body.authenticate = authenticateAnalytics._id;
 
   return next();

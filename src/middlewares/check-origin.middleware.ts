@@ -20,6 +20,8 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
   if (!tenantRecord) {
     return res.status(400).send({ message: 'Invalid origin' });
   }
+
+  console.log('tenantRecord', tenantRecord);
   req.body.tenant_id = tenantRecord._id;
   req.body.originUrl = url.href;
 
