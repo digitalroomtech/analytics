@@ -1,24 +1,25 @@
 import mongoose from 'mongoose';
-import { MetricGroupResult, MetricModels } from '../controllers/metrics/metrics.types';
+import { MetricGroupResult, MetricModels } from '../metrics/metrics.types';
 import moment, { DurationInputArg1, DurationInputArg2 } from 'moment/moment';
 import {
   PageAnalyticNames,
   SocialNetworkAnalyticNames,
   SocialNetworkSessionAnalyticNames,
-} from '../utils/constants';
+} from '../../utils/constants';
 import {
   PageAnalytic,
   SocialNetworkAnalytic,
   SocialNetworkSessionAnalytic,
-} from '../controllers/analytics/analytics.models';
+} from '../analytics/analytics.models';
 import {
   PageMetrics,
   SocialNetworkMetrics,
   SocialNetworkSessionMetrics,
-} from '../controllers/metrics/metrics.models';
-import { IAuthenticateAnalyticName } from '../controllers/analytics/analytics.types';
-import { TenantModel } from '../controllers/tenant/tenant.models';
-import { ITenant } from '../controllers/tenant/tenant.types';
+} from '../metrics/metrics.models';
+import { IAuthenticateAnalyticName } from '../analytics/analytics.types';
+import { TenantModel } from '../tenant/tenant.models';
+import { ITenant } from '../tenant/tenant.types';
+import cron from 'node-cron';
 
 const getSelectedAnalyticNames = (model: MetricModels) => {
   let selectedModel: IAuthenticateAnalyticName[];
@@ -129,3 +130,27 @@ export const metricTask = async (
     }
   }
 };
+
+const JOB_TIME = 1;
+
+const socialNetworkMetric = cron.schedule(
+  '0 0 */1  * * *',
+  async () =>
+    await metricTask(MetricModels.socialNetworkMetrics, {
+      amount: JOB_TIME,
+      unit: 'hour',
+    }),
+);
+
+const pageMetrics = cron.schedule('0 0 */1  * * *', async () =>
+  metricTask(MetricModels.pageMetrics, { amount: JOB_TIME, unit: 'hour' }),
+);
+
+const socialNetworkSessionMetrics = cron.schedule('0 0 */1  * * *', async () =>
+  metricTask(MetricModels.socialNetworkSessionMetrics, {
+    amount: JOB_TIME,
+    unit: 'hour',
+  }),
+);
+
+export const TASK_LISTS = [socialNetworkMetric, pageMetrics, socialNetworkSessionMetrics];

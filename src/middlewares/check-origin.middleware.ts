@@ -1,5 +1,5 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
-import { TenantModel } from '../controllers/tenant/tenant.models';
+import { TenantModel } from '../modules/tenant/tenant.models';
 
 interface Request extends ExpressRequest {
   tenant_id?: number;

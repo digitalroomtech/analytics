@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ITenant } from '../../controllers/tenant/tenant.types';
+import { ITenant } from '../../modules/tenant/tenant.types';
 
 const { Schema, model } = mongoose;
 

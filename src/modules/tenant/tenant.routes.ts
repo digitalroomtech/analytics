@@ -1,5 +1,5 @@
 import express from 'express';
-import { tenantCreate } from './tenant.controller';
+import { tenantCreate } from './tenant.actions';
 
 const router = express.Router();
 

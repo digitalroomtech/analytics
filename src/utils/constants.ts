@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { IAuthenticateAnalyticName } from '../controllers/analytics/analytics.types';
+import { IAuthenticateAnalyticName } from '../modules/analytics/analytics.types';
 
 dotenv.config();
 
@@ -31,3 +31,5 @@ export const SocialNetworkAnalyticNames: IAuthenticateAnalyticName[] = [
   IAuthenticateAnalyticName.appleClicked,
   IAuthenticateAnalyticName.gmailClicked,
 ];
+
+export const APP_SECRET = process.env.APP_SECRET || '';

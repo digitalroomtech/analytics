@@ -1,0 +1,36 @@
+enum UserRoles{
+    TENANT_ADMINISTRATOR
+    ADMINISTRATOR
+
+}
+
+enum Gender{
+    FEMALE
+    MALE
+    NO_APPLY
+}
+
+type UserRole{
+    id:Int
+    name: UserRoles
+}
+
+scalar Upload
+
+type User {
+    id: Int!
+    name: String!
+    email: String!
+    password:String
+    created_at:String
+    updated_at:String
+    avatar:String
+    gender:Gender
+    birthday:String
+    role:UserRole
+}
+
+
+type Query{
+    currentUser:User
+}

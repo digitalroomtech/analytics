@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { MONGODB_URI } from '../utils/constants';
-import { TenantModel } from '../controllers/tenant/tenant.models';
+import { TenantModel } from '../modules/tenant/tenant.models';
 
 const main = async () => {
   const mongooseConnection = await mongoose.connect(MONGODB_URI);

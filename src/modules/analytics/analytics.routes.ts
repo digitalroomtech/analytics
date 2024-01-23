@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticate, analyticsCreate } from './analytics.controller';
+import { authenticate, analyticsCreate } from './analytics.actions';
 import { checkSessionMiddleware } from '../../middlewares/check-analytics-session.middleware';
 import { checkSessionOriginMiddleware } from '../../middlewares/check-analytics-session-origin.middleware';
 // import { limitRequests } from '../../middlewares/limit-requests.middleware';

@@ -1,74 +1,40 @@
 import express from 'express';
-import analyticsRoutes from './controllers/analytics/analytics.routes';
-import tenantRoutes from './controllers/tenant/tenant.routes';
+import analyticsRoutes from './modules/analytics/analytics.routes';
+import tenantRoutes from './modules/tenant/tenant.routes';
 import cors from 'cors';
 import http from 'http';
 import mongoose from 'mongoose';
 import { MONGODB_URI } from './utils/constants';
-import cron from 'node-cron';
-import metricsRoutes from './controllers/metrics/metrics.routes';
-import { metricTask } from './jobs/task.actions';
-import { MetricModels } from './controllers/metrics/metrics.types';
+import metricsRoutes from './modules/metrics/metrics.routes';
+import { graphqlUploadExpress } from 'graphql-upload-ts';
+import { expressMiddleware } from '@apollo/server/express4';
+import { expressServer } from './config/express.server';
+import { graphqlServer } from './config/graphql.server';
+import { TASK_LISTS } from './modules/task/task.actions';
 
-const app = express();
-const httpServer = http.createServer(app);
+const httpServer = http.createServer(expressServer);
 const port = process.env.PORT || 3002;
 
-app.use(
-  cors({
-    origin: '*',
-    methods: ['GET', 'POST'],
-    allowedHeaders: [
-      'Authorization',
-      'Content-Type',
-      'analytics-session',
-      'analytics-session-origin',
-    ],
-    maxAge: 86400,
-  }),
-  express.json(),
-  analyticsRoutes,
-);
-
-app.use('/tenant', tenantRoutes);
-app.use('/metric', metricsRoutes);
-
-app.use((req, res) => {
-  res.status(404).json({ message: 'Not Found' });
-});
+expressServer.use('/analytics', analyticsRoutes);
+expressServer.use('/tenant', tenantRoutes);
+expressServer.use('/metric', metricsRoutes);
 
 const main = async () => {
   await mongoose.connect(MONGODB_URI);
+  await graphqlServer.start();
+  expressServer.use(
+    '/graphql',
+    cors<cors.CorsRequest>(),
+    express.json(),
+    graphqlUploadExpress(),
+    expressMiddleware(graphqlServer),
+  );
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+
+  TASK_LISTS.map((cron) => cron.start());
+
+  console.log(`🚀 Server ready at http://localhost:${port}/graphql`);
+  console.log(`🚀 Server ready at http://localhost:${port}`);
 };
-
-const JOB_TIME = 1;
-
-cron
-  .schedule(
-    '0 0 */1  * * *',
-    async () =>
-      await metricTask(MetricModels.socialNetworkMetrics, {
-        amount: JOB_TIME,
-        unit: 'hour',
-      }),
-  )
-  .start();
-
-cron
-  .schedule('0 0 */1  * * *', async () =>
-    metricTask(MetricModels.pageMetrics, { amount: JOB_TIME, unit: 'hour' }),
-  )
-  .start();
-
-cron
-  .schedule('0 0 */1  * * *', async () =>
-    metricTask(MetricModels.socialNetworkSessionMetrics, {
-      amount: JOB_TIME,
-      unit: 'hour',
-    }),
-  )
-  .start();
 
 main();

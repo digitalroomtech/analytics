@@ -8,15 +8,15 @@ import {
   PageAnalytic,
   SocialNetworkAnalytic,
   SocialNetworkSessionAnalytic,
-} from '../controllers/analytics/analytics.models';
+} from '../modules/analytics/analytics.models';
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
-import { MetricGroupResult } from '../controllers/metrics/metrics.types';
+import { MetricGroupResult } from '../modules/metrics/metrics.types';
 import {
   PageMetrics,
   SocialNetworkMetrics,
   SocialNetworkSessionMetrics,
-} from '../controllers/metrics/metrics.models';
+} from '../modules/metrics/metrics.models';
 // eslint-disable-next-line @typescript-eslint/no-var-requires,@typescript-eslint/ban-ts-comment
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-var-requires

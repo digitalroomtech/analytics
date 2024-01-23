@@ -9,10 +9,14 @@ interface IUserModel extends mongoose.Model<IUser> {
 
 const userSchema = new Schema<IUser, IUserModel>(
   {
-    user_id: Number,
-    authenticate_analytic: {
-      type: Schema?.Types.ObjectId,
-      ref: 'AuthenticateAnalytics',
+    name: String,
+    email: String,
+    password: String,
+    avatar: String,
+    role: {
+      type: String,
+      enum: ['ADMINISTRATOR', 'USER'],
+      default: 'USER',
     },
     created_at: {
       type: Date,
@@ -31,7 +35,6 @@ const userSchema = new Schema<IUser, IUserModel>(
 
 userSchema.static('findOneOrCreate', async function findOneOrCreate(params: IFindOneOrCreate) {
   const user = await this.findOne(params);
-
   return user ? user : await this.create(params);
 });
 

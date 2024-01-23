@@ -1,0 +1,15 @@
+#import User from "../user/user.queries.graphql"
+
+type AuthPayload {
+    token: String
+    user: User
+}
+
+type ForgotPasswordPayload {
+    success:Boolean
+}
+
+type Mutation {
+    signup(email: String!, password: String!, name: String!, url:String!): AuthPayload
+    login(email: String!, password: String!): AuthPayload
+}

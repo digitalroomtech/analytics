@@ -1,5 +1,5 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
-import { isAuthenticateAnalytics } from '../controllers/analytics/analytics.controller';
+import { isAuthenticateAnalytics } from '../modules/analytics/analytics.actions';
 import { ENVIRONMENT } from '../utils/constants';
 
 interface Request extends ExpressRequest {
