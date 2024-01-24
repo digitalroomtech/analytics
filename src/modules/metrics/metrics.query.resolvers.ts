@@ -1,5 +1,8 @@
-import moment from 'moment';
-import { EventsMetricsModel, RegisteredUserMetricsModel } from './metrics.models';
+import {
+  EventsMetricsModel,
+  HeatMatMetricsModel,
+  RegisteredUserMetricsModel,
+} from './metrics.models';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
   try {
@@ -8,7 +11,10 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
       {
         $match: {
           name: { $in: events },
-          createdAt: { $gte: moment(from).toDate(), $lt: moment(to).toDate() },
+          created_at: {
+            $gte: new Date(new Date(from).setHours(0, 0, 0)),
+            $lt: new Date(new Date(to).setHours(23, 59, 59)),
+          },
         },
       },
       { $group: { _id: '$name', count: { $sum: 1 } } },
@@ -28,9 +34,10 @@ const getRegisteredUserReport = async (parent: any, args: any, context: any) => 
     const response = await RegisteredUserMetricsModel.aggregate([
       {
         $match: {
-          name: {
-            $ne: 'analytics_authenticate',
-            createdAt: { $gte: moment(from).toDate(), $lt: moment(to).toDate() },
+          name: { $ne: 'analytics_authenticate' },
+          created_at: {
+            $gte: new Date(new Date(from).setHours(0, 0, 0)),
+            $lt: new Date(new Date(to).setHours(23, 59, 59)),
           },
         },
       },
@@ -66,7 +73,49 @@ const getRegisteredUserReport = async (parent: any, args: any, context: any) => 
   }
 };
 
+const getHeatMapReport = async (parent: any, args: any, context: any) => {
+  try {
+    const { from, to } = args.variables;
+
+    const response = await HeatMatMetricsModel.aggregate([
+      {
+        $match: {
+          name: { $ne: 'analytics_authenticate' },
+          created_at: {
+            $gte: new Date(new Date(from).setHours(0, 0, 0)),
+            $lt: new Date(new Date(to).setHours(23, 59, 59)),
+          },
+        },
+      },
+      {
+        $project: {
+          date: { $dateToString: { format: '%Y-%m-%d', date: '$created_at' } },
+          time: { $dateToString: { format: '%H', date: '$created_at' } },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            date: '$date',
+            time: '$time',
+          },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: { date_time: '$_id', count: '$count', _id: false },
+      },
+    ]);
+
+    return response;
+  } catch (error) {
+    console.error('Error Get Heat Map Report', error);
+    return [];
+  }
+};
+
 export const metricsQueryResolvers = {
   getClickedReport,
   getRegisteredUserReport,
+  getHeatMapReport,
 };
