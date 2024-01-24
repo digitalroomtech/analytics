@@ -8,8 +8,10 @@ import { userTypeDefs } from '../modules/user/user.types';
 import { authMutationResolvers } from '../modules/auth/auth.mutation.resolvers';
 import { authQueryResolvers } from '../modules/auth/auth.query.resolvers';
 import { userQueryResolvers } from '../modules/user/user.query.resolvers';
+import { metricsQueryResolvers } from '../modules/metrics/metrics.query.resolvers';
+import { metricsTypeDefs } from '../modules/metrics/metrics.types';
 
-const typeDefs = [authTypeDefs, userTypeDefs].toString();
+const typeDefs = [authTypeDefs, userTypeDefs, metricsTypeDefs].toString();
 
 const httpServer = http.createServer(expressServer);
 export const graphqlServer = new ApolloServer({
@@ -19,6 +21,7 @@ export const graphqlServer = new ApolloServer({
     Query: {
       ...authQueryResolvers,
       ...userQueryResolvers,
+      ...metricsQueryResolvers,
     },
     Mutation: {
       ...authMutationResolvers,

@@ -1,0 +1,23 @@
+input ClickReportPayload {
+  events: [String]!
+  from: String!
+  to: String!
+}
+type ClickReportResponse {
+  name: String
+  count: Int
+}
+
+input RegisteredUserReportPayload {
+  from: String!
+  to: String!
+}
+type RegisteredUserReportResponse {
+  total_users_registered: Int
+  total_user_anonymous: Int
+}
+
+type Query {
+  getClickedReport(variables: ClickReportPayload): [ClickReportResponse]
+  getRegisteredUserReport(variables: RegisteredUserReportPayload): RegisteredUserReportResponse
+}
