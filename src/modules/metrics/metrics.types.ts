@@ -1,5 +1,7 @@
+import path from 'path';
 import { IAuthenticateAnalyticName } from '../analytics/analytics.types';
 import { ITenant } from '../tenant/tenant.types';
+import * as fs from 'fs';
 
 export type MetricGroupResult = {
   _id?: { name: IAuthenticateAnalyticName };
@@ -19,3 +21,5 @@ export enum MetricModels {
   socialNetworkSessionMetrics = 'social_network_session_metrics',
   pageMetrics = 'page_metrics',
 }
+
+export const metricsTypeDefs = fs.readFileSync(path.join(__dirname, 'metrics.queries.graphql'), 'utf8');

@@ -66,9 +66,27 @@ const pageMetrics = new Schema<IMetricAnalytics>(
   { collection: 'page_metrics' },
 );
 
+const eventMetrics = new Schema(
+  {
+    name: String,
+    count: Number,
+  },
+  { collection: 'Analytics' },
+);
+
+const registeredUserMetrics = new Schema(
+  {
+    user_type: String,
+    count: Number,
+  },
+  { collection: 'Analytics' },
+);
+
 export const SocialNetworkSessionMetrics = model(
   'SocialNetworkSessionMetrics',
   socialNetworkSessionMetrics,
 );
 export const SocialNetworkMetrics = model('SocialNetworkMetrics', socialNetworkMetrics);
 export const PageMetrics = model('PageMetrics', pageMetrics);
+export const EventsMetricsModel = model('EventsMetrics', eventMetrics);
+export const RegisteredUserMetricsModel = model('RegisteredUserMetrics', registeredUserMetrics);
