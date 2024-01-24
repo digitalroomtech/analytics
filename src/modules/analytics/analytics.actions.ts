@@ -5,7 +5,7 @@ import {
   SocialNetworkAnalytic,
   SocialNetworkSessionAnalytic,
 } from './analytics.models';
-import { User } from '../user/user.models';
+import { UserModel } from '../user/user.models';
 import { IAuthenticateAnalyticName } from './analytics.types';
 import {
   PageAnalyticNames,
@@ -24,7 +24,7 @@ export async function authenticate(req: Request, res: Response) {
   let authenticateAnalyticsCreate;
 
   try {
-    const user = await User.findOneOrCreate({ user_id: req.body.user_id || 0 });
+    const user = await UserModel.findOneOrCreate({ user_id: req.body.user_id || 0 });
 
     authenticateAnalyticsCreate = await AuthenticateAnalytic.create({
       tenant: {
@@ -75,7 +75,7 @@ export async function analyticsCreate(req: Request, res: Response) {
     const users = authenticateAnalyticsUser?.users || [];
 
     if (!users.length) {
-      const createdUser = await User.create({ user_id: data.user_id });
+      const createdUser = await UserModel.create({ user_id: data.user_id });
 
       await AuthenticateAnalytic.findOneAndUpdate(
         {

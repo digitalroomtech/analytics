@@ -1,15 +1,14 @@
+import { UserModel } from './user.models';
+
 const currentUser = async (parent: any, args: any, context: any) => {
   const id = context.userId || 0;
 
   if (!id) throw Error('Usuario sin autorización');
-
-  const user = await context.prisma.users.findUnique({
-    where: { id },
-    include: { role: true },
-  });
+  console.log('id', id);
+  const user = await UserModel.findById(id);
 
   if (!user) {
-    throw new Error('No such user found');
+    throw new Error('Usuario no encontrado');
   }
 
   return user;

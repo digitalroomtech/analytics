@@ -11,6 +11,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { expressServer } from './config/express.server';
 import { graphqlServer } from './config/graphql.server';
 import { TASK_LISTS } from './modules/task/task.actions';
+import { authenticateMiddleware } from './middlewares/authenticateMiddleware';
 
 const httpServer = http.createServer(expressServer);
 const port = process.env.PORT || 3002;
@@ -27,7 +28,11 @@ const main = async () => {
     cors<cors.CorsRequest>(),
     express.json(),
     graphqlUploadExpress(),
-    expressMiddleware(graphqlServer),
+    expressMiddleware(graphqlServer, {
+      context: async ({ req }) => ({
+        userId: req && req.headers.authorization ? authenticateMiddleware(req) : null,
+      }),
+    }),
   );
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 

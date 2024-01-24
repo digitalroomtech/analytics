@@ -9,7 +9,7 @@ export interface IUser {
   email?: string;
   password?: string;
   avatar?: string;
-  role?: ROLES;
+  role?: UserRoles;
   created_at?: string;
   updated_at?: string;
 }
@@ -18,7 +18,7 @@ export interface IFindOneOrCreate {
   user_id: number;
 }
 
-export enum ROLES {
+export enum UserRoles {
   ADMINISTRATOR = 'ADMINISTRATOR',
   USER = 'USER',
 }

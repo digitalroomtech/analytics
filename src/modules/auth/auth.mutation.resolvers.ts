@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { jwtSign } from './auth.actions';
 import { APP_SECRET } from '../../utils/constants';
-import { ROLES } from '../user/user.types';
+import { UserRoles } from '../user/user.types';
+import { UserModel } from '../user/user.models';
 
 /**
  * Sign up user.
@@ -15,18 +16,14 @@ import { ROLES } from '../user/user.types';
  */
 const signup = async (parent: any, args: SignupArgs, context: any): Promise<AuthPayload> => {
   const password = await bcrypt.hash(args.password, 10);
-  const role = await context.prisma.user_roles.findFirst({ where: { name: ROLES.USER } });
-  if (!role) throw new Error('No hay rol de usuario dentro del sistema');
   let user;
 
   try {
-    user = await context.prisma.users.create({
-      data: {
-        name: args.name,
-        email: args.email,
-        password,
-        role_id: role.id,
-      },
+    user = await UserModel.create({
+      name: args.name,
+      email: args.email,
+      password,
+      role: UserRoles.USER,
     });
   } catch (e) {
     throw new Error('El usuario ya se encuentra registrado');
@@ -51,12 +48,12 @@ const signup = async (parent: any, args: SignupArgs, context: any): Promise<Auth
  * @returns {AuthPayload} - Return payload data.
  */
 const login = async (parent: any, args: LoginArgs, context: any): Promise<AuthPayload> => {
-  const user = await context.prisma.users.findUnique({ where: { email: args.email } });
+  const user = await UserModel.findOne({ email: args.email });
   if (!user) {
     throw new Error('Usuario no encontrado');
   }
 
-  const valid = await bcrypt.compare(args.password, user.password);
+  const valid = await bcrypt.compare(args.password, user.password as string);
 
   if (!valid) {
     throw new Error('Contraseña invalida');

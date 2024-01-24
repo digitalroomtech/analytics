@@ -10,7 +10,10 @@ interface IUserModel extends mongoose.Model<IUser> {
 const userSchema = new Schema<IUser, IUserModel>(
   {
     name: String,
-    email: String,
+    email: {
+      unique: true,
+      type: String,
+    },
     password: String,
     avatar: String,
     role: {
@@ -38,4 +41,4 @@ userSchema.static('findOneOrCreate', async function findOneOrCreate(params: IFin
   return user ? user : await this.create(params);
 });
 
-export const User = model<IUser, IUserModel>('Users', userSchema);
+export const UserModel = model<IUser, IUserModel>('Users', userSchema);
