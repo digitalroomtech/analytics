@@ -17,7 +17,21 @@ type RegisteredUserReportResponse {
   total_user_anonymous: Int
 }
 
+input HeatMapPayload {
+  from: String!
+  to: String!
+}
+type HeatMapDateTime {
+  date: String
+  time: String
+}
+type HeatMapResponse {
+  date_time: HeatMapDateTime
+  count: Int
+}
+
 type Query {
   getClickedReport(variables: ClickReportPayload): [ClickReportResponse]
   getRegisteredUserReport(variables: RegisteredUserReportPayload): RegisteredUserReportResponse
+  getHeatMapReport(variables: HeatMapPayload): [HeatMapResponse]
 }
