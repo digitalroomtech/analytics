@@ -22,8 +22,8 @@ export async function authenticate(req: Request, res: Response) {
       user_id: 0,
       url: req.headers.origin || '',
       tenant_id: req.body.tenant_id,
-      created_at: new Date(Date.now()).toISOString(),
-      updated_at: new Date(Date.now()).toISOString(),
+      created_at: moment().toDate(),
+      updated_at: moment().toDate(),
     });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
