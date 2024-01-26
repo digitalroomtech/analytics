@@ -45,8 +45,8 @@ export async function analyticsCreate(req: Request, res: Response) {
       user_id: data.user_id,
       url: data.originUrl,
       tenant_id: req.body.tenant_id,
-      created_at: moment().toISOString(),
-      updated_at: moment().toISOString(),
+      created_at: moment().toDate(),
+      updated_at: moment().toDate(),
     });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
