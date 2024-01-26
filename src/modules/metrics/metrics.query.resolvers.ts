@@ -2,6 +2,7 @@ import {
   EventsMetricsModel,
   HeatMatMetricsModel,
   RegisteredUserMetricsModel,
+  UrlVisitMetricsModel,
 } from './metrics.models';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
@@ -114,8 +115,38 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
   }
 };
 
+const getUrlVisitReport = async (parent: any, args: any, context: any) => {
+  try {
+    let { from, to } = args.variables;
+    from = new Date(new Date(from).setHours(0, 0, 0));
+    to = new Date(new Date(to).setHours(23, 59, 59));
+
+    const response = await UrlVisitMetricsModel.aggregate([
+      {
+        $match: {
+          name: { $ne: 'analytics_authenticate' },
+          created_at: { $gte: from, $lt: to },
+          url: { $ne: '' },
+        },
+      },
+      {
+        $group: { _id: '$url', count: { $sum: 1 } },
+      },
+      {
+        $project: { url: '$_id', count: '$count', _id: false },
+      },
+    ]);
+
+    return response;
+  } catch (error) {
+    console.error('Error Get Url Visit Report', error);
+    return [];
+  }
+};
+
 export const metricsQueryResolvers = {
   getClickedReport,
   getRegisteredUserReport,
   getHeatMapReport,
+  getUrlVisitReport,
 };
