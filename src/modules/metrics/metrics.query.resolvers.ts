@@ -6,9 +6,10 @@ import {
 } from './metrics.models';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
+  //TODO: RENAME
   try {
-    const { events, from, to } = args.variables;
-    const response = await EventsMetricsModel.aggregate([
+    const { events, from, to } = args.where;
+    return await EventsMetricsModel.aggregate([
       {
         $match: {
           name: { $in: events },
@@ -21,8 +22,6 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
       { $group: { _id: '$name', count: { $sum: 1 } } },
       { $project: { name: '$_id', count: '$count', _id: false } },
     ]);
-
-    return response;
   } catch (error) {
     console.error('Error Get Clicked Events Report', error);
     return [];
@@ -31,7 +30,7 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
 
 const getRegisteredUserReport = async (parent: any, args: any, context: any) => {
   try {
-    const { from, to } = args.variables;
+    const { from, to } = args.where;
     const response = await RegisteredUserMetricsModel.aggregate([
       {
         $match: {
@@ -76,12 +75,12 @@ const getRegisteredUserReport = async (parent: any, args: any, context: any) => 
 
 const getHeatMapReport = async (parent: any, args: any, context: any) => {
   try {
-    const { from, to } = args.variables;
+    const { from, to, event } = args.where;
 
-    const response = await HeatMatMetricsModel.aggregate([
+    return await HeatMatMetricsModel.aggregate([
       {
         $match: {
-          name: { $ne: 'analytics_authenticate' },
+          name: { $ne: event },
           created_at: {
             $gte: new Date(new Date(from).setHours(0, 0, 0)),
             $lt: new Date(new Date(to).setHours(23, 59, 59)),
@@ -107,8 +106,6 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
         $project: { date_time: '$_id', count: '$count', _id: false },
       },
     ]);
-
-    return response;
   } catch (error) {
     console.error('Error Get Heat Map Report', error);
     return [];
@@ -117,11 +114,11 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
 
 const getUrlVisitReport = async (parent: any, args: any, context: any) => {
   try {
-    let { from, to } = args.variables;
+    let { from, to } = args.where;
     from = new Date(new Date(from).setHours(0, 0, 0));
     to = new Date(new Date(to).setHours(23, 59, 59));
 
-    const response = await UrlVisitMetricsModel.aggregate([
+    return await UrlVisitMetricsModel.aggregate([
       {
         $match: {
           name: { $ne: 'analytics_authenticate' },
@@ -136,8 +133,6 @@ const getUrlVisitReport = async (parent: any, args: any, context: any) => {
         $project: { url: '$_id', count: '$count', _id: false },
       },
     ]);
-
-    return response;
   } catch (error) {
     console.error('Error Get Url Visit Report', error);
     return [];

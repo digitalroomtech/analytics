@@ -1,47 +1,48 @@
 input ClickReportPayload {
-  events: [String]!
-  from: String!
-  to: String!
+    events: [String]!
+    from: String!
+    to: String!
 }
 type ClickReportResponse {
-  name: String
-  count: Int
+    name: String
+    count: Int
 }
 
 input RegisteredUserReportPayload {
-  from: String!
-  to: String!
+    from: String!
+    to: String!
 }
 type RegisteredUserReportResponse {
-  total_users_registered: Int
-  total_user_anonymous: Int
+    total_users_registered: Int
+    total_user_anonymous: Int
 }
 
 input HeatMapPayload {
-  from: String!
-  to: String!
+    from: String!
+    to: String!
+    event: String!
 }
 type HeatMapDateTime {
-  date: String
-  time: String
+    date: String
+    time: String
 }
 type HeatMapResponse {
-  date_time: HeatMapDateTime
-  count: Int
+    date_time: HeatMapDateTime
+    count: Int
 }
 
 input UrlVisitPayload {
-  from: String!
-  to: String!
+    from: String!
+    to: String!
 }
 type UrlVisitResponse {
-  url: String
-  count: Int
+    url: String
+    count: Int
 }
 
 type Query {
-  getClickedReport(variables: ClickReportPayload): [ClickReportResponse]
-  getRegisteredUserReport(variables: RegisteredUserReportPayload): RegisteredUserReportResponse
-  getHeatMapReport(variables: HeatMapPayload): [HeatMapResponse]
-  getUrlVisitReport(variables: UrlVisitPayload): [UrlVisitResponse]
+    getClickedReport(where: ClickReportPayload): [ClickReportResponse]
+    getRegisteredUserReport(where: RegisteredUserReportPayload): RegisteredUserReportResponse
+    getHeatMapReport(where: HeatMapPayload): [HeatMapResponse]
+    getUrlVisitReport(where: UrlVisitPayload): [UrlVisitResponse]
 }
