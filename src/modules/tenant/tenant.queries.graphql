@@ -1,0 +1,123 @@
+#import User from "../plan/plan.queries.graphql"
+#import User from "../user/user.queries.graphql"
+
+enum TenantUserRoles{
+    TENANT_ADMINISTRATOR
+    TENANT_USER
+}
+
+enum TenantUserInvitationStatuses{
+    REJECTED
+    ACCEPTED
+    PENDING
+}
+
+type Tenant{
+    id:String
+    name:String
+    webhook:String
+    timezone:String
+    logo:String
+    allowedUrls:[String]
+    createdAt:String
+    updatedAt:String
+    plan:Plan
+}
+
+type TenantUser{
+    id:ID
+    role:TenantUserRoles
+    tenant:Tenant
+    user:User
+    createdAt:String
+    updatedAt:String
+}
+
+type TenantUserInvitation {
+    id:String
+    role: TenantUserRoles
+    email:String
+    status:TenantUserInvitationStatuses
+    tenant: Tenant
+    createdAt:String
+    updatedAt:String
+}
+
+input CreateTenantInput {
+    name:String
+    webhook:String
+    logo:String
+    allowedUrls:[String]
+}
+
+input UpdateTenantPlanInput{
+    id:ID
+}
+
+input UpdateTenantInput {
+    id:String
+    name:String
+    webhook:String
+    logo:String
+    timezone:String
+    allowedUrls:[String]
+    plan:UpdateTenantPlanInput
+}
+
+input TenantInput{
+    id:ID
+}
+
+input CreateTenantUserInvitationInput {
+    email:String
+    role: TenantUserRoles
+    tenant:TenantInput!
+}
+
+type TenantsPayload{
+    count:Int,
+    items:[Tenant]
+}
+
+type TenantUsersPayload{
+    count:Int,
+    items:[TenantUser]
+}
+
+type TenantUserInvitationsPayload{
+    count:Int,
+    items:[TenantUserInvitation]
+}
+
+input TenantUserInvitationWhereInput {
+    email:String
+    role: TenantUserRoles
+    status: TenantUserInvitationStatuses
+    tenant:TenantInput
+}
+
+input TenantUserWhereInput {
+    role: TenantUserRoles
+    tenant:TenantInput
+}
+
+input UpdateTenantUserInvitationInput {
+    id:String
+    status: TenantUserInvitationStatuses
+}
+
+type Mutation {
+    createTenant(input:CreateTenantInput!):Tenant
+    updateTenant(input:UpdateTenantInput!):Tenant
+    createTenantUserInvitation(input:CreateTenantUserInvitationInput): TenantUserInvitation
+    updateTenantUserInvitation(input:UpdateTenantUserInvitationInput): TenantUserInvitation
+}
+
+
+
+type Query{
+    tenants:TenantsPayload
+    tenant(id:ID!):Tenant
+    tenantUsers(where:TenantUserWhereInput):TenantUsersPayload
+    tenantUserInvitations(where:TenantUserInvitationWhereInput):TenantUserInvitationsPayload
+}

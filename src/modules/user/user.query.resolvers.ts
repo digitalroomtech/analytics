@@ -11,7 +11,7 @@ const currentUser = async (parent: any, args: any, context: any) => {
     throw new Error('Usuario no encontrado');
   }
 
-  return user;
+  return await user.populate({ path: 'tenantUsers', populate: { path: 'tenant' } });
 };
 
 export const userQueryResolvers = {

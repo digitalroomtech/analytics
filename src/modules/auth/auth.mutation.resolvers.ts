@@ -14,7 +14,7 @@ import { UserModel } from '../user/user.models';
  * @param {any}context - Prisma Resolver.
  * @returns {AuthPayload} - Return payload data.
  */
-const signup = async (parent: any, args: SignupArgs, context: any): Promise<AuthPayload> => {
+const signup = async (parent: any, args: SignupArgs): Promise<AuthPayload> => {
   const password = await bcrypt.hash(args.password, 10);
   let user;
 

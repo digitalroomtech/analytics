@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { ITenantUser } from '../tenant/tenant.types';
 
 export const userTypeDefs = fs.readFileSync(path.join(__dirname, 'user.queries.graphql'), 'utf8');
 
@@ -8,8 +9,10 @@ export interface IUser {
   name?: string;
   email?: string;
   password?: string;
+  timezone?: string;
   avatar?: string;
   role?: UserRoles;
+  tenantUsers: ITenantUser[];
   created_at?: string;
   updated_at?: string;
 }

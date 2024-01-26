@@ -16,11 +16,18 @@ const userSchema = new Schema<IUser, IUserModel>(
     },
     password: String,
     avatar: String,
+    timezone: String,
     role: {
       type: String,
       enum: ['ADMINISTRATOR', 'USER'],
       default: 'USER',
     },
+    tenantUsers: [
+      {
+        type: Schema?.Types.ObjectId,
+        ref: 'TenantUsers',
+      },
+    ],
     created_at: {
       type: Date,
       default: Date.now(),

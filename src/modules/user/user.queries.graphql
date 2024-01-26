@@ -1,5 +1,7 @@
+#import User from "../tenant/tenant.queries.graphql"
+
 enum UserRoles{
-    TENANT_ADMINISTRATOR
+    USER
     ADMINISTRATOR
 
 }
@@ -22,13 +24,19 @@ type User {
     name: String!
     email: String!
     password:String
+    timezone:String
     created_at:String
     updated_at:String
     avatar:String
     role:String
+    tenantUsers:[TenantUser]
 }
 
+type MetricGroupPayload{
+    list:[User]
+}
 
 type Query{
     currentUser:User
+    metricsGroup(eventList:[String]):User
 }
