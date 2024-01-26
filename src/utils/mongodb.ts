@@ -26,7 +26,7 @@ export const client = new MongoClient(MONGODB_URI);
 const database = client.db('admin');
 
 export const analyticsCollection = async () => {
-  return database.collection<Analytics>('Analytics');
+  return database.collection<Analytics>('analytics');
 };
 
 export const tenantsCollection = async () => {
