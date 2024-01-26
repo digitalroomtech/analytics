@@ -93,6 +93,14 @@ const heatMapMetrics = new Schema(
   { collection: 'Analytics' },
 );
 
+const urlVisiMetrics = new Schema(
+  {
+    url: String,
+    count: Number,
+  },
+  { collection: 'Analytics' },
+);
+
 export const SocialNetworkSessionMetrics = model(
   'SocialNetworkSessionMetrics',
   socialNetworkSessionMetrics,
@@ -102,3 +110,4 @@ export const PageMetrics = model('PageMetrics', pageMetrics);
 export const EventsMetricsModel = model('EventsMetrics', eventMetrics);
 export const RegisteredUserMetricsModel = model('RegisteredUserMetrics', registeredUserMetrics);
 export const HeatMatMetricsModel = model('HeatMatMetrics', heatMapMetrics);
+export const UrlVisitMetricsModel = model('UrlVisitMetrics', urlVisiMetrics);

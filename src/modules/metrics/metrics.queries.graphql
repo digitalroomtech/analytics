@@ -30,8 +30,18 @@ type HeatMapResponse {
   count: Int
 }
 
+input UrlVisitPayload {
+  from: String!
+  to: String!
+}
+type UrlVisitResponse {
+  url: String
+  count: Int
+}
+
 type Query {
   getClickedReport(variables: ClickReportPayload): [ClickReportResponse]
   getRegisteredUserReport(variables: RegisteredUserReportPayload): RegisteredUserReportResponse
   getHeatMapReport(variables: HeatMapPayload): [HeatMapResponse]
+  getUrlVisitReport(variables: UrlVisitPayload): [UrlVisitResponse]
 }
