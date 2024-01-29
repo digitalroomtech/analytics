@@ -43,9 +43,20 @@ type UrlVisitResponse {
   count: Int
 }
 
+input UserByMonthPayload {
+  from: String!
+  to: String!
+  tenantId: ID!
+}
+type UserByMonthResponse {
+  date: String
+  count: Int
+}
+
 type Query {
   getClickedReport(variables: ClickReportPayload): [ClickReportResponse]
   getRegisteredUserReport(variables: RegisteredUserReportPayload): RegisteredUserReportResponse
   getHeatMapReport(variables: HeatMapPayload): [HeatMapResponse]
   getUrlVisitReport(variables: UrlVisitPayload): [UrlVisitResponse]
+  getUsersByMonthReport(variables: UserByMonthPayload): [UserByMonthResponse]
 }
