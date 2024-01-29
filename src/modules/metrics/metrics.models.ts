@@ -101,6 +101,14 @@ const urlVisiMetrics = new Schema(
   { collection: 'Analytics' },
 );
 
+const userByMonthMetrics = new Schema(
+  {
+    date: String,
+    count: Number,
+  },
+  { collection: 'Analytics' },
+);
+
 export const SocialNetworkSessionMetrics = model(
   'SocialNetworkSessionMetrics',
   socialNetworkSessionMetrics,
@@ -111,3 +119,4 @@ export const EventsMetricsModel = model('EventsMetrics', eventMetrics);
 export const RegisteredUserMetricsModel = model('RegisteredUserMetrics', registeredUserMetrics);
 export const HeatMatMetricsModel = model('HeatMatMetrics', heatMapMetrics);
 export const UrlVisitMetricsModel = model('UrlVisitMetrics', urlVisiMetrics);
+export const UserByMonthMetricsModel = model('UserByMonthMetrics', userByMonthMetrics);

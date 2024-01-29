@@ -3,12 +3,13 @@ import {
   HeatMatMetricsModel,
   RegisteredUserMetricsModel,
   UrlVisitMetricsModel,
+  UserByMonthMetricsModel,
 } from './metrics.models';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
-    let { events, from, to, tenantId } = args.where;
+    let { events, from, to, tenantId } = args.variables;
     from = new Date(new Date(from).setHours(0, 0, 0));
     to = new Date(new Date(to).setHours(23, 59, 59));
 
@@ -32,7 +33,7 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
 const getRegisteredUserReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
-    let { from, to, tenantId } = args.where;
+    let { from, to, tenantId } = args.variables;
     from = new Date(new Date(from).setHours(0, 0, 0));
     to = new Date(new Date(to).setHours(23, 59, 59));
 
@@ -79,7 +80,7 @@ const getRegisteredUserReport = async (parent: any, args: any, context: any) => 
 const getHeatMapReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
-    let { from, to, event, tenantId } = args.where;
+    let { from, to, event, tenantId } = args.variables;
     from = new Date(new Date(from).setHours(0, 0, 0));
     to = new Date(new Date(to).setHours(23, 59, 59));
 
@@ -93,8 +94,8 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
       },
       {
         $project: {
-          date: { $dateToString: { format: '%Y-%m-%d', date: '$created_at' } },
-          time: { $dateToString: { format: '%H', date: '$created_at' } },
+          date: { $dateToString: { format: '%Y-%m-%d', date: { $toDate: '$created_at' } } },
+          time: { $dateToString: { format: '%H', date: { $toDate: '$created_at' } } },
         },
       },
       {
@@ -119,7 +120,7 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
 const getUrlVisitReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
-    let { from, to, tenantId } = args.where;
+    let { from, to, tenantId } = args.variables;
     from = new Date(new Date(from).setHours(0, 0, 0));
     to = new Date(new Date(to).setHours(23, 59, 59));
 
@@ -145,9 +146,49 @@ const getUrlVisitReport = async (parent: any, args: any, context: any) => {
   }
 };
 
+const getUsersByMonthReport = async (parent: any, args: any, context: any) => {
+  try {
+    // eslint-disable-next-line prefer-const
+    let { from, to, tenantId } = args.where;
+    from = new Date(new Date(from).setHours(0, 0, 0));
+    to = new Date(new Date(to).setHours(23, 59, 59));
+
+    console.log({ from, to });
+
+    const response = await UserByMonthMetricsModel.aggregate([
+      {
+        $match: {
+          name: { $ne: 'analytics_authenticate' },
+          tenant_id: tenantId,
+          $and: [{ created_at: { $ne: null } }, { created_at: { $gte: from, $lt: to } }],
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: { $toDate: '$created_at' } } },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          date: '$_id',
+          count: 1,
+        },
+      },
+    ]);
+
+    return response;
+  } catch (error) {
+    console.error('Error Get Users by Month Report', error);
+    return [];
+  }
+};
+
 export const metricsQueryResolvers = {
   getClickedReport,
   getRegisteredUserReport,
   getHeatMapReport,
   getUrlVisitReport,
+  getUsersByMonthReport,
 };
