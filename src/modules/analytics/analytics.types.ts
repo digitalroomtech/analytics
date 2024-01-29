@@ -2,6 +2,17 @@ import { ObjectId } from 'mongodb';
 import { ITenant } from '../tenant/tenant.types';
 import { IUser } from '../user/user.types';
 
+export interface Analytics {
+  id?: string;
+  name?: string;
+  uuid?: string;
+  url?: string;
+  user_id?: number;
+  tenant_id?: string;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
 export interface IAuthenticateAnalytic {
   _id?: ObjectId;
   url?: string;

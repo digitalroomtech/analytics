@@ -1,5 +1,5 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
-import { TenantModel } from '../modules/tenant/tenant.models';
+import { OldTenantsModel } from '../modules/tenant/tenant.models';
 
 interface Request extends ExpressRequest {
   tenant_id?: number;
@@ -11,7 +11,7 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
 
   let tenantRecord = undefined;
   try {
-    tenantRecord = await TenantModel.findOne({
+    tenantRecord = await OldTenantsModel.findOne({
       domain: url.origin || '',
     });
   } catch (error: any) {
@@ -20,8 +20,6 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
   if (!tenantRecord) {
     return res.status(400).send({ message: `Invalid origin: ${url.origin}` });
   }
-
-  console.log('tenantRecord', tenantRecord);
   req.body.tenant_id = tenantRecord._id;
   req.body.originUrl = url.href;
 

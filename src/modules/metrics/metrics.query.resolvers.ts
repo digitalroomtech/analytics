@@ -17,7 +17,7 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
         $match: {
           name: { $in: events },
           created_at: { $gte: from, $lt: to },
-          tenant_id: tenantId,
+          // tenant_id: tenantId,
         },
       },
       { $group: { _id: '$name', count: { $sum: 1 } } },
@@ -41,7 +41,7 @@ const getRegisteredUserReport = async (parent: any, args: any, context: any) => 
         $match: {
           name: { $ne: 'analytics_authenticate' },
           created_at: { $gte: from, $lt: to },
-          tenant_id: tenantId,
+          // tenant_id: tenantId,
         },
       },
       {
@@ -88,7 +88,7 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
         $match: {
           name: { $ne: event },
           created_at: { $gte: from, $lt: to },
-          tenant_id: tenantId,
+          // tenant_id: tenantId,
         },
       },
       {
@@ -129,7 +129,7 @@ const getUrlVisitReport = async (parent: any, args: any, context: any) => {
           name: { $ne: 'analytics_authenticate' },
           created_at: { $gte: from, $lt: to },
           url: { $ne: '' },
-          tenant_id: tenantId,
+          // tenant_id: tenantId,
         },
       },
       {

@@ -1,7 +1,33 @@
 import mongoose from 'mongoose';
-import { IAuthenticateAnalytic, IAuthenticateAnalyticCustom } from './analytics.types';
+import { Analytics, IAuthenticateAnalyticCustom, IAuthenticateAnalytic } from './analytics.types';
 
 const { Schema, model } = mongoose;
+
+const analyticsSchema = new Schema<Analytics>(
+  {
+    name: String,
+    uuid: String,
+    url: {
+      type: String,
+      require: 'Url origin is required',
+    },
+    user_id: Number,
+    tenant_id: {
+      type: Schema?.Types.ObjectId,
+      ref: 'OldTenants',
+    },
+    created_at: {
+      type: Date,
+      default: Date.now(),
+      index: true,
+    },
+    updated_at: {
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  { collection: 'Analytics' },
+);
 
 const authenticateAnalyticsModel = new Schema<IAuthenticateAnalytic>(
   {
@@ -104,6 +130,7 @@ const pageAnalyticsModel = new Schema<IAuthenticateAnalyticCustom>(
   { collection: 'page_analytics' },
 );
 
+export const AnalyticsModel = model('Analytics', analyticsSchema);
 export const AuthenticateAnalytic = model('AuthenticateAnalytics', authenticateAnalyticsModel);
 export const SocialNetworkAnalytic = model('SocialNetworkAnalytics', socialNetworkAnalyticsModel);
 export const SocialNetworkSessionAnalytic = model(

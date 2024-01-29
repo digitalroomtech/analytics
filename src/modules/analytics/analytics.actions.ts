@@ -1,5 +1,6 @@
 import { Request as ExpressRequest, Response } from 'express';
 import {
+  AnalyticsModel,
   AuthenticateAnalytic,
   PageAnalytic,
   SocialNetworkAnalytic,
@@ -12,6 +13,7 @@ import {
   SocialNetworkAnalyticNames,
   SocialNetworkSessionAnalyticNames,
 } from '../../utils/constants';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Request extends ExpressRequest {
   tenant_id?: string;
@@ -21,69 +23,37 @@ interface Request extends ExpressRequest {
 }
 
 export async function authenticate(req: Request, res: Response) {
-  let authenticateAnalyticsCreate;
+  const uuid = uuidv4();
 
   try {
-    const user = await UserModel.findOneOrCreate({ user_id: req.body.user_id || 0 });
-
-    authenticateAnalyticsCreate = await AuthenticateAnalytic.create({
-      tenant: {
-        _id: req.body.tenant_id,
-      },
-      users: [user],
+    await AnalyticsModel.create({
+      name: 'analytics_authenticate',
+      uuid: uuid,
+      user_id: 0,
       url: req.headers.origin || req.body.originUrl,
+      tenant_id: req.body.tenant_id,
     });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
 
-  return res.json({ message: 'Authenticate successfully.', uuid: authenticateAnalyticsCreate._id });
+  return res.json({ message: 'Authenticate successfully.', uuid: uuid });
 }
 
 export async function analyticsCreate(req: Request, res: Response) {
   const data = req.body;
-  if (!(data.name || data.tenant_id || data.authenticateId || data.user_id || data.originUrl)) {
+  if (!(data.name || data.tenant_id || data.uuid || data.user_id || data.originUrl)) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
+
   try {
-    const params = {
+    await AnalyticsModel.create({
       name: data.name,
+      uuid: data.uuid,
+      user_id: data.user_id,
       url: data.originUrl,
-      tenant: {
-        _id: data.tenant_id,
-      },
-      authenticate_analytic: {
-        _id: data.authenticate,
-      },
-    };
-
-    if (PageAnalyticNames.includes(data.name)) {
-      await PageAnalytic.create(params);
-    } else if (SocialNetworkAnalyticNames.includes(data.name)) {
-      await SocialNetworkAnalytic.create(params);
-    } else if (SocialNetworkSessionAnalyticNames.includes(data.name)) {
-      await SocialNetworkSessionAnalytic.create(params);
-    }
-
-    const authenticateAnalyticsUser = await AuthenticateAnalytic.findOne({
-      _id: data.authenticate,
-    }).populate({
-      path: 'users',
-      match: { user_id: data.user_id },
+      tenant_id: req.body.tenant_id,
     });
-
-    const users = authenticateAnalyticsUser?.users || [];
-
-    if (!users.length) {
-      const createdUser = await UserModel.create({ user_id: data.user_id });
-
-      await AuthenticateAnalytic.findOneAndUpdate(
-        {
-          _id: data.authenticate,
-        },
-        { $push: { users: { _id: createdUser._id } } },
-      );
-    }
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
@@ -91,6 +61,6 @@ export async function analyticsCreate(req: Request, res: Response) {
   return res.json({ message: 'Register event successfully.' });
 }
 
-export const isAuthenticateAnalytics = async (id: string) => {
-  return await AuthenticateAnalytic.findById(id);
+export const isUuidAuthenticated = async (uuid: string) => {
+  return await AnalyticsModel.find({ uuid });
 };

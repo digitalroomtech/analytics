@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ITenant, ITenantUser, ITenantUserInvitation } from './tenant.types';
+import { ITenant, ITenantUser, ITenantUserInvitation, OldTenant } from './tenant.types';
 
 const { Schema, model } = mongoose;
 
@@ -72,7 +72,7 @@ const tenantUserSchema = new Schema<ITenantUser>(
   { collection: 'tenant_users' },
 );
 
-const tenantUserInvitationSchema= new Schema<ITenantUserInvitation>(
+const tenantUserInvitationSchema = new Schema<ITenantUserInvitation>(
   {
     role: {
       type: String,
@@ -102,6 +102,25 @@ const tenantUserInvitationSchema= new Schema<ITenantUserInvitation>(
   { collection: 'tenant_user_invitations' },
 );
 
+const oldTenantsSchema = new Schema<OldTenant>(
+  {
+    name: String,
+    domain: String,
+
+    created_at: {
+      type: Date,
+      default: Date.now(),
+      index: true,
+    },
+    updated_at: {
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  { collection: 'OldTenants' },
+);
+
+export const OldTenantsModel = model('OldTenants', oldTenantsSchema);
 export const TenantModel = model('Tenants', tenantSchema);
 export const TenantUserModel = model('TenantUsers', tenantUserSchema);
 export const TenantUserInvitationModel = model('TenantUserInvitations', tenantUserInvitationSchema);

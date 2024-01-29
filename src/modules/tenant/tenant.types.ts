@@ -9,6 +9,14 @@ export const tenantTypeDefs = fs.readFileSync(
   'utf8',
 );
 
+export interface OldTenant {
+  _id?: string;
+  name?: string;
+  domain?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface ITenant {
   _id?: string;
   name?: string;
@@ -77,7 +85,7 @@ export type UpdateTenantUserArgs = {
     user: {
       id: string;
       name: string;
-    }
+    };
   };
 };
 
@@ -95,7 +103,7 @@ export type UpdateTenantArgs = {
       id?: string;
     };
   };
-  file: any
+  file: any;
 };
 
 export type TenantsArgs = {
@@ -119,14 +127,13 @@ export enum TenantUserInvitationStatuses {
 
 export enum TenantStatuses {
   ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE'
+  INACTIVE = 'INACTIVE',
 }
 
 export enum TenantUserStatuses {
   ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE'
+  INACTIVE = 'INACTIVE',
 }
-
 
 export type TenantUserInvitationArgs = {
   where: {

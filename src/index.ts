@@ -17,15 +17,18 @@ import uploadRoutes from './modules/upload/upload.routes';
 const httpServer = http.createServer(expressServer);
 const port = process.env.PORT || 3002;
 
-expressServer.use('/analytics', analyticsRoutes);
-expressServer.use('/analytics', analyticsRoutes);
+expressServer.use('/analytic', express.json(), analyticsRoutes);
 expressServer.use('/tenant', tenantRoutes);
 expressServer.use('/metric', metricsRoutes);
-expressServer.use('/upload', cors<cors.CorsRequest>({
-  origin: '*',
-  methods: ['GET', 'POST'],
-  maxAge: 86400,
-}), uploadRoutes);
+expressServer.use(
+  '/upload',
+  cors<cors.CorsRequest>({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    maxAge: 86400,
+  }),
+  uploadRoutes,
+);
 
 const main = async () => {
   await mongoose.connect(MONGODB_URI);

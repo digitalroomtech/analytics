@@ -2,7 +2,7 @@ input ClickReportPayload {
   events: [String]!
   from: String!
   to: String!
-  tenantId: ID!
+  tenantId: ID
 }
 type ClickReportResponse {
   name: String
@@ -12,7 +12,7 @@ type ClickReportResponse {
 input RegisteredUserReportPayload {
   from: String!
   to: String!
-  tenantId: ID!
+  tenantId: ID
 }
 type RegisteredUserReportResponse {
   total_users_registered: Int
@@ -22,7 +22,8 @@ type RegisteredUserReportResponse {
 input HeatMapPayload {
   from: String!
   to: String!
-  tenantId: ID!
+  tenantId: ID
+  event:String
 }
 type HeatMapDateTime {
   date: String
@@ -36,7 +37,7 @@ type HeatMapResponse {
 input UrlVisitPayload {
   from: String!
   to: String!
-  tenantId: ID!
+  tenantId: ID
 }
 type UrlVisitResponse {
   url: String
@@ -44,8 +45,8 @@ type UrlVisitResponse {
 }
 
 type Query {
-  getClickedReport(variables: ClickReportPayload): [ClickReportResponse]
-  getRegisteredUserReport(variables: RegisteredUserReportPayload): RegisteredUserReportResponse
-  getHeatMapReport(variables: HeatMapPayload): [HeatMapResponse]
-  getUrlVisitReport(variables: UrlVisitPayload): [UrlVisitResponse]
+  getClickedReport(where: ClickReportPayload): [ClickReportResponse]
+  getRegisteredUserReport(where: RegisteredUserReportPayload): RegisteredUserReportResponse
+  getHeatMapReport(where: HeatMapPayload): [HeatMapResponse]
+  getUrlVisitReport(where: UrlVisitPayload): [UrlVisitResponse]
 }
