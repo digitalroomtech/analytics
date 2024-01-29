@@ -2,13 +2,16 @@ import {
   CreateTenantArgs,
   CreateTenantUserInvitationArgs,
   TenantUserInvitationStatuses,
-  UpdateTenantArgs,
+  UpdateTenantArgs, UpdateTenantUserArgs,
   UpdateTenantUserInvitationArgs,
 } from './tenant.types';
 import { TenantModel, TenantUserInvitationModel, TenantUserModel } from './tenant.models';
 import { ObjectId } from 'mongodb';
 import { AuthenticateAnalytic } from '../analytics/analytics.models';
 import { UserModel } from '../user/user.models';
+import stream from 'node:stream';
+import { createUploadStream } from '../../utils/s3';
+import { DO_SPACES_ROUTE } from '../../utils/constants';
 
 const createTenant = async (parent: any, args: CreateTenantArgs) => {
   let tenant;
@@ -24,9 +27,28 @@ const createTenant = async (parent: any, args: CreateTenantArgs) => {
 
 const updateTenant = async (parent: any, args: UpdateTenantArgs) => {
   let tenant;
-  const { plan, id, ...params } = args.input;
+  const { plan, id, file, ...params } = args.input;
 
   if (!id) throw new Error('El ID del tenant es requerido');
+
+  let result;
+
+  if (file) {
+    try {
+
+      const { createReadStream, filename } = await file;
+      const _stream = createReadStream();
+      const body = new stream.PassThrough();
+      _stream.pipe(body);
+      result = await createUploadStream(`${DO_SPACES_ROUTE}/tenants/${id}/${filename}`, body);
+
+    } catch (error) {
+      throw new Error('Tenemos problema para actualizar el usuario');
+    }
+
+    params.logo = result?.Location as string;
+  }
+
 
   try {
     tenant = await TenantModel.findOneAndUpdate(new ObjectId(id), {
@@ -85,8 +107,6 @@ const updateTenantUserInvitation = async (
     throw new Error('Tenemos problemas para validar la invitación');
   }
 
-  console.log('tenantUserInvitation', tenantUserInvitation);
-
   if (
     tenantUserInvitation &&
     tenantUserInvitation.status === TenantUserInvitationStatuses.ACCEPTED
@@ -102,9 +122,35 @@ const updateTenantUserInvitation = async (
   return await tenantUserInvitation?.populate('tenant');
 };
 
+const updateTenantUser = async (
+  parent: any,
+  args: UpdateTenantUserArgs,
+) => {
+  const { id, status, role, user } = args.input;
+  console.log({ status, role });
+  let tenantUser;
+  try {
+    tenantUser = await TenantUserModel.findByIdAndUpdate(new ObjectId(id), { role, status },
+      {
+        returnNewDocument: true,
+        new: true,
+      });
+
+    if (user) {
+      await UserModel.findByIdAndUpdate(new ObjectId(user.id), { name: user.name });
+    }
+
+  } catch (e) {
+    throw new Error('Tenemos problemas para actualizar el usuario');
+  }
+
+  return await tenantUser?.populate('user');
+};
+
 export const tenantMutationResolvers = {
   createTenant,
   updateTenant,
   createTenantUserInvitation,
   updateTenantUserInvitation,
+  updateTenantUser,
 };

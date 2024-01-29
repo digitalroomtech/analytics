@@ -3,7 +3,6 @@
 enum UserRoles{
     USER
     ADMINISTRATOR
-
 }
 
 enum Gender{
@@ -17,12 +16,19 @@ type UserRole{
     name: UserRoles
 }
 
+enum UserInvitationStatuses{
+    REJECTED
+    ACCEPTED
+    PENDING
+}
+
+
 scalar Upload
 
 type User {
-    id: String!
-    name: String!
-    email: String!
+    id: String
+    name: String
+    email: String
     password:String
     timezone:String
     created_at:String
@@ -32,11 +38,46 @@ type User {
     tenantUsers:[TenantUser]
 }
 
+input UpdateUserInput{
+    id:String!
+    name: String
+    password:String
+    timezone:String
+    file: Upload
+}
+
 type MetricGroupPayload{
     list:[User]
 }
 
+type UserInvitation{
+    id:String
+    role: UserRoles
+    email:String
+    status:UserInvitationStatuses
+    createdAt:String
+    updatedAt:String
+}
+
+type UserInvitationsResponse{
+    count:Int,
+    items:[UserInvitation]
+}
+
+
+input CreateUserInvitationInput {
+    email:String
+    role: UserRoles
+}
+
+
+type Mutation{
+    updateUser(input:UpdateUserInput!):User
+    createUserInvitation(input:CreateUserInvitationInput):UserInvitation
+}
+
 type Query{
     currentUser:User
+    userInvitations:UserInvitationsResponse
     metricsGroup(eventList:[String]):User
 }

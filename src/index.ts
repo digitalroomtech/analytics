@@ -12,13 +12,20 @@ import { expressServer } from './config/express.server';
 import { graphqlServer } from './config/graphql.server';
 import { TASK_LISTS } from './modules/task/task.actions';
 import { authenticateMiddleware } from './middlewares/authenticateMiddleware';
+import uploadRoutes from './modules/upload/upload.routes';
 
 const httpServer = http.createServer(expressServer);
 const port = process.env.PORT || 3002;
 
 expressServer.use('/analytics', analyticsRoutes);
+expressServer.use('/analytics', analyticsRoutes);
 expressServer.use('/tenant', tenantRoutes);
 expressServer.use('/metric', metricsRoutes);
+expressServer.use('/upload', cors<cors.CorsRequest>({
+  origin: '*',
+  methods: ['GET', 'POST'],
+  maxAge: 86400,
+}), uploadRoutes);
 
 const main = async () => {
   await mongoose.connect(MONGODB_URI);
@@ -36,7 +43,7 @@ const main = async () => {
   );
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 
-  TASK_LISTS.map((cron) => cron.start());
+  // TASK_LISTS.map((cron) => cron.start());
 
   console.log(`🚀 Server ready at http://localhost:${port}/graphql`);
   console.log(`🚀 Server ready at http://localhost:${port}`);

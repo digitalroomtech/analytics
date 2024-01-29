@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { IFindOneOrCreate, IUser } from './user.types';
+import { IFindOneOrCreate, IUser, UserInvitation } from './user.types';
+import { ITenantUserInvitation } from '../tenant/tenant.types';
 
 const { Schema, model } = mongoose;
 
@@ -43,9 +44,37 @@ const userSchema = new Schema<IUser, IUserModel>(
   },
 );
 
+
+const UserInvitationSchema = new Schema<UserInvitation>(
+  {
+    role: {
+      type: String,
+      enum: ['ADMINISTRATOR', 'USER'],
+      default: 'USER',
+    },
+    status: {
+      type: String,
+      enum: ['ACCEPTED', 'REJECTED', 'PENDING'],
+      default: 'PENDING',
+    },
+    email: String,
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+      index: true,
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  { collection: 'user_invitations' },
+);
+
 userSchema.static('findOneOrCreate', async function findOneOrCreate(params: IFindOneOrCreate) {
   const user = await this.findOne(params);
   return user ? user : await this.create(params);
 });
 
 export const UserModel = model<IUser, IUserModel>('Users', userSchema);
+export const UserInvitationModel = model('UserInvitations', UserInvitationSchema);

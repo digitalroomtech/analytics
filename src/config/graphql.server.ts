@@ -16,6 +16,7 @@ import { tenantMutationResolvers } from '../modules/tenant/tenant.mutation.resol
 import { planQueryResolvers } from '../modules/plan/plan.query.resolvers';
 import { planMutationResolvers } from '../modules/plan/plan.mutation.resolvers';
 import { planTypeDefs } from '../modules/plan/plan.types';
+import { userMutationResolvers } from '../modules/user/user.mutation.resolvers';
 
 const typeDefs = [
   authTypeDefs,
@@ -41,6 +42,7 @@ export const graphqlServer = new ApolloServer({
       ...authMutationResolvers,
       ...tenantMutationResolvers,
       ...planMutationResolvers,
+      ...userMutationResolvers,
     },
   },
   csrfPrevention: true,

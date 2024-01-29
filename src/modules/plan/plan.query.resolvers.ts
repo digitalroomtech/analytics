@@ -1,14 +1,17 @@
 import { PlanModel } from './plan.models';
-import { IPlan } from './plan.types';
+import { IPlan, PlansArgs } from './plan.types';
 
 const plans = async (
   parent: any,
-  args: any,
+  args: PlansArgs,
 ): Promise<{
   items: IPlan[];
   count: number;
 }> => {
-  const plans = await PlanModel.find();
+
+  const { ...params } = args.where;
+
+  const plans = await PlanModel.find(params);
   const count = await PlanModel.countDocuments();
   return {
     items: plans,

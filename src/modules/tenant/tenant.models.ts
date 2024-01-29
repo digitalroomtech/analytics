@@ -3,12 +3,16 @@ import { ITenant, ITenantUser, ITenantUserInvitation } from './tenant.types';
 
 const { Schema, model } = mongoose;
 
-const tenantModel = new Schema<ITenant>(
+const tenantSchema = new Schema<ITenant>(
   {
     name: String,
     timezone: String,
     webhook: String,
     logo: String,
+    identityColor: {
+      type: String,
+      default: '#000',
+    },
     allowedUrls: {
       type: Array,
       default: [],
@@ -16,6 +20,11 @@ const tenantModel = new Schema<ITenant>(
     plan: {
       type: Schema?.Types.ObjectId,
       ref: 'Plans',
+    },
+    status: {
+      type: String,
+      enum: ['ACTIVE', 'INACTIVE'],
+      default: 'ACTIVE',
     },
     createdAt: {
       type: Date,
@@ -30,12 +39,12 @@ const tenantModel = new Schema<ITenant>(
   { collection: 'tenants' },
 );
 
-const tenantUserModel = new Schema<ITenantUser>(
+const tenantUserSchema = new Schema<ITenantUser>(
   {
     role: {
       type: String,
       enum: ['TENANT_ADMINISTRATOR', 'TENANT_USER'],
-      default: 'USER',
+      default: 'TENANT_USER',
     },
     user: {
       type: Schema?.Types.ObjectId,
@@ -44,6 +53,11 @@ const tenantUserModel = new Schema<ITenantUser>(
     tenant: {
       type: Schema?.Types.ObjectId,
       ref: 'Tenants',
+    },
+    status: {
+      type: String,
+      enum: ['ACTIVE', 'INACTIVE'],
+      default: 'ACTIVE',
     },
     createdAt: {
       type: Date,
@@ -58,7 +72,7 @@ const tenantUserModel = new Schema<ITenantUser>(
   { collection: 'tenant_users' },
 );
 
-const tenantUserInvitationModel = new Schema<ITenantUserInvitation>(
+const tenantUserInvitationSchema= new Schema<ITenantUserInvitation>(
   {
     role: {
       type: String,
@@ -88,6 +102,6 @@ const tenantUserInvitationModel = new Schema<ITenantUserInvitation>(
   { collection: 'tenant_user_invitations' },
 );
 
-export const TenantModel = model('Tenants', tenantModel);
-export const TenantUserModel = model('TenantUsers', tenantUserModel);
-export const TenantUserInvitationModel = model('TenantUserInvitations', tenantUserInvitationModel);
+export const TenantModel = model('Tenants', tenantSchema);
+export const TenantUserModel = model('TenantUsers', tenantUserSchema);
+export const TenantUserInvitationModel = model('TenantUserInvitations', tenantUserInvitationSchema);

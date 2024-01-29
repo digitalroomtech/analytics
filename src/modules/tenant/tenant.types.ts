@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { IPlan } from '../plan/plan.types';
 import { IUser } from '../user/user.types';
+import { InputMaybe, Scalars } from '../../utils/types';
 
 export const tenantTypeDefs = fs.readFileSync(
   path.join(__dirname, 'tenant.queries.graphql'),
@@ -13,11 +14,13 @@ export interface ITenant {
   name?: string;
   webhook?: string;
   logo?: string;
+  identityColor?: string;
   allowedUrls?: [string];
   timezone?: string;
   createdAt?: string;
   updatedAt?: string;
   plan?: IPlan;
+  status?: TenantStatuses;
 }
 
 export interface ITenantUser {
@@ -25,6 +28,7 @@ export interface ITenantUser {
   role?: TenantUserRoles;
   tenant?: ITenant;
   user?: IUser;
+  status?: TenantUserStatuses;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -65,6 +69,17 @@ export type UpdateTenantUserInvitationArgs = {
     status: TenantUserInvitationStatuses;
   };
 };
+export type UpdateTenantUserArgs = {
+  input: {
+    id: string;
+    status: TenantUserInvitationStatuses;
+    role: TenantUserRoles;
+    user: {
+      id: string;
+      name: string;
+    }
+  };
+};
 
 export type UpdateTenantArgs = {
   input: {
@@ -72,12 +87,15 @@ export type UpdateTenantArgs = {
     name?: string;
     webhook?: string;
     logo?: string;
+    identityColor?: string;
     allowedUrls?: [string];
     timezone?: string;
+    file: InputMaybe<Scalars['Upload']>;
     plan?: {
       id?: string;
     };
   };
+  file: any
 };
 
 export type TenantsArgs = {
@@ -99,6 +117,17 @@ export enum TenantUserInvitationStatuses {
   PENDING = 'PENDING',
 }
 
+export enum TenantStatuses {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
+}
+
+export enum TenantUserStatuses {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
+}
+
+
 export type TenantUserInvitationArgs = {
   where: {
     email?: string;
@@ -112,7 +141,7 @@ export type TenantUserInvitationArgs = {
 
 export type TenantUsersArgs = {
   where: {
-    email?: string;
+    search?: string;
     tenant?: {
       id: string;
     };

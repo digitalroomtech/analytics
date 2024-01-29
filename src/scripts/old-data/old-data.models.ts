@@ -7,19 +7,14 @@ const tenantsOldModel = new Schema<ITenant>(
   {
     name: String,
     timezone: String,
-    domain: String,
-    created_at: {
+    createdAt: {
       type: Date,
       default: Date.now(),
       index: true,
     },
-    updated_at: {
+    updatedAt: {
       type: Date,
       default: Date.now(),
-    },
-    authenticate_analytics: {
-      type: Schema?.Types.ObjectId,
-      ref: 'TenantsOldModel',
     },
   },
   { collection: 'Tenants' },

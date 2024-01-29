@@ -6,6 +6,15 @@ enum TenantUserRoles{
     TENANT_USER
 }
 
+enum TenantStatuses{
+    ACTIVE
+    INACTIVE
+}
+
+enum TenantUserStatuses{
+    ACTIVE
+    INACTIVE
+}
 enum TenantUserInvitationStatuses{
     REJECTED
     ACCEPTED
@@ -22,6 +31,8 @@ type Tenant{
     createdAt:String
     updatedAt:String
     plan:Plan
+    identityColor:String
+    status: TenantStatuses
 }
 
 type TenantUser{
@@ -29,6 +40,7 @@ type TenantUser{
     role:TenantUserRoles
     tenant:Tenant
     user:User
+    status:TenantUserStatuses
     createdAt:String
     updatedAt:String
 }
@@ -47,6 +59,7 @@ input CreateTenantInput {
     name:String
     webhook:String
     logo:String
+    status: TenantStatuses
     allowedUrls:[String]
 }
 
@@ -58,10 +71,13 @@ input UpdateTenantInput {
     id:String
     name:String
     webhook:String
+    identityColor:String
     logo:String
     timezone:String
     allowedUrls:[String]
     plan:UpdateTenantPlanInput
+    file: Upload
+    status: TenantStatuses
 }
 
 input TenantInput{
@@ -99,6 +115,7 @@ input TenantUserInvitationWhereInput {
 input TenantUserWhereInput {
     role: TenantUserRoles
     tenant:TenantInput
+    search: String
 }
 
 input UpdateTenantUserInvitationInput {
@@ -106,11 +123,25 @@ input UpdateTenantUserInvitationInput {
     status: TenantUserInvitationStatuses
 }
 
+input TenantUserUserInput{
+    id: String
+    name: String
+}
+
+
+input UpdateTenantUserInput {
+    id:String
+    status: TenantUserStatuses
+    role: TenantUserRoles
+    user:TenantUserUserInput
+}
+
 type Mutation {
     createTenant(input:CreateTenantInput!):Tenant
     updateTenant(input:UpdateTenantInput!):Tenant
     createTenantUserInvitation(input:CreateTenantUserInvitationInput): TenantUserInvitation
     updateTenantUserInvitation(input:UpdateTenantUserInvitationInput): TenantUserInvitation
+    updateTenantUser(input:UpdateTenantUserInput): TenantUser
 }
 
 

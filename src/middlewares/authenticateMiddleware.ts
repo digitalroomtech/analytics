@@ -17,7 +17,7 @@ export const authenticateMiddleware = (req: Request) => {
         throw new Error('No token found');
       }
       const { userId } = getTokenPayload(token);
-
+      console.log(new ObjectId('659431b12c5994d923483e6c').getTimestamp());
       return new ObjectId(userId);
     }
   }

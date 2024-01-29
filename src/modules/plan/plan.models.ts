@@ -7,6 +7,11 @@ const planModel = new Schema<IPlan>(
   {
     title: String,
     description: String,
+    status: {
+      type: String,
+      enum: ['ACTIVE', 'INACTIVE'],
+      default: 'INACTIVE',
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

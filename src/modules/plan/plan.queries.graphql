@@ -1,7 +1,13 @@
+enum PlanStatuses{
+    ACTIVE
+    INACTIVE
+}
+
 type Plan {
     id:String
     title:String
     description:String
+    status:PlanStatuses
     createdAt:String
     updatedAt:String
 }
@@ -11,15 +17,27 @@ input CreatePlanInput{
     description:String
 }
 
+input UpdatePlanInput{
+    id:String
+    title:String
+    description:String
+    status:PlanStatuses
+}
+
 type PlansPayload{
     count:Int,
     items:[Plan]
 }
 
+input PlanWhereInput{
+    status:PlanStatuses
+}
+
 type Mutation{
     createPlan(input:CreatePlanInput!):Plan
+    updatePlan(input:UpdatePlanInput!):Plan
 }
 
 type Query {
-    plans:PlansPayload
+    plans(where:PlanWhereInput):PlansPayload
 }
