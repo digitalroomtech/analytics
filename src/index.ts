@@ -10,7 +10,6 @@ import { graphqlUploadExpress } from 'graphql-upload-ts';
 import { expressMiddleware } from '@apollo/server/express4';
 import { expressServer } from './config/express.server';
 import { graphqlServer } from './config/graphql.server';
-import { TASK_LISTS } from './modules/task/task.actions';
 import { authenticateMiddleware } from './middlewares/authenticateMiddleware';
 import uploadRoutes from './modules/upload/upload.routes';
 
@@ -22,7 +21,6 @@ expressServer.use(
   cors({
     origin: '*',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Authorization', 'Content-Type', 'analytics-session'],
     maxAge: 86400,
   }),
   express.json(),
