@@ -17,7 +17,17 @@ import uploadRoutes from './modules/upload/upload.routes';
 const httpServer = http.createServer(expressServer);
 const port = process.env.PORT || 3002;
 
-expressServer.use('/analytic', express.json(), analyticsRoutes);
+expressServer.use(
+  '/analytic',
+  cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Authorization', 'Content-Type', 'analytics-session'],
+    maxAge: 86400,
+  }),
+  express.json(),
+  analyticsRoutes,
+);
 expressServer.use('/tenant', tenantRoutes);
 expressServer.use('/metric', metricsRoutes);
 expressServer.use(
