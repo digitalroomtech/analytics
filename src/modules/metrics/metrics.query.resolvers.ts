@@ -10,14 +10,14 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
     let { events, from, to, tenantId } = args.where;
-    from = new Date(new Date(from).setHours(0, 0, 0));
-    to = new Date(new Date(to).setHours(23, 59, 59));
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
 
     return await EventsMetricsModel.aggregate([
       {
         $match: {
           name: { $in: events },
-          created_at: { $gte: from, $lt: to },
+          created_at: { $gte: from, $lte: to },
           // tenant_id: tenantId,
         },
       },
@@ -34,14 +34,14 @@ const getRegisteredUserReport = async (parent: any, args: any, context: any) => 
   try {
     // eslint-disable-next-line prefer-const
     let { from, to, tenantId } = args.where;
-    from = new Date(new Date(from).setHours(0, 0, 0));
-    to = new Date(new Date(to).setHours(23, 59, 59));
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
 
     const response = await RegisteredUserMetricsModel.aggregate([
       {
         $match: {
           name: { $ne: 'analytics_authenticate' },
-          created_at: { $gte: from, $lt: to },
+          created_at: { $gte: from, $lte: to },
           // tenant_id: tenantId,
         },
       },
@@ -81,14 +81,14 @@ const visitPageByUsers = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
     let { from, to, tenantId } = args.where;
-    from = new Date(new Date(from).setHours(0, 0, 0));
-    to = new Date(new Date(to).setHours(23, 59, 59));
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
 
     const response = await RegisteredUserMetricsModel.aggregate([
       {
         $match: {
           name: { $eq: 'page_visit' },
-          created_at: { $gte: from, $lt: to },
+          created_at: { $gte: from, $lte: to },
           // tenant_id: tenantId,
         },
       },
@@ -127,14 +127,14 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
     let { from, to, event, tenantId } = args.where;
-    from = new Date(new Date(from).setHours(0, 0, 0));
-    to = new Date(new Date(to).setHours(23, 59, 59));
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
 
     return await HeatMatMetricsModel.aggregate([
       {
         $match: {
           name: { $eq: event },
-          created_at: { $gte: from, $lt: to },
+          created_at: { $gte: from, $lte: to },
           // tenant_id: tenantId,
         },
       },
@@ -167,14 +167,15 @@ const getUrlVisitReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
     let { from, to, tenantId } = args.where;
-    from = new Date(new Date(from).setHours(0, 0, 0));
-    to = new Date(new Date(to).setHours(23, 59, 59));
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
 
     return await UrlVisitMetricsModel.aggregate([
       {
         $match: {
           name: { $ne: 'analytics_authenticate' },
-          created_at: { $gte: from, $lt: to },
+          user_id: { $ne: 0 },
+          created_at: { $gte: from, $lte: to },
           url: { $ne: '' },
           // tenant_id: tenantId,
         },
@@ -184,8 +185,8 @@ const getUrlVisitReport = async (parent: any, args: any, context: any) => {
       },
       {
         $project: { url: '$_id', count: '$count', _id: false },
-        // $sort: { count: -1 },
       },
+      { $sort: { count: -1 } },
     ]);
   } catch (error) {
     console.error('Error Get Url Visit Report', error);
@@ -197,15 +198,15 @@ const getUsersByMonthReport = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
     let { from, to, tenantId } = args.where;
-    from = new Date(new Date(from).setHours(0, 0, 0));
-    to = new Date(new Date(to).setHours(23, 59, 59));
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
 
     const response = await UserByMonthMetricsModel.aggregate([
       {
         $match: {
           name: { $ne: 'analytics_authenticate' },
           tenant_id: tenantId,
-          $and: [{ created_at: { $ne: null } }, { created_at: { $gte: from, $lt: to } }],
+          $and: [{ created_at: { $ne: null } }, { created_at: { $gte: from, $lte: to } }],
         },
       },
       {
