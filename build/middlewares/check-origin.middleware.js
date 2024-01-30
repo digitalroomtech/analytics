@@ -16,7 +16,7 @@ const checkOriginMiddleware = (req, res, next) => __awaiter(void 0, void 0, void
     const url = new URL((sessionOrigin || req.headers.origin));
     let tenantRecord = undefined;
     try {
-        tenantRecord = yield tenant_models_1.TenantModel.findOne({
+        tenantRecord = yield tenant_models_1.OldTenantsModel.findOne({
             domain: url.origin || '',
         });
     }
@@ -24,9 +24,12 @@ const checkOriginMiddleware = (req, res, next) => __awaiter(void 0, void 0, void
         return res.status(500).json({ message: error.message });
     }
     if (!tenantRecord) {
-        return res.status(400).send({ message: `Invalid origin: ${url.origin}` });
+        return res
+            .status(400)
+            .send({
+            message: `Invalid origin: ${url.origin} ${sessionOrigin} ${req.headers.origin} ${JSON.stringify(url)}`,
+        });
     }
-    console.log('tenantRecord', tenantRecord);
     req.body.tenant_id = tenantRecord._id;
     req.body.originUrl = url.href;
     return next();

@@ -11,22 +11,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkSessionMiddleware = void 0;
 const analytics_actions_1 = require("../modules/analytics/analytics.actions");
+const constants_1 = require("../utils/constants");
 const checkSessionMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const session = req.headers['analytics-session'];
+    if (constants_1.ENVIRONMENT === 'local') {
+        req.body.uuid = session;
+        return next();
+    }
     if (!session) {
         return res.status(403).send({ message: 'No analytics-session header' });
     }
-    let authenticateAnalytics;
-    try {
-        authenticateAnalytics = yield (0, analytics_actions_1.isAuthenticateAnalytics)(session.toString());
-    }
-    catch (e) {
-        return res.status(400).send({ message: e.message });
-    }
-    if (!authenticateAnalytics) {
+    const isAuthenticated = yield (0, analytics_actions_1.isUuidAuthenticated)(session.toString());
+    if (!isAuthenticated) {
         return res.status(403).send({ message: 'Forbidden !' });
     }
-    req.body.authenticate = authenticateAnalytics._id;
+    req.body.uuid = session;
     return next();
 });
 exports.checkSessionMiddleware = checkSessionMiddleware;

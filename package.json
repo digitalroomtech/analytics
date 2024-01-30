@@ -9,9 +9,10 @@
     "nodemon": "npx nodemon index.ts",
     "nodemon:app": "npx nodemon app.ts",
     "dev": "nodemon src/index.ts",
-    "build": "rimraf ./build && tsc",
+    "build": "rimraf ./build && tsc && npm run copyFiles",
     "app": "npm run build && node build/app.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build"
   },
   "repository": {
     "type": "git",

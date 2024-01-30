@@ -24,15 +24,11 @@ const graphql_upload_ts_1 = require("graphql-upload-ts");
 const express4_1 = require("@apollo/server/express4");
 const express_server_1 = require("./config/express.server");
 const graphql_server_1 = require("./config/graphql.server");
-const task_actions_1 = require("./modules/task/task.actions");
 const authenticateMiddleware_1 = require("./middlewares/authenticateMiddleware");
 const upload_routes_1 = __importDefault(require("./modules/upload/upload.routes"));
-const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const httpServer = http_1.default.createServer(express_server_1.expressServer);
 const port = process.env.PORT || 3002;
-express_server_1.expressServer.use((0, express_fileupload_1.default)());
-express_server_1.expressServer.use('/analytics', analytics_routes_1.default);
-express_server_1.expressServer.use('/analytics', analytics_routes_1.default);
+express_server_1.expressServer.use('/analytic', express_1.default.json(), analytics_routes_1.default);
 express_server_1.expressServer.use('/tenant', tenant_routes_1.default);
 express_server_1.expressServer.use('/metric', metrics_routes_1.default);
 express_server_1.expressServer.use('/upload', (0, cors_1.default)({
@@ -51,7 +47,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         }),
     }));
     yield new Promise((resolve) => httpServer.listen({ port }, resolve));
-    task_actions_1.TASK_LISTS.map((cron) => cron.start());
+    // TASK_LISTS.map((cron) => cron.start());
     console.log(`🚀 Server ready at http://localhost:${port}/graphql`);
     console.log(`🚀 Server ready at http://localhost:${port}`);
 });
