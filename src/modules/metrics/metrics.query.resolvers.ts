@@ -184,6 +184,7 @@ const getUrlVisitReport = async (parent: any, args: any, context: any) => {
       },
       {
         $project: { url: '$_id', count: '$count', _id: false },
+        $sort: { count: -1 },
       },
     ]);
   } catch (error) {
@@ -198,8 +199,6 @@ const getUsersByMonthReport = async (parent: any, args: any, context: any) => {
     let { from, to, tenantId } = args.where;
     from = new Date(new Date(from).setHours(0, 0, 0));
     to = new Date(new Date(to).setHours(23, 59, 59));
-
-    console.log({ from, to });
 
     const response = await UserByMonthMetricsModel.aggregate([
       {
