@@ -17,7 +17,7 @@ const httpServer = http.createServer(expressServer);
 const port = process.env.PORT || 3002;
 
 expressServer.use(
-  '/analytic',
+  '/',
   cors({
     origin: '*',
     methods: ['GET', 'POST'],
