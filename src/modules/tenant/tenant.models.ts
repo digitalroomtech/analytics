@@ -106,7 +106,6 @@ const oldTenantsSchema = new Schema<OldTenant>(
   {
     name: String,
     domain: String,
-
     created_at: {
       type: Date,
       default: Date.now(),
