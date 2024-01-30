@@ -184,7 +184,7 @@ const getUrlVisitReport = async (parent: any, args: any, context: any) => {
       },
       {
         $project: { url: '$_id', count: '$count', _id: false },
-        $sort: { count: -1 },
+        // $sort: { count: -1 },
       },
     ]);
   } catch (error) {
