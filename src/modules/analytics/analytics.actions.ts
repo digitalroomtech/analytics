@@ -1,19 +1,8 @@
 import { Request as ExpressRequest, Response } from 'express';
-import {
-  AnalyticsModel,
-  AuthenticateAnalytic,
-  PageAnalytic,
-  SocialNetworkAnalytic,
-  SocialNetworkSessionAnalytic,
-} from './analytics.models';
-import { UserModel } from '../user/user.models';
+import { AnalyticsModel } from './analytics.models';
 import { IAuthenticateAnalyticName } from './analytics.types';
-import {
-  PageAnalyticNames,
-  SocialNetworkAnalyticNames,
-  SocialNetworkSessionAnalyticNames,
-} from '../../utils/constants';
 import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
 
 interface Request extends ExpressRequest {
   tenant_id?: string;
@@ -32,6 +21,8 @@ export async function authenticate(req: Request, res: Response) {
       user_id: 0,
       url: req.headers.origin || req.body.originUrl,
       tenant_id: req.body.tenant_id,
+      created_at: moment().toISOString(),
+      updated_at: moment().toISOString(),
     });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
@@ -53,6 +44,8 @@ export async function analyticsCreate(req: Request, res: Response) {
       user_id: data.user_id,
       url: data.originUrl,
       tenant_id: req.body.tenant_id,
+      created_at: moment().toISOString(),
+      updated_at: moment().toISOString(),
     });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
