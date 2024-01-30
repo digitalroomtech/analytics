@@ -133,7 +133,7 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
     return await HeatMatMetricsModel.aggregate([
       {
         $match: {
-          name: { $ne: event },
+          name: { $eq: event },
           created_at: { $gte: from, $lt: to },
           // tenant_id: tenantId,
         },
