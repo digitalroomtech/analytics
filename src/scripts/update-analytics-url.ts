@@ -46,7 +46,7 @@ const updateAnalyticCollections = async (page = 0) => {
           $skip: i,
         },
         {
-          $limit: 10,
+          $limit: 50000,
         },
         {
           $match: {
