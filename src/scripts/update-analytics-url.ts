@@ -96,6 +96,7 @@ const updateAnalyticCollections = async (page = 0) => {
       });
 
       await AnalyticsNewModel.create(analyticsData);
+      await AnalyticParamsModel.create(analyticsParams);
     }
   } catch (e) {
     console.log('e', e);
