@@ -72,7 +72,6 @@ const updateAnalyticCollections = async (page = 0) => {
         };
         await AnalyticsModel.findOneAndUpdate(_id, data);
       }
-      break;
     }
   } catch (e) {
     console.log('e', e);
