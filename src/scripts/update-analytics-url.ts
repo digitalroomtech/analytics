@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { MONGODB_URI } from '../utils/constants';
-import { AnalyticsModel } from '../modules/analytics/analytics.models';
+import { AnalyticsModel, AnalyticsNewModel } from '../modules/analytics/analytics.models';
 import figlet from 'figlet';
 import { ObjectId } from 'mongodb';
 import { getOriginalUrl, getSections, getUrlParams } from '../modules/analytics/analytics.utils';
@@ -48,25 +48,25 @@ const updateAnalyticCollections = async (page = 0) => {
         .limit(50000);
 
       console.log('response', response.length);
+      // const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
 
-      for (const responseElement of response) {
+      // await createAnalyticParams(urlParams.hashParams, _id);
+      // await createAnalyticParams(urlParams.queryParams, _id);
+
+      const data = response.map((responseElement) => {
         const { _id, ...params } = responseElement;
         const section = getSections(params.url || 'https://vanguardia.com.mx');
-        const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
         const originalUrl = getOriginalUrl(params.url || 'https://vanguardia.com.mx');
-
-        await createAnalyticParams(urlParams.hashParams, _id);
-        await createAnalyticParams(urlParams.queryParams, _id);
-
-        const data = {
+        return {
           ...params,
           url: params.url || 'https://vanguardia.com.mx',
           ...section,
           tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
           original_url: originalUrl,
         };
-        await AnalyticsModel.findOneAndUpdate(_id, data);
-      }
+      });
+
+      await AnalyticsNewModel.create(data);
     }
   } catch (e) {
     console.log('e', e);
