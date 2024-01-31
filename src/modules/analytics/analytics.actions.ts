@@ -13,7 +13,10 @@ interface Request extends ExpressRequest {
   originUrl?: string;
 }
 
-const createAnalyticParams = async (params: { [key: string]: string }[], analyticId: ObjectId) => {
+export const createAnalyticParams = async (
+  params: { [key: string]: string }[],
+  analyticId: ObjectId,
+) => {
   if (!analyticId) throw Error('Tenemos problemas al crear los parametros');
 
   for (const param of params) {

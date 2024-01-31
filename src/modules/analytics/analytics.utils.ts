@@ -17,7 +17,7 @@ export const getSections = (url: string): { section: string; subsection: string 
   }
 
   return {
-    section: '',
+    section: 'home',
     subsection: '',
   };
 };
@@ -50,5 +50,5 @@ export const getUrlParams = (url: string) => {
 
 export const getOriginalUrl = (url: string) => {
   const data = new URL(url);
-  return `${data.origin}${data.pathname ? data.pathname : ''}`;
+  return `${data.origin}${data.pathname && data.pathname !== '/' ? data.pathname : ''}`;
 };

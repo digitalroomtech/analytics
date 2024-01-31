@@ -12,7 +12,8 @@
     "build": "rimraf ./build && tsc && npm run copyFiles",
     "app": "npm run build && node build/app.js",
     "prepare": "husky install",
-    "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build"
+    "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build",
+    "update-analytics": "ts-node src/scripts/update-analytics-url.ts"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,8 @@
     "@types/cors": "^2.8.14",
     "@types/express": "^4.17.17",
     "@types/express-fileupload": "^1.4.4",
+    "@types/figlet": "^1.5.8",
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^20.6.3",
     "@types/node-cron": "^3.0.10",
     "@types/request": "^2.48.8",
@@ -68,6 +71,7 @@
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
+    "commander": "^11.1.0",
     "copyfiles": "^2.4.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -75,9 +79,11 @@
     "express-fileupload": "^1.4.3",
     "express-jwt": "^8.4.1",
     "express-oauth2-jwt-bearer": "^1.5.0",
+    "figlet": "^1.7.0",
     "graphql": "^16.8.1",
     "graphql-middleware": "^6.1.35",
     "graphql-upload-ts": "^2.1.0",
+    "inquirer": "^9.2.13",
     "jwks-rsa": "^3.0.1",
     "metaapi.cloud-sdk": "^23.6.0",
     "moment": "^2.29.4",

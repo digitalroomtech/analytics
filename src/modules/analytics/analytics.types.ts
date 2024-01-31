@@ -3,7 +3,7 @@ import { ITenant } from '../tenant/tenant.types';
 import { IUser } from '../user/user.types';
 
 export interface Analytics {
-  id?: string;
+  _id?: ObjectId;
   name?: string;
   uuid?: string;
   url?: string;
@@ -21,8 +21,8 @@ export interface AnalyticParams {
   key?: string;
   value?: string;
   analytic: Analytics;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface IAuthenticateAnalytic {
