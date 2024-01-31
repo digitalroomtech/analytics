@@ -38,7 +38,6 @@ export async function authenticate(req: Request, res: Response) {
   if (!(req.headers.origin || req.body.originUrl)) {
     return res.status(500).json({ message: 'Hay campos requeridos' });
   }
-
   try {
     const analytic = await AnalyticsModel.create({
       name: 'analytics_authenticate',
@@ -85,9 +84,7 @@ export async function analyticsCreate(req: Request, res: Response) {
 
   // { key:"sourceCampaign", value:"google", analytic: Obj}, created_at}
   try {
-    const analytic = await AnalyticsModel.create({
-      analyticParams,
-    });
+    const analytic = await AnalyticsModel.create(analyticParams);
 
     await createAnalyticParams(params.queryParams, analytic._id);
     await createAnalyticParams(params.hashParams, analytic._id);
