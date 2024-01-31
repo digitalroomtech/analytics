@@ -81,10 +81,7 @@ const updateAnalyticCollections = async (page = 0) => {
 
       for (const createdListElement of createdList) {
         const { _id, ...params } = createdListElement;
-        const urlParams = getUrlParams(
-          params.url ||
-            'https://vanguardia.com.mx/opinion/un-delicioso-cuento-de-navidad-bacalao-a-la-vizcaina-DD10315251?fbclid=IwAR2Fm1_I_s0NTWyX3l9wPa_EKi8xowCOyd2hueUqiIc3V5-XJ0UK41QzqXM',
-        );
+        const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
         for (const param of urlParams.queryParams) {
           analyticsParams.push({
             ...param,
