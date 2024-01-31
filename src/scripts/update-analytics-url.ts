@@ -12,6 +12,7 @@ import { ObjectId } from 'mongodb';
 import { getOriginalUrl, getSections, getUrlParams } from '../modules/analytics/analytics.utils';
 import { Analytics } from '../modules/analytics/analytics.types';
 import moment from 'moment/moment';
+import { createAnalyticParams } from '../modules/analytics/analytics.actions';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Command } = require('commander');
 //
@@ -46,7 +47,7 @@ const updateAnalyticCollections = async (page = 0) => {
           $skip: i,
         },
         {
-          $limit: 50000,
+          $limit: 10,
         },
         {
           $match: {
@@ -60,50 +61,25 @@ const updateAnalyticCollections = async (page = 0) => {
         },
       ]);
 
-      const analyticsParams: any[] = [];
-
-      const analyticsData = response.map((res: Analytics) => {
-        const { _id, ...params } = res;
+      for (const responseElement of response) {
+        const { _id, ...params } = responseElement;
         const section = getSections(params.url || 'https://vanguardia.com.mx');
-
+        const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
         const originalUrl = getOriginalUrl(params.url || 'https://vanguardia.com.mx');
 
-        return {
+        await createAnalyticParams(urlParams.hashParams, _id);
+        await createAnalyticParams(urlParams.queryParams, _id);
+
+        const data = {
           ...params,
-          url: res.url || 'https://vanguardia.com.mx',
+          url: params.url || 'https://vanguardia.com.mx',
           ...section,
           tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
           original_url: originalUrl,
         };
-      });
-
-      const createdList = await AnalyticsNewModel.create(analyticsData);
-
-      for (const createdListElement of createdList) {
-        const { _id, ...params } = createdListElement;
-        const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
-        for (const param of urlParams.queryParams) {
-          analyticsParams.push({
-            ...param,
-            analytic: _id,
-            created_at: moment().toISOString(),
-            updated_at: moment().toISOString(),
-          });
-        }
-
-        for (const param of urlParams.hashParams) {
-          analyticsParams.push({
-            ...param,
-            analytic: _id,
-            created_at: moment().toISOString(),
-            updated_at: moment().toISOString(),
-          });
-        }
-        break;
+        await AnalyticsModel.findOneAndUpdate(_id, data);
       }
-
-      const createdParamsList = await AnalyticParamsModel.create(analyticsParams);
-      console.log('createdParamsList', createdParamsList.length);
+      break;
     }
   } catch (e) {
     console.log('e', e);
