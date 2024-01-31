@@ -1,17 +1,10 @@
 import mongoose from 'mongoose';
 import { MONGODB_URI } from '../utils/constants';
-import { AnalyticsOldModel } from './old-data/old-data.models';
-import * as fs from 'fs';
-import {
-  AnalyticParamsModel,
-  AnalyticsModel,
-  AnalyticsNewModel,
-} from '../modules/analytics/analytics.models';
+import { AnalyticsModel } from '../modules/analytics/analytics.models';
 import figlet from 'figlet';
 import { ObjectId } from 'mongodb';
 import { getOriginalUrl, getSections, getUrlParams } from '../modules/analytics/analytics.utils';
-import { Analytics } from '../modules/analytics/analytics.types';
-import moment from 'moment/moment';
+
 import { createAnalyticParams } from '../modules/analytics/analytics.actions';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Command } = require('commander');

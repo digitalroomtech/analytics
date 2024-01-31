@@ -35,6 +35,10 @@ export async function authenticate(req: Request, res: Response) {
   const params = getUrlParams(req.headers.origin || req.body.originUrl);
   const originalUrl = getOriginalUrl(req.headers.origin || req.body.originUrl);
 
+  if (!(req.headers.origin || req.body.originUrl)) {
+    return res.status(500).json({ message: 'Hay campos requeridos' });
+  }
+
   try {
     const analytic = await AnalyticsModel.create({
       name: 'analytics_authenticate',
