@@ -1,15 +1,29 @@
 import mongoose from 'mongoose';
-import { Analytics, IAuthenticateAnalyticCustom, IAuthenticateAnalytic } from './analytics.types';
+import {
+  Analytics,
+  IAuthenticateAnalyticCustom,
+  IAuthenticateAnalytic,
+  AnalyticParams,
+} from './analytics.types';
 
 const { Schema, model } = mongoose;
 
 const analyticsSchema = new Schema<Analytics>(
   {
-    name: String,
+    name: {
+      type: String,
+      index: true,
+    },
     uuid: String,
+    section: String,
+    subsection: String,
     url: {
       type: String,
       require: 'Url origin is required',
+    },
+    original_url: {
+      type: String,
+      index: true,
     },
     user_id: Number,
     tenant_id: {
@@ -27,6 +41,27 @@ const analyticsSchema = new Schema<Analytics>(
     },
   },
   { collection: 'Analytics' },
+);
+
+const analyticParamsSchema = new Schema<AnalyticParams>(
+  {
+    key: String,
+    value: String,
+    created_at: {
+      type: Date,
+      default: Date.now(),
+      index: true,
+    },
+    analytic: {
+      type: Schema?.Types.ObjectId,
+      ref: 'Analytics',
+    },
+    updated_at: {
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  { collection: 'analytic_params' },
 );
 
 const authenticateAnalyticsModel = new Schema<IAuthenticateAnalytic>(
@@ -131,10 +166,12 @@ const pageAnalyticsModel = new Schema<IAuthenticateAnalyticCustom>(
 );
 
 export const AnalyticsModel = model('Analytics', analyticsSchema);
-export const AuthenticateAnalytic = model('AuthenticateAnalytics', authenticateAnalyticsModel);
 export const SocialNetworkAnalytic = model('SocialNetworkAnalytics', socialNetworkAnalyticsModel);
 export const SocialNetworkSessionAnalytic = model(
   'SocialNetworkSessionAnalytics',
   socialNetworkSessionAnalyticsModel,
 );
 export const PageAnalytic = model('PageAnalytics', pageAnalyticsModel);
+
+export const AuthenticateAnalytic = model('AuthenticateAnalytics', authenticateAnalyticsModel);
+export const AnalyticParamsModel = model('AnalyticParams', analyticParamsSchema);

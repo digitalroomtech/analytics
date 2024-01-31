@@ -7,8 +7,20 @@ export interface Analytics {
   name?: string;
   uuid?: string;
   url?: string;
+  section?: string;
+  subsection?: string;
+  original_url?: string;
   user_id?: number;
   tenant_id?: string;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface AnalyticParams {
+  id?: string;
+  key?: string;
+  value?: string;
+  analytic: Analytics;
   created_at?: Date;
   updated_at?: Date;
 }

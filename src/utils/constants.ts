@@ -34,10 +34,86 @@ export const SocialNetworkAnalyticNames: IAuthenticateAnalyticName[] = [
 
 export const APP_SECRET = process.env.APP_SECRET || '';
 
-
 export const DO_SPACES_ENDPOINT = process.env.DO_SPACES_ENDPOINT || '';
 export const DO_SPACES_KEY = process.env.DO_SPACES_KEY || '';
 export const DO_SPACES_SECRET = process.env.DO_SPACES_SECRET || '';
 export const DO_SPACES_REGION = process.env.DO_SPACES_REGION || '';
 export const DO_SPACES_BUCKET = process.env.DO_SPACES_BUCKET || '';
 export const DO_SPACES_ROUTE = process.env.DO_SPACES_ROUTE || '';
+
+export const CATEGORIES: { section: string; subsections: string[] }[] = [
+  {
+    section: 'noticias',
+    subsections: ['mexico', 'mundo'],
+  },
+  {
+    section: 'informacion',
+    subsections: [],
+  },
+  {
+    section: 'coahuila',
+    subsections: [
+      'saltillo',
+      'torreon',
+      'monclova',
+      'acuna',
+      'sabinas',
+      'piedras-negras',
+      'historias-del-saltillo',
+      'semanario',
+    ],
+  },
+  {
+    section: 'opinion',
+    subsections: ['cartones', 'politicon', 'autores'],
+  },
+  {
+    section: 'dinero',
+    subsections: [],
+  },
+  {
+    section: 'deportes',
+    subsections: [
+      'futbol',
+      'beisbol',
+      'basquetbol',
+      'automovilismo',
+      'futbol-americano',
+      'tenis',
+      'saraperos',
+    ],
+  },
+  {
+    section: 'show',
+    subsections: ['cine', 'artes'],
+  },
+  {
+    section: 'tech',
+    subsections: ['gadgets', 'videojuegos'],
+  },
+  {
+    section: 'circulo-de-oro-2023',
+    subsections: [],
+  },
+  {
+    section: 'vida',
+    subsections: [
+      'bienestar',
+      'hogar',
+      'nutricion',
+      'gourmet',
+      'viajes',
+      'lgbtttiq',
+      'sexo',
+      'viral',
+    ],
+  },
+  {
+    section: 'motor',
+    subsections: ['autos', 'suvs', 'pick-up', 'motos'],
+  },
+  {
+    section: 'newsletters',
+    subsections: ['newsletter-vanguardia', 'newsletter-semanario'],
+  },
+];
