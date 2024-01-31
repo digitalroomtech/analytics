@@ -51,8 +51,8 @@ export async function authenticate(req: Request, res: Response) {
       updated_at: moment().toISOString(),
     });
 
-    await createAnalyticParams(params.queryParams, analytic._id);
-    await createAnalyticParams(params.hashParams, analytic._id);
+    // await createAnalyticParams(params.queryParams, analytic._id);
+    // await createAnalyticParams(params.hashParams, analytic._id);
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
@@ -86,8 +86,8 @@ export async function analyticsCreate(req: Request, res: Response) {
   try {
     const analytic = await AnalyticsModel.create(analyticParams);
 
-    await createAnalyticParams(params.queryParams, analytic._id);
-    await createAnalyticParams(params.hashParams, analytic._id);
+    // await createAnalyticParams(params.queryParams, analytic._id);
+    // await createAnalyticParams(params.hashParams, analytic._id);
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
