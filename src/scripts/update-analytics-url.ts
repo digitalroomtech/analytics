@@ -35,43 +35,38 @@ const updateAnalyticCollections = async (page = 0) => {
   try {
     for (let i = page; i < pages; i++) {
       console.log(`${i}/${pages}`);
-      const response = await AnalyticsModel.aggregate([
-        {
-          $skip: i,
-        },
-        {
-          $limit: 50000,
-        },
-        {
-          $match: {
-            tenant_id: {
-              $ne: new ObjectId('65a5460f29827c2cabe00a12'),
-            },
-            original_url: {
-              $eq: null,
-            },
-          },
-        },
-      ]);
 
-      for (const responseElement of response) {
-        const { _id, ...params } = responseElement;
-        const section = getSections(params.url || 'https://vanguardia.com.mx');
-        const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
-        const originalUrl = getOriginalUrl(params.url || 'https://vanguardia.com.mx');
+      const response = await AnalyticsModel.find({
+        tenant_id: {
+          $ne: new ObjectId('65a5460f29827c2cabe00a12'),
+        },
+        original_url: {
+          $eq: null,
+        },
+      })
+        .skip(i * 50000)
+        .limit(50000);
 
-        await createAnalyticParams(urlParams.hashParams, _id);
-        await createAnalyticParams(urlParams.queryParams, _id);
+      console.log('response', response.length);
 
-        const data = {
-          ...params,
-          url: params.url || 'https://vanguardia.com.mx',
-          ...section,
-          tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
-          original_url: originalUrl,
-        };
-        await AnalyticsModel.findOneAndUpdate(_id, data);
-      }
+      // for (const responseElement of response) {
+      //   const { _id, ...params } = responseElement;
+      //   const section = getSections(params.url || 'https://vanguardia.com.mx');
+      //   const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
+      //   const originalUrl = getOriginalUrl(params.url || 'https://vanguardia.com.mx');
+      //
+      //   await createAnalyticParams(urlParams.hashParams, _id);
+      //   await createAnalyticParams(urlParams.queryParams, _id);
+      //
+      //   const data = {
+      //     ...params,
+      //     url: params.url || 'https://vanguardia.com.mx',
+      //     ...section,
+      //     tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
+      //     original_url: originalUrl,
+      //   };
+      //   await AnalyticsModel.findOneAndUpdate(_id, data);
+      // }
     }
   } catch (e) {
     console.log('e', e);
