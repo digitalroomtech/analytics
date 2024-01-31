@@ -46,7 +46,7 @@ const updateAnalyticCollections = async (page = 0) => {
           $skip: i,
         },
         {
-          $limit: 50000,
+          $limit: 10,
         },
         {
           $match: {
@@ -64,10 +64,27 @@ const updateAnalyticCollections = async (page = 0) => {
 
       const analyticsData = response.map((res: Analytics) => {
         const { _id, ...params } = res;
-        const section = getSections(res.url || 'https://vanguardia.com.mx');
-        const urlParams = getUrlParams(res.url || 'https://vanguardia.com.mx');
-        const originalUrl = getOriginalUrl(res.url || 'https://vanguardia.com.mx');
+        const section = getSections(params.url || 'https://vanguardia.com.mx');
 
+        const originalUrl = getOriginalUrl(params.url || 'https://vanguardia.com.mx');
+
+        return {
+          ...params,
+          url: res.url || 'https://vanguardia.com.mx',
+          ...section,
+          tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
+          original_url: originalUrl,
+        };
+      });
+
+      const createdList = await AnalyticsNewModel.create(analyticsData);
+
+      for (const createdListElement of createdList) {
+        const { _id, ...params } = createdListElement;
+        const urlParams = getUrlParams(
+          params.url ||
+            'https://vanguardia.com.mx/opinion/un-delicioso-cuento-de-navidad-bacalao-a-la-vizcaina-DD10315251?fbclid=IwAR2Fm1_I_s0NTWyX3l9wPa_EKi8xowCOyd2hueUqiIc3V5-XJ0UK41QzqXM',
+        );
         for (const param of urlParams.queryParams) {
           analyticsParams.push({
             ...param,
@@ -85,18 +102,11 @@ const updateAnalyticCollections = async (page = 0) => {
             updated_at: moment().toISOString(),
           });
         }
+        break;
+      }
 
-        return {
-          ...params,
-          url: res.url || 'https://vanguardia.com.mx',
-          ...section,
-          tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
-          original_url: originalUrl,
-        };
-      });
-
-      await AnalyticsNewModel.create(analyticsData);
-      await AnalyticParamsModel.create(analyticsParams);
+      const createdParamsList = await AnalyticParamsModel.create(analyticsParams);
+      console.log('createdParamsList', createdParamsList.length);
     }
   } catch (e) {
     console.log('e', e);
