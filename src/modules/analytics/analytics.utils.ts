@@ -50,5 +50,5 @@ export const getUrlParams = (url: string) => {
 
 export const getOriginalUrl = (url: string) => {
   const data = new URL(url);
-  return `${data.origin}${data.pathname}`;
+  return `${data.origin}${data.pathname ? data.pathname : ''}`;
 };
