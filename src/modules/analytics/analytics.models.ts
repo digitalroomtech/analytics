@@ -8,7 +8,7 @@ import {
 
 const { Schema, model } = mongoose;
 
-const oldAnalyticsSchema = new Schema<Analytics>(
+const analyticsSchema = new Schema<Analytics>(
   {
     name: {
       type: String,
@@ -43,40 +43,40 @@ const oldAnalyticsSchema = new Schema<Analytics>(
   { collection: 'Analytics' },
 );
 
-const analyticsSchema = new Schema<Analytics>(
-  {
-    name: {
-      type: String,
-      index: true,
-    },
-    uuid: String,
-    section: String,
-    subsection: String,
-    url: {
-      type: String,
-      require: 'Url origin is required',
-    },
-    original_url: {
-      type: String,
-      index: true,
-    },
-    user_id: Number,
-    tenant_id: {
-      type: Schema?.Types.ObjectId,
-      ref: 'tenants',
-    },
-    created_at: {
-      type: Date,
-      default: Date.now(),
-      index: true,
-    },
-    updated_at: {
-      type: Date,
-      default: Date.now(),
-    },
-  },
-  { collection: 'analytics' },
-);
+// const analyticsSchema = new Schema<Analytics>(
+//   {
+//     name: {
+//       type: String,
+//       index: true,
+//     },
+//     uuid: String,
+//     section: String,
+//     subsection: String,
+//     url: {
+//       type: String,
+//       require: 'Url origin is required',
+//     },
+//     original_url: {
+//       type: String,
+//       index: true,
+//     },
+//     user_id: Number,
+//     tenant_id: {
+//       type: Schema?.Types.ObjectId,
+//       ref: 'tenants',
+//     },
+//     created_at: {
+//       type: Date,
+//       default: Date.now(),
+//       index: true,
+//     },
+//     updated_at: {
+//       type: Date,
+//       default: Date.now(),
+//     },
+//   },
+//   { collection: 'analytics' },
+// );
 
 const analyticParamsSchema = new Schema<AnalyticParams>(
   {
@@ -201,7 +201,7 @@ const pageAnalyticsModel = new Schema<IAuthenticateAnalyticCustom>(
 );
 
 export const AnalyticsModel = model('Analytics', analyticsSchema);
-export const AnalyticOldModel = model('AnalyticOldModel', oldAnalyticsSchema);
+// export const AnalyticOldModel = model('AnalyticOldModel', oldAnalyticsSchema);
 export const SocialNetworkAnalytic = model('SocialNetworkAnalytics', socialNetworkAnalyticsModel);
 export const SocialNetworkSessionAnalytic = model(
   'SocialNetworkSessionAnalytics',
