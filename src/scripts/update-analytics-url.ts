@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 import { MONGODB_URI } from '../utils/constants';
-import { AnalyticsModel, AnalyticsNewModel } from '../modules/analytics/analytics.models';
+import { AnalyticOldModel, AnalyticsModel } from '../modules/analytics/analytics.models';
 import figlet from 'figlet';
 import { ObjectId } from 'mongodb';
 import { getOriginalUrl, getSections, getUrlParams } from '../modules/analytics/analytics.utils';
 
 import { createAnalyticParams } from '../modules/analytics/analytics.actions';
+import moment from 'moment';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Command } = require('commander');
 //
@@ -25,8 +26,22 @@ const updateAnalyticCollections = async (page = 0) => {
 
   await mongoose.connect(MONGODB_URI);
 
-  const count = await AnalyticsModel.countDocuments();
-  const pages = Math.ceil(count / 50000);
+  const cursor: { count: number }[] = await AnalyticOldModel.aggregate([
+    {
+      $match: {
+        created_at: { $gte: moment().subtract(1, 'month').toDate() },
+        section: { $ne: null },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const pages = Math.ceil((cursor[0].count || 0) / 50000);
 
   if (page > pages || page < 0) {
     throw new Error(`La cantidad de paginas debe estar entre 0 y ${pages}`);
@@ -37,21 +52,12 @@ const updateAnalyticCollections = async (page = 0) => {
       console.log(`${i}/${pages}`);
 
       const response = await AnalyticsModel.find({
-        tenant_id: {
-          $ne: new ObjectId('65a5460f29827c2cabe00a12'),
-        },
-        original_url: {
-          $eq: null,
-        },
+        section: { $ne: null },
       })
         .skip(i * 50000)
         .limit(50000);
 
       console.log('response', response.length);
-      // const urlParams = getUrlParams(params.url || 'https://vanguardia.com.mx');
-
-      // await createAnalyticParams(urlParams.hashParams, _id);
-      // await createAnalyticParams(urlParams.queryParams, _id);
 
       const data = response.map((responseElement) => {
         const { _id, ...params } = responseElement;
@@ -66,7 +72,7 @@ const updateAnalyticCollections = async (page = 0) => {
         };
       });
 
-      await AnalyticsNewModel.create(data);
+      await AnalyticsModel.create(data);
     }
   } catch (e) {
     console.log('e', e);

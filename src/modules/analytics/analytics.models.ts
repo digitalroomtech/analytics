@@ -8,40 +8,40 @@ import {
 
 const { Schema, model } = mongoose;
 
-// const analyticsSchema = new Schema<Analytics>(
-//   {
-//     name: {
-//       type: String,
-//       index: true,
-//     },
-//     uuid: String,
-//     section: String,
-//     subsection: String,
-//     url: {
-//       type: String,
-//       require: 'Url origin is required',
-//     },
-//     original_url: {
-//       type: String,
-//       index: true,
-//     },
-//     user_id: Number,
-//     tenant_id: {
-//       type: Schema?.Types.ObjectId,
-//       ref: 'tenants',
-//     },
-//     created_at: {
-//       type: Date,
-//       default: Date.now(),
-//       index: true,
-//     },
-//     updated_at: {
-//       type: Date,
-//       default: Date.now(),
-//     },
-//   },
-//   { collection: 'Analytics' },
-// );
+const oldAnalyticsSchema = new Schema<Analytics>(
+  {
+    name: {
+      type: String,
+      index: true,
+    },
+    uuid: String,
+    section: String,
+    subsection: String,
+    url: {
+      type: String,
+      require: 'Url origin is required',
+    },
+    original_url: {
+      type: String,
+      index: true,
+    },
+    user_id: Number,
+    tenant_id: {
+      type: Schema?.Types.ObjectId,
+      ref: 'tenants',
+    },
+    created_at: {
+      type: Date,
+      default: Date.now(),
+      index: true,
+    },
+    updated_at: {
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  { collection: 'Analytics' },
+);
 
 const analyticsSchema = new Schema<Analytics>(
   {
@@ -201,7 +201,7 @@ const pageAnalyticsModel = new Schema<IAuthenticateAnalyticCustom>(
 );
 
 export const AnalyticsModel = model('Analytics', analyticsSchema);
-// export const AnalyticsNewModel = model('NewAnalitycs', analyticsNewSchema);
+export const AnalyticOldModel = model('AnalyticOldModel', oldAnalyticsSchema);
 export const SocialNetworkAnalytic = model('SocialNetworkAnalytics', socialNetworkAnalyticsModel);
 export const SocialNetworkSessionAnalytic = model(
   'SocialNetworkSessionAnalytics',
