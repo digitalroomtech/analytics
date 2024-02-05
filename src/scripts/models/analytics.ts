@@ -1,5 +1,5 @@
+import { Analytics } from '../../modules/analytics/analytics.types';
 import mongoose from 'mongoose';
-import { Analytics, AnalyticParams } from './analytics.types';
 
 const { Schema, model } = mongoose;
 
@@ -35,30 +35,43 @@ const analyticsSchema = new Schema<Analytics>(
       default: Date.now(),
     },
   },
-  { collection: 'Analytics' },
+  { collection: 'analytics' },
 );
 
-const analyticParamsSchema = new Schema<AnalyticParams>(
+const tempAnalyticsSchema = new Schema<Analytics>(
   {
-    key: String,
-    value: String,
+    name: {
+      type: String,
+      index: true,
+    },
+    uuid: String,
+    section: String,
+    subsection: String,
+    url: {
+      type: String,
+      require: 'Url origin is required',
+    },
+    original_url: {
+      type: String,
+      index: true,
+    },
+    user_id: Number,
+    tenant_id: {
+      type: Schema?.Types.ObjectId,
+      ref: 'tenants',
+    },
     created_at: {
       type: Date,
       default: Date.now(),
       index: true,
-    },
-    analytic: {
-      type: Schema?.Types.ObjectId,
-      ref: 'Analytics',
     },
     updated_at: {
       type: Date,
       default: Date.now(),
     },
   },
-  { collection: 'analytic_params' },
+  { collection: 'temp_analytics' },
 );
 
-export const AnalyticsModel = model('Analytics', analyticsSchema);
-
-export const AnalyticParamsModel = model('AnalyticParams', analyticParamsSchema);
+export const AnalyticsModel = model('analyticsModel', analyticsSchema);
+export const TempAnalyticsModel = model('tempAnalyticsSchema', tempAnalyticsSchema);

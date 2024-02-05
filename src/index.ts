@@ -5,7 +5,6 @@ import cors from 'cors';
 import http from 'http';
 import mongoose from 'mongoose';
 import { MONGODB_URI } from './utils/constants';
-import metricsRoutes from './modules/metrics/metrics.routes';
 import { graphqlUploadExpress } from 'graphql-upload-ts';
 import { expressMiddleware } from '@apollo/server/express4';
 import { expressServer } from './config/express.server';
@@ -27,7 +26,6 @@ expressServer.use(
   analyticsRoutes,
 );
 expressServer.use('/tenant', tenantRoutes);
-expressServer.use('/metric', metricsRoutes);
 expressServer.use(
   '/upload',
   cors<cors.CorsRequest>({

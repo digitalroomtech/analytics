@@ -13,7 +13,7 @@
     "app": "npm run build && node build/app.js",
     "prepare": "husky install",
     "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build",
-    "update-analytics": "ts-node src/scripts/update-analytics-url.ts",
+    "analytics": "ts-node src/scripts/main.ts",
     "delete": "ts-node src/scripts/delete.ts"
   },
   "repository": {
