@@ -122,7 +122,7 @@ const main = async () => {
   console.log('cursor', cursor);
 
   try {
-    for (let i = 3; i < pages; i++) {
+    for (let i = 56; i < pages; i++) {
       console.log(`${i}/${pages}`);
 
       const response = await AnalyticsModel.find({
