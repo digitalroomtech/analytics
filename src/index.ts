@@ -52,8 +52,6 @@ const main = async () => {
   );
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 
-  // TASK_LISTS.map((cron) => cron.start());
-
   console.log(`🚀 Server ready at http://localhost:${port}/graphql`);
   console.log(`🚀 Server ready at http://localhost:${port}`);
 };
