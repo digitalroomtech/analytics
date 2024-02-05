@@ -65,21 +65,28 @@ const tenantUsers = async (
   items: ITenantUser[];
   count: number;
 }> => {
-  const { tenant, search } = args.where;
+  const { tenant, search, page, pageSize } = args.where;
 
-  const match = search ? {
-    or: [{
-      name: search,
-
-    }]
-  } : {};
+  const match = search
+    ? {
+        or: [
+          {
+            name: search,
+          },
+        ],
+      }
+    : {};
 
   const tenantUsers = await TenantUserModel.find({
     tenant: tenant ? new ObjectId(tenant.id) : null,
-  }).populate({
-    path: 'user',
-    match,
-  }).populate('tenant');
+  })
+    .populate({
+      path: 'user',
+      match,
+    })
+    .skip(page)
+    .limit(pageSize)
+    .populate('tenant');
 
   const count = await TenantUserModel.countDocuments();
   return {
