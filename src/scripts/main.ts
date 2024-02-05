@@ -104,7 +104,7 @@ const main = async () => {
   const cursor: { count: number }[] = await AnalyticsModel.aggregate([
     {
       $match: {
-        uuid: { $ne: null },
+        section: { $eq: null },
       },
     },
     {
@@ -118,6 +118,7 @@ const main = async () => {
   const BY_PAGE = 100000;
 
   const pages = Math.ceil((cursor[0].count || 0) / BY_PAGE);
+
   console.log('cursor', cursor);
 
   try {
@@ -125,7 +126,7 @@ const main = async () => {
       console.log(`${i}/${pages}`);
 
       const response = await AnalyticsModel.find({
-        uuid: { $ne: null },
+        section: { $eq: null },
       })
         .skip(i * BY_PAGE)
         .limit(BY_PAGE);
