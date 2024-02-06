@@ -72,12 +72,12 @@ const tenantUsers = async (
   const tenantUsers = await TenantUserModel.find({
     tenant: tenant ? new ObjectId(tenant.id) : null,
   })
+    .skip((page - 1) * pageSize)
+    .limit(pageSize)
     .populate({
       path: 'user',
       match,
     })
-    .skip((page - 1) * pageSize)
-    .limit(pageSize)
     .populate('tenant');
 
   const count = await TenantUserModel.countDocuments();
