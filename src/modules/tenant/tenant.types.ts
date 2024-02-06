@@ -153,5 +153,7 @@ export type TenantUsersArgs = {
       id: string;
     };
     role?: TenantUserRoles;
+    page: number;
+    pageSize: number;
   };
 };
