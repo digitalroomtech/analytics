@@ -83,7 +83,7 @@ const tenantUsers = async (
   const count = await TenantUserModel.countDocuments();
 
   return {
-    items: tenantUsers.filter((item) => item.user),
+    items: tenantUsers,
     count,
   };
 };
