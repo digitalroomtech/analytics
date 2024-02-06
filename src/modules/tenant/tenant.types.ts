@@ -68,6 +68,7 @@ export type CreateTenantUserInvitationArgs = {
     tenant?: {
       id: string;
     };
+    url?: string;
   };
 };
 
