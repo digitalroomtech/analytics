@@ -26,6 +26,7 @@ expressServer.use(
   analyticsRoutes,
 );
 expressServer.use('/tenant', tenantRoutes);
+
 expressServer.use(
   '/upload',
   cors<cors.CorsRequest>({

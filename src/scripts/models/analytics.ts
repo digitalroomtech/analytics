@@ -35,7 +35,7 @@ const analyticsSchema = new Schema<Analytics>(
       default: Date.now(),
     },
   },
-  { collection: 'Analytics' },
+  { collection: 'analytics_without_created_at' },
 );
 
 const tempAnalyticsSchema = new Schema<Analytics>(
@@ -70,7 +70,7 @@ const tempAnalyticsSchema = new Schema<Analytics>(
       default: Date.now(),
     },
   },
-  { collection: 'temp_analytics' },
+  { collection: 'temp1_analytics' },
 );
 
 export const AnalyticsModel = model('analyticsModel', analyticsSchema);

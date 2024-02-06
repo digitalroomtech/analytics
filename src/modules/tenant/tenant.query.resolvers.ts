@@ -67,21 +67,29 @@ const tenantUsers = async (
 }> => {
   const { tenant, search } = args.where;
 
-  const match = search ? {
-    or: [{
-      name: search,
-
-    }]
-  } : {};
+  const match = search
+    ? {
+        or: [
+          {
+            name: search,
+          },
+        ],
+      }
+    : {};
 
   const tenantUsers = await TenantUserModel.find({
     tenant: tenant ? new ObjectId(tenant.id) : null,
-  }).populate({
-    path: 'user',
-    match,
-  }).populate('tenant');
+  })
+    .skip(0)
+    .limit(10)
+    .populate({
+      path: 'user',
+      match,
+    })
+    .populate('tenant');
 
   const count = await TenantUserModel.countDocuments();
+
   return {
     items: tenantUsers,
     count,

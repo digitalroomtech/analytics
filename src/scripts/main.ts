@@ -119,10 +119,8 @@ const main = async () => {
 
   const pages = Math.ceil((cursor[0].count || 0) / BY_PAGE);
 
-  console.log('cursor', cursor);
-
   try {
-    for (let i = 56; i < pages; i++) {
+    for (let i = 0; i < pages; i++) {
       console.log(`${i}/${pages}`);
 
       const response = await AnalyticsModel.find({
@@ -130,18 +128,18 @@ const main = async () => {
       })
         .skip(i * BY_PAGE)
         .limit(BY_PAGE);
-      console.log('response', response.length);
+
       //
       const data = response.map((responseElement) => {
-        const { _id, created_at, updated_at, name, uuid, user_id, ...params } = responseElement;
+        const { _id, name, uuid, user_id, ...params } = responseElement;
         const section = getSections(params.url || 'https://vanguardia.com.mx');
         const originalUrl = getOriginalUrl(params.url || 'https://vanguardia.com.mx');
         return {
           name,
           uuid,
           user_id,
-          created_at,
-          updated_at,
+          created_at: new ObjectId(_id).getTimestamp().toISOString(),
+          updated_at: new ObjectId(_id).getTimestamp().toISOString(),
           url: params.url || 'https://vanguardia.com.mx',
           ...section,
           tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
@@ -149,6 +147,8 @@ const main = async () => {
         };
       });
 
+      console.log('response', data.length);
+      //
       await TempAnalyticsModel.create(data);
     }
   } catch (e) {
