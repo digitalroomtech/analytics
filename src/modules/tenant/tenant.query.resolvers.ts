@@ -65,23 +65,15 @@ const tenantUsers = async (
   items: ITenantUser[];
   count: number;
 }> => {
-  const { tenant, search } = args.where;
+  const { tenant, search, page = 1, pageSize = 10 } = args.where;
 
-  const match = search
-    ? {
-        or: [
-          {
-            name: search,
-          },
-        ],
-      }
-    : {};
+  const match = search ? { name: { $regex: search, $options: 'i' } } : {};
 
   const tenantUsers = await TenantUserModel.find({
     tenant: tenant ? new ObjectId(tenant.id) : null,
   })
-    .skip(0)
-    .limit(10)
+    .skip((page - 1) * pageSize)
+    .limit(pageSize)
     .populate({
       path: 'user',
       match,
