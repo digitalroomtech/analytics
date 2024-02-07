@@ -9,18 +9,15 @@ const main = async () => {
 
   const count = await AnalyticsModel.countDocuments();
 
-  const BY_PAGE = 100000;
+  const BY_PAGE = 13000;
 
   const pages = 5;
-  console.log('count', count);
 
   try {
     for (let i = 0; i < pages; i++) {
       console.log(`${i}/${pages - 1}`);
 
-      const response = await AnalyticsModel.find()
-        .skip(i * BY_PAGE)
-        .limit(BY_PAGE);
+      const response = await AnalyticsModel.find().skip(500000).limit(13000);
 
       //
       const data = response.map((responseElement) => {
@@ -45,6 +42,8 @@ const main = async () => {
   } catch (e) {
     console.log('e', e);
   }
+
+  console.log('FINISH');
 };
 
 main();
