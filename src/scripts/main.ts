@@ -7,12 +7,6 @@ import { getOriginalUrl, getSections } from '../modules/analytics/analytics.util
 const main = async () => {
   await mongoose.connect(MONGODB_URI);
 
-  const count = await AnalyticsModel.countDocuments();
-
-  const BY_PAGE = 13000;
-
-  const pages = 5;
-
   try {
     const response = await AnalyticsModel.find().skip(500000).limit(13000);
 
