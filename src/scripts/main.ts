@@ -11,12 +11,12 @@ const main = async () => {
 
   const BY_PAGE = 100000;
 
-  const pages = Math.ceil((count || 0) / BY_PAGE);
+  const pages = 5;
   console.log('count', count);
 
   try {
-    for (let i = 5; i < pages; i++) {
-      console.log(`${i}/${pages}`);
+    for (let i = 0; i < pages; i++) {
+      console.log(`${i}/${pages - 1}`);
 
       const response = await AnalyticsModel.find()
         .skip(i * BY_PAGE)
