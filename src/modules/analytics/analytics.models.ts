@@ -35,7 +35,7 @@ const analyticsSchema = new Schema<Analytics>(
       default: Date.now(),
     },
   },
-  { collection: 'temp_analytics' },
+  { collection: 'analytics' },
 );
 
 const analyticParamsSchema = new Schema<AnalyticParams>(

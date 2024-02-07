@@ -5,6 +5,7 @@ import {
   UrlVisitMetricsModel,
   UserByMonthMetricsModel,
 } from './metrics.models';
+import moment from 'moment';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
   try {
@@ -26,6 +27,30 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
     ]);
   } catch (error) {
     console.error('Error Get Clicked Events Report', error);
+    return [];
+  }
+};
+
+const sectionReport = async (parent: any, args: any, context: any) => {
+  try {
+    // eslint-disable-next-line prefer-const
+    let { from, to, tenantId } = args.where;
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
+
+    return await EventsMetricsModel.aggregate([
+      {
+        $match: {
+          section: { $ne: 'home' },
+          created_at: { $gte: from, $lte: to },
+          // tenant_id: tenantId,
+        },
+      },
+      { $group: { _id: '$section', count: { $sum: 1 } } },
+      { $project: { name: '$_id', count: '$count', _id: false } },
+    ]);
+  } catch (error) {
+    console.error('Error Section Report', error);
     return [];
   }
 };
@@ -238,4 +263,5 @@ export const metricsQueryResolvers = {
   getUrlVisitReport,
   getUsersByMonthReport,
   visitPageByUsers,
+  sectionReport,
 };

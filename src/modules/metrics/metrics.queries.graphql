@@ -4,10 +4,23 @@ input ClickReportPayload {
     to: String!
     tenantId: ID
 }
+
+input SectionReportPayload {
+    from: String!
+    to: String!
+    tenantId: ID
+}
+
 type ClickReportResponse {
     name: String
     count: Int
 }
+
+type SectionReportResponse {
+    name: String
+    count: Int
+}
+
 
 input RegisteredUserReportPayload {
     from: String!
@@ -68,6 +81,7 @@ type UserByMonthResponse {
 
 type Query {
     getClickedReport(where: ClickReportPayload): [ClickReportResponse]
+    sectionReport(where: SectionReportPayload): [SectionReportResponse]
     getRegisteredUserReport(where: RegisteredUserReportPayload): RegisteredUserReportResponse
     visitPageByUsers(where: VisitPageByUsersPayload): VisitPageByUserResponse
     getHeatMapReport(where: HeatMapPayload): [HeatMapResponse]
