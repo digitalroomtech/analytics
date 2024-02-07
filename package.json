@@ -14,7 +14,8 @@
     "prepare": "husky install",
     "copyFiles": "npx copyfiles -u 1 \"./src/**/*.graphql\" ./build",
     "analytics": "ts-node src/scripts/main.ts",
-    "delete": "ts-node src/scripts/delete.ts"
+    "delete": "ts-node src/scripts/delete.ts",
+    "rename": "ts-node src/scripts/rename-collection.ts"
   },
   "repository": {
     "type": "git",

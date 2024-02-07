@@ -7,7 +7,7 @@ const main = async () => {
   const db = mongooseConnection.connection.db;
 
   // Rename the `test` collection to `foobar`
-  return db.collection('Tenants').rename('OldTenants');
+  return db.collection('temp_analytics').rename('analytics');
 };
 
 main();
