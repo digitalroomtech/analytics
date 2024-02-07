@@ -15,7 +15,7 @@ const main = async () => {
   console.log('count', count);
 
   try {
-    for (let i = 0; i < pages; i++) {
+    for (let i = 5; i < pages; i++) {
       console.log(`${i}/${pages}`);
 
       const response = await AnalyticsModel.find()
