@@ -36,20 +36,17 @@ const main = async () => {
       })
         .skip(i * BY_PAGE)
         .limit(BY_PAGE);
-
-      console.log('response', response[0]);
-
       //
       const data = response.map((responseElement) => {
-        const { _id, name, uuid, user_id, ...params } = responseElement;
+        const { _id, name, uuid, user_id, created_at, updated_at, ...params } = responseElement;
         const section = getSections(params.url || 'https://vanguardia.com.mx');
         const originalUrl = getOriginalUrl(params.url || 'https://vanguardia.com.mx');
         return {
           name,
           uuid,
           user_id,
-          created_at: new ObjectId(_id).getTimestamp().toISOString(),
-          updated_at: new ObjectId(_id).getTimestamp().toISOString(),
+          created_at,
+          updated_at,
           url: params.url || 'https://vanguardia.com.mx',
           ...section,
           tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
@@ -57,9 +54,7 @@ const main = async () => {
         };
       });
 
-      break;
-
-      // await TempAnalyticsModel.create(data);
+      await TempAnalyticsModel.create(data);
     }
   } catch (e) {
     console.log('e', e);
