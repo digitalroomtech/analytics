@@ -1,5 +1,6 @@
 import { POSTMARK_FROM_EMAIL, POSTMARK_TOKEN } from '../constants';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const postmark = require('postmark');
 const postmarkClient = new postmark.ServerClient(POSTMARK_TOKEN);
 
@@ -24,6 +25,7 @@ export const sendPostmarkSignupEmail = async (invitation: {
       },
     });
   } catch (e) {
+    console.log('e', e);
     throw new Error('Error to sending sign up email');
   }
 };

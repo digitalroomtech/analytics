@@ -145,6 +145,8 @@ export type TenantUserInvitationArgs = {
     status?: TenantUserInvitationStatuses;
     role?: TenantUserRoles;
   };
+  page: number;
+  pageSize: number;
 };
 
 export type TenantUsersArgs = {
@@ -154,7 +156,7 @@ export type TenantUsersArgs = {
       id: string;
     };
     role?: TenantUserRoles;
-    page: number;
-    pageSize: number;
   };
+  page: number;
+  pageSize: number;
 };

@@ -6,6 +6,7 @@ dotenv.config();
 export const MAX_REQUESTS = Number(process.env.MAX_REQUESTS || '2');
 export const ENVIRONMENT = process.env.ENVIRONMENT || 'local';
 export const MONGODB_URI = process.env.MONGODB_URI || '';
+export const FRONT_URL = process.env.FRONT_URL || '';
 
 export const POSTMARK_FROM_EMAIL = process.env.POSTMARK_FROM_EMAIL || '';
 export const POSTMARK_TOKEN = process.env.POSTMARK_TOKEN || '';

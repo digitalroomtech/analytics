@@ -11,7 +11,7 @@ import { ObjectId } from 'mongodb';
 import { UserModel } from '../user/user.models';
 import stream from 'node:stream';
 import { createUploadStream } from '../../utils/s3';
-import { DO_SPACES_ROUTE } from '../../utils/constants';
+import { DO_SPACES_ROUTE, FRONT_URL } from '../../utils/constants';
 import { sendPostmarkSignupEmail } from '../../utils/mail/sendMail';
 
 const createTenant = async (parent: any, args: CreateTenantArgs) => {
@@ -63,7 +63,7 @@ const updateTenant = async (parent: any, args: UpdateTenantArgs) => {
 const createTenantUserInvitation = async (parent: any, args: CreateTenantUserInvitationArgs) => {
   let tenantUserInvitation;
 
-  const { tenant, role, email, url } = args.input;
+  const { tenant, role, email } = args.input;
 
   try {
     tenantUserInvitation = await TenantUserInvitationModel.create({
@@ -73,15 +73,16 @@ const createTenantUserInvitation = async (parent: any, args: CreateTenantUserInv
     });
 
     const tenantById = await TenantModel.findOne({ _id: new ObjectId(tenant?.id) });
-    const urlDashboard = new URL(url ?? '');
+
     await sendPostmarkSignupEmail({
       email: email ?? '',
       tenant: tenantById?.name ?? '',
       role: role ?? '',
       logo: tenantById?.logo ?? '',
-      url: `${urlDashboard.protocol}//${urlDashboard.host}`,
+      url: FRONT_URL,
     });
   } catch (e) {
+    console.log('e', e);
     throw new Error('Tenemos problemas para crear la invitación');
   }
 

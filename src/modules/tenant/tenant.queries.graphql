@@ -88,7 +88,6 @@ input CreateTenantUserInvitationInput {
     email:String
     role: TenantUserRoles
     tenant:TenantInput!
-    url: String
 }
 
 type TenantsPayload{
@@ -117,8 +116,7 @@ input TenantUserWhereInput {
     role: TenantUserRoles
     tenant:TenantInput
     search: String
-    page: Int
-    pageSize: Int
+
 }
 
 input UpdateTenantUserInvitationInput {
@@ -152,6 +150,6 @@ type Mutation {
 type Query{
     tenants:TenantsPayload
     tenant(id:ID!):Tenant
-    tenantUsers(where:TenantUserWhereInput):TenantUsersPayload
-    tenantUserInvitations(where:TenantUserInvitationWhereInput):TenantUserInvitationsPayload
+    tenantUsers(where:TenantUserWhereInput,page: Int, pageSize: Int):TenantUsersPayload
+    tenantUserInvitations(where:TenantUserInvitationWhereInput, page: Int, pageSize: Int):TenantUserInvitationsPayload
 }
