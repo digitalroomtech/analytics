@@ -6,9 +6,7 @@ import { getOriginalUrl, getSections } from '../modules/analytics/analytics.util
 
 const main = async () => {
   await mongoose.connect(MONGODB_URI);
-  console.log({
-    created_at: { $gte: new Date('2024-02-01 08:00'), $lte: new Date('2024-02-01 09:00') },
-  });
+  console.log({ $gte: new Date('2024-01-31 20:00'), $lte: new Date('2024-02-01 08:00') });
   const cursor: { count: number }[] = await AnalyticsModel.aggregate([
     {
       $match: {
