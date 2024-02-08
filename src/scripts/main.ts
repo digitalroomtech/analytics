@@ -6,11 +6,11 @@ import { getOriginalUrl, getSections } from '../modules/analytics/analytics.util
 
 const main = async () => {
   await mongoose.connect(MONGODB_URI);
-  console.log({ $gte: new Date('2024-02-01 00:00'), $lte: new Date('2024-02-01 12:00') });
+  console.log({ $gte: new Date('2024-02-01 18:00'), $lte: new Date('2024-02-06 14:00') });
   const cursor: { count: number }[] = await AnalyticsModel.aggregate([
     {
       $match: {
-        created_at: { $gte: new Date('2024-02-01 00:00'), $lte: new Date('2024-02-01 12:00') },
+        created_at: { $gte: new Date('2024-02-01 18:00'), $lte: new Date('2024-02-06 14:00') },
       },
     },
     {
@@ -32,7 +32,7 @@ const main = async () => {
       console.log(`${i}/${pages}`);
 
       const response = await AnalyticsModel.find({
-        created_at: { $gte: new Date('2024-02-01 00:00'), $lte: new Date('2024-02-01 12:00') },
+        created_at: { $gte: new Date('2024-02-01 18:00'), $lte: new Date('2024-02-06 14:00') },
       })
         .skip(i * BY_PAGE)
         .limit(BY_PAGE);
