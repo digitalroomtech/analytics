@@ -6,11 +6,13 @@ import { getOriginalUrl, getSections } from '../modules/analytics/analytics.util
 
 const main = async () => {
   await mongoose.connect(MONGODB_URI);
-
+  console.log({
+    created_at: { $gte: new Date('2024-02-01 08:00'), $lte: new Date('2024-02-01 09:00') },
+  });
   const cursor: { count: number }[] = await AnalyticsModel.aggregate([
     {
       $match: {
-        section: { $ne: null },
+        created_at: { $gte: new Date('2024-01-31 20:00'), $lte: new Date('2024-02-01 08:00') },
       },
     },
     {
@@ -20,6 +22,7 @@ const main = async () => {
       },
     },
   ]);
+  console.log('cursor', cursor);
 
   const BY_PAGE = 100000;
 
@@ -31,10 +34,12 @@ const main = async () => {
       console.log(`${i}/${pages}`);
 
       const response = await AnalyticsModel.find({
-        section: { $eq: null },
+        created_at: { $gte: new Date('2024-01-31 20:00'), $lte: new Date('2024-02-01 08:00') },
       })
         .skip(i * BY_PAGE)
         .limit(BY_PAGE);
+
+      console.log('response', response[0]);
 
       //
       const data = response.map((responseElement) => {
@@ -54,7 +59,9 @@ const main = async () => {
         };
       });
 
-      await TempAnalyticsModel.create(data);
+      console.log(data[0]);
+
+      // await TempAnalyticsModel.create(data);
     }
   } catch (e) {
     console.log('e', e);
