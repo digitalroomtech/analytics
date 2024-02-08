@@ -22,4 +22,16 @@ export enum MetricModels {
   pageMetrics = 'page_metrics',
 }
 
-export const metricsTypeDefs = fs.readFileSync(path.join(__dirname, 'metrics.queries.graphql'), 'utf8');
+export type UrlVisitReportArgs = {
+  where: {
+    from: string;
+    to: string;
+    skip: number;
+    tenantId: string;
+  };
+};
+
+export const metricsTypeDefs = fs.readFileSync(
+  path.join(__dirname, 'metrics.queries.graphql'),
+  'utf8',
+);

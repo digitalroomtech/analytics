@@ -71,7 +71,7 @@ const eventMetrics = new Schema(
     name: String,
     count: Number,
   },
-  { collection: 'Analytics' },
+  { collection: 'analytics' },
 );
 
 const registeredUserMetrics = new Schema(
@@ -79,7 +79,7 @@ const registeredUserMetrics = new Schema(
     user_type: String,
     count: Number,
   },
-  { collection: 'Analytics' },
+  { collection: 'analytics' },
 );
 
 const heatMapMetrics = new Schema(
@@ -90,7 +90,7 @@ const heatMapMetrics = new Schema(
     },
     count: Number,
   },
-  { collection: 'Analytics' },
+  { collection: 'analytics' },
 );
 
 const urlVisiMetrics = new Schema(
@@ -98,7 +98,7 @@ const urlVisiMetrics = new Schema(
     url: String,
     count: Number,
   },
-  { collection: 'Analytics' },
+  { collection: 'analytics' },
 );
 
 const userByMonthMetrics = new Schema(
@@ -106,7 +106,7 @@ const userByMonthMetrics = new Schema(
     date: String,
     count: Number,
   },
-  { collection: 'Analytics' },
+  { collection: 'analytics' },
 );
 
 export const SocialNetworkSessionMetrics = model(

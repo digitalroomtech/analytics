@@ -5,6 +5,8 @@ import {
   UrlVisitMetricsModel,
   UserByMonthMetricsModel,
 } from './metrics.models';
+import { UrlVisitReportArgs } from './metrics.types';
+import { AnalyticsModel } from '../../scripts/models/analytics';
 import moment from 'moment';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
@@ -48,6 +50,7 @@ const sectionReport = async (parent: any, args: any, context: any) => {
       },
       { $group: { _id: '$section', count: { $sum: 1 } } },
       { $project: { name: '$_id', count: '$count', _id: false } },
+      { $sort: { count: -1 } },
     ]);
   } catch (error) {
     console.error('Error Section Report', error);
@@ -188,31 +191,62 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
   }
 };
 
-const getUrlVisitReport = async (parent: any, args: any, context: any) => {
+const getUrlVisitReport = async (parent: any, args: UrlVisitReportArgs, context: any) => {
   try {
-    // eslint-disable-next-line prefer-const
-    let { from, to, tenantId } = args.where;
-    from = new Date(`${from}`);
-    to = new Date(`${to}`);
+    const { from, to, tenantId, skip } = args.where;
 
-    return await UrlVisitMetricsModel.aggregate([
+    console.log('where', { $gte: moment(from).toDate(), $lte: moment(to).toDate() });
+    console.log('where', { $gte: moment(from).toISOString(), $lte: moment(to).toISOString() });
+
+    const data = await UrlVisitMetricsModel.aggregate([
       {
         $match: {
           name: { $ne: 'analytics_authenticate' },
           user_id: { $ne: 0 },
-          created_at: { $gte: from, $lte: to },
-          url: { $ne: '' },
+          section: {
+            $ne: 'home',
+          },
+          created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+          original_url: { $ne: '' },
           // tenant_id: tenantId,
         },
       },
       {
-        $group: { _id: '$url', count: { $sum: 1 } },
+        $group: { _id: '$original_url', count: { $sum: 1 } },
       },
       {
         $project: { url: '$_id', count: '$count', _id: false },
       },
       { $sort: { count: -1 } },
+      { $skip: skip || 0 },
+      { $limit: 10 },
     ]);
+
+    const res = await UrlVisitMetricsModel.aggregate([
+      {
+        $match: {
+          name: { $ne: 'analytics_authenticate' },
+          user_id: { $ne: 0 },
+          section: {
+            $ne: 'home',
+          },
+          created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+          original_url: { $ne: '' },
+          // tenant_id: tenantId,
+        },
+      },
+      {
+        $group: { _id: '$original_url', count: { $sum: 1 } },
+      },
+      {
+        $project: { url: '$_id', count: '$count', _id: false },
+      },
+    ]);
+
+    return {
+      data,
+      total: res.length,
+    };
   } catch (error) {
     console.error('Error Get Url Visit Report', error);
     return [];
@@ -226,7 +260,7 @@ const getUsersByMonthReport = async (parent: any, args: any, context: any) => {
     from = new Date(`${from}`);
     to = new Date(`${to}`);
 
-    const response = await UserByMonthMetricsModel.aggregate([
+    return await UserByMonthMetricsModel.aggregate([
       {
         $match: {
           name: { $ne: 'analytics_authenticate' },
@@ -248,8 +282,6 @@ const getUsersByMonthReport = async (parent: any, args: any, context: any) => {
         },
       },
     ]);
-
-    return response;
   } catch (error) {
     console.error('Error Get Users by Month Report', error);
     return [];

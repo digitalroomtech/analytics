@@ -63,10 +63,16 @@ input UrlVisitPayload {
     from: String!
     to: String!
     tenantId: ID
+    skip: Int
 }
-type UrlVisitResponse {
+type UrlVisitDataResponse {
     url: String
     count: Int
+}
+
+type UrlVisitResponse{
+    data: [UrlVisitDataResponse]
+    total: Int
 }
 
 input UserByMonthPayload {
@@ -85,7 +91,7 @@ type Query {
     getRegisteredUserReport(where: RegisteredUserReportPayload): RegisteredUserReportResponse
     visitPageByUsers(where: VisitPageByUsersPayload): VisitPageByUserResponse
     getHeatMapReport(where: HeatMapPayload): [HeatMapResponse]
-    getUrlVisitReport(where: UrlVisitPayload): [UrlVisitResponse]
+    getUrlVisitReport(where: UrlVisitPayload):UrlVisitResponse
     getUsersByMonthReport(where: UserByMonthPayload): [UserByMonthResponse]
 
 }
