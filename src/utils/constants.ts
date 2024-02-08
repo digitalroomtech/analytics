@@ -7,6 +7,9 @@ export const MAX_REQUESTS = Number(process.env.MAX_REQUESTS || '2');
 export const ENVIRONMENT = process.env.ENVIRONMENT || 'local';
 export const MONGODB_URI = process.env.MONGODB_URI || '';
 
+export const POSTMARK_FROM_EMAIL = process.env.POSTMARK_FROM_EMAIL || '';
+export const POSTMARK_TOKEN = process.env.POSTMARK_TOKEN || '';
+
 export const PageAnalyticNames: IAuthenticateAnalyticName[] = [
   IAuthenticateAnalyticName.pageVisit,
   IAuthenticateAnalyticName.registerUser,

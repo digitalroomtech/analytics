@@ -12,6 +12,7 @@ import { UserModel } from '../user/user.models';
 import stream from 'node:stream';
 import { createUploadStream } from '../../utils/s3';
 import { DO_SPACES_ROUTE } from '../../utils/constants';
+import { sendPostmarkSignupEmail } from '../../utils/mail/sendMail';
 
 const createTenant = async (parent: any, args: CreateTenantArgs) => {
   let tenant;
@@ -62,13 +63,23 @@ const updateTenant = async (parent: any, args: UpdateTenantArgs) => {
 const createTenantUserInvitation = async (parent: any, args: CreateTenantUserInvitationArgs) => {
   let tenantUserInvitation;
 
-  const { tenant, role, email } = args.input;
+  const { tenant, role, email, url } = args.input;
 
   try {
     tenantUserInvitation = await TenantUserInvitationModel.create({
       role,
       email,
       tenant: new ObjectId(tenant?.id),
+    });
+
+    const tenantById = await TenantModel.findOne({ _id: new ObjectId(tenant?.id) });
+    const urlDashboard = new URL(url ?? '');
+    await sendPostmarkSignupEmail({
+      email: email ?? '',
+      tenant: tenantById?.name ?? '',
+      role: role ?? '',
+      logo: tenantById?.logo ?? '',
+      url: `${urlDashboard.protocol}//${urlDashboard.host}`,
     });
   } catch (e) {
     throw new Error('Tenemos problemas para crear la invitación');
@@ -121,7 +132,7 @@ const updateTenantUserInvitation = async (
 
 const updateTenantUser = async (parent: any, args: UpdateTenantUserArgs) => {
   const { id, status, role, user } = args.input;
-  console.log({ status, role });
+
   let tenantUser;
   try {
     tenantUser = await TenantUserModel.findByIdAndUpdate(
