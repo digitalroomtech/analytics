@@ -31,7 +31,7 @@ const main = async () => {
       },
     );
 
-    console.log('id', update?._id);
+    console.log(`${i}/${response.length}`, update?._id);
   }
 
   console.log('FINISH');
