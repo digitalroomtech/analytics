@@ -33,6 +33,8 @@ const main = async () => {
 
     console.log('id', update?._id);
   }
+
+  console.log('FINISH');
 };
 
 main();
