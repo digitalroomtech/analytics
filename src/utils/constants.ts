@@ -51,6 +51,10 @@ export const CATEGORIES: { section: string; subsections: string[] }[] = [
     subsections: ['mexico', 'mundo'],
   },
   {
+    section: 'autor',
+    subsections: [],
+  },
+  {
     section: 'informacion',
     subsections: [],
   },
