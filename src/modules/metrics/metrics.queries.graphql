@@ -85,13 +85,70 @@ type UserByMonthResponse {
     count: Int
 }
 
+type SwgTapResponse {
+    total_swg_in_home: Int
+    total_swg_in_other_section: Int
+}
+
+input SwgTapPayload {
+    from: String!
+    to: String!
+    tenantId: ID
+}
+
+type SwgTapBySectionReportResponse {
+    name: String
+    count: Int
+}
+
+input SwgTapBySectionReportPayload {
+    from: String!
+    to: String!
+    tenantId: ID
+}
+
+input SwgTapByMonthPayload {
+    from: String!
+    to: String!
+    tenantId: ID!
+    period:String
+}
+
+type SwgTapByMonthResponse {
+    date: String
+    count: Int
+}
+
+input SwgTapByUrlPayload {
+    from: String!
+    to: String!
+    tenantId: ID
+    skip: Int
+}
+
+type SwgTapByUrlDataResponse {
+    url: String
+    count: Int
+}
+
+type SwgTapByUrlResponse{
+    data: [SwgTapByUrlDataResponse]
+    total: Int
+}
+
 type Query {
     getClickedReport(where: ClickReportPayload): [ClickReportResponse]
     sectionReport(where: SectionReportPayload): [SectionReportResponse]
+    swgTapBySectionReport(where: SwgTapBySectionReportPayload): [SwgTapBySectionReportResponse]
     getRegisteredUserReport(where: RegisteredUserReportPayload): RegisteredUserReportResponse
     visitPageByUsers(where: VisitPageByUsersPayload): VisitPageByUserResponse
     getHeatMapReport(where: HeatMapPayload): [HeatMapResponse]
     getUrlVisitReport(where: UrlVisitPayload):UrlVisitResponse
     getUsersByMonthReport(where: UserByMonthPayload): [UserByMonthResponse]
+    getSwgTap(where:SwgTapPayload):SwgTapResponse
+
+    swgTapByMonthReport(where: SwgTapByMonthPayload): [SwgTapByMonthResponse]
+
+    swgTapByUrlReport(where: SwgTapByUrlPayload): SwgTapByUrlResponse
 
 }

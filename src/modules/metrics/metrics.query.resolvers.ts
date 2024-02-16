@@ -5,9 +5,11 @@ import {
   UrlVisitMetricsModel,
   UserByMonthMetricsModel,
 } from './metrics.models';
-import { UrlVisitReportArgs } from './metrics.types';
-import { AnalyticsModel } from '../../scripts/models/analytics';
+import { DateFilter, SwgTapByMonthReportArgs, UrlVisitReportArgs } from './metrics.types';
+import { AnalyticsModel } from '../analytics/analytics.models';
 import moment from 'moment';
+import { ObjectId } from 'mongodb';
+import momentTimezone from 'moment-timezone';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
   try {
@@ -105,6 +107,80 @@ const getRegisteredUserReport = async (parent: any, args: any, context: any) => 
   }
 };
 
+const getSwgTap = async (parent: any, args: any, context: any) => {
+  try {
+    // eslint-disable-next-line prefer-const
+    let { from, to, tenantId } = args.where;
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
+
+    console.log(args.where);
+
+    const response = await AnalyticsModel.aggregate([
+      {
+        $match: {
+          name: { $eq: 'swg_register_user' },
+          created_at: { $gte: from, $lte: to },
+          tenant_id: new ObjectId(tenantId),
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total_swg_in_home: {
+            $sum: {
+              $cond: {
+                if: { $eq: ['$section', 'home'] },
+                then: 1,
+                else: 0,
+              },
+            },
+          },
+          total_swg_in_other_section: {
+            $sum: {
+              $cond: {
+                if: { $ne: ['$section', 'home'] },
+                then: 1,
+                else: 0,
+              },
+            },
+          },
+        },
+      },
+    ]);
+
+    return response[0];
+  } catch (error) {
+    console.error('Error Get Registered User Report', error);
+    return [];
+  }
+};
+
+const swgTapBySectionReport = async (parent: any, args: any, context: any) => {
+  try {
+    // eslint-disable-next-line prefer-const
+    let { from, to, tenantId } = args.where;
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
+
+    return await AnalyticsModel.aggregate([
+      {
+        $match: {
+          name: 'swg_register_user',
+          created_at: { $gte: from, $lte: to },
+          tenant_id: new ObjectId(tenantId),
+        },
+      },
+      { $group: { _id: '$section', count: { $sum: 1 } } },
+      { $project: { name: '$_id', count: '$count', _id: false } },
+      { $sort: { count: -1 } },
+    ]);
+  } catch (error) {
+    console.error('Error Section Report', error);
+    return [];
+  }
+};
+
 const visitPageByUsers = async (parent: any, args: any, context: any) => {
   try {
     // eslint-disable-next-line prefer-const
@@ -194,9 +270,6 @@ const getHeatMapReport = async (parent: any, args: any, context: any) => {
 const getUrlVisitReport = async (parent: any, args: UrlVisitReportArgs, context: any) => {
   try {
     const { from, to, tenantId, skip } = args.where;
-
-    console.log('where', { $gte: moment(from).toDate(), $lte: moment(to).toDate() });
-    console.log('where', { $gte: moment(from).toISOString(), $lte: moment(to).toISOString() });
 
     const data = await UrlVisitMetricsModel.aggregate([
       {
@@ -288,6 +361,100 @@ const getUsersByMonthReport = async (parent: any, args: any, context: any) => {
   }
 };
 
+const swgTapByMonthReport = async (parent: any, args: SwgTapByMonthReportArgs, context: any) => {
+  try {
+    const { from, to, tenantId, period } = args.where;
+
+    let format = '%Y-%m-%d %H:00';
+
+    if (period === DateFilter.WEEK || period == DateFilter.MONTH) {
+      format = '%m-%d';
+    } else if (period === DateFilter.YEAR) {
+      format = '%Y-%m';
+    }
+
+    return await AnalyticsModel.aggregate([
+      {
+        $match: {
+          name: { $eq: 'swg_register_user' },
+          tenant_id: new ObjectId(tenantId),
+          created_at: { $gte: new Date(from), $lte: new Date(to) },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: format, date: { $toDate: '$created_at' } } },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          date: '$_id',
+          count: 1,
+        },
+      },
+      { $sort: { date: 1 } },
+    ]);
+  } catch (error) {
+    console.error('Error Get Users by Month Report', error);
+    return [];
+  }
+};
+
+const swgTapByUrlReport = async (parent: any, args: UrlVisitReportArgs, context: any) => {
+  try {
+    const { from, to, tenantId, skip } = args.where;
+
+    const data = await AnalyticsModel.aggregate([
+      {
+        $match: {
+          name: { $eq: 'swg_register_user' },
+          user_id: { $ne: 0 },
+          created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+          original_url: { $ne: '' },
+          tenant_id: new ObjectId(tenantId),
+        },
+      },
+      {
+        $group: { _id: '$original_url', count: { $sum: 1 } },
+      },
+      {
+        $project: { url: '$_id', count: '$count', _id: false },
+      },
+      { $sort: { count: -1 } },
+      { $skip: skip || 0 },
+      { $limit: 10 },
+    ]);
+
+    const res = await AnalyticsModel.aggregate([
+      {
+        $match: {
+          name: { $eq: 'swg_register_user' },
+          user_id: { $ne: 0 },
+          created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+          original_url: { $ne: '' },
+          tenant_id: new ObjectId(tenantId),
+        },
+      },
+      {
+        $group: { _id: '$original_url', count: { $sum: 1 } },
+      },
+      {
+        $project: { url: '$_id', count: '$count', _id: false },
+      },
+    ]);
+
+    return {
+      data,
+      total: res.length,
+    };
+  } catch (error) {
+    console.error('Error Get Url Visit Report', error);
+    return [];
+  }
+};
+
 export const metricsQueryResolvers = {
   getClickedReport,
   getRegisteredUserReport,
@@ -296,4 +463,8 @@ export const metricsQueryResolvers = {
   getUsersByMonthReport,
   visitPageByUsers,
   sectionReport,
+  getSwgTap,
+  swgTapBySectionReport,
+  swgTapByMonthReport,
+  swgTapByUrlReport,
 };

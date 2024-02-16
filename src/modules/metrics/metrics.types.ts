@@ -31,7 +31,23 @@ export type UrlVisitReportArgs = {
   };
 };
 
+export type SwgTapByMonthReportArgs = {
+  where: {
+    from: string;
+    to: string;
+    period: string;
+    tenantId: string;
+  };
+};
+
 export const metricsTypeDefs = fs.readFileSync(
   path.join(__dirname, 'metrics.queries.graphql'),
   'utf8',
 );
+
+export enum DateFilter {
+  TODAY = 'today',
+  WEEK = 'week',
+  MONTH = 'month',
+  YEAR = 'year',
+}
