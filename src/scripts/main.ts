@@ -33,7 +33,24 @@ const main = async () => {
       },
     );
 
-    console.log(`${i}/${response.length}`, update?._id);
+    if (update) {
+      console.log(`updated: ${i}/${response.length}`, update?._id);
+    } else {
+      const created = await TempAnalyticsModel.create({
+        name,
+        uuid,
+        user_id,
+
+        created_at,
+        updated_at,
+        url: url || 'https://vanguardia.com.mx',
+        ...section,
+        tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
+        original_url: originalUrl,
+      });
+
+      console.log(`created: ${i}/${response.length}`, created?._id);
+    }
   }
 
   console.log('FINISH');
