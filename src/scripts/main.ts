@@ -20,6 +20,8 @@ const main = async () => {
 
   console.log('res', response[0]);
 
+  const created = [];
+
   for (let i = 0; i < response.length; i++) {
     const { _id, name, uuid, user_id, created_at, updated_at, url } = response[i];
     const section = getSections(url || 'https://vanguardia.com.mx');
@@ -36,7 +38,7 @@ const main = async () => {
     if (update) {
       console.log(`updated: ${i}/${response.length}`, update?._id);
     } else {
-      const created = await TempAnalyticsModel.create({
+      created.push({
         name,
         uuid,
         user_id,
@@ -48,10 +50,12 @@ const main = async () => {
         tenant_id: new ObjectId('65b39e5af17e852e77abc149'),
         original_url: originalUrl,
       });
-
-      console.log(`created: ${i}/${response.length}`, created?._id);
+      console.log(`created: uuid:`, uuid);
     }
   }
+
+  await TempAnalyticsModel.create(created);
+  console.log(`created:${created.length}`);
 
   console.log('FINISH');
 };
