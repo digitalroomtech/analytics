@@ -18,6 +18,8 @@ const main = async () => {
     },
   ]);
 
+  console.log('res', response[0]);
+
   for (let i = 0; i < response.length; i++) {
     const { _id, name, uuid, user_id, created_at, updated_at, url } = response[i];
     const section = getSections(url || 'https://vanguardia.com.mx');
