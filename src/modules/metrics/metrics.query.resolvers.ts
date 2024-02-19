@@ -5,7 +5,13 @@ import {
   UrlVisitMetricsModel,
   UserByMonthMetricsModel,
 } from './metrics.models';
-import { DateFilter, SwgTapByMonthReportArgs, UrlVisitReportArgs } from './metrics.types';
+import {
+  DateFilter,
+  SwgTapByMonthReportArgs,
+  SwgTapByUrlMatch,
+  SwgUrlVisitReportArgs,
+  UrlVisitReportArgs,
+} from './metrics.types';
 import { AnalyticsModel } from '../analytics/analytics.models';
 import moment from 'moment';
 import { ObjectId } from 'mongodb';
@@ -402,19 +408,27 @@ const swgTapByMonthReport = async (parent: any, args: SwgTapByMonthReportArgs, c
   }
 };
 
-const swgTapByUrlReport = async (parent: any, args: UrlVisitReportArgs, context: any) => {
+const swgTapByUrlReport = async (parent: any, args: SwgUrlVisitReportArgs, context: any) => {
   try {
-    const { from, to, tenantId, skip } = args.where;
+    const { from, to, tenantId, skip, section } = args.where;
+
+    let match: SwgTapByUrlMatch = {
+      name: { $eq: 'swg_register_user' },
+      user_id: { $ne: 0 },
+      created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+      original_url: { $ne: '' },
+      tenant_id: new ObjectId(tenantId),
+    };
+
+    if (section)
+      match = {
+        ...match,
+        section,
+      };
 
     const data = await AnalyticsModel.aggregate([
       {
-        $match: {
-          name: { $eq: 'swg_register_user' },
-          user_id: { $ne: 0 },
-          created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
-          original_url: { $ne: '' },
-          tenant_id: new ObjectId(tenantId),
-        },
+        $match: match,
       },
       {
         $group: { _id: '$original_url', count: { $sum: 1 } },
@@ -429,13 +443,7 @@ const swgTapByUrlReport = async (parent: any, args: UrlVisitReportArgs, context:
 
     const res = await AnalyticsModel.aggregate([
       {
-        $match: {
-          name: { $eq: 'swg_register_user' },
-          user_id: { $ne: 0 },
-          created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
-          original_url: { $ne: '' },
-          tenant_id: new ObjectId(tenantId),
-        },
+        $match: match,
       },
       {
         $group: { _id: '$original_url', count: { $sum: 1 } },

@@ -123,6 +123,7 @@ input SwgTapByUrlPayload {
     from: String!
     to: String!
     tenantId: ID
+    section:String
     skip: Int
 }
 

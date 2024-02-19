@@ -2,6 +2,7 @@ import path from 'path';
 import { IAuthenticateAnalyticName } from '../analytics/analytics.types';
 import { ITenant } from '../tenant/tenant.types';
 import * as fs from 'fs';
+import { ObjectId } from 'mongodb';
 
 export type MetricGroupResult = {
   _id?: { name: IAuthenticateAnalyticName };
@@ -38,6 +39,34 @@ export type SwgTapByMonthReportArgs = {
     period: string;
     tenantId: string;
   };
+};
+
+export type SwgUrlVisitReportArgs = {
+  where: {
+    from: string;
+    to: string;
+    section: string;
+    skip: number;
+    tenantId: string;
+  };
+};
+
+export type SwgTapByUrlMatch = {
+  name: {
+    $eq: string;
+  };
+  user_id: {
+    $ne: number;
+  };
+  created_at: {
+    $gte: Date;
+    $lte: Date;
+  };
+  original_url: {
+    $ne: string;
+  };
+  tenant_id: ObjectId;
+  section?: string;
 };
 
 export const metricsTypeDefs = fs.readFileSync(
