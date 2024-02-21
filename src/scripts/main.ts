@@ -54,9 +54,8 @@ const main = async () => {
   });
 
   await TempAnalyticsModel.create(data);
-  console.log('created:', data.length);
 
-  for (let i = 9141; i < updatedUuids.length; i++) {
+  for (let i = 10374; i < updatedUuids.length; i++) {
     const { _id, name, uuid, url } = response[i];
     const section = getSections(url || 'https://vanguardia.com.mx');
     const originalUrl = getOriginalUrl(url || 'https://vanguardia.com.mx');
