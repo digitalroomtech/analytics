@@ -373,9 +373,19 @@ const swgTapByMonthReport = async (parent: any, args: SwgTapByMonthReportArgs, c
 
     let format = '%Y-%m-%d %H:00';
 
-    if (period === DateFilter.WEEK || period == DateFilter.MONTH) {
+    if (
+      [
+        DateFilter.WEEK,
+        DateFilter.MONTH,
+        DateFilter.CURRENT_MONTH,
+        DateFilter.LAST_WEEK,
+        DateFilter.CURRENT_WEEK,
+        DateFilter.LAST_MONTH,
+        DateFilter.CUSTOM,
+      ].includes(period)
+    ) {
       format = '%m-%d';
-    } else if (period === DateFilter.YEAR) {
+    } else if ([DateFilter.YEAR, DateFilter.CURRENT_YEAR].includes(period)) {
       format = '%Y-%m';
     }
 
@@ -389,7 +399,9 @@ const swgTapByMonthReport = async (parent: any, args: SwgTapByMonthReportArgs, c
       },
       {
         $group: {
-          _id: { $dateToString: { format: format, date: { $toDate: '$created_at' } } },
+          _id: {
+            $dateToString: { format: format, date: { $toDate: '$created_at' }, timezone: '-06:00' },
+          },
           count: { $sum: 1 },
         },
       },

@@ -36,7 +36,7 @@ export type SwgTapByMonthReportArgs = {
   where: {
     from: string;
     to: string;
-    period: string;
+    period: DateFilter;
     tenantId: string;
   };
 };
@@ -76,6 +76,14 @@ export const metricsTypeDefs = fs.readFileSync(
 
 export enum DateFilter {
   TODAY = 'today',
+  YESTERDAY = 'yesterday',
+  CURRENT_WEEK = 'currentWeek',
+  LAST_WEEK = 'lastWeek',
+  CURRENT_MONTH = 'currentMonth',
+  LAST_MONTH = 'lastMonth',
+  CURRENT_YEAR = 'currentYear',
+
+  CUSTOM = 'custom',
   WEEK = 'week',
   MONTH = 'month',
   YEAR = 'year',
