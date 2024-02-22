@@ -19,9 +19,9 @@ const tenantUserInvitations = async (
   items: ITenantUserInvitation[];
   count: number;
 }> => {
-  const { page = 1, pageSize = 10 } = args;
+  const { page = 0, pageSize = 10 } = args;
   const { tenant, ...params } = args.where;
-  console.log({ page, pageSize });
+
   let data: {
     email?: string;
     tenant?: string | null | ObjectId;
@@ -42,13 +42,15 @@ const tenantUserInvitations = async (
     .skip(page * pageSize)
     .limit(pageSize)
     .populate('tenant');
-  const count = await TenantUserInvitationModel.countDocuments();
+
+  const count = await TenantUserInvitationModel.countDocuments(data);
 
   return {
     items: tenants,
     count,
   };
 };
+
 const tenants = async (
   parent: any,
   args: TenantsArgs,
