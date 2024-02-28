@@ -475,6 +475,46 @@ const swgTapByUrlReport = async (parent: any, args: SwgUrlVisitReportArgs, conte
   }
 };
 
+const swgTapByUrlReportMetric = async (parent: any, args: SwgUrlVisitReportArgs, context: any) => {
+  try {
+    const { from, to, tenantId, section } = args.where;
+
+    let match: SwgTapByUrlMatch = {
+      name: { $eq: 'swg_register_user' },
+      user_id: { $ne: 0 },
+      created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+      original_url: { $ne: '' },
+      tenant_id: new ObjectId(tenantId),
+    };
+
+    if (section)
+      match = {
+        ...match,
+        section,
+      };
+
+    const data = await AnalyticsModel.aggregate([
+      {
+        $match: match,
+      },
+      {
+        $group: { _id: '$original_url', count: { $sum: 1 } },
+      },
+      {
+        $project: { url: '$_id', count: '$count', _id: false },
+      },
+      { $sort: { count: -1 } },
+    ]);
+
+    return {
+      data,
+    };
+  } catch (error) {
+    console.error('Error Get Url Visit Report', error);
+    return [];
+  }
+};
+
 export const metricsQueryResolvers = {
   getClickedReport,
   getRegisteredUserReport,
@@ -487,4 +527,5 @@ export const metricsQueryResolvers = {
   swgTapBySectionReport,
   swgTapByMonthReport,
   swgTapByUrlReport,
+  swgTapByUrlReportMetric,
 };

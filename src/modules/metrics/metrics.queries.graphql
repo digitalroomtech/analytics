@@ -127,6 +127,14 @@ input SwgTapByUrlPayload {
     skip: Int
 }
 
+
+input SwgTapByUrlMetricPayload {
+    from: String!
+    to: String!
+    tenantId: ID
+    section:String
+}
+
 type SwgTapByUrlDataResponse {
     url: String
     count: Int
@@ -135,6 +143,15 @@ type SwgTapByUrlDataResponse {
 type SwgTapByUrlResponse{
     data: [SwgTapByUrlDataResponse]
     total: Int
+}
+
+type SwgTapByUrlDataMetricResponse {
+    url: String
+    count: Int
+}
+
+type SwgTapByUrlMetricResponse{
+    data: [SwgTapByUrlDataMetricResponse]
 }
 
 type Query {
@@ -151,5 +168,6 @@ type Query {
     swgTapByMonthReport(where: SwgTapByMonthPayload): [SwgTapByMonthResponse]
 
     swgTapByUrlReport(where: SwgTapByUrlPayload): SwgTapByUrlResponse
+    swgTapByUrlReportMetric(where: SwgTapByUrlMetricPayload): SwgTapByUrlMetricResponse
 
 }
