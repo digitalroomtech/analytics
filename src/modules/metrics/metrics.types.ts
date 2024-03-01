@@ -48,6 +48,7 @@ export type SwgUrlVisitReportArgs = {
     section: string;
     skip: number;
     tenantId: string;
+    order: 'asc' | 'desc';
   };
 };
 

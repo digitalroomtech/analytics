@@ -119,12 +119,18 @@ type SwgTapByMonthResponse {
     count: Int
 }
 
+enum SwgTapByUrlOrder{
+    desc
+    asc
+}
+
 input SwgTapByUrlPayload {
     from: String!
     to: String!
     tenantId: ID
     section:String
     skip: Int
+    order:SwgTapByUrlOrder
 }
 
 
