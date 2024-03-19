@@ -1,7 +1,13 @@
-import { CATEGORIES } from '../../utils/constants';
+import { ANIMAL_POLITICO_CATEGORIES, VANGUARDIA_CATEGORIES } from '../../utils/constants';
 
-export const getSections = (url: string): { section: string; subsection: string } => {
-  const sectionObject = CATEGORIES.find(
+export const getSections = (
+  url: string,
+  categories: { section: string; subsections: string[] }[],
+): {
+  section: string;
+  subsection: string;
+} => {
+  const sectionObject = categories.find(
     (category) => url.includes(`/${category.section}/`) || url.includes(`/${category.section}`),
   );
 
@@ -51,4 +57,13 @@ export const getUrlParams = (url: string) => {
 export const getOriginalUrl = (url: string) => {
   const data = new URL(url);
   return `${data.origin}${data.pathname && data.pathname !== '/' ? data.pathname : ''}`;
+};
+
+export const getCategoriesByTenant = (tenantId: string) => {
+  if (tenantId === '65b39e5af17e852e77abc149') {
+    return VANGUARDIA_CATEGORIES;
+  } else if (tenantId === '65f47446af45c4f2fa1d5a5c') {
+    return ANIMAL_POLITICO_CATEGORIES;
+  }
+  return [];
 };

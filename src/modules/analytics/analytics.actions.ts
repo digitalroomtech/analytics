@@ -3,7 +3,12 @@ import { AnalyticParamsModel, AnalyticsModel } from './analytics.models';
 import { IAuthenticateAnalyticName } from './analytics.types';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
-import { getOriginalUrl, getSections, getUrlParams } from './analytics.utils';
+import {
+  getCategoriesByTenant,
+  getOriginalUrl,
+  getSections,
+  getUrlParams,
+} from './analytics.utils';
 import { ObjectId } from 'mongodb';
 
 interface Request extends ExpressRequest {
@@ -31,7 +36,10 @@ export const createAnalyticParams = async (
 
 export async function authenticate(req: Request, res: Response) {
   const uuid = uuidv4();
-  const section = getSections(req.headers.origin || req.body.originUrl);
+  const section = getSections(
+    req.headers.origin || req.body.originUrl,
+    getCategoriesByTenant(req.body.tenant_id),
+  );
   const params = getUrlParams(req.headers.origin || req.body.originUrl);
   const originalUrl = getOriginalUrl(req.headers.origin || req.body.originUrl);
 
@@ -66,7 +74,7 @@ export async function analyticsCreate(req: Request, res: Response) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
 
-  const section = getSections(data.originUrl);
+  const section = getSections(data.originUrl, getCategoriesByTenant(req.body.tenant_id));
   const params = getUrlParams(data.originUrl);
   const originalUrl = getOriginalUrl(data.originUrl);
 

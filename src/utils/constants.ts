@@ -45,7 +45,7 @@ export const DO_SPACES_REGION = process.env.DO_SPACES_REGION || '';
 export const DO_SPACES_BUCKET = process.env.DO_SPACES_BUCKET || '';
 export const DO_SPACES_ROUTE = process.env.DO_SPACES_ROUTE || '';
 
-export const CATEGORIES: { section: string; subsections: string[] }[] = [
+export const VANGUARDIA_CATEGORIES: { section: string; subsections: string[] }[] = [
   {
     section: 'noticias',
     subsections: ['mexico', 'mundo'],
@@ -123,5 +123,56 @@ export const CATEGORIES: { section: string; subsections: string[] }[] = [
   {
     section: 'newsletters',
     subsections: ['newsletter-vanguardia', 'newsletter-semanario'],
+  },
+];
+
+export const ANIMAL_POLITICO_CATEGORIES: { section: string; subsections: string[] }[] = [
+  {
+    section: 'politica',
+    subsections: [],
+  },
+  {
+    section: 'elecciones-2024',
+    subsections: ['presidencia', 'cdmx', 'estados', 'congreso', 'picalenguas'],
+  },
+  {
+    section: 'seguridad',
+    subsections: [],
+  },
+  {
+    section: 'sociedad',
+    subsections: [],
+  },
+  {
+    section: 'salud',
+    subsections: [],
+  },
+  {
+    section: 'verificacion-de-hechos',
+    subsections: ['fact-checking', 'te-explico', 'desinformacion'],
+  },
+  {
+    section: 'tendencias',
+    subsections: ['entretenimiento', 'actualidad', 'estilo-de-vida', 'ciencia-tecnologia'],
+  },
+  {
+    section: 'estados',
+    subsections: [],
+  },
+  {
+    section: 'genero-y-diversidad',
+    subsections: [],
+  },
+  {
+    section: 'internacional',
+    subsections: [],
+  },
+  {
+    section: 'analisis',
+    subsections: ['autores', 'organizaciones', 'invitades'],
+  },
+  {
+    section: 'hablemos-de',
+    subsections: ['finanzas', 'empresas', 'sustentabilidad', 'educacion'],
   },
 ];
