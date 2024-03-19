@@ -62,12 +62,12 @@ export const getOriginalUrl = (url: string) => {
 };
 
 export const getCategoriesByTenant = (tenantId: ObjectId) => {
-  console.log({ tenantId: tenantId._id });
-  console.log({ newTenantId: new ObjectId('65b39e5af17e852e77abc149')._id });
+  console.log({ vanguardia: tenantId.equals(new ObjectId('65b39e5af17e852e77abc149')) });
+  console.log({ ap: tenantId.equals(new ObjectId('65f47446af45c4f2fa1d5a5c')) });
 
-  if (tenantId._id === new ObjectId('65b39e5af17e852e77abc149')._id) {
+  if (tenantId.equals(new ObjectId('65b39e5af17e852e77abc149'))) {
     return VANGUARDIA_CATEGORIES;
-  } else if (tenantId._id === new ObjectId('65f47446af45c4f2fa1d5a5c')._id) {
+  } else if (tenantId.equals(new ObjectId('65f47446af45c4f2fa1d5a5c'))) {
     return ANIMAL_POLITICO_CATEGORIES;
   }
   return [];
