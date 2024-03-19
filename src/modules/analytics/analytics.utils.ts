@@ -62,11 +62,10 @@ export const getOriginalUrl = (url: string) => {
 };
 
 export const getCategoriesByTenant = (tenantId: ObjectId) => {
-  console.log({ tenantId: tenantId === new ObjectId('65b39e5af17e852e77abc149') });
-  console.log({ tenantId, test: new ObjectId('65f47446af45c4f2fa1d5a5c') });
-  if (tenantId === new ObjectId('65b39e5af17e852e77abc149')) {
+  console.log({ tenantId: tenantId._id === new ObjectId('65b39e5af17e852e77abc149')._id });
+  if (tenantId._id === new ObjectId('65b39e5af17e852e77abc149')._id) {
     return VANGUARDIA_CATEGORIES;
-  } else if (tenantId === new ObjectId('65f47446af45c4f2fa1d5a5c')) {
+  } else if (tenantId._id === new ObjectId('65f47446af45c4f2fa1d5a5c')._id) {
     return ANIMAL_POLITICO_CATEGORIES;
   }
   return [];
