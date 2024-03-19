@@ -70,12 +70,15 @@ export async function authenticate(req: Request, res: Response) {
 
 export async function analyticsCreate(req: Request, res: Response) {
   const data = req.body;
+
   if (!(data.name || data.tenant_id || data.uuid || data.user_id || data.originUrl)) {
     return res.status(500).json({ message: 'El name y uuid son requeridos' });
   }
 
   const section = getSections(data.originUrl, getCategoriesByTenant(req.body.tenant_id));
+
   const params = getUrlParams(data.originUrl);
+
   const originalUrl = getOriginalUrl(data.originUrl);
 
   const analyticParams = {

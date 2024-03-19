@@ -60,6 +60,7 @@ export const getOriginalUrl = (url: string) => {
 };
 
 export const getCategoriesByTenant = (tenantId: string) => {
+  console.log({ tenantId });
   if (tenantId === '65b39e5af17e852e77abc149') {
     return VANGUARDIA_CATEGORIES;
   } else if (tenantId === '65f47446af45c4f2fa1d5a5c') {
