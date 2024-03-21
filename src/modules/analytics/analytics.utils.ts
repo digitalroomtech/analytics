@@ -8,7 +8,6 @@ export const getSections = (
   section: string;
   subsection: string;
 } => {
-  console.log({ url });
   const sectionObject = categories.find(
     (category) => url.includes(`/${category.section}/`) || url.includes(`/${category.section}`),
   );
@@ -62,9 +61,6 @@ export const getOriginalUrl = (url: string) => {
 };
 
 export const getCategoriesByTenant = (tenantId: ObjectId) => {
-  console.log({ vanguardia: tenantId.equals(new ObjectId('65b39e5af17e852e77abc149')) });
-  console.log({ ap: tenantId.equals(new ObjectId('65f47446af45c4f2fa1d5a5c')) });
-
   if (tenantId.equals(new ObjectId('65b39e5af17e852e77abc149'))) {
     return VANGUARDIA_CATEGORIES;
   } else if (tenantId.equals(new ObjectId('65f47446af45c4f2fa1d5a5c'))) {

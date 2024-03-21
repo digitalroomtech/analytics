@@ -13,9 +13,7 @@ import {
   UrlVisitReportArgs,
 } from './metrics.types';
 import { AnalyticsModel } from '../analytics/analytics.models';
-import moment from 'moment';
 import { ObjectId } from 'mongodb';
-import momentTimezone from 'moment-timezone';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
   try {
@@ -29,7 +27,7 @@ const getClickedReport = async (parent: any, args: any, context: any) => {
         $match: {
           name: { $in: events },
           created_at: { $gte: from, $lte: to },
-          // tenant_id: tenantId,
+          tenant_id: new ObjectId(tenantId),
         },
       },
       { $group: { _id: '$name', count: { $sum: 1 } } },
