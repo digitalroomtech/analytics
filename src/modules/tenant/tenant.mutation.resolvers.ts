@@ -2,6 +2,7 @@ import {
   CreateTenantArgs,
   CreateTenantUserInvitationArgs,
   TenantUserInvitationStatuses,
+  TenantUserRoles,
   UpdateTenantArgs,
   UpdateTenantUserArgs,
   UpdateTenantUserInvitationArgs,
@@ -77,7 +78,7 @@ const createTenantUserInvitation = async (parent: any, args: CreateTenantUserInv
     await sendPostmarkSignupEmail({
       email: email ?? '',
       tenant: tenantById?.name ?? '',
-      role: role ?? '',
+      role: role === TenantUserRoles.TENANT_ADMINISTRATOR ? 'Administrador' : 'Usuario',
       logo: tenantById?.logo ?? '',
       url: FRONT_URL,
     });
@@ -86,7 +87,7 @@ const createTenantUserInvitation = async (parent: any, args: CreateTenantUserInv
     throw new Error('Tenemos problemas para crear la invitación');
   }
 
-  return await tenantUserInvitation?.populate('tenant');
+  return tenantUserInvitation?.populate('tenant');
 };
 
 const updateTenantUserInvitation = async (
