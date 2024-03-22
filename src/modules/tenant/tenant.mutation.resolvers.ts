@@ -58,7 +58,7 @@ const updateTenant = async (parent: any, args: UpdateTenantArgs) => {
     throw new Error('Tenemos problemas para actualizar el tenant');
   }
 
-  return await tenant?.populate('plan');
+  return tenant?.populate('plan');
 };
 
 const createTenantUserInvitation = async (parent: any, args: CreateTenantUserInvitationArgs) => {
@@ -129,7 +129,7 @@ const updateTenantUserInvitation = async (
     await UserModel.findOneAndUpdate(userId, { $push: { tenantUsers: { _id: tenantUser._id } } });
   }
 
-  return await tenantUserInvitation?.populate('tenant');
+  return tenantUserInvitation?.populate('tenant');
 };
 
 const updateTenantUser = async (parent: any, args: UpdateTenantUserArgs) => {
