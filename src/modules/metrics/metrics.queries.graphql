@@ -5,10 +5,22 @@ input ClickReportPayload {
     tenantId: ID
 }
 
+input ClickReportUserPayload {
+    events: [String]!
+    from: String!
+    to: String!
+    tenantId: ID
+}
+
 input SectionReportPayload {
     from: String!
     to: String!
     tenantId: ID
+}
+
+type ClickReportUserResponse {
+    name: String
+    count: Int
 }
 
 type ClickReportResponse {
@@ -162,6 +174,8 @@ type SwgTapByUrlMetricResponse{
 
 type Query {
     getClickedReport(where: ClickReportPayload): [ClickReportResponse]
+    getClickedReportUser(where: ClickReportUserPayload): [ClickReportUserResponse]
+
     sectionReport(where: SectionReportPayload): [SectionReportResponse]
     swgTapBySectionReport(where: SwgTapBySectionReportPayload): [SwgTapBySectionReportResponse]
     getRegisteredUserReport(where: RegisteredUserReportPayload): RegisteredUserReportResponse

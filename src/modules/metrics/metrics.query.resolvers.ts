@@ -513,6 +513,30 @@ const swgTapByUrlReportMetric = async (parent: any, args: SwgUrlVisitReportArgs,
   }
 };
 
+const getClickedReportUser = async (parent: any, args: any, context: any) => {
+  try {
+    // eslint-disable-next-line prefer-const
+    let { events, from, to, tenantId } = args.where;
+    from = new Date(`${from}`);
+    to = new Date(`${to}`);
+
+    return await EventsMetricsModel.aggregate([
+      {
+        $match: {
+          name: { $in: events },
+          created_at: { $gte: from, $lte: to },
+          tenant_id: new ObjectId(tenantId),
+        },
+      },
+      { $group: { _id: '$uuid', count: { $sum: 1 } } },
+      { $project: { uuid: '$_id', count: '$count', _id: false } },
+    ]);
+  } catch (error) {
+    console.error('Error Get Clicked Events Report', error);
+    return [];
+  }
+};
+
 export const metricsQueryResolvers = {
   getClickedReport,
   getRegisteredUserReport,
@@ -526,4 +550,5 @@ export const metricsQueryResolvers = {
   swgTapByMonthReport,
   swgTapByUrlReport,
   swgTapByUrlReportMetric,
+  getClickedReportUser,
 };
