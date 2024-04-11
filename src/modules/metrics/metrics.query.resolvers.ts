@@ -420,7 +420,8 @@ const swgTapByMonthReport = async (parent: any, args: SwgTapByMonthReportArgs, c
 
 const swgTapByUrlReport = async (parent: any, args: SwgUrlVisitReportArgs, context: any) => {
   try {
-    const { from, to, tenantId, skip, section, order } = args.where;
+    const { from, to, tenantId, section, order } = args.where;
+    const { page, pageSize } = args;
 
     let match: SwgTapByUrlMatch = {
       name: { $eq: 'swg_register_user' },
@@ -447,8 +448,8 @@ const swgTapByUrlReport = async (parent: any, args: SwgUrlVisitReportArgs, conte
         $project: { url: '$_id', count: '$count', _id: false },
       },
       { $sort: { count: order === 'desc' ? -1 : 1 } },
-      { $skip: skip || 0 },
-      { $limit: 10 },
+      { $skip: page * pageSize },
+      { $limit: pageSize },
     ]);
 
     const res = await AnalyticsModel.aggregate([

@@ -50,6 +50,8 @@ export type SwgUrlVisitReportArgs = {
     tenantId: string;
     order: 'asc' | 'desc';
   };
+  page: number;
+  pageSize: number;
 };
 
 export type SwgTapByUrlMatch = {

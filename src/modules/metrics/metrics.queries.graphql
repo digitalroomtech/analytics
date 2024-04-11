@@ -141,7 +141,6 @@ input SwgTapByUrlPayload {
     to: String!
     tenantId: ID
     section:String
-    skip: Int
     order:SwgTapByUrlOrder
 }
 
@@ -187,7 +186,7 @@ type Query {
 
     swgTapByMonthReport(where: SwgTapByMonthPayload): [SwgTapByMonthResponse]
 
-    swgTapByUrlReport(where: SwgTapByUrlPayload): SwgTapByUrlResponse
+    swgTapByUrlReport(where: SwgTapByUrlPayload, page:Int,pageSize:Int): SwgTapByUrlResponse
     swgTapByUrlReportMetric(where: SwgTapByUrlMetricPayload): SwgTapByUrlMetricResponse
 
 }
