@@ -29,6 +29,9 @@ const userSchema = new Schema<IUser, IUserModel>(
         ref: 'TenantUsers',
       },
     ],
+    last_login: {
+      type: Date
+    },
     created_at: {
       type: Date,
       default: Date.now(),

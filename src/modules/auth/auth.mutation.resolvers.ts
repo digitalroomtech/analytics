@@ -5,6 +5,8 @@ import { jwtSign } from './auth.actions';
 import { APP_SECRET } from '../../utils/constants';
 import { UserRoles } from '../user/user.types';
 import { UserModel } from '../user/user.models';
+import { ObjectId } from 'mongodb';
+import moment from 'moment';
 
 /**
  * Sign up user.
@@ -58,6 +60,20 @@ const login = async (parent: any, args: LoginArgs, context: any): Promise<AuthPa
   if (!valid) {
     throw new Error('Contraseña invalida');
   }
+
+  try {
+    await UserModel.findByIdAndUpdate(user._id, {
+        last_login: moment().toISOString(),
+      },
+      {
+        returnNewDocument: true,
+        new: true,
+      });
+
+  } catch (e) {
+    throw new Error('Tenemos problemas para actualizar el usuario');
+  }
+
 
   const token = jwt.sign(jwtSign(user), APP_SECRET);
 

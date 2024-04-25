@@ -14,6 +14,7 @@ export interface IUser {
   avatar?: string;
   role?: UserRoles;
   tenantUsers: ITenantUser[];
+  last_login?: string;
   created_at?: string;
   updated_at?: string;
 }
