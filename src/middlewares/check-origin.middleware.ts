@@ -8,8 +8,16 @@ interface Request extends ExpressRequest {
 
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const sessionOrigin = req.headers['analytics-session-origin'];
+
+
+  console.log({
+    sessionOrigin,
+    header:req.headers.origin
+  })
+
   const url = new URL((sessionOrigin || req.headers.origin) as string);
   let tenant = undefined;
+
 
   try {
     tenant = await TenantModel.findOne({
