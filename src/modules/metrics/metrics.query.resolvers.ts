@@ -374,16 +374,15 @@ const swgTapByMonthReport = async (parent: any, args: SwgTapByMonthReportArgs, c
     if (
       [
         DateFilter.WEEK,
-        DateFilter.MONTH,
         DateFilter.CURRENT_MONTH,
         DateFilter.LAST_WEEK,
         DateFilter.CURRENT_WEEK,
         DateFilter.LAST_MONTH,
-        DateFilter.CUSTOM,
+        DateFilter.DAY,
       ].includes(period)
     ) {
       format = '%m-%d';
-    } else if ([DateFilter.YEAR, DateFilter.CURRENT_YEAR].includes(period)) {
+    } else if ([DateFilter.YEAR, DateFilter.CURRENT_YEAR, DateFilter.MONTH].includes(period)) {
       format = '%Y-%m';
     }
 

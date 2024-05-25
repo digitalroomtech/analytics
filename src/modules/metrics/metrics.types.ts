@@ -90,4 +90,5 @@ export enum DateFilter {
   WEEK = 'week',
   MONTH = 'month',
   YEAR = 'year',
+  DAY = 'day',
 }
