@@ -519,7 +519,7 @@ const getClickedReportUser = async (parent: any, args: any, context: any) => {
     let { events, from, to, tenantId } = args.where;
     from = new Date(`${from}`);
     to = new Date(`${to}`);
-
+    console.log(JSON.stringify({ args }));
     return await EventsMetricsModel.aggregate([
       {
         $match: {

@@ -97,8 +97,7 @@ export async function analyticsCreate(req: Request, res: Response) {
   try {
     const analytic = await AnalyticsModel.create(analyticParams);
 
-    // await createAnalyticParams(params.queryParams, analytic._id);
-    // await createAnalyticParams(params.hashParams, analytic._id);
+    console.log({ analytic });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }

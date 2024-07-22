@@ -19,6 +19,7 @@ import moment from 'moment';
 const signup = async (parent: any, args: SignupArgs): Promise<AuthPayload> => {
   const password = await bcrypt.hash(args.password, 10);
   let user;
+  console.log({password}, args);
 
   try {
     user = await UserModel.create({
@@ -55,7 +56,10 @@ const login = async (parent: any, args: LoginArgs, context: any): Promise<AuthPa
     throw new Error('Usuario no encontrado');
   }
 
+  console.log({user});
+
   const valid = await bcrypt.compare(args.password, user.password as string);
+  console.log({ valid });
 
   if (!valid) {
     throw new Error('Contraseña invalida');
