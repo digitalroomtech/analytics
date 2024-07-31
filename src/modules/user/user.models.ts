@@ -30,7 +30,7 @@ const userSchema = new Schema<IUser, IUserModel>(
       },
     ],
     last_login: {
-      type: Date
+      type: Date,
     },
     created_at: {
       type: Date,
@@ -46,7 +46,6 @@ const userSchema = new Schema<IUser, IUserModel>(
     collection: 'users',
   },
 );
-
 
 const UserInvitationSchema = new Schema<UserInvitation>(
   {
@@ -74,6 +73,33 @@ const UserInvitationSchema = new Schema<UserInvitation>(
   { collection: 'user_invitations' },
 );
 
+const userResetPasswordSchema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    token: {
+      type: String,
+      required: true,
+    },
+    expired_at: {
+      type: Date,
+      required: true,
+    },
+    created_at: {
+      type: Date,
+      default: Date.now(),
+      index: true,
+    },
+    updated_at: {
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  { collection: 'user_reset_password' },
+);
+
 userSchema.static('findOneOrCreate', async function findOneOrCreate(params: IFindOneOrCreate) {
   const user = await this.findOne(params);
   return user ? user : await this.create(params);
@@ -81,3 +107,4 @@ userSchema.static('findOneOrCreate', async function findOneOrCreate(params: IFin
 
 export const UserModel = model<IUser, IUserModel>('Users', userSchema);
 export const UserInvitationModel = model('UserInvitations', UserInvitationSchema);
+export const UserResetPasswordModel = model('user_reset_password', userResetPasswordSchema);

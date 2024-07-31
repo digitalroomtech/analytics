@@ -11,6 +11,7 @@ import { expressServer } from './config/express.server';
 import { graphqlServer } from './config/graphql.server';
 import { authenticateMiddleware } from './middlewares/authenticateMiddleware';
 import uploadRoutes from './modules/upload/upload.routes';
+import { authRouter } from './modules/auth/auth.routes';
 
 const httpServer = http.createServer(expressServer);
 const port = process.env.PORT || 3002;
@@ -25,6 +26,9 @@ expressServer.use(
   express.json(),
   analyticsRoutes,
 );
+
+expressServer.use('/auth', authRouter);
+
 expressServer.use('/tenant', tenantRoutes);
 
 expressServer.use(
