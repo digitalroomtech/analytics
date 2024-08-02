@@ -105,6 +105,10 @@ type TenantUserInvitationsPayload{
     items:[TenantUserInvitation]
 }
 
+type RemoveTenantUserInvitationPayload{
+    success:Boolean
+}
+
 input TenantUserInvitationWhereInput {
     email:String
     role: TenantUserRoles
@@ -122,6 +126,14 @@ input TenantUserWhereInput {
 input UpdateTenantUserInvitationInput {
     id:String
     status: TenantUserInvitationStatuses
+}
+
+input RemoveTenantUserInvitationInput {
+    id:String
+}
+
+input ResendTenantUserInvitationInput {
+    id:String
 }
 
 input TenantUserUserInput{
@@ -142,6 +154,8 @@ type Mutation {
     updateTenant(input:UpdateTenantInput!):Tenant
     createTenantUserInvitation(input:CreateTenantUserInvitationInput): TenantUserInvitation
     updateTenantUserInvitation(input:UpdateTenantUserInvitationInput): TenantUserInvitation
+    removeTenantUserInvitation(input:RemoveTenantUserInvitationInput): RemoveTenantUserInvitationPayload
+    resendTenantUserInvitation(input:ResendTenantUserInvitationInput): TenantUserInvitation
     updateTenantUser(input:UpdateTenantUserInput): TenantUser
 }
 
