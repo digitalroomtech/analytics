@@ -72,6 +72,18 @@ export type CreateTenantUserInvitationArgs = {
   };
 };
 
+export type RemoveTenantUserInvitationArgs = {
+  input: {
+    id: string;
+  };
+};
+
+export type ResendTenantUserInvitationArgs = {
+  input: {
+    id: string;
+  };
+};
+
 export type UpdateTenantUserInvitationArgs = {
   input: {
     id: string;

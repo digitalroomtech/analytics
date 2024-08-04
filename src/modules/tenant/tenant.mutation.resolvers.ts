@@ -1,6 +1,8 @@
 import {
   CreateTenantArgs,
   CreateTenantUserInvitationArgs,
+  RemoveTenantUserInvitationArgs,
+  ResendTenantUserInvitationArgs,
   TenantUserInvitationStatuses,
   TenantUserRoles,
   UpdateTenantArgs,
@@ -132,6 +134,63 @@ const updateTenantUserInvitation = async (
   return tenantUserInvitation?.populate('tenant');
 };
 
+const removeTenantUserInvitation = async (
+  parent: any,
+  args: RemoveTenantUserInvitationArgs,
+  context: any,
+) => {
+  const { id } = args.input;
+  const invitationId = new ObjectId(id);
+  const invitation = await TenantUserInvitationModel.findById(invitationId);
+
+  if (!invitation) throw new Error('La invitación no existe');
+
+  if (invitation && invitation.status === TenantUserInvitationStatuses.ACCEPTED)
+    throw new Error('La invitación ya fue aceptada');
+
+  if (invitation && invitation.status === TenantUserInvitationStatuses.REJECTED)
+    throw new Error('La invitación ya fue cancelada');
+
+  try {
+    await TenantUserInvitationModel.findByIdAndDelete(invitationId);
+  } catch (e) {
+    throw new Error('Tenemos problemas para eliminar la invitación');
+  }
+  return { success: true };
+};
+
+const resendTenantUserInvitation = async (
+  parent: any,
+  args: ResendTenantUserInvitationArgs,
+  context: any,
+) => {
+  const { id } = args.input;
+  const invitationId = new ObjectId(id);
+  const invitation = await TenantUserInvitationModel.findById(invitationId).populate('tenant');
+
+  if (!invitation) throw new Error('La invitación no existe');
+
+  if (invitation && invitation.status === TenantUserInvitationStatuses.ACCEPTED)
+    throw new Error('La invitación ya fue aceptada');
+
+  if (invitation && invitation.status === TenantUserInvitationStatuses.REJECTED)
+    throw new Error('La invitación ya fue cancelada');
+
+  try {
+    await sendPostmarkSignupEmail({
+      email: invitation.email ?? '',
+      tenant: invitation.tenant?.name ?? '',
+      role: invitation.role === TenantUserRoles.TENANT_ADMINISTRATOR ? 'Administrador' : 'Usuario',
+      logo: invitation.tenant?.logo ?? '',
+      url: FRONT_URL,
+    });
+  } catch (e) {
+    throw new Error('Tenemos problemas para enviar la invitación');
+  }
+
+  return invitation;
+};
+
 const updateTenantUser = async (parent: any, args: UpdateTenantUserArgs) => {
   const { id, status, role, user } = args.input;
 
@@ -161,5 +220,7 @@ export const tenantMutationResolvers = {
   updateTenant,
   createTenantUserInvitation,
   updateTenantUserInvitation,
+  removeTenantUserInvitation,
+  resendTenantUserInvitation,
   updateTenantUser,
 };
