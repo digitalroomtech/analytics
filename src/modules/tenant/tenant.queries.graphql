@@ -116,11 +116,21 @@ input TenantUserInvitationWhereInput {
     tenant:TenantInput
 }
 
+enum SortOrder {
+    ASC 
+    DESC
+}
+
+input SortTableInput {
+    field: String
+    order: SortOrder
+}
+
 input TenantUserWhereInput {
     role: TenantUserRoles
     tenant:TenantInput
     search: String
-
+    sort: SortTableInput
 }
 
 input UpdateTenantUserInvitationInput {
