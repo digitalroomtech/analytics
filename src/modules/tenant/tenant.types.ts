@@ -3,6 +3,7 @@ import path from 'path';
 import { IPlan } from '../plan/plan.types';
 import { IUser } from '../user/user.types';
 import { InputMaybe, Scalars } from '../../utils/types';
+import { SortOrder } from 'mongoose';
 
 export const tenantTypeDefs = fs.readFileSync(
   path.join(__dirname, 'tenant.queries.graphql'),
@@ -168,6 +169,10 @@ export type TenantUsersArgs = {
       id: string;
     };
     role?: TenantUserRoles;
+    sort?: {
+      field: string;
+      order: 'ASC' | 'DESC';
+    };
   };
   page: number;
   pageSize: number;
