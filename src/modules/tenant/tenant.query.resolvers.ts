@@ -77,11 +77,11 @@ const tenantUsers = async (
   const { tenant, search, sort } = args.where;
   const { page = 1, pageSize = 10 } = args;
 
-  const match = !search || search === '' ? {} : { 'user.name': { $regex: search, $options: 'i' } };
+  //const match = !search || search === '' ? {} : { 'user.name': { $regex: search, $options: 'i' } };
   const sortField: Record<string, 1 | -1> | undefined = sort
     ? { [sort.field]: sort.order === 'ASC' ? -1 : 1 }
     : undefined;
-
+  const regex = new RegExp(search ?? '', 'i');
   const tenantUsers = await TenantUserModel.aggregate([
     {
       $lookup: {
@@ -107,25 +107,28 @@ const tenantUsers = async (
     },
     {
       $match: {
-        $and: [{ 'tenant._id': tenant ? new ObjectId(tenant.id) : { $exists: true } }, match],
+        $and: [
+          { 'tenant._id': tenant ? new ObjectId(tenant.id) : { $exists: true } },
+          ...(search ? [{ 'user.name': { $regex: regex } }] : []),
+        ], //{ "user.name": {$regex: regex }}
       },
     },
-    {
-      $skip: page * pageSize,
-    },
-    {
-      $limit: pageSize,
-    },
     ...(sortField ? [{ $sort: sortField }] : []),
+    {
+      $facet: {
+        paginatedResults: [{ $skip: page * pageSize }, { $limit: pageSize }],
+        totalCount: [
+          {
+            $count: 'count',
+          },
+        ],
+      },
+    },
   ]);
 
-  const count = await TenantUserModel.find({
-    tenant: tenant ? new ObjectId(tenant.id) : null,
-  }).countDocuments();
-
   return {
-    items: tenantUsers,
-    count,
+    items: tenantUsers[0].paginatedResults,
+    count: tenantUsers[0]?.totalCount?.[0]?.count ?? 0,
   };
 };
 const tenant = async (parent: any, args: TenantArgs): Promise<ITenant | null> => {
