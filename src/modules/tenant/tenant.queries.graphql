@@ -114,6 +114,7 @@ input TenantUserInvitationWhereInput {
     role: TenantUserRoles
     status: TenantUserInvitationStatuses
     tenant:TenantInput
+    sort: SortTableInput
 }
 
 enum SortOrder {
