@@ -157,6 +157,10 @@ export type TenantUserInvitationArgs = {
     };
     status?: TenantUserInvitationStatuses;
     role?: TenantUserRoles;
+    sort?: {
+      field: string;
+      order: 'ASC' | 'DESC';
+    };
   };
   page: number;
   pageSize: number;

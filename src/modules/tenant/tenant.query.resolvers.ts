@@ -21,7 +21,10 @@ const tenantUserInvitations = async (
   count: number;
 }> => {
   const { page = 0, pageSize = 10 } = args;
-  const { tenant, ...params } = args.where;
+  const { tenant, sort, ...params } = args.where;
+  const sortField: Record<string, 1 | -1> | undefined = sort
+    ? { [sort.field]: sort.order === 'ASC' ? -1 : 1 }
+    : undefined;
 
   let data: {
     email?: string;
@@ -42,7 +45,8 @@ const tenantUserInvitations = async (
   const tenants = await TenantUserInvitationModel.find(data)
     .skip(page * pageSize)
     .limit(pageSize)
-    .populate('tenant');
+    .populate('tenant')
+    .sort(sortField);
 
   const count = await TenantUserInvitationModel.countDocuments(data);
 
