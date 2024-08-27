@@ -36,7 +36,7 @@ export async function authenticate(req: Request, res: Response) {
         event: authenticateEvent._id,
       }))]);
 
-      console.log({ result });
+      console.log(result);
 
       // await EventModel.findByIdAndUpdate(authenticateEvent._id,{
       //   $push:{
