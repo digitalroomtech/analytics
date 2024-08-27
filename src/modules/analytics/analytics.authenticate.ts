@@ -31,18 +31,16 @@ export async function authenticate(req: Request, res: Response) {
 
 
     if (event_meta.length) {
-      const result = await EventMetaModel.insertMany([...event_meta.map((ev: EventMeta) => ({
+      const results = await EventMetaModel.insertMany([...event_meta.map((ev: EventMeta) => ({
         ...ev,
         event: authenticateEvent._id,
       }))]);
 
-      console.log(result);
-
-      // await EventModel.findByIdAndUpdate(authenticateEvent._id,{
-      //   $push:{
-      //     event_meta:result.
-      //   }
-      // })
+      await EventModel.findByIdAndUpdate(authenticateEvent._id, {
+        $push: {
+          event_meta: results.map((result) => result._id),
+        },
+      }, { new: true, useFindAndModify: false });
 
     }
 

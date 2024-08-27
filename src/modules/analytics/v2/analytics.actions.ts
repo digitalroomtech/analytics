@@ -24,11 +24,19 @@ export const eventsCreate = async (req: Request, res: Response) => {
   });
 
   if (event_meta.length) {
-    await EventMetaModel.insertMany([...event_meta.map((ev: EventMeta) => ({
+    const results = await EventMetaModel.insertMany([...event_meta.map((ev: EventMeta) => ({
       ...ev,
       event: event._id,
     }))]);
+
+    await EventModel.findByIdAndUpdate(event._id, {
+      $push: {
+        event_meta: results.map((result) => result._id),
+      },
+    }, { new: true, useFindAndModify: false });
+
   }
+
 
   console.log('EVENT', { name, id: event._id });
 
