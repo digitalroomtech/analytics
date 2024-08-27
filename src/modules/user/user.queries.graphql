@@ -77,8 +77,24 @@ type Mutation{
     createUserInvitation(input:CreateUserInvitationInput):UserInvitation
 }
 
+type UserEventMeta{
+    id:String
+}
+
+type UserEvent{
+    id:String
+    event_meta:[UserEventMeta]
+}
+
+
+type UserEventResponse{
+    events:[UserEvent]
+    count: Int
+}
+
 type Query{
     currentUser:User
     userInvitations:UserInvitationsResponse
     metricsGroup(eventList:[String]):User
+    userEvents(user_id:Int, tenant_id:String):UserEventResponse
 }

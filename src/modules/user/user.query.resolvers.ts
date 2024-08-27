@@ -1,8 +1,10 @@
 import { UserInvitationModel, UserModel } from './user.models';
 import {
-  TenantUserInvitationArgs
+  TenantUserInvitationArgs,
 } from '../tenant/tenant.types';
-import { UserInvitation } from './user.types';
+import { UserEventSArgs, UserInvitation } from './user.types';
+import { EventModel } from '../analytics/v2/analytics.models';
+import { ObjectId } from 'mongodb';
 
 const currentUser = async (parent: any, args: any, context: any) => {
   const id = context.userId || 0;
@@ -36,8 +38,45 @@ const userInvitations = async (
   };
 };
 
+const userEvents = async (
+  parent: any,
+  args: UserEventSArgs,
+) => {
+  const { user_id, tenant_id } = args;
+  console.log({ user_id });
+  const groupAuthenticate = await EventModel.aggregate([
+    {
+      $match: {
+        user_id: { $eq: user_id },
+      },
+    },
+    {
+      $group: {
+        _id: '$uuid',
+      },
+    },
+    {
+      $project: { _id: '$_id' },
+    },
+  ]);
+
+  const events = await EventModel.aggregate([
+    {
+      $match: {
+        uuid: {
+          $in: [...groupAuthenticate.map((data) => data._id)],
+        },
+      },
+    },
+    { $sort: { created_at: -1 } },
+  ]);
+
+  console.log({ events });
+};
+
 
 export const userQueryResolvers = {
   currentUser,
   userInvitations,
+  userEvents,
 };

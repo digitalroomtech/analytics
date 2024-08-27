@@ -13,6 +13,13 @@ const eventsSchema = new Schema<Event>(
       index: true
     },
     user_id: Number,
+    event_meta:[
+      {
+        type: Schema?.Types.ObjectId,
+        ref: 'event_meta',
+        index: true
+      }
+    ],
     tenant_id: {
       type: Schema?.Types.ObjectId,
       ref: 'tenants',

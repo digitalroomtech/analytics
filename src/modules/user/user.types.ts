@@ -19,6 +19,11 @@ export interface IUser {
   updated_at?: string;
 }
 
+export type UserEventSArgs = {
+  user_id:number;
+  tenant_id:number
+}
+
 export interface IFindOneOrCreate {
   user_id: number;
 }
