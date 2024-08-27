@@ -12,7 +12,7 @@ import {
   SwgUrlVisitReportArgs,
   UrlVisitReportArgs,
 } from './metrics.types';
-import { AnalyticsModel } from '../analytics/analytics.models';
+import { AnalyticsModel } from '../analytics/v1/analytics.models';
 import { ObjectId } from 'mongodb';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {

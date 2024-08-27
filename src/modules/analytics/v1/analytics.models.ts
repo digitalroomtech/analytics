@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Analytics, AnalyticParams } from './analytics.types';
+import { Analytics, AnalyticParams } from '../analytics.types';
 
 const { Schema, model } = mongoose;
 

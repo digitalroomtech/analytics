@@ -1,6 +1,6 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
 import { TenantModel } from '../modules/tenant/tenant.models';
-import { ITenant, TenantStatuses } from '../modules/tenant/tenant.types';
+import { TenantStatuses } from '../modules/tenant/tenant.types';
 
 interface Request extends ExpressRequest {
   tenant_id?: number;
@@ -9,30 +9,32 @@ interface Request extends ExpressRequest {
 export const checkOriginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
-    const sessionOrigin = req.headers['analytics-session-origin'];
 
-    const url = new URL((sessionOrigin || req.headers.origin) as string);
-    let tenant: ITenant | undefined | null = undefined;
+    let url = '';
+    const origin = req.headers.origin || req.headers['analytics-origin'] as string || '';
 
-    tenant = await TenantModel.findOne({
-      allowedUrls: url.origin || '',
+    if (origin) {
+      const urlOrigin = new URL(origin);
+      url = urlOrigin.origin;
+    }
+    const tenant = await TenantModel.findOne({
+      allowedUrls: url || req.headers['analytics-application-id'],
       status: TenantStatuses.ACTIVE,
     });
 
     if (!tenant) {
       return res.status(400).send({
-        message: `Invalid origin: ${url.origin} ${sessionOrigin} ${
+        message: `Invalid origin: ${url} ${origin} ${
           req.headers.origin
         } ${JSON.stringify(url)}`,
       });
     }
     req.body.tenant_id = tenant._id;
-    req.body.originUrl = url.href;
 
   } catch (error: any) {
+    console.log({ req, error });
     return res.status(500).json({ message: error.message });
   }
-
 
   return next();
 };

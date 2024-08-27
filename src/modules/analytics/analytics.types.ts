@@ -2,6 +2,26 @@ import { ObjectId } from 'mongodb';
 import { ITenant } from '../tenant/tenant.types';
 import { IUser } from '../user/user.types';
 
+export interface Event {
+  _id?: ObjectId;
+  name?: string;
+  uuid?: string;
+  user_id?: number;
+  tenant_id?: string;
+  event_meta?: EventMeta[];
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface EventMeta {
+  _id?: ObjectId;
+  meta_key?: string;
+  meta_value?: string;
+  event?: Event;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
 export interface Analytics {
   _id?: ObjectId;
   name?: string;
@@ -62,3 +82,7 @@ export enum IAuthenticateAnalyticName {
   analyticsAuthenticate = 'analytics_authenticate',
   appleClicked = 'apple_clicked',
 }
+
+
+
+
