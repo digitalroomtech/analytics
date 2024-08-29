@@ -86,6 +86,7 @@ type UserEventMeta{
 type UserEvent{
     id:String
     name:String
+    user_id:Int
     event_meta:[UserEventMeta]
     created_at:String
 }
