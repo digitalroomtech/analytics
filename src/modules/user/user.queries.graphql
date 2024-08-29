@@ -79,11 +79,15 @@ type Mutation{
 
 type UserEventMeta{
     id:String
+    meta_value:String
+    meta_key:String
 }
 
 type UserEvent{
     id:String
+    name:String
     event_meta:[UserEventMeta]
+    created_at:String
 }
 
 

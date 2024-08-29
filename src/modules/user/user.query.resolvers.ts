@@ -58,6 +58,7 @@ const userEvents = async (
     {
       $project: { _id: '$_id' },
     },
+
   ]);
 
   const events = await EventModel.aggregate([
@@ -69,9 +70,40 @@ const userEvents = async (
       },
     },
     { $sort: { created_at: -1 } },
+    {
+      $lookup: {
+        from: 'event_meta',
+        localField: 'event_meta',
+        foreignField: '_id',
+        as: 'event_meta',
+      },
+    },
+    {
+      $project: {
+        id: '$_id',
+        name: 1,
+        created_at: 1,
+        event_meta: {
+          $map: {
+            input: '$event_meta',
+            as: 'event_meta',
+            in: {
+              id: '$$event_meta._id',
+              meta_value: '$$event_meta.meta_value',
+              meta_key: '$$event_meta.meta_key',
+            },
+          },
+        },
+      },
+    },
   ]);
 
-  console.log({ events });
+  console.log(JSON.stringify(events, null, 2));
+
+
+  return {
+    events,
+  };
 };
 
 
