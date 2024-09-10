@@ -5,7 +5,7 @@ import { checkSessionOriginMiddleware } from '../../middlewares/check-analytics-
 // import { limitRequests } from '../../middlewares/limit-requests.middleware';
 import { checkOriginMiddleware } from '../../middlewares/check-origin.middleware';
 import { authenticate } from './analytics.authenticate';
-import { eventsCreate } from './v2/analytics.actions';
+import { eventsCreate, eventsUpdate } from './v2/analytics.actions';
 
 const router = express.Router();
 
@@ -27,5 +27,7 @@ router.post(
   // limitRequests,
   eventsCreate,
 );
+
+router.post('/v2/update', checkOriginMiddleware, checkSessionMiddleware, eventsUpdate);
 
 export default router;
