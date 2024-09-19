@@ -550,11 +550,14 @@ const userSession = async (parent: any, args: UserSessionArgs, context: any) => 
     const group = session ?
       { user_id: '$user_id' } : { uuid: '$uuid' };
 
+    const user = session ? { user_id: { $ne: 0 } } : { user_id: { $eq: 0 } };
+
     response = await EventModel.aggregate([
       {
         $match: {
           tenant_id: tenant?._id,
           created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+          ...user,
         },
       },
       {
