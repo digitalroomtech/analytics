@@ -72,6 +72,17 @@ export type SwgTapByUrlMatch = {
   section?: string;
 };
 
+
+
+export type UserSessionArgs  = {
+  where:{
+    session: boolean;
+    tenantId: string;
+    from: string;
+    to: string;
+  }
+}
+
 export const metricsTypeDefs = fs.readFileSync(
   path.join(__dirname, 'metrics.queries.graphql'),
   'utf8',

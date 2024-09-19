@@ -10,10 +10,12 @@ import {
   SwgTapByMonthReportArgs,
   SwgTapByUrlMatch,
   SwgUrlVisitReportArgs,
-  UrlVisitReportArgs,
+  UrlVisitReportArgs, UserSessionArgs,
 } from './metrics.types';
 import { AnalyticsModel } from '../analytics/v1/analytics.models';
 import { ObjectId } from 'mongodb';
+import { EventModel } from '../analytics/v2/analytics.models';
+import { TenantModel } from '../tenant/tenant.models';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
   try {
@@ -537,6 +539,67 @@ const getClickedReportUser = async (parent: any, args: any, context: any) => {
   }
 };
 
+const userSession = async (parent: any, args: UserSessionArgs, context: any) => {
+  let response = [];
+  const { session = false, from, to, tenantId } = args.where;
+
+
+  try {
+
+    const tenant = await TenantModel.findById(tenantId);
+    const group = session ?
+      { user_id: '$user_id' } : { uuid: '$uuid' };
+
+    response = await EventModel.aggregate([
+      {
+        $match: {
+          tenant_id: tenant?._id,
+          created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+        },
+      },
+      {
+        $addFields: {
+          date: {
+            $dateToString: {
+              format: '%Y-%m-%d %H:%M',
+              date: { $toDate: '$created_at' },
+              timezone: tenant?.timezone || 'America/Mexico_City',
+            },
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            date: '$date', ...group,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: '$_id.date',
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          date: '$_id',
+          count: 1,
+        },
+      },
+      { $sort: { date: -1 } },
+    ]);
+
+  } catch (error) {
+    console.log({ error });
+  }
+
+  console.log(JSON.stringify(response, null, 2));
+
+  return response;
+};
+
 export const metricsQueryResolvers = {
   getClickedReport,
   getRegisteredUserReport,
@@ -551,4 +614,5 @@ export const metricsQueryResolvers = {
   swgTapByUrlReport,
   swgTapByUrlReportMetric,
   getClickedReportUser,
+  userSession,
 };

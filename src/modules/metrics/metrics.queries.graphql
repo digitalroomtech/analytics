@@ -171,6 +171,19 @@ type SwgTapByUrlMetricResponse{
     data: [SwgTapByUrlDataMetricResponse]
 }
 
+input UserSessionWhere {
+    session: Boolean
+    tenantId:String
+    from:String
+    to: String
+}
+
+
+type UserSessionResponse{
+    date: String
+    count: Int
+}
+
 type Query {
     getClickedReport(where: ClickReportPayload): [ClickReportResponse]
     getClickedReportUser(where: ClickReportUserPayload): [ClickReportUserResponse]
@@ -188,5 +201,8 @@ type Query {
 
     swgTapByUrlReport(where: SwgTapByUrlPayload, page:Int,pageSize:Int): SwgTapByUrlResponse
     swgTapByUrlReportMetric(where: SwgTapByUrlMetricPayload): SwgTapByUrlMetricResponse
+
+
+    userSession(where:UserSessionWhere):[UserSessionResponse]
 
 }

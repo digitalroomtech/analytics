@@ -113,8 +113,7 @@ export const SocialNetworkSessionMetrics = model(
   'SocialNetworkSessionMetrics',
   socialNetworkSessionMetrics,
 );
-export const SocialNetworkMetrics = model('SocialNetworkMetrics', socialNetworkMetrics);
-export const PageMetrics = model('PageMetrics', pageMetrics);
+
 export const EventsMetricsModel = model('EventsMetrics', eventMetrics);
 export const RegisteredUserMetricsModel = model('RegisteredUserMetrics', registeredUserMetrics);
 export const HeatMatMetricsModel = model('HeatMatMetrics', heatMapMetrics);
