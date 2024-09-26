@@ -178,10 +178,26 @@ input UserSessionWhere {
     to: String
 }
 
+input WinnerNotesWhere{
+    tenantId:String
+    from:String
+    to: String
+}
 
 type UserSessionResponse{
     date: String
     count: Int
+}
+
+type WinnerNote {
+    url:String
+    count:Int
+}
+
+
+type WinnerNotesResponse{
+    items: [WinnerNote]
+    total: Int
 }
 
 type Query {
@@ -203,6 +219,10 @@ type Query {
     swgTapByUrlReportMetric(where: SwgTapByUrlMetricPayload): SwgTapByUrlMetricResponse
 
 
+
+
+
+    winnerNotes(where:WinnerNotesWhere,page:Int,pageSize:Int):[WinnerNotesResponse]
     userSession(where:UserSessionWhere):[UserSessionResponse]
 
 }

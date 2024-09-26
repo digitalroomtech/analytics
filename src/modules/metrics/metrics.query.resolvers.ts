@@ -10,11 +10,11 @@ import {
   SwgTapByMonthReportArgs,
   SwgTapByUrlMatch,
   SwgUrlVisitReportArgs,
-  UrlVisitReportArgs, UserSessionArgs,
+  UrlVisitReportArgs, UserSessionArgs, WinnerNoteArgs,
 } from './metrics.types';
 import { AnalyticsModel } from '../analytics/v1/analytics.models';
 import { ObjectId } from 'mongodb';
-import { EventModel } from '../analytics/v2/analytics.models';
+import { EventMetaModel, EventModel } from '../analytics/v2/analytics.models';
 import { TenantModel } from '../tenant/tenant.models';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {
@@ -543,9 +543,7 @@ const userSession = async (parent: any, args: UserSessionArgs, context: any) => 
   let response = [];
   const { session = false, from, to, tenantId } = args.where;
 
-
   try {
-
     const tenant = await TenantModel.findById(tenantId);
     const group = session ?
       { user_id: '$user_id' } : { uuid: '$uuid' };
@@ -598,10 +596,102 @@ const userSession = async (parent: any, args: UserSessionArgs, context: any) => 
     console.log({ error });
   }
 
-  console.log(JSON.stringify(response, null, 2));
 
   return response;
 };
+
+export const winnerNotes = async (parent: any, args: WinnerNoteArgs, context: any) => {
+  const { from, to, tenantId } = args.where;
+  const { page, pageSize } = args;
+  let items = [];
+  let total = 0;
+
+  const aggregate = [
+    {
+      $match: {
+        name: {
+          $in: [
+            'register_google',
+            'register_facebook',
+            'register_user',
+            'register_apple',
+            'register_google_one_tap',
+          ],
+        },
+        uuid: {
+          $ne: '',
+        },
+        tenant_id: new ObjectId(tenantId),
+        created_at: { $gte: new Date(`${from}`), $lte: new Date(`${to}`) },
+      },
+    },
+    {
+      $lookup: {
+        from: 'event_meta',
+        localField: 'event_meta',
+        foreignField: '_id',
+        pipeline: [{
+          $match: {
+            $and: [{ meta_key: 'url' }, { meta_value: { $ne: '' } }, { meta_value: { $ne: 'Desconocido' } }],
+          },
+        }],
+        as: 'meta',
+      },
+    },
+    { $unwind: '$meta' },
+    {
+      $project: {
+        _id: 1,
+        url: { $substr: ['$meta.meta_value', 0, { $indexOfBytes: ['$meta.meta_value', '?'] }] },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        url: { $substr: ['$url', 0, { $indexOfBytes: ['$url', '#'] }] },
+      },
+    },
+    {
+      $group: {
+        _id: '$url',
+        count: {
+          $sum: 1,
+        },
+      },
+    },
+    {
+      $project: {
+        url: '$_id',
+        count: 1,
+      },
+    },
+  ];
+
+  try {
+    items = await EventModel.aggregate([
+      ...aggregate,
+      { $skip: page * pageSize },
+      { $limit: pageSize },
+    ]);
+
+    const totalCount = await EventModel.aggregate([
+      ...aggregate,
+      {
+        $count: 'totalCount',
+      },
+    ]);
+
+    total = totalCount.find((item) => item.totalCount)?.totalCount || 0;
+  } catch (error) {
+    console.log({ error });
+  }
+
+  return {
+    items,
+    total,
+  };
+};
+
 
 export const metricsQueryResolvers = {
   getClickedReport,
@@ -617,5 +707,9 @@ export const metricsQueryResolvers = {
   swgTapByUrlReport,
   swgTapByUrlReportMetric,
   getClickedReportUser,
+
+
   userSession,
+  winnerNotes,
+
 };
