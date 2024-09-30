@@ -602,7 +602,7 @@ const userSession = async (parent: any, args: UserSessionArgs, context: any) => 
 
 export const winnerNotes = async (parent: any, args: WinnerNoteArgs, context: any) => {
   const { from, to, tenantId } = args.where;
-  const { page, pageSize } = args;
+  const { page = 0, pageSize = 10, order = 'desc' } = args;
   let items = [];
   let total = 0;
 
@@ -663,6 +663,7 @@ export const winnerNotes = async (parent: any, args: WinnerNoteArgs, context: an
       $project: {
         url: '$_id',
         count: 1,
+        _id: 0,
       },
     },
   ];
@@ -685,6 +686,11 @@ export const winnerNotes = async (parent: any, args: WinnerNoteArgs, context: an
   } catch (error) {
     console.log({ error });
   }
+
+  console.log({
+    items,
+    total,
+  });
 
   return {
     items,

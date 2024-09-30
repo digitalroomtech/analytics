@@ -200,6 +200,12 @@ type WinnerNotesResponse{
     total: Int
 }
 
+enum WinnerNoteOrder{
+    desc
+    asc
+}
+
+
 type Query {
     getClickedReport(where: ClickReportPayload): [ClickReportResponse]
     getClickedReportUser(where: ClickReportUserPayload): [ClickReportUserResponse]
@@ -222,7 +228,7 @@ type Query {
 
 
 
-    winnerNotes(where:WinnerNotesWhere,page:Int,pageSize:Int):[WinnerNotesResponse]
+    winnerNotes(where:WinnerNotesWhere,page:Int,pageSize:Int, order:WinnerNoteOrder):WinnerNotesResponse
     userSession(where:UserSessionWhere):[UserSessionResponse]
 
 }

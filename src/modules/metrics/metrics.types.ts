@@ -90,6 +90,8 @@ export type WinnerNoteArgs = {
   },
   page: number;
   pageSize: number;
+  order: 'asc' | 'desc';
+
 }
 
 export const metricsTypeDefs = fs.readFileSync(
