@@ -671,8 +671,8 @@ export const winnerNotes = async (parent: any, args: WinnerNoteArgs, context: an
   try {
     items = await EventModel.aggregate([
       ...aggregate,
-      { $skip: page * pageSize },
-      { $limit: pageSize },
+      // { $skip: page * pageSize },
+      // { $limit: pageSize },
     ]);
 
     const totalCount = await EventModel.aggregate([
