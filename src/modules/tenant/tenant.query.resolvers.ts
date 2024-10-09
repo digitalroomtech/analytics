@@ -131,7 +131,10 @@ const tenantUsers = async (
   ]);
 
   return {
-    items: tenantUsers[0].paginatedResults,
+    items: tenantUsers[0].paginatedResults.map((item: any) => ({
+      ...item,
+      id: item._id,
+    })),
     count: tenantUsers[0]?.totalCount?.[0]?.count ?? 0,
   };
 };
