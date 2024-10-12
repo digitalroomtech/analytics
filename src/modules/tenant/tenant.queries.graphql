@@ -40,6 +40,7 @@ type TenantUser{
     role:TenantUserRoles
     tenant:Tenant
     user:User
+    isSelected:Boolean
     status:TenantUserStatuses
     createdAt:String
     updatedAt:String

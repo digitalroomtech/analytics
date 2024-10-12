@@ -225,7 +225,8 @@ const selectedTenant = async (parent: any, args: SelectedTenantArgs, context: Co
   });
 
   for (const tenantUser of tenantUsers) {
-    if (tenantUser._id === tenant_id) {
+    await tenantUser.populate('tenant');
+    if (tenantUser.tenant?._id?.toString() === tenant_id) {
       response = await TenantUserModel.findByIdAndUpdate(tenantUser._id, { isSelected: true });
     } else {
       await TenantUserModel.findByIdAndUpdate(tenantUser._id, { isSelected: false });
@@ -243,5 +244,5 @@ export const tenantMutationResolvers = {
   removeTenantUserInvitation,
   resendTenantUserInvitation,
   updateTenantUser,
-  selectedTenant
+  selectedTenant,
 };
