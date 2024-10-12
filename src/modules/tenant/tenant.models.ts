@@ -59,6 +59,10 @@ const tenantUserSchema = new Schema<ITenantUser>(
       enum: ['ACTIVE', 'INACTIVE'],
       default: 'ACTIVE',
     },
+    isSelected:{
+      type: Boolean,
+      default: false,
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

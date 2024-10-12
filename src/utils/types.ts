@@ -8,3 +8,7 @@ export type Scalars = {
 };
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
+
+export type ContextResolver = {
+  userId?: number | null;
+};

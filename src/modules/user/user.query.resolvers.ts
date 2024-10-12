@@ -14,7 +14,7 @@ const currentUser = async (parent: any, args: any, context: any) => {
     throw new Error('Usuario no encontrado');
   }
 
-  return await user.populate({ path: 'tenantUsers', populate: { path: 'tenant', populate: { path: 'plan' } } });
+  return user.populate({ path: 'tenantUsers', populate: { path: 'tenant', populate: { path: 'plan' } } });
 };
 
 const userInvitations = async (
