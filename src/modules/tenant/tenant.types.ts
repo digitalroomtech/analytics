@@ -38,6 +38,7 @@ export interface ITenantUser {
   tenant?: ITenant;
   user?: IUser;
   status?: TenantUserStatuses;
+  isSelected?: boolean;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -102,6 +103,12 @@ export type UpdateTenantUserArgs = {
     };
   };
 };
+
+export type SelectedTenantArgs = {
+  input:{
+    tenant_id: string;
+  }
+}
 
 export type UpdateTenantArgs = {
   input: {

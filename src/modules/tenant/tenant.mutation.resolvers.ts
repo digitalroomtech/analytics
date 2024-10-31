@@ -2,7 +2,7 @@ import {
   CreateTenantArgs,
   CreateTenantUserInvitationArgs,
   RemoveTenantUserInvitationArgs,
-  ResendTenantUserInvitationArgs,
+  ResendTenantUserInvitationArgs, SelectedTenantArgs,
   TenantUserInvitationStatuses,
   TenantUserRoles,
   UpdateTenantArgs,
@@ -16,6 +16,7 @@ import stream from 'node:stream';
 import { createUploadStream } from '../../utils/s3';
 import { DO_SPACES_ROUTE, FRONT_URL } from '../../utils/constants';
 import { sendPostmarkSignupEmail } from '../../utils/mail/sendMail';
+import { ContextResolver } from '../../utils/types';
 
 const createTenant = async (parent: any, args: CreateTenantArgs) => {
   let tenant;
@@ -212,7 +213,27 @@ const updateTenantUser = async (parent: any, args: UpdateTenantUserArgs) => {
     throw new Error('Tenemos problemas para actualizar el usuario');
   }
 
-  return await tenantUser?.populate('user');
+  return tenantUser?.populate('user');
+};
+
+const selectedTenant = async (parent: any, args: SelectedTenantArgs, context: ContextResolver) => {
+  const id = context.userId || 0;
+  const { tenant_id } = args.input;
+  let response = null;
+  const tenantUsers = await TenantUserModel.find({
+    user: new ObjectId(id),
+  });
+
+  for (const tenantUser of tenantUsers) {
+    await tenantUser.populate('tenant');
+    if (tenantUser.tenant?._id?.toString() === tenant_id) {
+      response = await TenantUserModel.findByIdAndUpdate(tenantUser._id, { isSelected: true });
+    } else {
+      await TenantUserModel.findByIdAndUpdate(tenantUser._id, { isSelected: false });
+    }
+  }
+
+  return response;
 };
 
 export const tenantMutationResolvers = {
@@ -223,4 +244,5 @@ export const tenantMutationResolvers = {
   removeTenantUserInvitation,
   resendTenantUserInvitation,
   updateTenantUser,
+  selectedTenant,
 };

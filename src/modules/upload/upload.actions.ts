@@ -1,16 +1,18 @@
 import { Response, Request } from 'express';
-import { bucket, config} from '../../utils/s3';
+import { bucket, config } from '../../utils/s3';
 import { DO_SPACES_ROUTE } from '../../utils/constants';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3, S3Client } from '@aws-sdk/client-s3';
 
 
 export async function uploadFile(req: Request, res: Response) {
-
+  console.log({
+    test: req.files,
+  });
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
-
+  console.log({ files: req.files });
   let data;
 
   if (req.files.file) {
@@ -21,7 +23,7 @@ export async function uploadFile(req: Request, res: Response) {
           Bucket: bucket,
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore
-          Key: `${DO_SPACES_ROUTE}/plans/images/${ req.files.file.name as string }`,
+          Key: `${DO_SPACES_ROUTE}/plans/images/${req.files.file.name as string}`,
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore
           Body: req.files.file.data,

@@ -40,6 +40,7 @@ type TenantUser{
     role:TenantUserRoles
     tenant:Tenant
     user:User
+    isSelected:Boolean
     status:TenantUserStatuses
     createdAt:String
     updatedAt:String
@@ -118,7 +119,7 @@ input TenantUserInvitationWhereInput {
 }
 
 enum SortOrder {
-    ASC 
+    ASC
     DESC
 }
 
@@ -160,6 +161,11 @@ input UpdateTenantUserInput {
     user:TenantUserUserInput
 }
 
+input SelectedTenantInput{
+    tenant_id:String
+}
+
+
 type Mutation {
     createTenant(input:CreateTenantInput!):Tenant
     updateTenant(input:UpdateTenantInput!):Tenant
@@ -168,6 +174,7 @@ type Mutation {
     removeTenantUserInvitation(input:RemoveTenantUserInvitationInput): RemoveTenantUserInvitationPayload
     resendTenantUserInvitation(input:ResendTenantUserInvitationInput): TenantUserInvitation
     updateTenantUser(input:UpdateTenantUserInput): TenantUser
+    selectedTenant(input:SelectedTenantInput):TenantUser
 }
 
 
@@ -177,4 +184,5 @@ type Query{
     tenant(id:ID!):Tenant
     tenantUsers(where:TenantUserWhereInput,page: Int, pageSize: Int):TenantUsersPayload
     tenantUserInvitations(where:TenantUserInvitationWhereInput, page: Int, pageSize: Int):TenantUserInvitationsPayload
+
 }
