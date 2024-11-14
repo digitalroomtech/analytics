@@ -11,14 +11,14 @@ const router = express.Router();
 
 router.post('/authenticate', checkOriginMiddleware, authenticate);
 
-router.post(
-  '/create',
-  checkSessionOriginMiddleware,
-  checkOriginMiddleware,
-  checkSessionMiddleware,
-  // limitRequests,
-  analyticsCreate,
-);
+// router.post(
+//   '/create',
+//   checkSessionOriginMiddleware,
+//   checkOriginMiddleware,
+//   checkSessionMiddleware,
+//   // limitRequests,
+//   analyticsCreate,
+// );
 
 router.post(
   '/v2/create',

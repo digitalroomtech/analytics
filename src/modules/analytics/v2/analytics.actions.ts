@@ -14,7 +14,6 @@ interface Request extends ExpressRequest {
 export const eventsCreate = async (req: Request, res: Response) => {
 
   const { name, user_id, uuid, event_meta, tenant_id } = req.body;
-  console.log('EVENT', req.body);
   const event = await EventModel.create({
     name,
     uuid: uuid,
@@ -39,10 +38,6 @@ export const eventsCreate = async (req: Request, res: Response) => {
     }, { new: true, useFindAndModify: false });
 
   }
-
-
-  console.log('EVENT', { name, id: event._id });
-
 
   return res.json({ message: 'Register event successfully.', event_id: event._id });
 };
