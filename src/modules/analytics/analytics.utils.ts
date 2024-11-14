@@ -2,7 +2,7 @@ import { ANIMAL_POLITICO_CATEGORIES, VANGUARDIA_CATEGORIES } from '../../utils/c
 import { ObjectId } from 'mongodb';
 
 export const getSections = (
-  url: string,
+  url = '',
   categories: { section: string; subsections: string[] }[],
 ): {
   section: string;
