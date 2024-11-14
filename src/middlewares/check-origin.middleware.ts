@@ -18,7 +18,7 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
       url = urlOrigin.origin;
     }
     const tenant = await TenantModel.findOne({
-      allowedUrls: url || req.headers['analytics-application-id'],
+      allowedUrls: url || req.headers['easy-data-application-id'] || req.headers['easy-data-origin'],
       status: TenantStatuses.ACTIVE,
     });
 
