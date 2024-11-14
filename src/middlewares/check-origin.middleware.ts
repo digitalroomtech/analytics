@@ -12,7 +12,7 @@ export const checkOriginMiddleware = async (req: Request, res: Response, next: N
 
     let url = '';
     const origin = req.headers.origin || req.headers['analytics-origin'] as string || '';
-
+    console.log({ origin });
     if (origin) {
       const urlOrigin = new URL(origin);
       url = urlOrigin.origin;

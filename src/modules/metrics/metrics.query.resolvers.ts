@@ -14,7 +14,7 @@ import {
 } from './metrics.types';
 import { AnalyticsModel } from '../analytics/v1/analytics.models';
 import { ObjectId } from 'mongodb';
-import { EventMetaModel, EventModel } from '../analytics/v2/analytics.models';
+import { EventModel } from '../analytics/v2/analytics.models';
 import { TenantModel } from '../tenant/tenant.models';
 
 const getClickedReport = async (parent: any, args: any, context: any) => {

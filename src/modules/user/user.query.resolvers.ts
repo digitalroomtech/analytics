@@ -4,7 +4,6 @@ import {
 } from '../tenant/tenant.types';
 import { UserEventSArgs, UserInvitation } from './user.types';
 import { EventModel } from '../analytics/v2/analytics.models';
-import { ObjectId } from 'mongodb';
 
 const currentUser = async (parent: any, args: any, context: any) => {
   const id = context.userId || 0;
