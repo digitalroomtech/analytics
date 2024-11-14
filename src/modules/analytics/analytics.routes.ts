@@ -9,7 +9,7 @@ import { eventsCreate, eventsUpdate } from './v2/analytics.actions';
 
 const router = express.Router();
 
-router.post('/authenticate', checkOriginMiddleware, authenticate);
+router.post('/v2/authenticate', checkOriginMiddleware, authenticate);
 
 // router.post(
 //   '/create',
